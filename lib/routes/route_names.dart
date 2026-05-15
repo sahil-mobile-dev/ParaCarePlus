@@ -16,5 +16,6 @@ class RouteNames {
   static const String ambulance = 'ambulance';
   static const String bloodbank = 'bloodbank';
   static const String patientRegistration = 'patientRegistration';
+  static const String opdToken = 'opdToken';
 }
 

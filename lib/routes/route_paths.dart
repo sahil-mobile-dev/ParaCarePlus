@@ -16,4 +16,5 @@ class RoutePaths {
   static const String ambulance = '/ambulance';
   static const String bloodbank = '/bloodbank';
   static const String patientRegistration = '/patient/registration';
+  static const String opdToken = '/opd/token';
 }

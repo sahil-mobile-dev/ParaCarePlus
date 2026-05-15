@@ -19,7 +19,7 @@ class QuickActionGrid extends StatelessWidget {
       _QuickActionItem(
         icon: Icons.token_outlined,
         label: 'OPD Token',
-        onTap: () => _handleAction(context, 'OPD Token'),
+        onTap: () => context.pushNamed(RouteNames.opdToken),
       ),
       _QuickActionItem(
         icon: Icons.hotel_outlined,
