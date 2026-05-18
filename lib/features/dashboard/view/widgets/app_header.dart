@@ -7,35 +7,40 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
   const AppHeader({super.key});
 
   @override
-  Size get preferredSize => const Size.fromHeight(70);
+  Size get preferredSize => const Size.fromHeight(120);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 105,
+      height: 160,
       padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
       decoration: const BoxDecoration(
         color: AppColors.surface,
         border: Border(bottom: BorderSide(color: AppColors.border)),
       ),
-      child: Column(
-        children: [
-          Row(
-            children: [
-              _buildGovernmentBranding(),
-              const Spacer(),
-              _buildUserProfile(),
-            ],
-          ),
-          const SizedBox(height: 10),
-          Row(
-            children: [
-              _buildSearchField(),
-              _buildIconBtn(Icons.notifications_none_rounded, 'Notifications'),
-              _buildIconBtn(Icons.settings_outlined, 'Settings'),
-            ],
-          ),
-        ],
+      child: SafeArea(
+        child: Column(
+          children: [
+            Row(
+              children: [
+                _buildGovernmentBranding(),
+                const Spacer(),
+                _buildUserProfile(),
+              ],
+            ),
+            const SizedBox(height: 10),
+            Row(
+              children: [
+                _buildSearchField(),
+                _buildIconBtn(
+                  Icons.notifications_none_rounded,
+                  'Notifications',
+                ),
+                _buildIconBtn(Icons.settings_outlined, 'Settings'),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }

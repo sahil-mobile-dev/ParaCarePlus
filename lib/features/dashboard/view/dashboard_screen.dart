@@ -24,6 +24,7 @@ class DashboardScreen extends ConsumerWidget {
 
     return Scaffold(
       backgroundColor: AppColors.background,
+      appBar: const AppHeader(),
       body: SafeArea(
         child: Row(
           children: [
@@ -33,7 +34,6 @@ class DashboardScreen extends ConsumerWidget {
             Expanded(
               child: Column(
                 children: [
-                  const AppHeader(),
                   Expanded(
                     child: dashboardState.when(
                       data: (state) =>
@@ -102,19 +102,15 @@ class DashboardScreen extends ConsumerWidget {
 
   Widget _buildTopActionsRow() {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Column(
+            const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
-                  'Executive Dashboard',
-                  style: AppTextStyles.titleMedium,
-                ),
+                Text('Executive Dashboard', style: AppTextStyles.titleMedium),
               ],
             ),
             Row(
