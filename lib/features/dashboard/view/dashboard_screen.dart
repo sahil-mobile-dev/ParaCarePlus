@@ -21,16 +21,20 @@ class DashboardScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final dashboardState = ref.watch(dashboardViewModelProvider);
+    final bool isWideScreen = MediaQuery.of(context).size.width > 1200;
 
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: const AppHeader(),
+      drawer: isWideScreen ? null : const Drawer(child: AppSidebar()),
       body: SafeArea(
         child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Sidebar - only visible on wide screens
-            if (MediaQuery.of(context).size.width > 1200) const AppSidebar(),
-
+            // Sidebar - permanently visible on wide screens
+            if (isWideScreen) const AppSidebar(),
+            
+            // Main Content Area
             Expanded(
               child: Column(
                 children: [
@@ -52,9 +56,6 @@ class DashboardScreen extends ConsumerWidget {
           ],
         ),
       ),
-      drawer: MediaQuery.of(context).size.width <= 1200
-          ? const Drawer(child: AppSidebar())
-          : null,
     );
   }
 

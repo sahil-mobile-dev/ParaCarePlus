@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:paracareplus/core/theme/app_colors.dart';
 import 'package:paracareplus/core/theme/app_spacing.dart';
 import 'package:paracareplus/core/theme/app_text_styles.dart';
@@ -19,7 +20,9 @@ class AppSidebar extends StatelessWidget {
           Expanded(
             child: ListView(
               padding: const EdgeInsets.symmetric(vertical: AppSpacing.md),
-              children: SidebarItem.items.map((item) => _buildNavItem(context, item)).toList(),
+              children: SidebarItem.items
+                  .map((item) => _buildNavItem(context, item))
+                  .toList(),
             ),
           ),
           const Divider(color: AppColors.border, height: 1),
@@ -40,16 +43,25 @@ class AppSidebar extends StatelessWidget {
               color: AppColors.primary.withOpacity(0.1),
               borderRadius: BorderRadius.circular(12),
             ),
-            child: const Icon(Icons.local_hospital_rounded, color: AppColors.primary, size: 32),
+            child: const Icon(
+              Icons.local_hospital_rounded,
+              color: AppColors.primary,
+              size: 32,
+            ),
           ),
           const SizedBox(width: 12),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text('ParaCare+', style: AppTextStyles.titleMedium.copyWith(letterSpacing: 1.2)),
+              Text(
+                'ParaCare+',
+                style: AppTextStyles.titleMedium.copyWith(letterSpacing: 1.2),
+              ),
               Text(
                 'Enterprise HIMS',
-                style: AppTextStyles.labelSmall.copyWith(color: AppColors.secondaryText),
+                style: AppTextStyles.labelSmall.copyWith(
+                  color: AppColors.secondaryText,
+                ),
               ),
             ],
           ),
@@ -59,12 +71,15 @@ class AppSidebar extends StatelessWidget {
   }
 
   Widget _buildNavItem(BuildContext context, SidebarItem item) {
-    final bool isSelected = item.title == 'Executive Dashboard'; // Mock selected state
+    final bool isSelected = item.title == 'Executive Dashboard';
 
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md, vertical: 4),
+      padding: const EdgeInsets.symmetric(
+        horizontal: AppSpacing.md,
+        vertical: 4,
+      ),
       child: InkWell(
-        onTap: () {},
+        onTap: () => context.pushNamed(item.routeName),
         borderRadius: BorderRadius.circular(12),
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
@@ -101,7 +116,11 @@ class AppSidebar extends StatelessWidget {
         children: [
           _buildFooterAction(Icons.help_outline_rounded, 'Help & Support'),
           const SizedBox(height: 8),
-          _buildFooterAction(Icons.logout_rounded, 'Logout', color: AppColors.error),
+          _buildFooterAction(
+            Icons.logout_rounded,
+            'Logout',
+            color: AppColors.error,
+          ),
         ],
       ),
     );
@@ -118,7 +137,9 @@ class AppSidebar extends StatelessWidget {
             const SizedBox(width: 12),
             Text(
               label,
-              style: AppTextStyles.bodyMedium.copyWith(color: color ?? AppColors.secondaryText),
+              style: AppTextStyles.bodyMedium.copyWith(
+                color: color ?? AppColors.secondaryText,
+              ),
             ),
           ],
         ),

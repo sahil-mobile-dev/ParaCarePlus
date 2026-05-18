@@ -11,6 +11,8 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isWideScreen = MediaQuery.of(context).size.width > 1200;
+
     return Container(
       height: 160,
       padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
@@ -23,6 +25,16 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
           children: [
             Row(
               children: [
+                if (!isWideScreen) ...[
+                  IconButton(
+                    onPressed: () => Scaffold.of(context).openDrawer(),
+                    icon: const Icon(
+                      Icons.menu_rounded,
+                      color: AppColors.primaryText,
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                ],
                 _buildGovernmentBranding(),
                 const Spacer(),
                 _buildUserProfile(),
