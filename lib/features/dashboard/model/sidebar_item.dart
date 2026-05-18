@@ -18,7 +18,7 @@ class SidebarItem {
     SidebarItem(
       title: 'Executive Dashboard',
       icon: Icons.dashboard_outlined,
-      routeName: '/dashboard',
+      routeName: RouteNames.dashboard,
     ),
     SidebarItem(
       title: 'Patient Registration',
@@ -38,52 +38,52 @@ class SidebarItem {
     SidebarItem(
       title: 'Billing & Finance',
       icon: Icons.payments_outlined,
-      routeName: '/billing',
+      routeName: RouteNames.billing,
     ),
     SidebarItem(
       title: 'Pharmacy',
       icon: Icons.medication_outlined,
-      routeName: '/pharmacy',
+      routeName: RouteNames.pharmacy,
     ),
     SidebarItem(
       title: 'Lab / Pathology',
       icon: Icons.science_outlined,
-      routeName: '/lab',
+      routeName: RouteNames.laboratory,
     ),
     SidebarItem(
       title: 'Radiology / RIS',
       icon: Icons.settings_remote_outlined,
-      routeName: '/radiology',
+      routeName: RouteNames.radiology,
     ),
     SidebarItem(
       title: 'Operation Theatre',
       icon: Icons.emergency_outlined,
-      routeName: '/ot',
+      routeName: 'ot',
     ),
     SidebarItem(
       title: 'Blood Bank',
       icon: Icons.bloodtype_outlined,
-      routeName: '/bloodbank',
+      routeName: RouteNames.bloodbank,
     ),
     SidebarItem(
       title: 'Vaccination',
       icon: Icons.vaccines_outlined,
-      routeName: '/vaccination',
+      routeName: 'vaccination',
     ),
     SidebarItem(
       title: 'Ambulance',
       icon: Icons.local_shipping_outlined,
-      routeName: '/ambulance',
+      routeName: RouteNames.ambulance,
     ),
     SidebarItem(
       title: 'Inventory',
       icon: Icons.inventory_2_outlined,
-      routeName: '/inventory',
+      routeName: 'inventory',
     ),
     SidebarItem(
       title: 'Human Resource',
       icon: Icons.groups_outlined,
-      routeName: '/hr',
+      routeName: 'hr',
     ),
   ];
 }

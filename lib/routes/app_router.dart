@@ -5,6 +5,7 @@ import 'package:paracareplus/features/dashboard/view/dashboard_screen.dart';
 import 'package:paracareplus/features/opd/view/opd_token_screen.dart';
 import 'package:paracareplus/features/patient/view/patient_registration_screen.dart';
 import 'package:paracareplus/features/ipd/view/ipd_admission_screen.dart';
+import 'package:paracareplus/features/billing/view/billing_screen.dart';
 import 'package:paracareplus/routes/route_names.dart';
 import 'package:paracareplus/routes/route_paths.dart';
 
@@ -36,6 +37,11 @@ final appRouterStateProvider = Provider<GoRouter>((ref) {
         path: RoutePaths.ipdAdmission,
         name: RouteNames.ipdAdmission,
         builder: (context, state) => const IpdAdmissionScreen(),
+      ),
+      GoRoute(
+        path: RoutePaths.billing,
+        name: RouteNames.billing,
+        builder: (context, state) => const BillingScreen(),
       ),
     ],
     // Redirect logic for Auth Guards will be added here
