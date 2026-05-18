@@ -7,6 +7,10 @@ import 'package:paracareplus/features/billing/view/tabs/bill_records_tab.dart';
 import 'package:paracareplus/features/billing/view/tabs/insurance_tpa_tab.dart';
 import 'package:paracareplus/features/billing/view/tabs/new_bill_tab.dart';
 import 'package:paracareplus/features/billing/view/tabs/payments_tab.dart';
+import 'package:paracareplus/features/billing/view/tabs/refunds_tab.dart';
+import 'package:paracareplus/features/billing/view/tabs/revenue_tab.dart';
+import 'package:paracareplus/features/billing/view/tabs/credit_advances_tab.dart';
+
 import 'package:paracareplus/features/billing/view_model/billing_view_model.dart';
 import 'package:paracareplus/features/billing/view/tabs/billing_dashboard_tab.dart';
 import 'package:paracareplus/features/dashboard/view/widgets/app_sidebar.dart';
@@ -233,6 +237,12 @@ class BillingScreen extends ConsumerWidget {
         return const PaymentsTab();
       case 'Insurance/TPA':
         return const InsuranceTpaTab();
+      case 'Credit/Advances':
+        return const CreditAdvancesTab();
+      case 'Refunds':
+        return const RefundsTab();
+      case 'Revenue':
+        return const RevenueTab();
       case 'Dashboard':
       default:
         return const BillingDashboardTab();
