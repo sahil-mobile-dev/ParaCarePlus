@@ -171,7 +171,7 @@ class PatientRegistrationScreen extends ConsumerWidget {
         children: [
           if (currentStep > 0)
             AppButton(
-              text: 'Back (Alt+B)',
+              text: 'Back',
               isOutlined: true,
               onPressed: () => ref
                   .read(registrationViewModelProvider.notifier)
@@ -189,7 +189,7 @@ class PatientRegistrationScreen extends ConsumerWidget {
               ),
               const SizedBox(width: AppSpacing.lg),
               AppButton(
-                text: currentStep == 4 ? 'Register & Print' : 'Next (Alt+N)',
+                text: currentStep == 4 ? 'Register & Print' : 'Next',
                 isLoading: data.isSubmitting,
                 onPressed: () {
                   if (currentStep == 4) {

@@ -24,7 +24,7 @@ class QuickActionGrid extends StatelessWidget {
       _QuickActionItem(
         icon: Icons.hotel_outlined,
         label: 'IPD Admit',
-        onTap: () => _handleAction(context, 'IPD Admit'),
+        onTap: () => context.pushNamed(RouteNames.ipdAdmission),
       ),
       _QuickActionItem(
         icon: Icons.local_pharmacy_outlined,

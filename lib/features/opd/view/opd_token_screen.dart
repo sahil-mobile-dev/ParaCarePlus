@@ -157,6 +157,7 @@ class _OpdTokenScreenState extends ConsumerState<OpdTokenScreen> {
             _buildBillingSection(state),
             const SizedBox(height: AppSpacing.xl),
             _buildActionButtons(state),
+            const SizedBox(height: AppSpacing.xl),
           ],
         ),
       ),
@@ -554,7 +555,7 @@ class _OpdTokenScreenState extends ConsumerState<OpdTokenScreen> {
       children: [
         Expanded(
           child: AppButton(
-            text: 'Cancel (Alt+B)',
+            text: 'Cancel',
             onPressed: () => Navigator.of(context).pop(),
             isOutlined: true,
           ),
@@ -563,7 +564,7 @@ class _OpdTokenScreenState extends ConsumerState<OpdTokenScreen> {
         Expanded(
           flex: 2,
           child: AppButton(
-            text: state.isSubmitting ? 'Issuing...' : 'Issue Token (Alt+N)',
+            text: state.isSubmitting ? 'Issuing...' : 'Issue Token',
             isLoading: state.isSubmitting,
             onPressed: _handleSubmit,
             // focusNode: _submitFocus,
