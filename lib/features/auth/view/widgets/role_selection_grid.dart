@@ -32,15 +32,23 @@ class RoleSelectionGrid extends ConsumerWidget {
           child: Material(
             color: Colors.transparent,
             child: InkWell(
-              onTap: () => ref.read(loginViewModelProvider.notifier).selectRole(role),
+              onTap: () =>
+                  ref.read(loginViewModelProvider.notifier).selectRole(role),
               borderRadius: BorderRadius.circular(12),
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 6,
+                ),
                 decoration: BoxDecoration(
-                  color: isSelected ? AppColors.primary.withOpacity(0.05) : Colors.transparent,
+                  color: isSelected
+                      ? AppColors.primary.withValues(alpha: 0.05)
+                      : Colors.transparent,
                   borderRadius: BorderRadius.circular(12),
                   border: Border.all(
-                    color: isSelected ? AppColors.primary : AppColors.border.withOpacity(0.5),
+                    color: isSelected
+                        ? AppColors.primary
+                        : AppColors.border.withValues(alpha: 0.5),
                     width: isSelected ? 1.5 : 1,
                   ),
                 ),
@@ -49,20 +57,28 @@ class RoleSelectionGrid extends ConsumerWidget {
                     Container(
                       padding: const EdgeInsets.all(8),
                       decoration: BoxDecoration(
-                        color: isSelected ? AppColors.primary : AppColors.surface,
+                        color: isSelected
+                            ? AppColors.primary
+                            : AppColors.surface,
                         borderRadius: BorderRadius.circular(10),
-                        boxShadow: isSelected ? [
-                          BoxShadow(
-                            color: AppColors.primary.withOpacity(0.3),
-                            blurRadius: 8,
-                            offset: const Offset(0, 2),
-                          )
-                        ] : null,
+                        boxShadow: isSelected
+                            ? [
+                                BoxShadow(
+                                  color: AppColors.primary.withValues(
+                                    alpha: 0.3,
+                                  ),
+                                  blurRadius: 8,
+                                  offset: const Offset(0, 2),
+                                ),
+                              ]
+                            : null,
                       ),
                       child: Icon(
                         role.icon,
                         size: 18,
-                        color: isSelected ? Colors.white : AppColors.secondaryText,
+                        color: isSelected
+                            ? Colors.white
+                            : AppColors.secondaryText,
                       ),
                     ),
                     const SizedBox(width: 12),
@@ -74,8 +90,14 @@ class RoleSelectionGrid extends ConsumerWidget {
                           Text(
                             role.displayName,
                             style: AppTextStyles.bodySmall.copyWith(
-                              color: isSelected ? AppColors.primaryText : AppColors.primaryText.withOpacity(0.7),
-                              fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
+                              color: isSelected
+                                  ? AppColors.primaryText
+                                  : AppColors.primaryText.withValues(
+                                      alpha: 0.7,
+                                    ),
+                              fontWeight: isSelected
+                                  ? FontWeight.bold
+                                  : FontWeight.w500,
                               fontSize: 12,
                             ),
                             maxLines: 1,
@@ -83,7 +105,10 @@ class RoleSelectionGrid extends ConsumerWidget {
                           ),
                           Text(
                             role.description,
-                            style: AppTextStyles.labelSmall.copyWith(fontSize: 9, color: AppColors.secondaryText),
+                            style: AppTextStyles.labelSmall.copyWith(
+                              fontSize: 9,
+                              color: AppColors.secondaryText,
+                            ),
                             maxLines: 1,
                             overflow: TextOverflow.ellipsis,
                           ),

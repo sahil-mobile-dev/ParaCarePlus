@@ -11,7 +11,7 @@ class DashboardStats with _$DashboardStats {
     @Default(0) int totalIpdAdmissions,
     @Default(0) int activeEmergencyCases,
     @Default(0) int pendingLabReports,
-    @Default(0.0) double bedOccupancyRate,
+    @Default(0) double bedOccupancyRate,
     @Default(0) int totalAmbulancesOnDuty,
     @Default(0) int dischargedToday,
     @Default(0) int labTestsToday,
@@ -19,7 +19,8 @@ class DashboardStats with _$DashboardStats {
     @Default('0%') String revenueTrend,
   }) = _DashboardStats;
 
-  factory DashboardStats.fromJson(Map<String, dynamic> json) => _$DashboardStatsFromJson(json);
+  factory DashboardStats.fromJson(Map<String, dynamic> json) =>
+      _$DashboardStatsFromJson(json);
 }
 
 @freezed
@@ -32,7 +33,8 @@ class ActivityFeedItem with _$ActivityFeedItem {
     required ActivityType type,
   }) = _ActivityFeedItem;
 
-  factory ActivityFeedItem.fromJson(Map<String, dynamic> json) => _$ActivityFeedItemFromJson(json);
+  factory ActivityFeedItem.fromJson(Map<String, dynamic> json) =>
+      _$ActivityFeedItemFromJson(json);
 }
 
 enum ActivityType {
@@ -53,7 +55,8 @@ class BedStatus with _$BedStatus {
     @JsonKey(ignore: true) @Default(Colors.blue) Color color,
   }) = _BedStatus;
 
-  factory BedStatus.fromJson(Map<String, dynamic> json) => _$BedStatusFromJson(json);
+  factory BedStatus.fromJson(Map<String, dynamic> json) =>
+      _$BedStatusFromJson(json);
 }
 
 @freezed
@@ -68,14 +71,11 @@ class CriticalPatient with _$CriticalPatient {
     required PatientSeverity severity,
   }) = _CriticalPatient;
 
-  factory CriticalPatient.fromJson(Map<String, dynamic> json) => _$CriticalPatientFromJson(json);
+  factory CriticalPatient.fromJson(Map<String, dynamic> json) =>
+      _$CriticalPatientFromJson(json);
 }
 
-enum PatientSeverity {
-  critical,
-  unstable,
-  stable,
-}
+enum PatientSeverity { critical, unstable, stable }
 
 @freezed
 class ModuleStatus with _$ModuleStatus {
@@ -88,12 +88,7 @@ class ModuleStatus with _$ModuleStatus {
   }) = _ModuleStatus;
 }
 
-enum ModuleHealth {
-  online,
-  offline,
-  critical,
-  partial,
-}
+enum ModuleHealth { online, offline, critical, partial }
 
 @freezed
 class StaffOnDuty with _$StaffOnDuty {
@@ -104,7 +99,8 @@ class StaffOnDuty with _$StaffOnDuty {
     required bool isOnDuty,
   }) = _StaffOnDuty;
 
-  factory StaffOnDuty.fromJson(Map<String, dynamic> json) => _$StaffOnDutyFromJson(json);
+  factory StaffOnDuty.fromJson(Map<String, dynamic> json) =>
+      _$StaffOnDutyFromJson(json);
 }
 
 @freezed
@@ -116,8 +112,4 @@ class AlertItem with _$AlertItem {
   }) = _AlertItem;
 }
 
-enum AlertType {
-  critical,
-  warning,
-  info,
-}
+enum AlertType { critical, warning, info }

@@ -308,7 +308,7 @@ class PaymentsTab extends StatelessWidget {
             3: FlexColumnWidth(1.2),
             4: FlexColumnWidth(1.2),
             5: FlexColumnWidth(1.2),
-            6: FlexColumnWidth(1.0),
+            6: FlexColumnWidth(1),
           },
           children: [
             _buildTableHeader(),

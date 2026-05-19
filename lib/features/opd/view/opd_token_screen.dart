@@ -213,7 +213,7 @@ class _OpdTokenScreenState extends ConsumerState<OpdTokenScreen> {
                     border: Border.all(color: AppColors.border),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.5),
+                        color: Colors.black.withValues(alpha: 0.5),
                         blurRadius: 20,
                         offset: const Offset(0, 10),
                       ),
@@ -232,7 +232,7 @@ class _OpdTokenScreenState extends ConsumerState<OpdTokenScreen> {
                         final isSelected = _selectedSearchIndex == index;
                         return ListTile(
                           tileColor: isSelected
-                              ? AppColors.primary.withOpacity(0.2)
+                              ? AppColors.primary.withValues(alpha: 0.2)
                               : null,
                           title: Text(
                             patient.name,

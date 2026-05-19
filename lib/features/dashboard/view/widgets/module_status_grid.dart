@@ -60,9 +60,9 @@ class ModuleStatusGrid extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: healthColor.withOpacity(0.05),
+        color: healthColor.withValues(alpha: 0.05),
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: healthColor.withOpacity(0.2)),
+        border: Border.all(color: healthColor.withValues(alpha: 0.2)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,7 +74,7 @@ class ModuleStatusGrid extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
                 decoration: BoxDecoration(
-                  color: healthColor.withOpacity(0.1),
+                  color: healthColor.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(4),
                 ),
                 child: Text(

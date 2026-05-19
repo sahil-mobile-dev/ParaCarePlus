@@ -11,20 +11,14 @@ class CreditAdvancesTab extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         final isWide = constraints.maxWidth > 900;
-        
+
         if (isWide) {
           return Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(
-                flex: 1,
-                child: _buildPatientDepositsCard(),
-              ),
+              Expanded(flex: 1, child: _buildPatientDepositsCard()),
               const SizedBox(width: AppSpacing.lg),
-              Expanded(
-                flex: 1,
-                child: _buildCreditOrganisationsCard(),
-              ),
+              Expanded(flex: 1, child: _buildCreditOrganisationsCard()),
             ],
           );
         }
@@ -56,7 +50,11 @@ class CreditAdvancesTab extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  const Icon(Icons.account_balance_rounded, size: 20, color: AppColors.primary),
+                  const Icon(
+                    Icons.account_balance_rounded,
+                    size: 20,
+                    color: AppColors.primary,
+                  ),
                   const SizedBox(width: 8),
                   Text('Patient Deposits', style: AppTextStyles.titleSmall),
                 ],
@@ -68,7 +66,10 @@ class CreditAdvancesTab extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.primary,
                   foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 8,
+                  ),
                   minimumSize: const Size(0, 36),
                 ),
               ),
@@ -94,7 +95,11 @@ class CreditAdvancesTab extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Icon(Icons.business_rounded, size: 20, color: AppColors.success),
+              const Icon(
+                Icons.business_rounded,
+                size: 20,
+                color: AppColors.success,
+              ),
               const SizedBox(width: 8),
               Text('Credit Organisations', style: AppTextStyles.titleSmall),
             ],
@@ -114,17 +119,36 @@ class CreditAdvancesTab extends StatelessWidget {
         child: Table(
           columnWidths: const {
             0: FlexColumnWidth(1.5),
-            1: FlexColumnWidth(1.0),
+            1: FlexColumnWidth(1),
             2: FlexColumnWidth(1.2),
             3: FlexColumnWidth(1.2),
             4: FlexColumnWidth(1.2),
             5: FlexColumnWidth(0.8),
           },
           children: [
-            _buildTableHeader(['Patient', 'Date', 'Deposited', 'Used', 'Balance', 'Action']),
-            _buildDepositRow('Kishore Negi', '10/04', '₹10,000', '₹5,000', '₹5,000'),
+            _buildTableHeader([
+              'Patient',
+              'Date',
+              'Deposited',
+              'Used',
+              'Balance',
+              'Action',
+            ]),
+            _buildDepositRow(
+              'Kishore Negi',
+              '10/04',
+              '₹10,000',
+              '₹5,000',
+              '₹5,000',
+            ),
             _buildDepositRow('Meena Bisht', '12/04', '₹5,000', '₹0', '₹5,000'),
-            _buildDepositRow('Anita Thapa', '11/04', '₹2,000', '₹720', '₹1,280'),
+            _buildDepositRow(
+              'Anita Thapa',
+              '11/04',
+              '₹2,000',
+              '₹720',
+              '₹1,280',
+            ),
           ],
         ),
       ),
@@ -138,17 +162,44 @@ class CreditAdvancesTab extends StatelessWidget {
         constraints: const BoxConstraints(minWidth: 500),
         child: Table(
           columnWidths: const {
-            0: FlexColumnWidth(2.0),
+            0: FlexColumnWidth(2),
             1: FlexColumnWidth(1.2),
             2: FlexColumnWidth(1.2),
             3: FlexColumnWidth(1.2),
-            4: FlexColumnWidth(1.0),
+            4: FlexColumnWidth(1),
           },
           children: [
-            _buildTableHeader(['Organisation', 'Limit', 'Used', 'Balance', 'Status']),
-            _buildOrganisationRow('Uttarakhand Police Welfare', '₹2,00,000', '₹45,000', '₹1,55,000', 'Active', AppColors.success),
-            _buildOrganisationRow('ONGC Employees', '₹5,00,000', '₹1,20,000', '₹3,80,000', 'Active', AppColors.success),
-            _buildOrganisationRow('Army Unit 18 RR', '₹3,00,000', '₹2,80,000', '₹20,000', 'Near Limit', Colors.orange),
+            _buildTableHeader([
+              'Organisation',
+              'Limit',
+              'Used',
+              'Balance',
+              'Status',
+            ]),
+            _buildOrganisationRow(
+              'Uttarakhand Police Welfare',
+              '₹2,00,000',
+              '₹45,000',
+              '₹1,55,000',
+              'Active',
+              AppColors.success,
+            ),
+            _buildOrganisationRow(
+              'ONGC Employees',
+              '₹5,00,000',
+              '₹1,20,000',
+              '₹3,80,000',
+              'Active',
+              AppColors.success,
+            ),
+            _buildOrganisationRow(
+              'Army Unit 18 RR',
+              '₹3,00,000',
+              '₹2,80,000',
+              '₹20,000',
+              'Near Limit',
+              Colors.orange,
+            ),
           ],
         ),
       ),
@@ -170,12 +221,20 @@ class CreditAdvancesTab extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
       child: Text(
         text,
-        style: AppTextStyles.labelSmall.copyWith(color: AppColors.secondaryText),
+        style: AppTextStyles.labelSmall.copyWith(
+          color: AppColors.secondaryText,
+        ),
       ),
     );
   }
 
-  TableRow _buildDepositRow(String patient, String date, String deposited, String used, String balance) {
+  TableRow _buildDepositRow(
+    String patient,
+    String date,
+    String deposited,
+    String used,
+    String balance,
+  ) {
     return TableRow(
       decoration: const BoxDecoration(
         border: Border(bottom: BorderSide(color: AppColors.border)),
@@ -190,14 +249,24 @@ class CreditAdvancesTab extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 8),
           child: Align(
             alignment: Alignment.centerLeft,
-            child: _actionIconButton(Icons.visibility_outlined, AppColors.primary),
+            child: _actionIconButton(
+              Icons.visibility_outlined,
+              AppColors.primary,
+            ),
           ),
         ),
       ],
     );
   }
 
-  TableRow _buildOrganisationRow(String org, String limit, String used, String balance, String status, Color statusColor) {
+  TableRow _buildOrganisationRow(
+    String org,
+    String limit,
+    String used,
+    String balance,
+    String status,
+    Color statusColor,
+  ) {
     return TableRow(
       decoration: const BoxDecoration(
         border: Border(bottom: BorderSide(color: AppColors.border)),
@@ -240,7 +309,11 @@ class CreditAdvancesTab extends StatelessWidget {
           ),
           child: Text(
             text,
-            style: TextStyle(color: color, fontSize: 11, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              color: color,
+              fontSize: 11,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ),
@@ -256,11 +329,7 @@ class CreditAdvancesTab extends StatelessWidget {
         borderRadius: BorderRadius.circular(4),
         border: Border.all(color: color),
       ),
-      child: Icon(
-        icon,
-        size: 14,
-        color: color,
-      ),
+      child: Icon(icon, size: 14, color: color),
     );
   }
 }

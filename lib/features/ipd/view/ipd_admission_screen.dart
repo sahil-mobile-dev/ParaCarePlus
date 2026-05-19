@@ -209,7 +209,7 @@ class _IpdAdmissionScreenState extends ConsumerState<IpdAdmissionScreen> {
                     border: Border.all(color: AppColors.border),
                     boxShadow: [
                       BoxShadow(
-                        color: Colors.black.withOpacity(0.5),
+                        color: Colors.black.withValues(alpha: 0.5),
                         blurRadius: 20,
                         offset: const Offset(0, 10),
                       ),
@@ -228,7 +228,7 @@ class _IpdAdmissionScreenState extends ConsumerState<IpdAdmissionScreen> {
                         final isSelected = _selectedSearchIndex == index;
                         return ListTile(
                           tileColor: isSelected
-                              ? AppColors.primary.withOpacity(0.2)
+                              ? AppColors.primary.withValues(alpha: 0.2)
                               : null,
                           title: Text(
                             patient.name,
@@ -481,7 +481,7 @@ class _IpdAdmissionScreenState extends ConsumerState<IpdAdmissionScreen> {
                       padding: const EdgeInsets.all(AppSpacing.xs),
                       decoration: BoxDecoration(
                         color: state.selectedBed == bed.id
-                            ? AppColors.primary.withOpacity(0.2)
+                            ? AppColors.primary.withValues(alpha: 0.2)
                             : AppColors.card,
                         borderRadius: BorderRadius.circular(8),
                         border: Border.all(

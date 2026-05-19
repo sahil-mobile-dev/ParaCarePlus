@@ -136,7 +136,7 @@ class InsuranceTpaTab extends StatelessWidget {
               1: FlexColumnWidth(1.5),
               2: FlexColumnWidth(1.5),
               3: FlexColumnWidth(1.2),
-              4: FlexColumnWidth(1.0),
+              4: FlexColumnWidth(),
               5: FlexColumnWidth(1.2),
             },
             children: [
@@ -246,7 +246,7 @@ class InsuranceTpaTab extends StatelessWidget {
               1: FlexColumnWidth(1.5),
               2: FlexColumnWidth(1.5),
               3: FlexColumnWidth(1.2),
-              4: FlexColumnWidth(1.0),
+              4: FlexColumnWidth(),
               5: FlexColumnWidth(1.2),
             },
             children: [

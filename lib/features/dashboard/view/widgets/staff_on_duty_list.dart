@@ -26,14 +26,21 @@ class StaffOnDutyList extends StatelessWidget {
             children: [
               const Row(
                 children: [
-                  Icon(Icons.badge_outlined, color: AppColors.primary, size: 24),
+                  Icon(
+                    Icons.badge_outlined,
+                    color: AppColors.primary,
+                    size: 24,
+                  ),
                   SizedBox(width: 12),
                   Text('Staff On Duty', style: AppTextStyles.titleSmall),
                 ],
               ),
               TextButton(
                 onPressed: () {},
-                child: const Text('View Full Roster', style: AppTextStyles.labelSmall),
+                child: const Text(
+                  'View Full Roster',
+                  style: AppTextStyles.labelSmall,
+                ),
               ),
             ],
           ),
@@ -46,35 +53,54 @@ class StaffOnDutyList extends StatelessWidget {
 
   Widget _buildStaffItem(StaffOnDuty s) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 12.0),
+      padding: const EdgeInsets.only(bottom: 12),
       child: Row(
         children: [
           const CircleAvatar(
             radius: 16,
             backgroundColor: AppColors.surface,
-            child: Icon(Icons.person_outline_rounded, size: 16, color: AppColors.secondaryText),
+            child: Icon(
+              Icons.person_outline_rounded,
+              size: 16,
+              color: AppColors.secondaryText,
+            ),
           ),
           const SizedBox(width: 12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(s.name, style: AppTextStyles.bodySmall.copyWith(fontWeight: FontWeight.bold)),
-                Text('${s.role} • ${s.department}', style: AppTextStyles.labelSmall.copyWith(fontSize: 9)),
+                Text(
+                  s.name,
+                  style: AppTextStyles.bodySmall.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  '${s.role} • ${s.department}',
+                  style: AppTextStyles.labelSmall.copyWith(fontSize: 9),
+                ),
               ],
             ),
           ),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
             decoration: BoxDecoration(
-              color: AppColors.success.withOpacity(0.1),
+              color: AppColors.success.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(4),
             ),
             child: const Row(
               children: [
                 Icon(Icons.circle, color: AppColors.success, size: 6),
                 SizedBox(width: 4),
-                Text('ON DUTY', style: TextStyle(color: AppColors.success, fontSize: 8, fontWeight: FontWeight.bold)),
+                Text(
+                  'ON DUTY',
+                  style: TextStyle(
+                    color: AppColors.success,
+                    fontSize: 8,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ],
             ),
           ),

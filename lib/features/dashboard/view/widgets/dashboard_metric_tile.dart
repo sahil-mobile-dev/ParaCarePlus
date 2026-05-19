@@ -36,7 +36,7 @@ class DashboardMetricTile extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(10),
             decoration: BoxDecoration(
-              color: effectiveColor.withOpacity(0.1),
+              color: effectiveColor.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(12),
             ),
             child: Icon(icon, color: effectiveColor, size: 24),
@@ -59,15 +59,22 @@ class DashboardMetricTile extends StatelessWidget {
                     ),
                     if (trend != null)
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 4,
+                          vertical: 2,
+                        ),
                         decoration: BoxDecoration(
-                          color: (isPositive ?? true) ? AppColors.success.withOpacity(0.1) : AppColors.error.withOpacity(0.1),
+                          color: (isPositive ?? true)
+                              ? AppColors.success.withValues(alpha: 0.1)
+                              : AppColors.error.withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(4),
                         ),
                         child: Text(
                           trend!,
                           style: TextStyle(
-                            color: (isPositive ?? true) ? AppColors.success : AppColors.error,
+                            color: (isPositive ?? true)
+                                ? AppColors.success
+                                : AppColors.error,
                             fontSize: 8,
                             fontWeight: FontWeight.bold,
                           ),
@@ -78,7 +85,10 @@ class DashboardMetricTile extends StatelessWidget {
                 const SizedBox(height: 2),
                 Text(
                   title,
-                  style: AppTextStyles.labelSmall.copyWith(color: AppColors.secondaryText, fontSize: 10),
+                  style: AppTextStyles.labelSmall.copyWith(
+                    color: AppColors.secondaryText,
+                    fontSize: 10,
+                  ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),

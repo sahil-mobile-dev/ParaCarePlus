@@ -23,7 +23,11 @@ class RefundsTab extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  const Icon(Icons.replay_rounded, size: 20, color: Colors.orange),
+                  const Icon(
+                    Icons.replay_rounded,
+                    size: 20,
+                    color: Colors.orange,
+                  ),
                   const SizedBox(width: 8),
                   Text('Refund Requests', style: AppTextStyles.titleSmall),
                 ],
@@ -35,7 +39,10 @@ class RefundsTab extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.orange,
                   foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 8,
+                  ),
                   minimumSize: const Size(0, 36),
                 ),
               ),
@@ -57,17 +64,35 @@ class RefundsTab extends StatelessWidget {
           columnWidths: const {
             0: FlexColumnWidth(1.2),
             1: FlexColumnWidth(1.5),
-            2: FlexColumnWidth(2.0),
-            3: FlexColumnWidth(2.0),
+            2: FlexColumnWidth(2),
+            3: FlexColumnWidth(2),
             4: FlexColumnWidth(1.2),
             5: FlexColumnWidth(1.5),
             6: FlexColumnWidth(1.2),
-            7: FlexColumnWidth(1.0),
+            7: FlexColumnWidth(1),
           },
           children: [
             _buildTableHeader(),
-            _buildTableRow('REF-001', 'BL-2024-890', 'Ram Prasad', 'Cancelled Test', '₹2,200', 'Dr. Sharma', 'Approved', AppColors.success),
-            _buildTableRow('REF-002', 'BL-2025-012', 'Kamala Devi', 'Overpayment', '₹500', 'Admin', 'Pending', Colors.orange),
+            _buildTableRow(
+              'REF-001',
+              'BL-2024-890',
+              'Ram Prasad',
+              'Cancelled Test',
+              '₹2,200',
+              'Dr. Sharma',
+              'Approved',
+              AppColors.success,
+            ),
+            _buildTableRow(
+              'REF-002',
+              'BL-2025-012',
+              'Kamala Devi',
+              'Overpayment',
+              '₹500',
+              'Admin',
+              'Pending',
+              Colors.orange,
+            ),
           ],
         ),
       ),
@@ -98,7 +123,9 @@ class RefundsTab extends StatelessWidget {
       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
       child: Text(
         text,
-        style: AppTextStyles.labelSmall.copyWith(color: AppColors.secondaryText),
+        style: AppTextStyles.labelSmall.copyWith(
+          color: AppColors.secondaryText,
+        ),
       ),
     );
   }
@@ -164,7 +191,11 @@ class RefundsTab extends StatelessWidget {
           ),
           child: Text(
             text,
-            style: TextStyle(color: color, fontSize: 11, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              color: color,
+              fontSize: 11,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ),
@@ -180,11 +211,7 @@ class RefundsTab extends StatelessWidget {
         borderRadius: BorderRadius.circular(4),
         border: Border.all(color: color),
       ),
-      child: Icon(
-        icon,
-        size: 14,
-        color: color,
-      ),
+      child: Icon(icon, size: 14, color: color),
     );
   }
 }

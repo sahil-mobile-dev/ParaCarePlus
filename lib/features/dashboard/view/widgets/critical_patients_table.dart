@@ -26,7 +26,11 @@ class CriticalPatientsTable extends StatelessWidget {
             children: [
               const Row(
                 children: [
-                  Icon(Icons.monitor_heart_rounded, color: AppColors.error, size: 24),
+                  Icon(
+                    Icons.monitor_heart_rounded,
+                    color: AppColors.error,
+                    size: 24,
+                  ),
                   SizedBox(width: 12),
                   Text('Critical Patients', style: AppTextStyles.titleSmall),
                 ],
@@ -46,11 +50,21 @@ class CriticalPatientsTable extends StatelessWidget {
               dataRowHeight: 56,
               headingRowColor: WidgetStateProperty.all(AppColors.background),
               columns: const [
-                DataColumn(label: Text('PATIENT', style: AppTextStyles.labelSmall)),
-                DataColumn(label: Text('WARD', style: AppTextStyles.labelSmall)),
-                DataColumn(label: Text('CONDITION', style: AppTextStyles.labelSmall)),
-                DataColumn(label: Text('ASSIGNED TO', style: AppTextStyles.labelSmall)),
-                DataColumn(label: Text('ACTION', style: AppTextStyles.labelSmall)),
+                DataColumn(
+                  label: Text('PATIENT', style: AppTextStyles.labelSmall),
+                ),
+                DataColumn(
+                  label: Text('WARD', style: AppTextStyles.labelSmall),
+                ),
+                DataColumn(
+                  label: Text('CONDITION', style: AppTextStyles.labelSmall),
+                ),
+                DataColumn(
+                  label: Text('ASSIGNED TO', style: AppTextStyles.labelSmall),
+                ),
+                DataColumn(
+                  label: Text('ACTION', style: AppTextStyles.labelSmall),
+                ),
               ],
               rows: patients.map((p) => _buildRow(p)).toList(),
             ),
@@ -68,8 +82,16 @@ class CriticalPatientsTable extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(p.name, style: AppTextStyles.bodyMedium.copyWith(fontWeight: FontWeight.bold)),
-              Text(p.id, style: AppTextStyles.labelSmall.copyWith(fontSize: 10)),
+              Text(
+                p.name,
+                style: AppTextStyles.bodyMedium.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                p.id,
+                style: AppTextStyles.labelSmall.copyWith(fontSize: 10),
+              ),
             ],
           ),
         ),
@@ -79,7 +101,10 @@ class CriticalPatientsTable extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(p.ward, style: AppTextStyles.bodySmall),
-              Text(p.bed, style: AppTextStyles.labelSmall.copyWith(fontSize: 9)),
+              Text(
+                p.bed,
+                style: AppTextStyles.labelSmall.copyWith(fontSize: 9),
+              ),
             ],
           ),
         ),
@@ -90,7 +115,9 @@ class CriticalPatientsTable extends StatelessWidget {
                 width: 8,
                 height: 8,
                 decoration: BoxDecoration(
-                  color: p.severity == PatientSeverity.critical ? AppColors.error : AppColors.secondaryAccent,
+                  color: p.severity == PatientSeverity.critical
+                      ? AppColors.error
+                      : AppColors.secondaryAccent,
                   shape: BoxShape.circle,
                 ),
               ),
@@ -104,7 +131,7 @@ class CriticalPatientsTable extends StatelessWidget {
           ElevatedButton(
             onPressed: () {},
             style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.primary.withOpacity(0.1),
+              backgroundColor: AppColors.primary.withValues(alpha: 0.1),
               foregroundColor: AppColors.primary,
               elevation: 0,
               padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),

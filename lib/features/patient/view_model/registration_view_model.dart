@@ -59,53 +59,60 @@ class RegistrationViewModel extends _$RegistrationViewModel {
       calculatedAge = _calculateAge(dateOfBirth);
     }
 
-    state = AsyncData(currentState.copyWith(
-      title: title ?? currentState.title,
-      fullName: fullName ?? currentState.fullName,
-      dateOfBirth: dateOfBirth ?? currentState.dateOfBirth,
-      age: calculatedAge,
-      gender: gender ?? currentState.gender,
-      bloodGroup: bloodGroup ?? currentState.bloodGroup,
-      aadhaarNumber: aadhaarNumber ?? currentState.aadhaarNumber,
-      ayushmanBharatId: ayushmanBharatId ?? currentState.ayushmanBharatId,
-      maritalStatus: maritalStatus ?? currentState.maritalStatus,
-      religion: religion ?? currentState.religion,
-      occupation: occupation ?? currentState.occupation,
-      category: category ?? currentState.category,
-      mobileNumber: mobileNumber ?? currentState.mobileNumber,
-      email: email ?? currentState.email,
-      address: address ?? currentState.address,
-      city: city ?? currentState.city,
-      state: addressState ?? currentState.state,
-      pincode: pincode ?? currentState.pincode,
-      emergencyContactName: emergencyContactName ?? currentState.emergencyContactName,
-      emergencyContactNumber: emergencyContactNumber ?? currentState.emergencyContactNumber,
-      visitType: visitType ?? currentState.visitType,
-      department: department ?? currentState.department,
-      doctorName: doctorName ?? currentState.doctorName,
-      appointmentDate: appointmentDate ?? currentState.appointmentDate,
-      appointmentSlot: appointmentSlot ?? currentState.appointmentSlot,
-      bedNumber: bedNumber ?? currentState.bedNumber,
-      paymentMode: paymentMode ?? currentState.paymentMode,
-      registrationFee: registrationFee ?? currentState.registrationFee,
-      admissionReason: admissionReason ?? currentState.admissionReason,
-      primaryComplaint: primaryComplaint ?? currentState.primaryComplaint,
-      referredBy: referredBy ?? currentState.referredBy,
-      allergies: allergies ?? currentState.allergies,
-      chronicIllnesses: chronicIllnesses ?? currentState.chronicIllnesses,
-      smokingHabit: smokingHabit ?? currentState.smokingHabit,
-      alcoholHabit: alcoholHabit ?? currentState.alcoholHabit,
-      familyHistory: familyHistory ?? currentState.familyHistory,
-      vaccinationHistory: vaccinationHistory ?? currentState.vaccinationHistory,
-      currentMedications: currentMedications ?? currentState.currentMedications,
-      pastSurgeries: pastSurgeries ?? currentState.pastSurgeries,
-    ));
+    state = AsyncData(
+      currentState.copyWith(
+        title: title ?? currentState.title,
+        fullName: fullName ?? currentState.fullName,
+        dateOfBirth: dateOfBirth ?? currentState.dateOfBirth,
+        age: calculatedAge,
+        gender: gender ?? currentState.gender,
+        bloodGroup: bloodGroup ?? currentState.bloodGroup,
+        aadhaarNumber: aadhaarNumber ?? currentState.aadhaarNumber,
+        ayushmanBharatId: ayushmanBharatId ?? currentState.ayushmanBharatId,
+        maritalStatus: maritalStatus ?? currentState.maritalStatus,
+        religion: religion ?? currentState.religion,
+        occupation: occupation ?? currentState.occupation,
+        category: category ?? currentState.category,
+        mobileNumber: mobileNumber ?? currentState.mobileNumber,
+        email: email ?? currentState.email,
+        address: address ?? currentState.address,
+        city: city ?? currentState.city,
+        state: addressState ?? currentState.state,
+        pincode: pincode ?? currentState.pincode,
+        emergencyContactName:
+            emergencyContactName ?? currentState.emergencyContactName,
+        emergencyContactNumber:
+            emergencyContactNumber ?? currentState.emergencyContactNumber,
+        visitType: visitType ?? currentState.visitType,
+        department: department ?? currentState.department,
+        doctorName: doctorName ?? currentState.doctorName,
+        appointmentDate: appointmentDate ?? currentState.appointmentDate,
+        appointmentSlot: appointmentSlot ?? currentState.appointmentSlot,
+        bedNumber: bedNumber ?? currentState.bedNumber,
+        paymentMode: paymentMode ?? currentState.paymentMode,
+        registrationFee: registrationFee ?? currentState.registrationFee,
+        admissionReason: admissionReason ?? currentState.admissionReason,
+        primaryComplaint: primaryComplaint ?? currentState.primaryComplaint,
+        referredBy: referredBy ?? currentState.referredBy,
+        allergies: allergies ?? currentState.allergies,
+        chronicIllnesses: chronicIllnesses ?? currentState.chronicIllnesses,
+        smokingHabit: smokingHabit ?? currentState.smokingHabit,
+        alcoholHabit: alcoholHabit ?? currentState.alcoholHabit,
+        familyHistory: familyHistory ?? currentState.familyHistory,
+        vaccinationHistory:
+            vaccinationHistory ?? currentState.vaccinationHistory,
+        currentMedications:
+            currentMedications ?? currentState.currentMedications,
+        pastSurgeries: pastSurgeries ?? currentState.pastSurgeries,
+      ),
+    );
   }
 
   String _calculateAge(DateTime dob) {
     final now = DateTime.now();
-    int age = now.year - dob.year;
-    if (now.month < dob.month || (now.month == dob.month && now.day < dob.day)) {
+    var age = now.year - dob.year;
+    if (now.month < dob.month ||
+        (now.month == dob.month && now.day < dob.day)) {
       age--;
     }
     return age.toString();
@@ -114,13 +121,17 @@ class RegistrationViewModel extends _$RegistrationViewModel {
   void nextStep() {
     final currentState = state.value;
     if (currentState == null || currentState.currentStep >= 4) return;
-    state = AsyncData(currentState.copyWith(currentStep: currentState.currentStep + 1));
+    state = AsyncData(
+      currentState.copyWith(currentStep: currentState.currentStep + 1),
+    );
   }
 
   void previousStep() {
     final currentState = state.value;
     if (currentState == null || currentState.currentStep <= 0) return;
-    state = AsyncData(currentState.copyWith(currentStep: currentState.currentStep - 1));
+    state = AsyncData(
+      currentState.copyWith(currentStep: currentState.currentStep - 1),
+    );
   }
 
   void setStep(int step) {
@@ -134,10 +145,10 @@ class RegistrationViewModel extends _$RegistrationViewModel {
     if (currentState == null) return;
 
     state = AsyncData(currentState.copyWith(isSubmitting: true));
-    
+
     // Simulate API call
     await Future<void>.delayed(const Duration(seconds: 2));
-    
+
     state = AsyncData(currentState.copyWith(isSubmitting: false));
     // In a real app, we would navigate to a success screen or show a receipt
   }

@@ -30,12 +30,19 @@ class DemoCredentialsBar extends ConsumerWidget {
                 padding: const EdgeInsets.only(right: 8),
                 child: ActionChip(
                   label: Text(role.displayName),
-                  labelStyle: AppTextStyles.labelSmall.copyWith(fontSize: 10, fontWeight: FontWeight.w600),
+                  labelStyle: AppTextStyles.labelSmall.copyWith(
+                    fontSize: 10,
+                    fontWeight: FontWeight.w600,
+                  ),
                   avatar: Icon(role.icon, size: 14, color: AppColors.primary),
-                  backgroundColor: AppColors.background.withOpacity(0.5),
+                  backgroundColor: AppColors.background.withValues(alpha: 0.5),
                   side: const BorderSide(color: AppColors.border, width: 0.5),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                  onPressed: () => ref.read(loginViewModelProvider.notifier).fillDemoCredentials(role),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  onPressed: () => ref
+                      .read(loginViewModelProvider.notifier)
+                      .fillDemoCredentials(role),
                 ),
               );
             }).toList(),

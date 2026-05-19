@@ -30,7 +30,8 @@ class ActivityFeed extends StatelessWidget {
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           itemCount: items.length,
-          separatorBuilder: (context, index) => Divider(color: AppColors.border, height: 1),
+          separatorBuilder: (context, index) =>
+              Divider(color: AppColors.border, height: 1),
           itemBuilder: (context, index) {
             final item = items[index];
             return Padding(
@@ -47,17 +48,26 @@ class ActivityFeed extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(item.title, style: AppTextStyles.bodyMedium.copyWith(fontWeight: FontWeight.bold)),
+                            Text(
+                              item.title,
+                              style: AppTextStyles.bodyMedium.copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
                             Text(
                               DateFormat('HH:mm').format(item.timestamp),
-                              style: AppTextStyles.bodySmall.copyWith(color: AppColors.secondaryText),
+                              style: AppTextStyles.bodySmall.copyWith(
+                                color: AppColors.secondaryText,
+                              ),
                             ),
                           ],
                         ),
                         const SizedBox(height: 4),
                         Text(
                           item.description,
-                          style: AppTextStyles.bodySmall.copyWith(color: AppColors.secondaryText),
+                          style: AppTextStyles.bodySmall.copyWith(
+                            color: AppColors.secondaryText,
+                          ),
                         ),
                       ],
                     ),
@@ -107,7 +117,7 @@ class _ActivityIcon extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: color.withOpacity(0.1),
+        color: color.withValues(alpha: 0.1),
         shape: BoxShape.circle,
       ),
       child: Icon(icon, color: color, size: 16),

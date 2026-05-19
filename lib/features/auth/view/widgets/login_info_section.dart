@@ -14,7 +14,7 @@ class LoginInfoSection extends StatelessWidget {
         Container(
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
-            color: AppColors.secondaryAccent.withOpacity(0.1),
+            color: AppColors.secondaryAccent.withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(16),
           ),
           child: const Icon(
@@ -27,9 +27,9 @@ class LoginInfoSection extends StatelessWidget {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
           decoration: BoxDecoration(
-            color: AppColors.primary.withOpacity(0.2),
+            color: AppColors.primary.withValues(alpha: 0.2),
             borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: AppColors.primary.withOpacity(0.5)),
+            border: Border.all(color: AppColors.primary.withValues(alpha: 0.5)),
           ),
           child: Text(
             'PARACARE+ HIMS V3.0 - ENTERPRISE EDITION',
@@ -87,15 +87,15 @@ class LoginInfoSection extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: AppColors.card.withOpacity(0.4),
+        color: AppColors.card.withValues(alpha: 0.4),
         borderRadius: BorderRadius.circular(24),
-        border: Border.all(color: AppColors.border.withOpacity(0.4)),
+        border: Border.all(color: AppColors.border.withValues(alpha: 0.4)),
         gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            AppColors.card.withOpacity(0.6),
-            AppColors.surface.withOpacity(0.2),
+            AppColors.card.withValues(alpha: 0.6),
+            AppColors.surface.withValues(alpha: 0.2),
           ],
         ),
       ),
@@ -106,7 +106,7 @@ class LoginInfoSection extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: AppColors.secondaryAccent.withOpacity(0.1),
+              color: AppColors.secondaryAccent.withValues(alpha: 0.1),
               shape: BoxShape.circle,
             ),
             child: Icon(icon, color: AppColors.secondaryAccent, size: 20),

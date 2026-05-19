@@ -40,7 +40,7 @@ class AppSidebar extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: AppColors.primary.withOpacity(0.1),
+              color: AppColors.primary.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(12),
             ),
             child: const Icon(
@@ -131,7 +131,7 @@ class AppSidebar extends StatelessWidget {
     return InkWell(
       onTap: () {},
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(8),
         child: Row(
           children: [
             Icon(icon, size: 20, color: color ?? AppColors.secondaryText),

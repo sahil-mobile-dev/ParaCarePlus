@@ -18,17 +18,17 @@ class AlertBanner extends StatelessWidget {
 
     switch (alert.type) {
       case AlertType.critical:
-        bgColor = AppColors.error.withOpacity(0.1);
+        bgColor = AppColors.error.withValues(alpha: 0.1);
         iconColor = AppColors.error;
         icon = Icons.error_rounded;
         break;
       case AlertType.warning:
-        bgColor = AppColors.secondaryAccent.withOpacity(0.1);
+        bgColor = AppColors.secondaryAccent.withValues(alpha: 0.1);
         iconColor = AppColors.secondaryAccent;
         icon = Icons.warning_rounded;
         break;
       case AlertType.info:
-        bgColor = AppColors.primary.withOpacity(0.1);
+        bgColor = AppColors.primary.withValues(alpha: 0.1);
         iconColor = AppColors.primary;
         icon = Icons.info_rounded;
         break;
@@ -40,7 +40,7 @@ class AlertBanner extends StatelessWidget {
       decoration: BoxDecoration(
         color: bgColor,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: iconColor.withOpacity(0.3)),
+        border: Border.all(color: iconColor.withValues(alpha: 0.3)),
       ),
       child: Row(
         children: [
@@ -49,7 +49,10 @@ class AlertBanner extends StatelessWidget {
           Expanded(
             child: Text(
               alert.message,
-              style: AppTextStyles.bodySmall.copyWith(color: iconColor, fontWeight: FontWeight.w500),
+              style: AppTextStyles.bodySmall.copyWith(
+                color: iconColor,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ),
           if (onClose != null)
@@ -57,7 +60,11 @@ class AlertBanner extends StatelessWidget {
               padding: EdgeInsets.zero,
               constraints: const BoxConstraints(),
               onPressed: onClose,
-              icon: Icon(Icons.close_rounded, color: iconColor.withOpacity(0.5), size: 18),
+              icon: Icon(
+                Icons.close_rounded,
+                color: iconColor.withValues(alpha: 0.5),
+                size: 18,
+              ),
             ),
         ],
       ),

@@ -125,7 +125,9 @@ class _SummaryCard extends StatelessWidget {
                 Icon(
                   icon,
                   size: 20,
-                  color: iconColor?.withOpacity(0.5) ?? AppColors.secondaryText,
+                  color:
+                      iconColor?.withValues(alpha: 0.5) ??
+                      AppColors.secondaryText,
                 ),
             ],
           ),

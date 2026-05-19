@@ -24,7 +24,13 @@ class StepMedicalHistory extends ConsumerWidget {
 
         _buildMultiSelectChips(
           label: 'Chronic Conditions (Multiple Selection Possible)',
-          options: ['COVID-19', 'Dengue Fever', 'Malaria', 'Typhoid Fever', 'Tuberculosis'],
+          options: [
+            'COVID-19',
+            'Dengue Fever',
+            'Malaria',
+            'Typhoid Fever',
+            'Tuberculosis',
+          ],
           selectedValues: state.chronicIllnesses,
           onChanged: (v) => notifier.updateField(chronicIllnesses: v),
         ),
@@ -75,7 +81,9 @@ class StepMedicalHistory extends ConsumerWidget {
           label: 'Known Allergies',
           hintText: 'e.g. Penicillin, Peanuts (Comma separated)',
           initialValue: state.allergies.join(', '),
-          onChanged: (v) => notifier.updateField(allergies: v.split(',').map((e) => e.trim()).toList()),
+          onChanged: (v) => notifier.updateField(
+            allergies: v.split(',').map((e) => e.trim()).toList(),
+          ),
           textInputAction: TextInputAction.next,
           maxLines: 2,
         ),
@@ -113,7 +121,12 @@ class StepMedicalHistory extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: AppTextStyles.labelMedium.copyWith(color: AppColors.secondaryText)),
+        Text(
+          label,
+          style: AppTextStyles.labelMedium.copyWith(
+            color: AppColors.secondaryText,
+          ),
+        ),
         const SizedBox(height: 12),
         Wrap(
           spacing: 8,
@@ -132,9 +145,9 @@ class StepMedicalHistory extends ConsumerWidget {
                 }
                 onChanged(newList);
               },
-              selectedColor: AppColors.primary.withOpacity(0.1),
+              selectedColor: AppColors.primary.withValues(alpha: 0.1),
               checkmarkColor: AppColors.primary,
-              backgroundColor: AppColors.card.withOpacity(0.5),
+              backgroundColor: AppColors.card.withValues(alpha: 0.5),
               labelStyle: AppTextStyles.labelSmall.copyWith(
                 color: isSelected ? AppColors.primary : AppColors.secondaryText,
                 fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
@@ -143,7 +156,9 @@ class StepMedicalHistory extends ConsumerWidget {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8),
                 side: BorderSide(
-                  color: isSelected ? AppColors.primary : AppColors.border.withOpacity(0.5),
+                  color: isSelected
+                      ? AppColors.primary
+                      : AppColors.border.withValues(alpha: 0.5),
                 ),
               ),
             );
@@ -162,7 +177,12 @@ class StepMedicalHistory extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(label, style: AppTextStyles.labelMedium.copyWith(color: AppColors.secondaryText)),
+        Text(
+          label,
+          style: AppTextStyles.labelMedium.copyWith(
+            color: AppColors.secondaryText,
+          ),
+        ),
         const SizedBox(height: 8),
         DropdownButtonFormField<String>(
           isExpanded: true,
@@ -182,16 +202,15 @@ class StepMedicalHistory extends ConsumerWidget {
               borderRadius: BorderRadius.circular(8),
               borderSide: const BorderSide(color: AppColors.border),
             ),
-            contentPadding:
-                const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 16,
+              vertical: 12,
+            ),
           ),
           items: items.map((item) {
             return DropdownMenuItem<String>(
               value: item,
-              child: Text(
-                item,
-                overflow: TextOverflow.ellipsis,
-              ),
+              child: Text(item, overflow: TextOverflow.ellipsis),
             );
           }).toList(),
           onChanged: onChanged,

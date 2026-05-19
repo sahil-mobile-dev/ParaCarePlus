@@ -31,7 +31,7 @@ class StatCard extends StatelessWidget {
         border: Border.all(color: AppColors.border),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: Colors.black.withValues(alpha: 0.1),
             blurRadius: 10,
             offset: const Offset(0, 4),
           ),
@@ -46,7 +46,7 @@ class StatCard extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(8),
                 decoration: BoxDecoration(
-                  color: iconColor.withOpacity(0.1),
+                  color: iconColor.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Icon(icon, color: iconColor, size: 20),
@@ -56,14 +56,18 @@ class StatCard extends StatelessWidget {
                   children: [
                     Icon(
                       isPositiveTrend ? Icons.trending_up : Icons.trending_down,
-                      color: isPositiveTrend ? AppColors.success : AppColors.error,
+                      color: isPositiveTrend
+                          ? AppColors.success
+                          : AppColors.error,
                       size: 14,
                     ),
                     const SizedBox(width: 4),
                     Text(
                       trend!,
                       style: AppTextStyles.bodySmall.copyWith(
-                        color: isPositiveTrend ? AppColors.success : AppColors.error,
+                        color: isPositiveTrend
+                            ? AppColors.success
+                            : AppColors.error,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -72,14 +76,13 @@ class StatCard extends StatelessWidget {
             ],
           ),
           const SizedBox(height: AppSpacing.md),
-          Text(
-            value,
-            style: AppTextStyles.titleLarge.copyWith(fontSize: 22),
-          ),
+          Text(value, style: AppTextStyles.titleLarge.copyWith(fontSize: 22)),
           const SizedBox(height: 4),
           Text(
             title,
-            style: AppTextStyles.bodySmall.copyWith(color: AppColors.secondaryText),
+            style: AppTextStyles.bodySmall.copyWith(
+              color: AppColors.secondaryText,
+            ),
           ),
         ],
       ),

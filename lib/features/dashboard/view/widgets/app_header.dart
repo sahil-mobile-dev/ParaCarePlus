@@ -7,14 +7,14 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
   const AppHeader({super.key});
 
   @override
-  Size get preferredSize => const Size.fromHeight(120);
+  Size get preferredSize => const Size.fromHeight(125);
 
   @override
   Widget build(BuildContext context) {
     final bool isWideScreen = MediaQuery.of(context).size.width > 1200;
 
     return Container(
-      height: 160,
+      height: 170,
       padding: const EdgeInsets.symmetric(horizontal: AppSpacing.lg),
       decoration: const BoxDecoration(
         color: AppColors.surface,

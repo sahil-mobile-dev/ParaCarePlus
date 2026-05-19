@@ -22,7 +22,7 @@ class BillingScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final bool isWideScreen = MediaQuery.of(context).size.width > 1200;
+    final isWideScreen = MediaQuery.of(context).size.width > 1200;
     final activeTab = ref.watch(billingTabProvider);
 
     return Scaffold(
@@ -81,10 +81,10 @@ class BillingScreen extends ConsumerWidget {
                     vertical: 4,
                   ),
                   decoration: BoxDecoration(
-                    color: AppColors.success.withOpacity(0.1),
+                    color: AppColors.success.withValues(alpha: 0.1),
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
-                      color: AppColors.success.withOpacity(0.3),
+                      color: AppColors.success.withValues(alpha: 0.3),
                     ),
                   ),
                   child: Row(

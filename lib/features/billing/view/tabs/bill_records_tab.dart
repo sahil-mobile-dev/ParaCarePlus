@@ -133,7 +133,7 @@ class BillRecordsTab extends StatelessWidget {
         child: Table(
           columnWidths: const {
             0: FlexColumnWidth(1.2),
-            1: FlexColumnWidth(2.0),
+            1: FlexColumnWidth(2),
             2: FlexColumnWidth(1.5),
             3: FlexColumnWidth(1.2),
             4: FlexColumnWidth(1.2),
@@ -141,7 +141,7 @@ class BillRecordsTab extends StatelessWidget {
             6: FlexColumnWidth(1.2),
             7: FlexColumnWidth(1.2),
             8: FlexColumnWidth(1.5),
-            9: FlexColumnWidth(2.0),
+            9: FlexColumnWidth(2),
           },
           children: [
             _buildTableHeader(),
