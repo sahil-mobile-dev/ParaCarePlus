@@ -292,10 +292,10 @@ class BillRecordsTab extends StatelessWidget {
     String status,
     Color statusColor,
   ) {
-    Color visitColor = visit == 'IPD'
+    final visitColor = visit == 'IPD'
         ? AppColors.primary
         : (visit == 'OPD' ? AppColors.success : Colors.orange);
-    bool showPayAction =
+    final showPayAction =
         status == 'Partial' || status == 'Pending' || status == 'Credit';
 
     return TableRow(

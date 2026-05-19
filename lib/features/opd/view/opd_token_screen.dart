@@ -5,10 +5,10 @@ import 'package:intl/intl.dart';
 import 'package:paracareplus/core/theme/app_colors.dart';
 import 'package:paracareplus/core/theme/app_spacing.dart';
 import 'package:paracareplus/core/theme/app_text_styles.dart';
-import 'package:paracareplus/features/opd/view_model/opd_token_view_model.dart';
-import 'package:paracareplus/features/opd/model/opd_token.dart';
 import 'package:paracareplus/core/widgets/app_button.dart';
 import 'package:paracareplus/core/widgets/app_textfield.dart';
+import 'package:paracareplus/features/opd/model/opd_token.dart';
+import 'package:paracareplus/features/opd/view_model/opd_token_view_model.dart';
 
 class OpdTokenScreen extends ConsumerStatefulWidget {
   const OpdTokenScreen({super.key});
@@ -112,7 +112,10 @@ class _OpdTokenScreenState extends ConsumerState<OpdTokenScreen> {
       child: Scaffold(
         backgroundColor: AppColors.background,
         appBar: AppBar(
-          title: Text('Issue OPD Token', style: AppTextStyles.titleMedium),
+          title: const Text(
+            'Issue OPD Token',
+            style: AppTextStyles.titleMedium,
+          ),
           backgroundColor: AppColors.surface,
           elevation: 0,
           leading: IconButton(
@@ -132,7 +135,7 @@ class _OpdTokenScreenState extends ConsumerState<OpdTokenScreen> {
           ],
         ),
         body: stateAsync.when(
-          data: (state) => _buildContent(state),
+          data: _buildContent,
           loading: () => const Center(child: CircularProgressIndicator()),
           error: (e, s) => Center(child: Text('Error: $e')),
         ),
@@ -168,10 +171,10 @@ class _OpdTokenScreenState extends ConsumerState<OpdTokenScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Row(
+        const Row(
           children: [
-            const Icon(Icons.search, color: AppColors.primary, size: 20),
-            const SizedBox(width: 8),
+            Icon(Icons.search, color: AppColors.primary, size: 20),
+            SizedBox(width: 8),
             Text('Search Existing Patient', style: AppTextStyles.labelMedium),
           ],
         ),
@@ -334,7 +337,7 @@ class _OpdTokenScreenState extends ConsumerState<OpdTokenScreen> {
                       ? null
                       : (val) => ref
                             .read(opdTokenViewModelProvider.notifier)
-                            .updateField(sex: val!),
+                            .updateField(sex: val),
                 ),
               ),
             ],

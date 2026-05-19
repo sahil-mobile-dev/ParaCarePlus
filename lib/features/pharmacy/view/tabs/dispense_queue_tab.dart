@@ -156,7 +156,7 @@ class _DispenseQueueTabState extends State<DispenseQueueTab> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    const Text(
                       'Routine & Urgent Active Queue',
                       style: AppTextStyles.labelLarge,
                     ),
@@ -225,7 +225,7 @@ class _DispenseQueueTabState extends State<DispenseQueueTab> {
                       ),
                       // Data Rows
                       ...filteredList.map((item) {
-                        final bool isUrgent = item['priority'] == 'Urgent';
+                        final isUrgent = item['priority'] == 'Urgent';
                         return TableRow(
                           decoration: const BoxDecoration(
                             border: Border(

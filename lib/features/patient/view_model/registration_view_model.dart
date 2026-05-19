@@ -1,5 +1,5 @@
-import 'package:paracareplus/features/patient/model/patient_registration.dart';
 import 'package:paracareplus/features/patient/model/patient_enums.dart';
+import 'package:paracareplus/features/patient/model/patient_registration.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'registration_view_model.g.dart';

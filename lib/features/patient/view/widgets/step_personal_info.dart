@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:paracareplus/core/theme/app_colors.dart';
 import 'package:paracareplus/core/theme/app_spacing.dart';
 import 'package:paracareplus/core/theme/app_text_styles.dart';
 import 'package:paracareplus/core/widgets/app_textfield.dart';
 import 'package:paracareplus/features/patient/model/patient_enums.dart';
 import 'package:paracareplus/features/patient/view_model/registration_view_model.dart';
-import 'package:intl/intl.dart';
 
 class StepPersonalInfo extends ConsumerWidget {
   const StepPersonalInfo({super.key});
@@ -21,7 +21,7 @@ class StepPersonalInfo extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Personal Information', style: AppTextStyles.titleMedium),
+        const Text('Personal Information', style: AppTextStyles.titleMedium),
         const SizedBox(height: AppSpacing.lg),
 
         Row(
@@ -237,10 +237,7 @@ class StepPersonalInfo extends ConsumerWidget {
           items: items.map((item) {
             return DropdownMenuItem<T>(
               value: item,
-              child: Text(
-                itemLabel(item),
-                overflow: TextOverflow.ellipsis,
-              ),
+              child: Text(itemLabel(item), overflow: TextOverflow.ellipsis),
             );
           }).toList(),
           onChanged: onChanged,

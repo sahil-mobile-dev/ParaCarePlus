@@ -24,7 +24,7 @@ class StepVisitType extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Visit Details', style: AppTextStyles.titleMedium),
+        const Text('Visit Details', style: AppTextStyles.titleMedium),
         const SizedBox(height: AppSpacing.lg),
 
         _buildDropdown(

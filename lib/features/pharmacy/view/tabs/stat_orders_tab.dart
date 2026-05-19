@@ -147,7 +147,7 @@ class _StatOrdersTabState extends State<StatOrdersTab> {
               final elapsedMinutes = DateTime.now()
                   .difference(order['orderedAt'] as DateTime)
                   .inMinutes;
-              final bool isOverdue = elapsedMinutes >= 15;
+              final isOverdue = elapsedMinutes >= 15;
 
               return Container(
                 decoration: BoxDecoration(

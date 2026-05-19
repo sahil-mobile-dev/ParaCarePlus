@@ -19,7 +19,7 @@ class StepMedicalHistory extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Medical History', style: AppTextStyles.titleMedium),
+        const Text('Medical History', style: AppTextStyles.titleMedium),
         const SizedBox(height: AppSpacing.lg),
 
         _buildMultiSelectChips(

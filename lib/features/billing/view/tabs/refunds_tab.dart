@@ -21,14 +21,10 @@ class RefundsTab extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
+              const Row(
                 children: [
-                  const Icon(
-                    Icons.replay_rounded,
-                    size: 20,
-                    color: Colors.orange,
-                  ),
-                  const SizedBox(width: 8),
+                  Icon(Icons.replay_rounded, size: 20, color: Colors.orange),
+                  SizedBox(width: 8),
                   Text('Refund Requests', style: AppTextStyles.titleSmall),
                 ],
               ),

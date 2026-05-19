@@ -142,7 +142,7 @@ class _RxValidationTabState extends State<RxValidationTab> {
                           topLeft: Radius.circular(8),
                           topRight: Radius.circular(8),
                         ),
-                        border: Border(
+                        border: const Border(
                           bottom: BorderSide(color: AppColors.border),
                         ),
                       ),

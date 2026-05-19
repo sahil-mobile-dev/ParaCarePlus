@@ -51,9 +51,7 @@ class _PurchaseOrdersTabState extends State<PurchaseOrdersTab> {
               ),
             ),
             ElevatedButton.icon(
-              onPressed: () {
-                _showDraftPoDialog();
-              },
+              onPressed: _showDraftPoDialog,
               icon: const Icon(Icons.note_add_rounded, size: 16),
               label: const Text('Generate PO'),
               style: ElevatedButton.styleFrom(
@@ -122,7 +120,7 @@ class _PurchaseOrdersTabState extends State<PurchaseOrdersTab> {
                       ],
                     ),
                     ..._purchaseOrders.map((item) {
-                      final bool isSent = item['status'] == 'SENT';
+                      final isSent = item['status'] == 'SENT';
                       return TableRow(
                         decoration: const BoxDecoration(
                           border: Border(
@@ -236,7 +234,10 @@ class _PurchaseOrdersTabState extends State<PurchaseOrdersTab> {
       builder: (context) {
         return AlertDialog(
           backgroundColor: AppColors.card,
-          title: Text('Draft Purchase Order', style: AppTextStyles.titleMedium),
+          title: const Text(
+            'Draft Purchase Order',
+            style: AppTextStyles.titleMedium,
+          ),
           content: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,

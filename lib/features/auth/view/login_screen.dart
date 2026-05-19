@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 import 'package:paracareplus/core/theme/app_colors.dart';
 import 'package:paracareplus/core/theme/app_spacing.dart';
 import 'package:paracareplus/core/theme/app_text_styles.dart';
 import 'package:paracareplus/core/widgets/app_button.dart';
 import 'package:paracareplus/core/widgets/app_textfield.dart';
-import 'package:paracareplus/features/auth/view_model/login_view_model.dart';
-import 'package:paracareplus/features/auth/view/widgets/role_selection_grid.dart';
-import 'package:paracareplus/features/auth/view/widgets/login_info_section.dart';
 import 'package:paracareplus/features/auth/view/widgets/demo_credentials_bar.dart';
+import 'package:paracareplus/features/auth/view/widgets/login_info_section.dart';
+import 'package:paracareplus/features/auth/view/widgets/role_selection_grid.dart';
+import 'package:paracareplus/features/auth/view_model/login_view_model.dart';
 import 'package:paracareplus/routes/route_names.dart';
-import 'package:go_router/go_router.dart';
 
 class LoginScreen extends ConsumerWidget {
   const LoginScreen({super.key});

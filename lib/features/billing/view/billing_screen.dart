@@ -4,18 +4,17 @@ import 'package:paracareplus/core/theme/app_colors.dart';
 import 'package:paracareplus/core/theme/app_spacing.dart';
 import 'package:paracareplus/core/theme/app_text_styles.dart';
 import 'package:paracareplus/features/billing/view/tabs/bill_records_tab.dart';
+import 'package:paracareplus/features/billing/view/tabs/billing_dashboard_tab.dart';
+import 'package:paracareplus/features/billing/view/tabs/credit_advances_tab.dart';
 import 'package:paracareplus/features/billing/view/tabs/insurance_tpa_tab.dart';
 import 'package:paracareplus/features/billing/view/tabs/new_bill_tab.dart';
 import 'package:paracareplus/features/billing/view/tabs/payments_tab.dart';
 import 'package:paracareplus/features/billing/view/tabs/refunds_tab.dart';
 import 'package:paracareplus/features/billing/view/tabs/revenue_tab.dart';
-import 'package:paracareplus/features/billing/view/tabs/credit_advances_tab.dart';
-
-import 'package:paracareplus/features/billing/view_model/billing_view_model.dart';
-import 'package:paracareplus/features/billing/view/tabs/billing_dashboard_tab.dart';
-import 'package:paracareplus/features/dashboard/view/widgets/app_sidebar.dart';
-import 'package:paracareplus/features/dashboard/view/widgets/app_header.dart';
 import 'package:paracareplus/features/billing/view/widgets/billing_summary_cards.dart';
+import 'package:paracareplus/features/billing/view_model/billing_view_model.dart';
+import 'package:paracareplus/features/dashboard/view/widgets/app_header.dart';
+import 'package:paracareplus/features/dashboard/view/widgets/app_sidebar.dart';
 
 class BillingScreen extends ConsumerWidget {
   const BillingScreen({super.key});

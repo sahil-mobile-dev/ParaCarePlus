@@ -72,14 +72,14 @@ class RecentTransactionsTable extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
+              const Row(
                 children: [
-                  const Icon(
+                  Icon(
                     Icons.list_alt_rounded,
                     size: 20,
                     color: AppColors.primaryText,
                   ),
-                  const SizedBox(width: 8),
+                  SizedBox(width: 8),
                   Text('Recent Transactions', style: AppTextStyles.titleSmall),
                 ],
               ),
@@ -125,16 +125,13 @@ class RecentTransactionsTable extends StatelessWidget {
                   case 'Paid':
                     statusColor = AppColors.success;
                     statusBg = AppColors.success.withValues(alpha: 0.1);
-                    break;
                   case 'Pending':
                     statusColor = AppColors.error;
                     statusBg = AppColors.error.withValues(alpha: 0.1);
-                    break;
                   case 'Partial':
                   default:
                     statusColor = AppColors.secondaryAccent;
                     statusBg = AppColors.secondaryAccent.withValues(alpha: 0.1);
-                    break;
                 }
 
                 Color typeColor;
@@ -143,15 +140,12 @@ class RecentTransactionsTable extends StatelessWidget {
                   case 'IPD':
                     typeColor = AppColors.primary;
                     typeBg = AppColors.primary.withValues(alpha: 0.1);
-                    break;
                   case 'Emergency':
                     typeColor = AppColors.error;
                     typeBg = AppColors.error.withValues(alpha: 0.1);
-                    break;
                   default:
                     typeColor = Colors.blue;
                     typeBg = Colors.blue.withValues(alpha: 0.1);
-                    break;
                 }
 
                 return DataRow(

@@ -66,7 +66,7 @@ class CriticalPatientsTable extends StatelessWidget {
                   label: Text('ACTION', style: AppTextStyles.labelSmall),
                 ),
               ],
-              rows: patients.map((p) => _buildRow(p)).toList(),
+              rows: patients.map(_buildRow).toList(),
             ),
           ),
         ],

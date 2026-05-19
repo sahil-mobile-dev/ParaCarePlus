@@ -16,9 +16,9 @@ class CreditAdvancesTab extends StatelessWidget {
           return Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(flex: 1, child: _buildPatientDepositsCard()),
+              Expanded(child: _buildPatientDepositsCard()),
               const SizedBox(width: AppSpacing.lg),
-              Expanded(flex: 1, child: _buildCreditOrganisationsCard()),
+              Expanded(child: _buildCreditOrganisationsCard()),
             ],
           );
         }
@@ -48,14 +48,14 @@ class CreditAdvancesTab extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
+              const Row(
                 children: [
-                  const Icon(
+                  Icon(
                     Icons.account_balance_rounded,
                     size: 20,
                     color: AppColors.primary,
                   ),
-                  const SizedBox(width: 8),
+                  SizedBox(width: 8),
                   Text('Patient Deposits', style: AppTextStyles.titleSmall),
                 ],
               ),
@@ -93,14 +93,10 @@ class CreditAdvancesTab extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
+          const Row(
             children: [
-              const Icon(
-                Icons.business_rounded,
-                size: 20,
-                color: AppColors.success,
-              ),
-              const SizedBox(width: 8),
+              Icon(Icons.business_rounded, size: 20, color: AppColors.success),
+              SizedBox(width: 8),
               Text('Credit Organisations', style: AppTextStyles.titleSmall),
             ],
           ),
@@ -119,7 +115,7 @@ class CreditAdvancesTab extends StatelessWidget {
         child: Table(
           columnWidths: const {
             0: FlexColumnWidth(1.5),
-            1: FlexColumnWidth(1),
+            1: FlexColumnWidth(),
             2: FlexColumnWidth(1.2),
             3: FlexColumnWidth(1.2),
             4: FlexColumnWidth(1.2),
@@ -166,7 +162,7 @@ class CreditAdvancesTab extends StatelessWidget {
             1: FlexColumnWidth(1.2),
             2: FlexColumnWidth(1.2),
             3: FlexColumnWidth(1.2),
-            4: FlexColumnWidth(1),
+            4: FlexColumnWidth(),
           },
           children: [
             _buildTableHeader([
@@ -212,7 +208,7 @@ class CreditAdvancesTab extends StatelessWidget {
         color: AppColors.background,
         borderRadius: BorderRadius.circular(6),
       ),
-      children: headers.map((h) => _headerCell(h)).toList(),
+      children: headers.map(_headerCell).toList(),
     );
   }
 

@@ -75,7 +75,7 @@ _$PatientRegistrationImpl _$$PatientRegistrationImplFromJson(
 Map<String, dynamic> _$$PatientRegistrationImplToJson(
   _$PatientRegistrationImpl instance,
 ) => <String, dynamic>{
-  'title': _$PatientTitleEnumMap[instance.title]!,
+  'title': _$PatientTitleEnumMap[instance.title],
   'fullName': instance.fullName,
   'dateOfBirth': instance.dateOfBirth?.toIso8601String(),
   'age': instance.age,

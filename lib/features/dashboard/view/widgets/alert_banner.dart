@@ -21,17 +21,14 @@ class AlertBanner extends StatelessWidget {
         bgColor = AppColors.error.withValues(alpha: 0.1);
         iconColor = AppColors.error;
         icon = Icons.error_rounded;
-        break;
       case AlertType.warning:
         bgColor = AppColors.secondaryAccent.withValues(alpha: 0.1);
         iconColor = AppColors.secondaryAccent;
         icon = Icons.warning_rounded;
-        break;
       case AlertType.info:
         bgColor = AppColors.primary.withValues(alpha: 0.1);
         iconColor = AppColors.primary;
         icon = Icons.info_rounded;
-        break;
     }
 
     return Container(

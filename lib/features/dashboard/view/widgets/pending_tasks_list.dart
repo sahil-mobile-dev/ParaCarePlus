@@ -80,7 +80,7 @@ class PendingTasksList extends StatelessWidget {
             ],
           ),
           const SizedBox(height: AppSpacing.md),
-          ...tasks.map((t) => _buildTaskItem(t)),
+          ...tasks.map(_buildTaskItem),
         ],
       ),
     );

@@ -7,11 +7,11 @@ import 'package:paracareplus/core/theme/app_spacing.dart';
 import 'package:paracareplus/core/theme/app_text_styles.dart';
 import 'package:paracareplus/core/widgets/app_button.dart';
 import 'package:paracareplus/features/patient/model/patient_registration.dart';
-import 'package:paracareplus/features/patient/view/widgets/step_personal_info.dart';
+import 'package:paracareplus/features/patient/view/widgets/step_confirm_print.dart';
 import 'package:paracareplus/features/patient/view/widgets/step_contact_address.dart';
 import 'package:paracareplus/features/patient/view/widgets/step_medical_history.dart';
+import 'package:paracareplus/features/patient/view/widgets/step_personal_info.dart';
 import 'package:paracareplus/features/patient/view/widgets/step_visit_type.dart';
-import 'package:paracareplus/features/patient/view/widgets/step_confirm_print.dart';
 import 'package:paracareplus/features/patient/view_model/registration_view_model.dart';
 
 class PatientRegistrationScreen extends ConsumerWidget {
@@ -59,7 +59,7 @@ class PatientRegistrationScreen extends ConsumerWidget {
           backgroundColor: AppColors.background,
           appBar: AppBar(
             backgroundColor: AppColors.surface,
-            title: Text(
+            title: const Text(
               'New Patient Registration',
               style: AppTextStyles.titleLarge,
             ),

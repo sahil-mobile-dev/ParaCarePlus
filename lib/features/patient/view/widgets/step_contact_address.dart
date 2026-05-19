@@ -18,9 +18,9 @@ class StepContactAddress extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Contact & Address', style: AppTextStyles.titleMedium),
+        const Text('Contact & Address', style: AppTextStyles.titleMedium),
         const SizedBox(height: AppSpacing.lg),
-        
+
         Row(
           children: [
             Expanded(
@@ -93,7 +93,7 @@ class StepContactAddress extends ConsumerWidget {
         ),
         const SizedBox(height: AppSpacing.xl),
 
-        Text('Emergency Contact', style: AppTextStyles.titleMedium),
+        const Text('Emergency Contact', style: AppTextStyles.titleMedium),
         const SizedBox(height: AppSpacing.md),
 
         Row(
@@ -113,7 +113,8 @@ class StepContactAddress extends ConsumerWidget {
                 label: 'Emergency Mobile',
                 hintText: '10-digit mobile',
                 initialValue: state.emergencyContactNumber,
-                onChanged: (v) => notifier.updateField(emergencyContactNumber: v),
+                onChanged: (v) =>
+                    notifier.updateField(emergencyContactNumber: v),
                 keyboardType: TextInputType.phone,
                 textInputAction: TextInputAction.done,
                 onFieldSubmitted: (_) => notifier.nextStep(),

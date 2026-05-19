@@ -45,7 +45,7 @@ class StaffOnDutyList extends StatelessWidget {
             ],
           ),
           const SizedBox(height: AppSpacing.md),
-          ...staff.map((s) => _buildStaffItem(s)),
+          ...staff.map(_buildStaffItem),
         ],
       ),
     );

@@ -53,20 +53,27 @@ class _TemplateManagerTabState extends State<TemplateManagerTab> {
           children: [
             Text(
               'Diagnostic Reference Range Templates',
-              style: AppTextStyles.labelLarge.copyWith(fontWeight: FontWeight.bold),
+              style: AppTextStyles.labelLarge.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
             ),
             ElevatedButton.icon(
-              onPressed: () {
-                _showCreateTemplateDialog();
-              },
+              onPressed: _showCreateTemplateDialog,
               icon: const Icon(Icons.playlist_add_rounded, size: 16),
               label: const Text('Create Template'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
                 foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
-                textStyle: AppTextStyles.labelSmall.copyWith(fontWeight: FontWeight.bold),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 14,
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+                textStyle: AppTextStyles.labelSmall.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ],
@@ -107,7 +114,10 @@ class _TemplateManagerTabState extends State<TemplateManagerTab> {
                         ),
                       ),
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 4,
+                        ),
                         decoration: BoxDecoration(
                           color: AppColors.surface,
                           borderRadius: BorderRadius.circular(4),
@@ -115,7 +125,9 @@ class _TemplateManagerTabState extends State<TemplateManagerTab> {
                         ),
                         child: Text(
                           temp['dept'] as String,
-                          style: AppTextStyles.labelSmall.copyWith(color: AppColors.secondaryText),
+                          style: AppTextStyles.labelSmall.copyWith(
+                            color: AppColors.secondaryText,
+                          ),
                         ),
                       ),
                     ],
@@ -123,7 +135,9 @@ class _TemplateManagerTabState extends State<TemplateManagerTab> {
                   const SizedBox(height: 12),
                   Text(
                     temp['name'] as String,
-                    style: AppTextStyles.labelLarge.copyWith(fontWeight: FontWeight.bold),
+                    style: AppTextStyles.labelLarge.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   const SizedBox(height: 4),
                   Text(
@@ -132,7 +146,9 @@ class _TemplateManagerTabState extends State<TemplateManagerTab> {
                   ),
                   Text(
                     'Measurement Standard: ${temp['unitSystem']}',
-                    style: AppTextStyles.bodySmall.copyWith(color: AppColors.secondaryText),
+                    style: AppTextStyles.bodySmall.copyWith(
+                      color: AppColors.secondaryText,
+                    ),
                   ),
                   const Spacer(),
                   Row(
@@ -142,12 +158,24 @@ class _TemplateManagerTabState extends State<TemplateManagerTab> {
                         onPressed: () {
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
-                              content: Text('Configuring template parameters for ${temp['code']}'),
+                              content: Text(
+                                'Configuring template parameters for ${temp['code']}',
+                              ),
                             ),
                           );
                         },
-                        icon: const Icon(Icons.settings_suggest_rounded, size: 14, color: AppColors.primary),
-                        label: const Text('Configure Ranges', style: TextStyle(color: AppColors.primary, fontSize: 11)),
+                        icon: const Icon(
+                          Icons.settings_suggest_rounded,
+                          size: 14,
+                          color: AppColors.primary,
+                        ),
+                        label: const Text(
+                          'Configure Ranges',
+                          style: TextStyle(
+                            color: AppColors.primary,
+                            fontSize: 11,
+                          ),
+                        ),
                       ),
                     ],
                   ),
@@ -166,7 +194,10 @@ class _TemplateManagerTabState extends State<TemplateManagerTab> {
       builder: (context) {
         return AlertDialog(
           backgroundColor: AppColors.card,
-          title: Text('Create Diagnostic Template', style: AppTextStyles.titleMedium),
+          title: const Text(
+            'Create Diagnostic Template',
+            style: AppTextStyles.titleMedium,
+          ),
           content: SingleChildScrollView(
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -182,7 +213,10 @@ class _TemplateManagerTabState extends State<TemplateManagerTab> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: const Text('Cancel', style: TextStyle(color: AppColors.secondaryText)),
+              child: const Text(
+                'Cancel',
+                style: TextStyle(color: AppColors.secondaryText),
+              ),
             ),
             ElevatedButton(
               onPressed: () {
@@ -190,11 +224,15 @@ class _TemplateManagerTabState extends State<TemplateManagerTab> {
                 ScaffoldMessenger.of(context).showSnackBar(
                   const SnackBar(
                     backgroundColor: AppColors.success,
-                    content: Text('New Diagnostics Reference Template Created!'),
+                    content: Text(
+                      'New Diagnostics Reference Template Created!',
+                    ),
                   ),
                 );
               },
-              style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.primary,
+              ),
               child: const Text('Create'),
             ),
           ],
@@ -208,9 +246,16 @@ class _TemplateManagerTabState extends State<TemplateManagerTab> {
       style: AppTextStyles.bodyMedium,
       decoration: InputDecoration(
         labelText: label,
-        labelStyle: const TextStyle(color: AppColors.secondaryText, fontSize: 13),
-        enabledBorder: const OutlineInputBorder(borderSide: BorderSide(color: AppColors.border)),
-        focusedBorder: const OutlineInputBorder(borderSide: BorderSide(color: AppColors.primary)),
+        labelStyle: const TextStyle(
+          color: AppColors.secondaryText,
+          fontSize: 13,
+        ),
+        enabledBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: AppColors.border),
+        ),
+        focusedBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: AppColors.primary),
+        ),
       ),
     );
   }

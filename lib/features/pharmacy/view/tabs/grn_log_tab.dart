@@ -126,7 +126,7 @@ class GrnLogTab extends StatelessWidget {
                       ],
                     ),
                     ..._mockGrns.map((item) {
-                      final bool isVerified = item['status'] == 'verified';
+                      final isVerified = item['status'] == 'verified';
                       return TableRow(
                         decoration: const BoxDecoration(
                           border: Border(

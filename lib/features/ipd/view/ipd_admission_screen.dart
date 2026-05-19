@@ -6,8 +6,8 @@ import 'package:paracareplus/core/theme/app_spacing.dart';
 import 'package:paracareplus/core/theme/app_text_styles.dart';
 import 'package:paracareplus/core/widgets/app_button.dart';
 import 'package:paracareplus/core/widgets/app_textfield.dart';
-import 'package:paracareplus/features/ipd/view_model/ipd_admission_view_model.dart';
 import 'package:paracareplus/features/ipd/model/ipd_admission.dart';
+import 'package:paracareplus/features/ipd/view_model/ipd_admission_view_model.dart';
 import 'package:paracareplus/features/opd/model/opd_token.dart';
 
 class IpdAdmissionScreen extends ConsumerStatefulWidget {
@@ -125,7 +125,7 @@ class _IpdAdmissionScreenState extends ConsumerState<IpdAdmissionScreen> {
           ),
         ),
         body: stateAsync.when(
-          data: (state) => _buildContent(state),
+          data: _buildContent,
           loading: () => const Center(child: CircularProgressIndicator()),
           error: (e, s) => Center(child: Text('Error: $e')),
         ),

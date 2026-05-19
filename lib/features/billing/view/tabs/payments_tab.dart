@@ -393,7 +393,7 @@ class PaymentsTab extends StatelessWidget {
     String time,
     String collectedBy,
   ) {
-    Color modeColor = mode == 'Cash'
+    final modeColor = mode == 'Cash'
         ? AppColors.success
         : (mode == 'UPI' ? AppColors.primary : Colors.orange);
 

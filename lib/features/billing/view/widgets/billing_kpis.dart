@@ -18,10 +18,10 @@ class BillingKPIsCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
+          const Row(
             children: [
-              const Icon(Icons.speed_rounded, size: 20, color: AppColors.success),
-              const SizedBox(width: 8),
+              Icon(Icons.speed_rounded, size: 20, color: AppColors.success),
+              SizedBox(width: 8),
               Text('Today\'s KPIs', style: AppTextStyles.titleSmall),
             ],
           ),
@@ -31,12 +31,20 @@ class BillingKPIsCard extends StatelessWidget {
             padding: EdgeInsets.symmetric(vertical: 8),
             child: Divider(color: AppColors.border, height: 1),
           ),
-          _buildKpiRow('Collection Rate', '87.4%', valueColor: AppColors.success),
+          _buildKpiRow(
+            'Collection Rate',
+            '87.4%',
+            valueColor: AppColors.success,
+          ),
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 8),
             child: Divider(color: AppColors.border, height: 1),
           ),
-          _buildKpiRow('Concession Given', '₹8,200', valueColor: AppColors.secondaryAccent),
+          _buildKpiRow(
+            'Concession Given',
+            '₹8,200',
+            valueColor: AppColors.secondaryAccent,
+          ),
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 8),
             child: Divider(color: AppColors.border, height: 1),
@@ -58,7 +66,9 @@ class BillingKPIsCard extends StatelessWidget {
       children: [
         Text(
           label,
-          style: AppTextStyles.bodyMedium.copyWith(color: AppColors.secondaryText),
+          style: AppTextStyles.bodyMedium.copyWith(
+            color: AppColors.secondaryText,
+          ),
         ),
         Text(
           value,

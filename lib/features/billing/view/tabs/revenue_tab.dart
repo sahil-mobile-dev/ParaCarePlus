@@ -177,10 +177,10 @@ class RevenueTab extends StatelessWidget {
         children: [
           Column(
             children: [
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
+                  Text(
                     'Monthly Revenue Breakdown',
                     style: AppTextStyles.titleSmall,
                     overflow: TextOverflow.ellipsis,
@@ -198,11 +198,11 @@ class RevenueTab extends StatelessWidget {
                       border: Border.all(color: AppColors.border),
                       borderRadius: BorderRadius.circular(8),
                     ),
-                    child: Row(
+                    child: const Row(
                       children: [
                         Text('April 2025', style: AppTextStyles.bodyMedium),
-                        const SizedBox(width: 4),
-                        const Icon(
+                        SizedBox(width: 4),
+                        Icon(
                           Icons.arrow_drop_down,
                           size: 20,
                           color: AppColors.secondaryText,
@@ -210,7 +210,7 @@ class RevenueTab extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   IconButton(
                     onPressed: () {},
                     icon: const Icon(
@@ -247,19 +247,14 @@ class RevenueTab extends StatelessWidget {
                         switch (value.toInt()) {
                           case 0:
                             text = 'W1';
-                            break;
                           case 1:
                             text = 'W2';
-                            break;
                           case 2:
                             text = 'W3';
-                            break;
                           case 3:
                             text = 'W4';
-                            break;
                           default:
                             text = '';
-                            break;
                         }
                         return SideTitleWidget(
                           meta: meta,

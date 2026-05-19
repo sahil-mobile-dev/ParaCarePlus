@@ -45,16 +45,12 @@ class ModuleStatusGrid extends StatelessWidget {
     switch (m.health) {
       case ModuleHealth.online:
         healthColor = AppColors.success;
-        break;
       case ModuleHealth.offline:
         healthColor = AppColors.secondaryText;
-        break;
       case ModuleHealth.critical:
         healthColor = AppColors.error;
-        break;
       case ModuleHealth.partial:
         healthColor = AppColors.secondaryAccent;
-        break;
     }
 
     return Container(

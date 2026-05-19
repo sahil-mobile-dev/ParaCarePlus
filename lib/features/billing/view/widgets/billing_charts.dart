@@ -93,10 +93,7 @@ class RevenueTrendChart extends StatelessWidget {
                           default:
                             text = const Text('', style: style);
                         }
-                        return SideTitleWidget(
-                          meta: meta,
-                          child: text,
-                        );
+                        return SideTitleWidget(meta: meta, child: text);
                       },
                     ),
                   ),
@@ -357,7 +354,7 @@ class PaymentModesChart extends StatelessWidget {
                           color: AppColors.secondaryText,
                           fontSize: 10,
                         );
-                        String text = '';
+                        var text = '';
                         switch (value.toInt()) {
                           case 0:
                             text = 'Cash';

@@ -11,7 +11,7 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bool isWideScreen = MediaQuery.of(context).size.width > 1200;
+    final isWideScreen = MediaQuery.of(context).size.width > 1200;
 
     return Container(
       height: 170,

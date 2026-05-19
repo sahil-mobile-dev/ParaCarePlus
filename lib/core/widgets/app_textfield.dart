@@ -1,25 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:paracareplus/core/theme/app_text_styles.dart';
 import 'package:paracareplus/core/theme/app_colors.dart';
+import 'package:paracareplus/core/theme/app_text_styles.dart';
 
 class AppTextField extends StatelessWidget {
-  final String label;
-  final String? hintText;
-  final TextEditingController? controller;
-  final String? initialValue;
-  final bool isPassword;
-  final TextInputType keyboardType;
-  final String? Function(String?)? validator;
-  final void Function(String)? onChanged;
-  final IconData? prefixIcon;
-  final Widget? suffixIcon;
-  final bool readOnly;
-  final int maxLines;
-
-  final TextInputAction? textInputAction;
-  final void Function(String)? onFieldSubmitted;
-  final FocusNode? focusNode;
-
   const AppTextField({
     super.key,
     required this.label,
@@ -38,6 +21,22 @@ class AppTextField extends StatelessWidget {
     this.readOnly = false,
     this.maxLines = 1,
   });
+  final String label;
+  final String? hintText;
+  final TextEditingController? controller;
+  final String? initialValue;
+  final bool isPassword;
+  final TextInputType keyboardType;
+  final String? Function(String?)? validator;
+  final void Function(String)? onChanged;
+  final IconData? prefixIcon;
+  final Widget? suffixIcon;
+  final bool readOnly;
+  final int maxLines;
+
+  final TextInputAction? textInputAction;
+  final void Function(String)? onFieldSubmitted;
+  final FocusNode? focusNode;
 
   @override
   Widget build(BuildContext context) {
@@ -61,7 +60,9 @@ class AppTextField extends StatelessWidget {
           style: AppTextStyles.bodyMedium,
           decoration: InputDecoration(
             hintText: hintText,
-            prefixIcon: prefixIcon != null ? Icon(prefixIcon, size: 20, color: AppColors.secondaryText) : null,
+            prefixIcon: prefixIcon != null
+                ? Icon(prefixIcon, size: 20, color: AppColors.secondaryText)
+                : null,
             suffixIcon: suffixIcon,
           ),
         ),

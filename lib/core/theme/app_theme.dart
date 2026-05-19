@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'app_colors.dart';
-import 'app_text_styles.dart';
+import 'package:paracareplus/core/theme/app_colors.dart';
+import 'package:paracareplus/core/theme/app_text_styles.dart';
 
 class AppTheme {
   const AppTheme._();
@@ -15,19 +15,17 @@ class AppTheme {
         primary: AppColors.primary,
         secondary: AppColors.secondaryAccent,
         surface: AppColors.surface,
-        background: AppColors.background,
         error: AppColors.error,
         onPrimary: Colors.white,
         onSecondary: Colors.white,
         onSurface: AppColors.primaryText,
-        onBackground: AppColors.primaryText,
       ),
       cardTheme: const CardThemeData(
         color: AppColors.card,
         elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(12)),
-          side: BorderSide(color: AppColors.border, width: 1),
+          side: BorderSide(color: AppColors.border),
         ),
       ),
       appBarTheme: const AppBarTheme(

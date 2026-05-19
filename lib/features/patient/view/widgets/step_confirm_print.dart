@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:paracareplus/core/theme/app_colors.dart';
 import 'package:paracareplus/core/theme/app_spacing.dart';
 import 'package:paracareplus/core/theme/app_text_styles.dart';
 import 'package:paracareplus/features/patient/view_model/registration_view_model.dart';
-import 'package:intl/intl.dart';
 
 class StepConfirmPrint extends ConsumerWidget {
   const StepConfirmPrint({super.key});

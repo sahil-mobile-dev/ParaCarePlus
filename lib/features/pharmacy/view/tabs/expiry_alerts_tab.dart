@@ -92,11 +92,11 @@ class _ExpiryAlertsTabState extends State<ExpiryAlertsTab> {
                 border: Border.all(color: AppColors.border),
               ),
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-              child: Row(
+              child: const Row(
                 children: [
                   Text('All Alerts (90 days)', style: AppTextStyles.bodyMedium),
-                  const SizedBox(width: 8),
-                  const Icon(
+                  SizedBox(width: 8),
+                  Icon(
                     Icons.keyboard_arrow_down_rounded,
                     color: AppColors.secondaryText,
                     size: 16,
@@ -106,9 +106,7 @@ class _ExpiryAlertsTabState extends State<ExpiryAlertsTab> {
             ),
             const Spacer(),
             ElevatedButton.icon(
-              onPressed: () {
-                _processExpiredItems();
-              },
+              onPressed: _processExpiredItems,
               icon: const Icon(Icons.delete_sweep_rounded, size: 16),
               label: const Text('Process Expired'),
               style: ElevatedButton.styleFrom(
@@ -320,9 +318,7 @@ class _ExpiryAlertsTabState extends State<ExpiryAlertsTab> {
 
   void _processExpiredItems() {
     if (_expiryItems.isEmpty) return;
-    setState(() {
-      _expiryItems.clear();
-    });
+    setState(_expiryItems.clear);
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         backgroundColor: AppColors.success,

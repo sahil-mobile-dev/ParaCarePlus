@@ -46,17 +46,20 @@ class DashboardViewModel extends _$DashboardViewModel {
       alerts: [
         const AlertItem(
           id: '1',
-          message: 'Critical Blood Stock: O+ group stock is low, only 12 units left in central blood bank.',
+          message:
+              'Critical Blood Stock: O+ group stock is low, only 12 units left in central blood bank.',
           type: AlertType.critical,
         ),
         const AlertItem(
           id: '2',
-          message: 'Low Drug Stock: Metformin 500mg stock is below reorder level (82 vials left).',
+          message:
+              'Low Drug Stock: Metformin 500mg stock is below reorder level (82 vials left).',
           type: AlertType.warning,
         ),
         const AlertItem(
           id: '3',
-          message: 'Pending Approvals: 5 leave requests and 2 purchase orders awaiting administrator approval.',
+          message:
+              'Pending Approvals: 5 leave requests and 2 purchase orders awaiting administrator approval.',
           type: AlertType.info,
         ),
       ],
@@ -84,11 +87,36 @@ class DashboardViewModel extends _$DashboardViewModel {
         ),
       ],
       bedStatus: [
-        const BedStatus(department: 'Medical Ward', totalBeds: 50, occupiedBeds: 45, color: Colors.blue),
-        const BedStatus(department: 'Surgical Ward', totalBeds: 30, occupiedBeds: 28, color: Colors.orange),
-        const BedStatus(department: 'Maternity Ward', totalBeds: 20, occupiedBeds: 18, color: Colors.pink),
-        const BedStatus(department: 'Pediatric Ward', totalBeds: 15, occupiedBeds: 12, color: Colors.green),
-        const BedStatus(department: 'ICU', totalBeds: 10, occupiedBeds: 9, color: Colors.red),
+        const BedStatus(
+          department: 'Medical Ward',
+          totalBeds: 50,
+          occupiedBeds: 45,
+          color: Colors.blue,
+        ),
+        const BedStatus(
+          department: 'Surgical Ward',
+          totalBeds: 30,
+          occupiedBeds: 28,
+          color: Colors.orange,
+        ),
+        const BedStatus(
+          department: 'Maternity Ward',
+          totalBeds: 20,
+          occupiedBeds: 18,
+          color: Colors.pink,
+        ),
+        const BedStatus(
+          department: 'Pediatric Ward',
+          totalBeds: 15,
+          occupiedBeds: 12,
+          color: Colors.green,
+        ),
+        const BedStatus(
+          department: 'ICU',
+          totalBeds: 10,
+          occupiedBeds: 9,
+          color: Colors.red,
+        ),
       ],
       criticalPatients: [
         const CriticalPatient(
@@ -150,15 +178,30 @@ class DashboardViewModel extends _$DashboardViewModel {
         ),
       ],
       staffOnDuty: [
-        const StaffOnDuty(name: 'Dr. Rajesh Negi', role: 'Senior Physician', department: 'General Medicine', isOnDuty: true),
-        const StaffOnDuty(name: 'Dr. Kavita Verma', role: 'Gynaecologist', department: 'Maternity', isOnDuty: true),
-        const StaffOnDuty(name: 'Nurse Priya Rawat', role: 'Staff Nurse', department: 'ICU', isOnDuty: true),
+        const StaffOnDuty(
+          name: 'Dr. Rajesh Negi',
+          role: 'Senior Physician',
+          department: 'General Medicine',
+          isOnDuty: true,
+        ),
+        const StaffOnDuty(
+          name: 'Dr. Kavita Verma',
+          role: 'Gynaecologist',
+          department: 'Maternity',
+          isOnDuty: true,
+        ),
+        const StaffOnDuty(
+          name: 'Nurse Priya Rawat',
+          role: 'Staff Nurse',
+          department: 'ICU',
+          isOnDuty: true,
+        ),
       ],
     );
   }
 
   Future<void> refresh() async {
     state = const AsyncLoading();
-    state = await AsyncValue.guard(() => _fetchDashboardData());
+    state = await AsyncValue.guard(_fetchDashboardData);
   }
 }

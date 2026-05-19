@@ -3,17 +3,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:paracareplus/core/theme/app_colors.dart';
 import 'package:paracareplus/core/theme/app_spacing.dart';
 import 'package:paracareplus/core/theme/app_text_styles.dart';
-import 'package:paracareplus/features/dashboard/view_model/dashboard_view_model.dart';
-import 'package:paracareplus/features/dashboard/view/widgets/app_sidebar.dart';
-import 'package:paracareplus/features/dashboard/view/widgets/app_header.dart';
-import 'package:paracareplus/features/dashboard/view/widgets/alert_banner.dart';
-import 'package:paracareplus/features/dashboard/view/widgets/dashboard_metric_tile.dart';
-import 'package:paracareplus/features/dashboard/view/widgets/critical_patients_table.dart';
-import 'package:paracareplus/features/dashboard/view/widgets/staff_on_duty_list.dart';
-import 'package:paracareplus/features/dashboard/view/widgets/pending_tasks_list.dart';
-import 'package:paracareplus/features/dashboard/view/widgets/module_status_grid.dart';
 import 'package:paracareplus/features/dashboard/view/widgets/activity_feed.dart';
+import 'package:paracareplus/features/dashboard/view/widgets/alert_banner.dart';
+import 'package:paracareplus/features/dashboard/view/widgets/app_header.dart';
+import 'package:paracareplus/features/dashboard/view/widgets/app_sidebar.dart';
+import 'package:paracareplus/features/dashboard/view/widgets/critical_patients_table.dart';
+import 'package:paracareplus/features/dashboard/view/widgets/dashboard_metric_tile.dart';
+import 'package:paracareplus/features/dashboard/view/widgets/module_status_grid.dart';
+import 'package:paracareplus/features/dashboard/view/widgets/pending_tasks_list.dart';
 import 'package:paracareplus/features/dashboard/view/widgets/quick_action_grid.dart';
+import 'package:paracareplus/features/dashboard/view/widgets/staff_on_duty_list.dart';
+import 'package:paracareplus/features/dashboard/view_model/dashboard_view_model.dart';
 
 class DashboardScreen extends ConsumerWidget {
   const DashboardScreen({super.key});
@@ -21,7 +21,7 @@ class DashboardScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final dashboardState = ref.watch(dashboardViewModelProvider);
-    final bool isWideScreen = MediaQuery.of(context).size.width > 1200;
+    final isWideScreen = MediaQuery.of(context).size.width > 1200;
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -33,7 +33,7 @@ class DashboardScreen extends ConsumerWidget {
           children: [
             // Sidebar - permanently visible on wide screens
             if (isWideScreen) const AppSidebar(),
-            
+
             // Main Content Area
             Expanded(
               child: Column(
@@ -220,7 +220,7 @@ class DashboardScreen extends ConsumerWidget {
   }
 
   Widget _buildDataSection(BuildContext context, DashboardState state) {
-    final bool isWide = MediaQuery.of(context).size.width > 1200;
+    final isWide = MediaQuery.of(context).size.width > 1200;
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,

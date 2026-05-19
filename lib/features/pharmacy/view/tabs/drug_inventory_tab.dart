@@ -155,9 +155,7 @@ class _DrugInventoryTabState extends State<DrugInventoryTab> {
                 _buildDropDownFilter('All Stock Levels'),
                 const SizedBox(width: 10),
                 IconButton(
-                  onPressed: () {
-                    _showAddStockDialog();
-                  },
+                  onPressed: _showAddStockDialog,
                   icon: const Icon(Icons.add_rounded, size: 16),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primary,

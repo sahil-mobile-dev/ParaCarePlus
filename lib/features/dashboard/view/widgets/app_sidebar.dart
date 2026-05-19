@@ -71,8 +71,8 @@ class AppSidebar extends StatelessWidget {
   }
 
   Widget _buildNavItem(BuildContext context, SidebarItem item) {
-    final String? currentRouteName = GoRouterState.of(context).name;
-    final bool isSelected = currentRouteName == item.routeName;
+    final currentRouteName = GoRouterState.of(context).name;
+    final isSelected = currentRouteName == item.routeName;
 
     return Padding(
       padding: const EdgeInsets.symmetric(
