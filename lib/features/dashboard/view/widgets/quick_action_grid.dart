@@ -29,22 +29,22 @@ class QuickActionGrid extends StatelessWidget {
       _QuickActionItem(
         icon: Icons.local_pharmacy_outlined,
         label: 'Pharmacy',
-        onTap: () => _handleAction(context, 'Pharmacy'),
+        onTap: () => context.pushNamed(RouteNames.pharmacy),
       ),
       _QuickActionItem(
         icon: Icons.science_outlined,
         label: 'Laboratory',
-        onTap: () => _handleAction(context, 'Laboratory'),
+        onTap: () => context.pushNamed(RouteNames.laboratory),
       ),
       _QuickActionItem(
         icon: Icons.biotech_outlined,
         label: 'Radiology',
-        onTap: () => _handleAction(context, 'Radiology'),
+        onTap: () => context.pushNamed(RouteNames.radiology),
       ),
       _QuickActionItem(
         icon: Icons.receipt_long_outlined,
         label: 'Billing',
-        onTap: () => _handleAction(context, 'Billing'),
+        onTap: () => context.pushNamed(RouteNames.billing),
       ),
       _QuickActionItem(
         icon: Icons.emergency_outlined,

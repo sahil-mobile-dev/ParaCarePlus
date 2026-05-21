@@ -3,11 +3,14 @@ import 'package:go_router/go_router.dart';
 import 'package:paracareplus/features/auth/view/login_screen.dart';
 import 'package:paracareplus/features/billing/view/billing_screen.dart';
 import 'package:paracareplus/features/dashboard/view/dashboard_screen.dart';
+import 'package:paracareplus/features/hr/view/hr_screen.dart';
 import 'package:paracareplus/features/ipd/view/ipd_admission_screen.dart';
 import 'package:paracareplus/features/laboratory/view/laboratory_screen.dart';
 import 'package:paracareplus/features/opd/view/opd_token_screen.dart';
 import 'package:paracareplus/features/patient/view/patient_registration_screen.dart';
 import 'package:paracareplus/features/pharmacy/view/pharmacy_screen.dart';
+import 'package:paracareplus/features/radiology/view/radiology_screen.dart';
+import 'package:paracareplus/features/tpa/view/tpa_screen.dart';
 import 'package:paracareplus/routes/route_names.dart';
 import 'package:paracareplus/routes/route_paths.dart';
 
@@ -54,6 +57,21 @@ final appRouterStateProvider = Provider<GoRouter>((ref) {
         path: RoutePaths.laboratory,
         name: RouteNames.laboratory,
         builder: (context, state) => const LaboratoryScreen(),
+      ),
+      GoRoute(
+        path: RoutePaths.radiology,
+        name: RouteNames.radiology,
+        builder: (context, state) => const RadiologyScreen(),
+      ),
+      GoRoute(
+        path: RoutePaths.hr,
+        name: RouteNames.hr,
+        builder: (context, state) => const HrScreen(),
+      ),
+      GoRoute(
+        path: RoutePaths.tpa,
+        name: RouteNames.tpa,
+        builder: (context, state) => const TpaScreen(),
       ),
     ],
     // Redirect logic for Auth Guards will be added here

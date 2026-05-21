@@ -81,9 +81,14 @@ class SidebarItem {
       routeName: 'inventory',
     ),
     SidebarItem(
+      title: 'TPA Management',
+      icon: Icons.health_and_safety_outlined,
+      routeName: RouteNames.tpa,
+    ),
+    SidebarItem(
       title: 'Human Resource',
       icon: Icons.groups_outlined,
-      routeName: 'hr',
+      routeName: RouteNames.hr,
     ),
   ];
 }

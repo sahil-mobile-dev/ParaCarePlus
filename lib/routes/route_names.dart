@@ -18,5 +18,6 @@ class RouteNames {
   static const String patientRegistration = 'patientRegistration';
   static const String opdToken = 'opdToken';
   static const String ipdAdmission = 'ipdAdmission';
+  static const String hr = 'hr';
+  static const String tpa = 'tpa';
 }
-

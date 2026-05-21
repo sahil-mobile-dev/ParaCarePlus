@@ -18,4 +18,6 @@ class RoutePaths {
   static const String patientRegistration = '/patient/registration';
   static const String opdToken = '/opd/token';
   static const String ipdAdmission = '/ipd/admission';
+  static const String hr = '/hr';
+  static const String tpa = '/tpa';
 }
