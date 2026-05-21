@@ -197,7 +197,7 @@ class _PurchaseOrdersTabState extends State<PurchaseOrdersTab> {
                           ),
                         ],
                       );
-                    }).toList(),
+                    }),
                   ],
                 ),
               ),

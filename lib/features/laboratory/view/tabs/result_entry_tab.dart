@@ -225,10 +225,10 @@ class _ResultEntryTabState extends State<ResultEntryTab> {
 
   Widget _buildParameterInputLayout() {
     // Parse double values for warnings
-    final double hb = double.tryParse(_hbController.text) ?? 0.0;
-    final double rbc = double.tryParse(_rbcController.text) ?? 0.0;
-    final double wbc = double.tryParse(_wbcController.text) ?? 0.0;
-    final double plt = double.tryParse(_pltController.text) ?? 0.0;
+    final hb = double.tryParse(_hbController.text) ?? 0.0;
+    final rbc = double.tryParse(_rbcController.text) ?? 0.0;
+    final wbc = double.tryParse(_wbcController.text) ?? 0.0;
+    final plt = double.tryParse(_pltController.text) ?? 0.0;
 
     final hbStatus = _getHbStatus(hb);
     final rbcStatus = _getRbcStatus(rbc);

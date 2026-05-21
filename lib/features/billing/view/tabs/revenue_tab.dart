@@ -23,7 +23,7 @@ class RevenueTab extends StatelessWidget {
                 children: [
                   Expanded(flex: 2, child: _buildRevenueBreakdownChart()),
                   const SizedBox(width: AppSpacing.lg),
-                  Expanded(flex: 1, child: _buildDeptWiseTable()),
+                  Expanded(child: _buildDeptWiseTable()),
                 ],
               )
             else
@@ -233,7 +233,6 @@ class RevenueTab extends StatelessWidget {
                 maxY: 100,
                 barTouchData: const BarTouchData(enabled: false),
                 titlesData: FlTitlesData(
-                  show: true,
                   bottomTitles: AxisTitles(
                     sideTitles: SideTitles(
                       showTitles: true,

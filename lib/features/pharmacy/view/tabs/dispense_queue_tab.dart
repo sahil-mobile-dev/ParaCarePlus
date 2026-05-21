@@ -394,7 +394,7 @@ class _DispenseQueueTabState extends State<DispenseQueueTab> {
                             ),
                           ],
                         );
-                      }).toList(),
+                      }),
                     ],
                   ),
                 ),

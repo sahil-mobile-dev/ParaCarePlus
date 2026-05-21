@@ -4,9 +4,9 @@ import 'package:paracareplus/core/theme/app_spacing.dart';
 import 'package:paracareplus/core/theme/app_text_styles.dart';
 
 class GrnLogTab extends StatelessWidget {
-  const GrnLogTab({super.key});
+  GrnLogTab({super.key});
 
-  final List<Map<String, dynamic>> _mockGrns = const [
+  final mockGrns = [
     {
       'grnNo': 'GRN-2024-0458',
       'supplier': 'Cipla Ltd.',
@@ -125,7 +125,7 @@ class GrnLogTab extends StatelessWidget {
                         _buildHeaderCell('STATUS'),
                       ],
                     ),
-                    ..._mockGrns.map((item) {
+                    ...mockGrns.map((item) {
                       final isVerified = item['status'] == 'verified';
                       return TableRow(
                         decoration: const BoxDecoration(
@@ -147,12 +147,12 @@ class GrnLogTab extends StatelessWidget {
                               ),
                             ),
                           ),
-                          _buildTextCell(item['supplier'] as String),
-                          _buildTextCell(item['invoice'] as String),
+                          _buildTextCell(item['supplier']! as String),
+                          _buildTextCell(item['invoice']! as String),
                           _buildTextCell('${item['items']}'),
-                          _buildTextCell(item['value'] as String),
-                          _buildTextCell(item['receivedBy'] as String),
-                          _buildTextCell(item['date'] as String),
+                          _buildTextCell(item['value']! as String),
+                          _buildTextCell(item['receivedBy']! as String),
+                          _buildTextCell(item['date']! as String),
                           Padding(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 12,
@@ -185,7 +185,7 @@ class GrnLogTab extends StatelessWidget {
                           ),
                         ],
                       );
-                    }).toList(),
+                    }),
                   ],
                 ),
               ),

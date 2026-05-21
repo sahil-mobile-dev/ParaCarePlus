@@ -39,8 +39,6 @@ class RevenueTrendChart extends StatelessWidget {
             child: LineChart(
               LineChartData(
                 gridData: FlGridData(
-                  show: true,
-                  drawVerticalLine: true,
                   horizontalInterval: 5000,
                   verticalInterval: 1,
                   getDrawingHorizontalLine: (value) {
@@ -57,13 +55,8 @@ class RevenueTrendChart extends StatelessWidget {
                   },
                 ),
                 titlesData: FlTitlesData(
-                  show: true,
-                  rightTitles: const AxisTitles(
-                    sideTitles: SideTitles(showTitles: false),
-                  ),
-                  topTitles: const AxisTitles(
-                    sideTitles: SideTitles(showTitles: false),
-                  ),
+                  rightTitles: const AxisTitles(),
+                  topTitles: const AxisTitles(),
                   bottomTitles: AxisTitles(
                     sideTitles: SideTitles(
                       showTitles: true,
@@ -338,13 +331,8 @@ class PaymentModesChart extends StatelessWidget {
                 maxY: 50,
                 barTouchData: const BarTouchData(enabled: false),
                 titlesData: FlTitlesData(
-                  show: true,
-                  bottomTitles: const AxisTitles(
-                    sideTitles: SideTitles(showTitles: false),
-                  ),
-                  topTitles: const AxisTitles(
-                    sideTitles: SideTitles(showTitles: false),
-                  ),
+                  bottomTitles: const AxisTitles(),
+                  topTitles: const AxisTitles(),
                   leftTitles: AxisTitles(
                     sideTitles: SideTitles(
                       showTitles: true,
@@ -382,13 +370,10 @@ class PaymentModesChart extends StatelessWidget {
                       interval: 1,
                     ),
                   ),
-                  rightTitles: const AxisTitles(
-                    sideTitles: SideTitles(showTitles: false),
-                  ),
+                  rightTitles: const AxisTitles(),
                 ),
                 gridData: FlGridData(
                   show: true,
-                  drawVerticalLine: true,
                   horizontalInterval: 1,
                   drawHorizontalLine: false,
                   getDrawingVerticalLine: (value) => FlLine(

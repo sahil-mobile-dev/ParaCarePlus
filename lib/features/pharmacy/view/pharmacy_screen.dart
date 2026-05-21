@@ -32,7 +32,7 @@ class PharmacyScreen extends ConsumerWidget {
       case 'Expiry Alerts':
         bodyContent = const ExpiryAlertsTab();
       case 'GRN Log':
-        bodyContent = const GrnLogTab();
+        bodyContent = GrnLogTab();
       case 'Purchase Orders':
         bodyContent = const PurchaseOrdersTab();
       default:

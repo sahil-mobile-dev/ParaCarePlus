@@ -271,7 +271,7 @@ class _ExpiryAlertsTabState extends State<ExpiryAlertsTab> {
                           ),
                         ],
                       );
-                    }).toList(),
+                    }),
                   ],
                 ),
               ),

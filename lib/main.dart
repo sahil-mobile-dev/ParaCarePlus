@@ -17,7 +17,7 @@ class ParaCarePlusApp extends ConsumerWidget {
     final router = ref.watch(appRouterStateProvider);
 
     return ScreenUtilInit(
-      designSize: const Size(390, 844), // iPhone 13/14 base size
+      designSize: const Size(390, 844),
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
