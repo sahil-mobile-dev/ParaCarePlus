@@ -35,7 +35,7 @@ class DemoCredentialsBar extends ConsumerWidget {
                     fontWeight: FontWeight.w600,
                   ),
                   avatar: Icon(role.icon, size: 14, color: AppColors.primary),
-                  backgroundColor: AppColors.background.withValues(alpha: 0.5),
+                  backgroundColor: Colors.white,
                   side: const BorderSide(color: AppColors.border, width: 0.5),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
