@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:paracareplus/core/theme/app_colors.dart';
-import 'package:paracareplus/core/theme/app_spacing.dart';
 import 'package:paracareplus/core/theme/app_text_styles.dart';
 import 'package:paracareplus/features/patient/view/portal/patient_opd_booking_screen.dart';
 
 class OpdStepDoctor extends ConsumerWidget {
+  const OpdStepDoctor({required this.onBack, required this.onNext, super.key});
   final VoidCallback onBack;
   final VoidCallback onNext;
-
-  const OpdStepDoctor({super.key, required this.onBack, required this.onNext});
 
   // Comprehensive doctor mock list matching specialties
   static final List<Map<String, dynamic>> allDoctors = [
@@ -28,7 +26,7 @@ class OpdStepDoctor extends ConsumerWidget {
       'hasTele': true,
       'isBusy': false,
       'avatar': 'A',
-      'avatarGradient': [Color(0xFFF72585), Color(0xFFC77DFF)],
+      'avatarGradient': [const Color(0xFFF72585), const Color(0xFFC77DFF)],
     },
     {
       'name': 'Dr. Vipin Rawat',
@@ -45,7 +43,7 @@ class OpdStepDoctor extends ConsumerWidget {
       'hasTele': false,
       'isBusy': false,
       'avatar': 'V',
-      'avatarGradient': [Color(0xFF3A86FF), Color(0xFF4361EE)],
+      'avatarGradient': [const Color(0xFF3A86FF), const Color(0xFF4361EE)],
     },
     {
       'name': 'Dr. Meera Bisht',
@@ -62,7 +60,7 @@ class OpdStepDoctor extends ConsumerWidget {
       'hasTele': true,
       'isBusy': true,
       'avatar': 'M',
-      'avatarGradient': [Color(0xFF00C897), Color(0xFF0D9488)],
+      'avatarGradient': [const Color(0xFF00C897), const Color(0xFF0D9488)],
     },
     {
       'name': 'Dr. Suresh Joshi',
@@ -79,7 +77,7 @@ class OpdStepDoctor extends ConsumerWidget {
       'hasTele': false,
       'isBusy': false,
       'avatar': 'S',
-      'avatarGradient': [Color(0xFFFFD166), Color(0xFFF77F00)],
+      'avatarGradient': [const Color(0xFFFFD166), const Color(0xFFF77F00)],
     },
     // Fallback/other specialists for different departments
     {
@@ -124,7 +122,7 @@ class OpdStepDoctor extends ConsumerWidget {
     final selectedDoctor = ref.watch(selectedDoctorProvider);
 
     // Filter doctors by selected specialty, otherwise show all/fallback
-    List<Map<String, dynamic>> filteredDoctors = allDoctors
+    var filteredDoctors = allDoctors
         .where(
           (d) =>
               d['specialty'].toString().toLowerCase() ==

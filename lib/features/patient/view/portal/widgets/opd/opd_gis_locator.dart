@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:paracareplus/core/theme/app_colors.dart';
-import 'package:paracareplus/core/theme/app_spacing.dart';
-import 'package:paracareplus/core/theme/app_text_styles.dart';
 
 class OpdGisLocator extends StatelessWidget {
   const OpdGisLocator({super.key});
@@ -116,7 +114,7 @@ class OpdGisLocator extends StatelessWidget {
   }
 
   Widget buildVectorMapMock({required List<Map<String, dynamic>> points}) {
-    return Container(
+    return ColoredBox(
       color: const Color(0xFF071221), // Dark Leaflet canvas match
       child: CustomPaint(
         size: Size.infinite,
@@ -308,9 +306,8 @@ class OpdGisLocator extends StatelessWidget {
 
 // Vector grid roadmap custom painter to resemble dark styled GPS vector grids
 class MapMockupPainter extends CustomPainter {
-  final List<Map<String, dynamic>> points;
-
   MapMockupPainter({required this.points});
+  final List<Map<String, dynamic>> points;
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -333,21 +330,22 @@ class MapMockupPainter extends CustomPainter {
       ..strokeWidth = 2.0
       ..strokeCap = StrokeCap.round;
 
-    canvas.drawLine(
-      Offset(0, size.height * 0.4),
-      Offset(size.width, size.height * 0.5),
-      roadPaint,
-    );
-    canvas.drawLine(
-      Offset(size.width * 0.3, 0),
-      Offset(size.width * 0.45, size.height),
-      roadPaint,
-    );
-    canvas.drawLine(
-      Offset(size.width * 0.7, 0),
-      Offset(size.width * 0.6, size.height),
-      roadPaint,
-    );
+    canvas
+      ..drawLine(
+        Offset(0, size.height * 0.4),
+        Offset(size.width, size.height * 0.5),
+        roadPaint,
+      )
+      ..drawLine(
+        Offset(size.width * 0.3, 0),
+        Offset(size.width * 0.45, size.height),
+        roadPaint,
+      )
+      ..drawLine(
+        Offset(size.width * 0.7, 0),
+        Offset(size.width * 0.6, size.height),
+        roadPaint,
+      );
 
     // Draw pins
     for (final p in points) {
@@ -359,35 +357,31 @@ class MapMockupPainter extends CustomPainter {
 
       final center = Offset(size.width * xVal, size.height * yVal);
 
-      // Outer glow circle
-      canvas.drawCircle(
-        center,
-        radius * 1.8,
-        Paint()..color = color.withValues(alpha: 0.15),
-      );
-
-      // Core point
-      canvas.drawCircle(center, radius * 0.8, Paint()..color = color);
-
-      // Point center dot
-      canvas.drawCircle(center, radius * 0.3, Paint()..color = Colors.white);
+      // Outer glow circle, core point, center dot
+      canvas
+        ..drawCircle(
+          center,
+          radius * 1.8,
+          Paint()..color = color.withValues(alpha: 0.15),
+        )
+        ..drawCircle(center, radius * 0.8, Paint()..color = color)
+        ..drawCircle(center, radius * 0.3, Paint()..color = Colors.white);
 
       // Tiny labels next to pins
-      final textSpan = TextSpan(
-        text: name,
-        style: const TextStyle(
-          color: Colors.white,
-          fontSize: 7.5,
-          fontWeight: FontWeight.bold,
-          backgroundColor: Color(0xCC0C1F34),
+      TextPainter(
+        text: TextSpan(
+          text: name,
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 7.5,
+            fontWeight: FontWeight.bold,
+            backgroundColor: Color(0xCC0C1F34),
+          ),
         ),
-      );
-      final textPainter = TextPainter(
-        text: textSpan,
         textDirection: TextDirection.ltr,
-      );
-      textPainter.layout();
-      textPainter.paint(canvas, center + Offset(8, -4));
+      )
+        ..layout()
+        ..paint(canvas, center + const Offset(8, -4));
     }
   }
 

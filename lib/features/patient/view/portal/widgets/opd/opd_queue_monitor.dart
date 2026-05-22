@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:paracareplus/core/theme/app_colors.dart';
-import 'package:paracareplus/core/theme/app_spacing.dart';
 import 'package:paracareplus/core/theme/app_text_styles.dart';
 
 class OpdQueueMonitor extends StatefulWidget {
@@ -301,8 +300,8 @@ class _OpdQueueMonitorState extends State<OpdQueueMonitor> {
     bool isActive = false,
     bool isMine = false,
   }) {
-    Color itemBg = Colors.white.withValues(alpha: 0.02);
-    Color itemBorder = AppColors.border;
+    var itemBg = Colors.white.withValues(alpha: 0.02);
+    var itemBorder = AppColors.border;
 
     if (isActive) {
       itemBg = AppColors.primary.withValues(alpha: 0.08);

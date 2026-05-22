@@ -1,27 +1,26 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:paracareplus/core/theme/app_colors.dart';
 import 'package:paracareplus/core/theme/app_spacing.dart';
 import 'package:paracareplus/core/theme/app_text_styles.dart';
-import 'package:paracareplus/features/patient/view/portal/widgets/patient_portal_drawer.dart';
-import 'package:paracareplus/routes/route_names.dart';
-
-// Modular components
-import 'package:paracareplus/features/patient/view/portal/widgets/opd/opd_kpi_row.dart';
-import 'package:paracareplus/features/patient/view/portal/widgets/opd/opd_tele_banner.dart';
-import 'package:paracareplus/features/patient/view/portal/widgets/opd/opd_queue_monitor.dart';
 import 'package:paracareplus/features/patient/view/portal/widgets/opd/opd_ai_suggestions.dart';
 import 'package:paracareplus/features/patient/view/portal/widgets/opd/opd_appointments_table.dart';
-import 'package:paracareplus/features/patient/view/portal/widgets/opd/opd_heatmaps.dart';
 import 'package:paracareplus/features/patient/view/portal/widgets/opd/opd_gis_locator.dart';
-
-// Wizard Steps
-import 'package:paracareplus/features/patient/view/portal/widgets/opd/wizard/opd_step_specialty.dart';
-import 'package:paracareplus/features/patient/view/portal/widgets/opd/wizard/opd_step_doctor.dart';
+import 'package:paracareplus/features/patient/view/portal/widgets/opd/opd_heatmaps.dart';
+// Modular components
+import 'package:paracareplus/features/patient/view/portal/widgets/opd/opd_kpi_row.dart';
+import 'package:paracareplus/features/patient/view/portal/widgets/opd/opd_queue_monitor.dart';
+import 'package:paracareplus/features/patient/view/portal/widgets/opd/opd_tele_banner.dart';
+import 'package:paracareplus/features/patient/view/portal/widgets/opd/wizard/opd_step_confirm.dart';
 import 'package:paracareplus/features/patient/view/portal/widgets/opd/wizard/opd_step_date_slot.dart';
 import 'package:paracareplus/features/patient/view/portal/widgets/opd/wizard/opd_step_details.dart';
-import 'package:paracareplus/features/patient/view/portal/widgets/opd/wizard/opd_step_confirm.dart';
+import 'package:paracareplus/features/patient/view/portal/widgets/opd/wizard/opd_step_doctor.dart';
+// Wizard Steps
+import 'package:paracareplus/features/patient/view/portal/widgets/opd/wizard/opd_step_specialty.dart';
+import 'package:paracareplus/features/patient/view/portal/widgets/patient_portal_drawer.dart';
+import 'package:paracareplus/routes/route_names.dart';
 
 // Models and Providers
 class Hospital {
@@ -588,7 +587,7 @@ class _PatientOpdBookingScreenState
                 const SizedBox(height: 4),
                 Text(
                   _generatedToken ?? '',
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: AppColors.secondaryAccent,
                     fontSize: 19,
                     fontWeight: FontWeight.w800,

@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:paracareplus/core/theme/app_colors.dart';
-import 'package:paracareplus/core/theme/app_spacing.dart';
 import 'package:paracareplus/core/theme/app_text_styles.dart';
 import 'package:paracareplus/features/patient/view/portal/patient_opd_booking_screen.dart';
 
 class OpdStepSpecialty extends ConsumerStatefulWidget {
+  const OpdStepSpecialty({required this.onNext, super.key});
   final VoidCallback onNext;
-
-  const OpdStepSpecialty({super.key, required this.onNext});
 
   @override
   ConsumerState<OpdStepSpecialty> createState() => _OpdStepSpecialtyState();
@@ -155,8 +153,8 @@ class _OpdStepSpecialtyState extends ConsumerState<OpdStepSpecialty> {
                     style: AppTextStyles.bodySmall.copyWith(
                       color: AppColors.primaryText,
                     ),
-                    children: [
-                      const TextSpan(text: 'AI suggests: '),
+                    children: const [
+                      TextSpan(text: 'AI suggests: '),
                       TextSpan(
                         text: 'Cardiology',
                         style: TextStyle(
@@ -164,15 +162,15 @@ class _OpdStepSpecialtyState extends ConsumerState<OpdStepSpecialty> {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const TextSpan(text: ' (based on your BP trend) · '),
-                      const TextSpan(
+                      TextSpan(text: ' (based on your BP trend) · '),
+                      TextSpan(
                         text: 'Endocrinology',
                         style: TextStyle(
                           color: AppColors.success,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const TextSpan(text: ' (HbA1c elevated)'),
+                      TextSpan(text: ' (HbA1c elevated)'),
                     ],
                   ),
                 ),

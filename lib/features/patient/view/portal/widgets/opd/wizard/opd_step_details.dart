@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:paracareplus/core/theme/app_colors.dart';
-import 'package:paracareplus/core/theme/app_spacing.dart';
 import 'package:paracareplus/core/theme/app_text_styles.dart';
 
 // State providers for Form Details
@@ -21,10 +20,9 @@ final recordShareConsentProvider = StateProvider<String>(
 );
 
 class OpdStepDetails extends ConsumerWidget {
+  const OpdStepDetails({required this.onBack, required this.onNext, super.key});
   final VoidCallback onBack;
   final VoidCallback onNext;
-
-  const OpdStepDetails({super.key, required this.onBack, required this.onNext});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -272,7 +270,7 @@ class OpdStepDetails extends ConsumerWidget {
                       [
                         'Share last 3 visits + current prescriptions',
                         'Share full medical history (ABDM consent)',
-                        'Share only today\'s vitals',
+                        "Share only today's vitals",
                         'Do not share (anonymous)',
                       ].map((val) {
                         return DropdownMenuItem<String>(

@@ -1,19 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:paracareplus/core/theme/app_colors.dart';
-import 'package:paracareplus/core/theme/app_spacing.dart';
 import 'package:paracareplus/core/theme/app_text_styles.dart';
 import 'package:paracareplus/features/patient/view/portal/patient_opd_booking_screen.dart';
 
 class OpdStepDateSlot extends ConsumerWidget {
-  final VoidCallback onBack;
-  final VoidCallback onNext;
-
   const OpdStepDateSlot({
-    super.key,
     required this.onBack,
     required this.onNext,
+    super.key,
   });
+  final VoidCallback onBack;
+  final VoidCallback onNext;
 
   // Calendar dates for May 2026
   static const int daysInMonth = 31;
@@ -201,29 +199,25 @@ class OpdStepDateSlot extends ConsumerWidget {
           ),
           const SizedBox(height: 8),
           // Legend Row
-          Row(
+          const Row(
             children: [
-              const Icon(Icons.circle, color: AppColors.success, size: 8),
-              const SizedBox(width: 4),
-              const Text(
+              Icon(Icons.circle, color: AppColors.success, size: 8),
+              SizedBox(width: 4),
+              Text(
                 'Available',
                 style: TextStyle(color: AppColors.secondaryText, fontSize: 10),
               ),
-              const SizedBox(width: 12),
-              const Icon(Icons.circle, color: AppColors.error, size: 8),
-              const SizedBox(width: 4),
-              const Text(
+              SizedBox(width: 12),
+              Icon(Icons.circle, color: AppColors.error, size: 8),
+              SizedBox(width: 4),
+              Text(
                 'Booked',
                 style: TextStyle(color: AppColors.secondaryText, fontSize: 10),
               ),
-              const SizedBox(width: 12),
-              const Icon(
-                Icons.circle,
-                color: AppColors.secondaryAccent,
-                size: 8,
-              ),
-              const SizedBox(width: 4),
-              const Text(
+              SizedBox(width: 12),
+              Icon(Icons.circle, color: AppColors.secondaryAccent, size: 8),
+              SizedBox(width: 4),
+              Text(
                 'Limited',
                 style: TextStyle(color: AppColors.secondaryText, fontSize: 10),
               ),
@@ -247,10 +241,10 @@ class OpdStepDateSlot extends ConsumerWidget {
               final status = slot['status'] as String;
               final isSel = selectedSlot == time;
 
-              Color cellBg = Colors.white.withValues(alpha: 0.03);
-              Color cellBorder = AppColors.border;
-              Color cellText = Colors.white;
-              bool enabled = true;
+              var cellBg = Colors.white.withValues(alpha: 0.03);
+              var cellBorder = AppColors.border;
+              var cellText = Colors.white;
+              var enabled = true;
 
               if (status == 'booked') {
                 cellBg = AppColors.error.withValues(alpha: 0.06);

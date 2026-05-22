@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:paracareplus/core/theme/app_colors.dart';
 import 'package:paracareplus/core/theme/app_spacing.dart';
-import 'package:paracareplus/core/theme/app_text_styles.dart';
 
 class OpdKpiRow extends StatelessWidget {
   const OpdKpiRow({super.key});

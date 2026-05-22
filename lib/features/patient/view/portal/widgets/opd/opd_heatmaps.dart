@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:paracareplus/core/theme/app_colors.dart';
-import 'package:paracareplus/core/theme/app_spacing.dart';
-import 'package:paracareplus/core/theme/app_text_styles.dart';
 
 class OpdHeatmaps extends StatelessWidget {
   const OpdHeatmaps({super.key});
@@ -24,7 +22,7 @@ class OpdHeatmaps extends StatelessWidget {
     final hours = ['08:00', '10:00', '12:00', '14:00', '16:00', '18:00'];
 
     // Mock load values: 0=Low(Green), 1=Moderate(Yellow), 2=High(Red)
-    final List<List<int>> loadMatrix = [
+    final loadMatrix = <List<int>>[
       [0, 1, 0, 2, 1, 0, 0],
       [1, 2, 2, 1, 0, 0, 1],
       [0, 1, 1, 0, 2, 1, 0],
@@ -35,7 +33,7 @@ class OpdHeatmaps extends StatelessWidget {
       [2, 1, 1, 0, 0, 2, 0],
     ];
 
-    final List<List<int>> waitTimeMatrix = [
+    final waitTimeMatrix = <List<int>>[
       [1, 2, 1, 0, 1, 2],
       [0, 1, 2, 1, 0, 1],
       [2, 2, 1, 0, 1, 2],

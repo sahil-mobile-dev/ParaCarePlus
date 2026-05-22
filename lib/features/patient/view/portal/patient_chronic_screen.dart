@@ -3,6 +3,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:paracareplus/core/theme/app_colors.dart';
 import 'package:paracareplus/core/theme/app_spacing.dart';
 import 'package:paracareplus/core/theme/app_text_styles.dart';
+import 'package:paracareplus/features/patient/view/portal/widgets/chronic/chronic_ai_risk.dart';
+import 'package:paracareplus/features/patient/view/portal/widgets/chronic/chronic_conditions_grid.dart';
+import 'package:paracareplus/features/patient/view/portal/widgets/chronic/chronic_kpis.dart';
+import 'package:paracareplus/features/patient/view/portal/widgets/chronic/chronic_trend_radar.dart';
 import 'package:paracareplus/features/patient/view/portal/widgets/patient_portal_drawer.dart';
 import 'package:paracareplus/routes/route_names.dart';
 
@@ -18,75 +22,141 @@ class PatientChronicScreen extends ConsumerWidget {
       ),
       appBar: AppBar(
         backgroundColor: AppColors.surface,
-        title: const Text('Chronic Care Portal'),
+        elevation: 0,
+        title: Row(
+          children: [
+            const Icon(
+              Icons.favorite_rounded,
+              color: AppColors.error,
+              size: 20,
+            ),
+            const SizedBox(width: 8),
+            Text(
+              'Chronic Care Portal',
+              style: AppTextStyles.titleMedium.copyWith(color: Colors.white),
+            ),
+          ],
+        ),
         leading: Builder(
           builder: (context) => IconButton(
             icon: const Icon(Icons.menu_rounded, color: AppColors.primaryText),
             onPressed: () => Scaffold.of(context).openDrawer(),
           ),
         ),
-      ),
-      body: ListView(
-        physics: const BouncingScrollPhysics(),
-        padding: const EdgeInsets.all(AppSpacing.md),
-        children: [
-          _buildActiveConditionsHeader(),
-          const SizedBox(height: AppSpacing.md),
-          const Text('VITAL DIARY LOGS', style: AppTextStyles.labelSmall),
-          const SizedBox(height: AppSpacing.sm),
-          _buildCareProgramCard(
-            title: 'Hypertension Management Program',
-            desc:
-                'BP tracking twice daily. Targeted systolic < 120 mmHg. Stage 1 HTN under active observation.',
-            param1: 'Latest BP: 128/82 mmHg',
-            param2: 'Amlodipine 5mg active',
-            icon: Icons.favorite_rounded,
-            iconColor: AppColors.error,
+        actions: [
+          Container(
+            margin: const EdgeInsets.only(right: 12),
+            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+            decoration: BoxDecoration(
+              color: AppColors.primary.withValues(alpha: 0.15),
+              borderRadius: BorderRadius.circular(20),
+              border: Border.all(
+                color: AppColors.primaryLight.withValues(alpha: 0.3),
+              ),
+            ),
+            child: Row(
+              children: [
+                const Icon(
+                  Icons.person_outline_rounded,
+                  color: AppColors.primaryLight,
+                  size: 12,
+                ),
+                const SizedBox(width: 4),
+                Text(
+                  'Ramesh Kumar',
+                  style: AppTextStyles.labelSmall.copyWith(
+                    color: AppColors.primaryLight,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
           ),
-          _buildCareProgramCard(
-            title: 'Type-2 Diabetes Management',
-            desc:
-                'Glucose tracker. Latest fasting sugar elevated. Diabetologist diet modifications active.',
-            param1: 'Latest HbA1c: 7.4%',
-            param2: 'Fasting Glucose: 142 mg/dL',
-            icon: Icons.bloodtype_rounded,
-            iconColor: AppColors.secondaryAccent,
-          ),
-          const SizedBox(height: AppSpacing.md),
-          const Text(
-            'DAILY SYMPTOM CHECKER DIARY',
-            style: AppTextStyles.labelSmall,
-          ),
-          const SizedBox(height: AppSpacing.sm),
-          _buildSymptomDiaryButton(context),
         ],
+      ),
+      body: SafeArea(
+        child: ListView(
+          physics: const BouncingScrollPhysics(),
+          padding: const EdgeInsets.all(AppSpacing.md),
+          children: [
+            // Top Section - Active Registered Profiles
+            _buildActiveProfilesStrip(),
+            const SizedBox(height: AppSpacing.md),
+
+            // KPI Grid Section
+            const ChronicKpis(),
+            const SizedBox(height: AppSpacing.lg),
+
+            // Active & Monitored Conditions Header
+            const Row(
+              children: [
+                Icon(
+                  Icons.healing_outlined,
+                  color: AppColors.secondaryAccent,
+                  size: 18,
+                ),
+                SizedBox(width: 8),
+                Text(
+                  'ACTIVE & MONITORED CONDITIONS',
+                  style: AppTextStyles.labelSmall,
+                ),
+              ],
+            ),
+            const SizedBox(height: AppSpacing.sm),
+
+            // 9 Conditions Grid
+            const ChronicConditionsGrid(),
+            const SizedBox(height: AppSpacing.lg),
+
+            // AI Risk Prediction Outlook
+            const ChronicAiRisk(),
+            const SizedBox(height: AppSpacing.lg),
+
+            // Trend Visualizers & Multi-Condition Radar
+            const ChronicTrendRadar(),
+            const SizedBox(height: AppSpacing.lg),
+
+            // Quick Symptom Entry Log Button
+            _buildLogSymptomBanner(context),
+          ],
+        ),
       ),
     );
   }
 
-  Widget _buildActiveConditionsHeader() {
+  Widget _buildActiveProfilesStrip() {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: AppColors.card,
-        borderRadius: BorderRadius.circular(AppRadius.md),
+        borderRadius: BorderRadius.circular(12),
         border: Border.all(color: AppColors.border),
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: Row(
         children: [
-          const Text(
-            'YOUR REGISTERED CHRONIC PROFILES',
-            style: AppTextStyles.labelSmall,
+          const Icon(
+            Icons.app_registration_rounded,
+            color: AppColors.secondaryAccent,
+            size: 20,
           ),
-          const SizedBox(height: 12),
+          const SizedBox(width: 12),
+          const Expanded(
+            child: Text(
+              'REGISTERED PROFILE TARGETS:',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 10,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 1.1,
+              ),
+            ),
+          ),
           Wrap(
-            spacing: 8,
-            runSpacing: 8,
+            spacing: 6,
             children: [
               _buildConditionTag('Hypertension', AppColors.error),
               _buildConditionTag('Type-2 Diabetes', AppColors.secondaryAccent),
-              _buildConditionTag('Penicillin Allergy', AppColors.success),
+              _buildConditionTag('Allergies', AppColors.success),
             ],
           ),
         ],
@@ -96,126 +166,56 @@ class PatientChronicScreen extends ConsumerWidget {
 
   Widget _buildConditionTag(String text, Color color) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
       decoration: BoxDecoration(
-        color: color.withValues(alpha: 0.15),
+        color: color.withValues(alpha: 0.12),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: color.withValues(alpha: 0.3)),
+        border: Border.all(color: color.withValues(alpha: 0.25)),
       ),
       child: Text(
         text,
         style: TextStyle(
           color: color,
-          fontSize: 11,
+          fontSize: 9.5,
           fontWeight: FontWeight.bold,
         ),
       ),
     );
   }
 
-  Widget _buildCareProgramCard({
-    required String title,
-    required String desc,
-    required String param1,
-    required String param2,
-    required IconData icon,
-    required Color iconColor,
-  }) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: AppSpacing.sm),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: AppColors.card,
-        borderRadius: BorderRadius.circular(AppRadius.md),
-        border: Border.all(color: AppColors.border),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: iconColor.withValues(alpha: 0.1),
-                  shape: BoxShape.circle,
-                ),
-                child: Icon(icon, color: iconColor, size: 20),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Text(
-                  title,
-                  style: AppTextStyles.labelLarge.copyWith(
-                    fontSize: 13,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 12),
-          Text(desc, style: AppTextStyles.bodySmall),
-          const SizedBox(height: 12),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                decoration: BoxDecoration(
-                  color: AppColors.background,
-                  borderRadius: BorderRadius.circular(6),
-                ),
-                child: Text(
-                  param1,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 10.5,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                decoration: BoxDecoration(
-                  color: AppColors.background,
-                  borderRadius: BorderRadius.circular(6),
-                ),
-                child: Text(
-                  param2,
-                  style: const TextStyle(
-                    color: AppColors.secondaryText,
-                    fontSize: 10.5,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildSymptomDiaryButton(BuildContext context) {
+  Widget _buildLogSymptomBanner(BuildContext context) {
     return InkWell(
-      onTap: () {},
-      borderRadius: BorderRadius.circular(AppRadius.md),
+      onTap: () {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Opening daily symptom checker diary log...'),
+          ),
+        );
+      },
+      borderRadius: BorderRadius.circular(12),
       child: Container(
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           color: AppColors.surface,
-          borderRadius: BorderRadius.circular(AppRadius.md),
+          borderRadius: BorderRadius.circular(12),
           border: Border.all(color: AppColors.border),
         ),
-        child: const Row(
+        child: Row(
           children: [
-            Icon(
-              Icons.edit_note_rounded,
-              color: AppColors.primaryLight,
-              size: 28,
+            Container(
+              padding: const EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: AppColors.primaryLight.withValues(alpha: 0.15),
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(
+                Icons.edit_note_rounded,
+                color: AppColors.primaryLight,
+                size: 24,
+              ),
             ),
-            SizedBox(width: 16),
-            Expanded(
+            const SizedBox(width: 14),
+            const Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -229,16 +229,16 @@ class PatientChronicScreen extends ConsumerWidget {
                   ),
                   SizedBox(height: 2),
                   Text(
-                    'Update BP readings, glucose entries, and diet guidelines.',
+                    'Update BP readings, glucose entries, and daily diet guidelines.',
                     style: TextStyle(
                       color: AppColors.secondaryText,
-                      fontSize: 11,
+                      fontSize: 10.5,
                     ),
                   ),
                 ],
               ),
             ),
-            Icon(
+            const Icon(
               Icons.arrow_forward_ios_rounded,
               color: AppColors.secondaryText,
               size: 12,

@@ -264,26 +264,4 @@ class EMRPatientHeader extends StatelessWidget {
       ),
     );
   }
-
-  Widget _buildMetaText(String label, String value) {
-    return RichText(
-      text: TextSpan(
-        style: const TextStyle(
-          color: AppColors.secondaryText,
-          fontSize: 10.5,
-          fontFamily: 'Inter',
-        ),
-        children: [
-          TextSpan(text: '$label: '),
-          TextSpan(
-            text: value,
-            style: const TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
 }

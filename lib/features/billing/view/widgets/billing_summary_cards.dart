@@ -28,10 +28,12 @@ class BillingSummaryCards extends StatelessWidget {
               title: "Today's Revenue",
               value: '₹1.24L',
               trend: '↑ 12% vs yest',
+              trendUp: true,
             ),
             _SummaryCard(
               title: 'Bills Generated',
               value: '87',
+              trendUp: false,
               subtitle: 'OPD: 64 | IPD: 23',
               icon: Icons.receipt_long_rounded,
               iconColor: AppColors.primary,
@@ -43,6 +45,8 @@ class BillingSummaryCards extends StatelessWidget {
               valueColor: AppColors.secondaryAccent,
               icon: Icons.pending_actions_rounded,
               iconColor: AppColors.secondaryAccent,
+              trend: '↑ 8% vs yest',
+              trendUp: true,
             ),
             _SummaryCard(
               title: 'Insurance Claims',
@@ -51,14 +55,18 @@ class BillingSummaryCards extends StatelessWidget {
               valueColor: Colors.purple,
               icon: Icons.shield_rounded,
               iconColor: Colors.purple,
+              trend: '↑ 8% vs yest',
+              trendUp: true,
             ),
             _SummaryCard(
               title: 'Overdue >30 Days',
               value: '₹12K',
+              trend: '↓ 5% vs yest',
               subtitle: '5 patients',
               valueColor: AppColors.error,
               icon: Icons.warning_rounded,
               iconColor: AppColors.error,
+              trendUp: false,
             ),
           ],
         );
@@ -69,11 +77,11 @@ class BillingSummaryCards extends StatelessWidget {
 
 class _SummaryCard extends StatelessWidget {
   const _SummaryCard({
+    required this.trendUp,
     required this.title,
     required this.value,
     this.subtitle,
     this.trend,
-    this.trendUp = true,
     this.icon,
     this.iconColor,
     this.valueColor,

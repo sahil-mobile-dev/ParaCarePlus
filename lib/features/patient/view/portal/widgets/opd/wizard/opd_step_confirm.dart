@@ -1,20 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:paracareplus/core/theme/app_colors.dart';
-import 'package:paracareplus/core/theme/app_spacing.dart';
-import 'package:paracareplus/core/theme/app_text_styles.dart';
 import 'package:paracareplus/features/patient/view/portal/patient_opd_booking_screen.dart';
-import 'opd_step_details.dart';
+import 'package:paracareplus/features/patient/view/portal/widgets/opd/wizard/opd_step_details.dart';
 
 class OpdStepConfirm extends ConsumerWidget {
-  final VoidCallback onBack;
-  final VoidCallback onConfirm;
-
   const OpdStepConfirm({
-    super.key,
     required this.onBack,
     required this.onConfirm,
+    super.key,
   });
+  final VoidCallback onBack;
+  final VoidCallback onConfirm;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
