@@ -7,7 +7,23 @@ import 'package:paracareplus/core/theme/app_text_styles.dart';
 import 'package:paracareplus/features/patient/view/portal/widgets/patient_portal_drawer.dart';
 import 'package:paracareplus/routes/route_names.dart';
 
-// State models and providers for booking
+// Modular components
+import 'package:paracareplus/features/patient/view/portal/widgets/opd/opd_kpi_row.dart';
+import 'package:paracareplus/features/patient/view/portal/widgets/opd/opd_tele_banner.dart';
+import 'package:paracareplus/features/patient/view/portal/widgets/opd/opd_queue_monitor.dart';
+import 'package:paracareplus/features/patient/view/portal/widgets/opd/opd_ai_suggestions.dart';
+import 'package:paracareplus/features/patient/view/portal/widgets/opd/opd_appointments_table.dart';
+import 'package:paracareplus/features/patient/view/portal/widgets/opd/opd_heatmaps.dart';
+import 'package:paracareplus/features/patient/view/portal/widgets/opd/opd_gis_locator.dart';
+
+// Wizard Steps
+import 'package:paracareplus/features/patient/view/portal/widgets/opd/wizard/opd_step_specialty.dart';
+import 'package:paracareplus/features/patient/view/portal/widgets/opd/wizard/opd_step_doctor.dart';
+import 'package:paracareplus/features/patient/view/portal/widgets/opd/wizard/opd_step_date_slot.dart';
+import 'package:paracareplus/features/patient/view/portal/widgets/opd/wizard/opd_step_details.dart';
+import 'package:paracareplus/features/patient/view/portal/widgets/opd/wizard/opd_step_confirm.dart';
+
+// Models and Providers
 class Hospital {
   const Hospital(this.id, this.name, this.location, this.distanceKm);
   final String id;
@@ -73,7 +89,6 @@ final doctorsList = [
   ),
 ];
 
-// Booking States
 final selectedHospitalProvider = StateProvider<Hospital?>(
   (ref) => hospitals[0],
 );
@@ -82,7 +97,7 @@ final selectedSpecialtyProvider = StateProvider<String>(
 );
 final selectedDoctorProvider = StateProvider<Doctor?>((ref) => doctorsList[0]);
 final selectedDateProvider = StateProvider<DateTime>(
-  (ref) => DateTime.now().add(const Duration(days: 1)),
+  (ref) => DateTime(2026, 5, 20),
 );
 final selectedSlotProvider = StateProvider<String?>((ref) => null);
 
@@ -105,13 +120,12 @@ class _PatientOpdBookingScreenState
       _isBooking = true;
     });
 
-    Timer(const Duration(seconds: 1), () {
+    Timer(const Duration(milliseconds: 1500), () {
       if (mounted) {
         setState(() {
           _isBooking = false;
           _generatedToken =
               'OPD-UTK-${10000 + (DateTime.now().millisecond % 90000)}';
-          _currentStep = 2; // Step index 2 is success receipt screen
         });
       }
     });
@@ -119,12 +133,6 @@ class _PatientOpdBookingScreenState
 
   @override
   Widget build(BuildContext context) {
-    final hosp = ref.watch(selectedHospitalProvider);
-    final spec = ref.watch(selectedSpecialtyProvider);
-    final doc = ref.watch(selectedDoctorProvider);
-    final date = ref.watch(selectedDateProvider);
-    final slot = ref.watch(selectedSlotProvider);
-
     return Scaffold(
       backgroundColor: AppColors.background,
       drawer: const PatientPortalDrawer(activeRouteName: RouteNames.patientOPD),
@@ -138,39 +146,208 @@ class _PatientOpdBookingScreenState
           ),
         ),
         title: const Text(
-          'OPD Appointment Engine',
+          'Appointments & Smart OPD',
           style: AppTextStyles.titleSmall,
         ),
         actions: [
           IconButton(
             icon: const Icon(
-              Icons.history_rounded,
+              Icons.refresh_rounded,
               color: AppColors.primaryText,
             ),
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
-                  content: Text('No previous active appointments.'),
+                  content: Text(
+                    'Refreshing queue and live wait predictions...',
+                  ),
                 ),
               );
             },
           ),
         ],
       ),
-      body: Column(
+      body: Stack(
         children: [
-          // Step Progress Bar
-          _buildStepProgress(),
+          SingleChildScrollView(
+            padding: const EdgeInsets.all(AppSpacing.md),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // 1. KPI row (status cards)
+                const OpdKpiRow(),
+                const SizedBox(height: AppSpacing.md),
 
-          Expanded(
-            child: _currentStep == 0
-                ? _buildStepSelection(hosp, spec, doc)
-                : _currentStep == 1
-                ? _buildStepDateSlot(date, slot, doc)
-                : _buildStepReceipt(hosp, doc, date, slot),
+                // 2. Telemedicine online banner
+                const OpdTeleBanner(),
+                const SizedBox(height: AppSpacing.md),
+
+                // 3. Interactive step wizard card
+                _buildBookingWizard(),
+                const SizedBox(height: AppSpacing.lg),
+
+                // 4. Live queue monitor & AI suggestions row/column
+                LayoutBuilder(
+                  builder: (context, constraints) {
+                    final isWide = constraints.maxWidth > 900;
+                    if (isWide) {
+                      return const Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Expanded(child: OpdQueueMonitor()),
+                          SizedBox(width: AppSpacing.md),
+                          Expanded(child: OpdAiSuggestions()),
+                        ],
+                      );
+                    } else {
+                      return const Column(
+                        children: [
+                          OpdQueueMonitor(),
+                          SizedBox(height: AppSpacing.md),
+                          OpdAiSuggestions(),
+                        ],
+                      );
+                    }
+                  },
+                ),
+                const SizedBox(height: AppSpacing.lg),
+
+                // 5. Historical / Recent appointments list table
+                const OpdAppointmentsTable(),
+                const SizedBox(height: AppSpacing.lg),
+
+                // 6. Custom departmental heatmaps
+                const OpdHeatmaps(),
+                const SizedBox(height: AppSpacing.lg),
+
+                // 7. Interactive GIS locations maps
+                const OpdGisLocator(),
+              ],
+            ),
           ),
+          if (_isBooking)
+            Container(
+              color: Colors.black.withValues(alpha: 0.6),
+              alignment: Alignment.center,
+              child: Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 20,
+                ),
+                decoration: BoxDecoration(
+                  color: AppColors.card,
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(color: AppColors.border),
+                ),
+                child: const Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    CircularProgressIndicator(
+                      strokeWidth: 3,
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        AppColors.primaryLight,
+                      ),
+                    ),
+                    SizedBox(height: 16),
+                    Text(
+                      'Securing Appointment Slot...',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    SizedBox(height: 4),
+                    Text(
+                      'Generating ABDM Token...',
+                      style: TextStyle(
+                        color: AppColors.secondaryText,
+                        fontSize: 11,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
 
-          if (_currentStep < 2) _buildNavigationFooter(hosp, doc, slot),
+  Widget _buildBookingWizard() {
+    return Container(
+      decoration: BoxDecoration(
+        color: AppColors.card,
+        border: Border.all(color: AppColors.border),
+        borderRadius: BorderRadius.circular(18),
+      ),
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Row(
+                children: [
+                  Icon(
+                    Icons.calendar_month_rounded,
+                    color: AppColors.primaryLight,
+                    size: 18,
+                  ),
+                  SizedBox(width: 8),
+                  Text(
+                    'Book New Appointment',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+              ElevatedButton.icon(
+                onPressed: () {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Opening ABHA Scan & Share QR...'),
+                    ),
+                  );
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.border,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 8,
+                  ),
+                ),
+                icon: const Icon(
+                  Icons.qr_code_scanner_rounded,
+                  color: Colors.white,
+                  size: 14,
+                ),
+                label: const Text(
+                  'Scan & Share',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 11,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 16),
+          if (_generatedToken != null) ...[
+            _buildSuccessTicket(),
+          ] else ...[
+            _buildStepProgress(),
+            const SizedBox(height: 16),
+            _buildActiveStepBody(),
+          ],
         ],
       ),
     );
@@ -178,545 +355,309 @@ class _PatientOpdBookingScreenState
 
   Widget _buildStepProgress() {
     return Container(
-      color: AppColors.surface,
-      padding: const EdgeInsets.symmetric(vertical: 16),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
+      decoration: BoxDecoration(
+        color: Colors.white.withValues(alpha: 0.02),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: AppColors.border),
+      ),
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final isSmall = constraints.maxWidth < 450;
+          return Row(
+            children: [
+              _buildStepIndicator(
+                '1',
+                isSmall ? 'Spec' : 'Specialty',
+                _currentStep >= 0,
+                _currentStep == 0,
+              ),
+              _buildStepDivider(_currentStep >= 1),
+              _buildStepIndicator(
+                '2',
+                isSmall ? 'Doc' : 'Doctor',
+                _currentStep >= 1,
+                _currentStep == 1,
+              ),
+              _buildStepDivider(_currentStep >= 2),
+              _buildStepIndicator(
+                '3',
+                isSmall ? 'Slot' : 'Date & Slot',
+                _currentStep >= 2,
+                _currentStep == 2,
+              ),
+              _buildStepDivider(_currentStep >= 3),
+              _buildStepIndicator(
+                '4',
+                isSmall ? 'Detail' : 'Details',
+                _currentStep >= 3,
+                _currentStep == 3,
+              ),
+              _buildStepDivider(_currentStep >= 4),
+              _buildStepIndicator(
+                '5',
+                isSmall ? 'Conf' : 'Confirm',
+                _currentStep >= 4,
+                _currentStep == 4,
+              ),
+            ],
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildStepIndicator(
+    String number,
+    String label,
+    bool isDoneOrActive,
+    bool isActive,
+  ) {
+    return Expanded(
+      child: Column(
         children: [
-          _buildStepIndicator('1', 'Consult', _currentStep >= 0),
-          _buildStepDivider(_currentStep >= 1),
-          _buildStepIndicator('2', 'Slot & Time', _currentStep >= 1),
-          _buildStepDivider(_currentStep >= 2),
-          _buildStepIndicator('3', 'Token', _currentStep >= 2),
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            width: 26,
+            height: 26,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: isActive
+                  ? AppColors.primary
+                  : (isDoneOrActive ? AppColors.success : AppColors.border),
+              boxShadow: isActive
+                  ? [
+                      BoxShadow(
+                        color: AppColors.primary.withValues(alpha: 0.35),
+                        blurRadius: 8,
+                        spreadRadius: 1,
+                      ),
+                    ]
+                  : null,
+            ),
+            child: Center(
+              child: isDoneOrActive && !isActive
+                  ? const Icon(Icons.check, color: Colors.white, size: 13)
+                  : Text(
+                      number,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 11,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+            ),
+          ),
+          const SizedBox(height: 5),
+          Text(
+            label,
+            textAlign: TextAlign.center,
+            maxLines: 1,
+            overflow: TextOverflow.ellipsis,
+            style: TextStyle(
+              fontSize: 9.5,
+              color: isActive
+                  ? AppColors.primaryLight
+                  : (isDoneOrActive
+                        ? AppColors.primaryText
+                        : AppColors.secondaryText),
+              fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
+            ),
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildStepIndicator(String number, String label, bool isDone) {
-    return Column(
-      children: [
-        CircleAvatar(
-          radius: 14,
-          backgroundColor: isDone ? AppColors.primary : AppColors.card,
-          child: isDone
-              ? const Icon(Icons.check_rounded, color: Colors.white, size: 14)
-              : Text(
-                  number,
-                  style: const TextStyle(
+  Widget _buildStepDivider(bool isActive) {
+    return Container(
+      width: 14,
+      height: 1.5,
+      margin: const EdgeInsets.only(bottom: 15),
+      color: isActive ? AppColors.success : AppColors.border,
+    );
+  }
+
+  Widget _buildActiveStepBody() {
+    switch (_currentStep) {
+      case 0:
+        return OpdStepSpecialty(onNext: () => setState(() => _currentStep = 1));
+      case 1:
+        return OpdStepDoctor(
+          onBack: () => setState(() => _currentStep = 0),
+          onNext: () => setState(() => _currentStep = 2),
+        );
+      case 2:
+        return OpdStepDateSlot(
+          onBack: () => setState(() => _currentStep = 1),
+          onNext: () => setState(() => _currentStep = 3),
+        );
+      case 3:
+        return OpdStepDetails(
+          onBack: () => setState(() => _currentStep = 2),
+          onNext: () => setState(() => _currentStep = 4),
+        );
+      case 4:
+        return OpdStepConfirm(
+          onBack: () => setState(() => _currentStep = 3),
+          onConfirm: _confirmBooking,
+        );
+      default:
+        return const SizedBox();
+    }
+  }
+
+  Widget _buildSuccessTicket() {
+    final hosp = ref.read(selectedHospitalProvider);
+    final doc = ref.read(selectedDoctorProvider);
+    final date = ref.read(selectedDateProvider);
+    final slot = ref.read(selectedSlotProvider);
+    final patientFor = ref.read(patientForProvider);
+    final chiefComplaint = ref.read(chiefComplaintProvider);
+    final visitType = ref.read(visitTypeProvider);
+    final paymentScheme = ref.read(paymentSchemeProvider);
+
+    final formatStrDate = '${date.day} May 2026';
+
+    return Container(
+      padding: const EdgeInsets.all(20),
+      decoration: BoxDecoration(
+        color: Colors.white.withValues(alpha: 0.01),
+        border: Border.all(color: AppColors.success.withValues(alpha: 0.25)),
+        borderRadius: BorderRadius.circular(16),
+      ),
+      child: Column(
+        children: [
+          const Icon(
+            Icons.check_circle_rounded,
+            color: AppColors.success,
+            size: 48,
+          ),
+          const SizedBox(height: 12),
+          const Text(
+            'OPD SLOT REGISTERED SECURELY',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 13.5,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 3),
+          const Text(
+            'ABDM Token generated successfully',
+            style: TextStyle(
+              color: AppColors.success,
+              fontSize: 10.5,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 16),
+          const Divider(color: AppColors.border, height: 1),
+          const SizedBox(height: 12),
+          _buildReceiptRow('PATIENT', patientFor),
+          _buildReceiptRow('ABHA ID', '43-8912-3456-7890'),
+          _buildReceiptRow('HOSPITAL', hosp?.name ?? 'AIIMS Rishikesh'),
+          _buildReceiptRow('DOCTOR', doc?.name ?? 'Dr. Anjali Sharma'),
+          _buildReceiptRow('DEPARTMENT', doc?.specialty ?? 'Cardiology'),
+          _buildReceiptRow('APPOINTMENT DATE', formatStrDate),
+          _buildReceiptRow('TIME SLOT', slot ?? '10:30 AM'),
+          _buildReceiptRow('VISIT TYPE', visitType),
+          _buildReceiptRow('CHIEF SYMPTOMS', chiefComplaint),
+          _buildReceiptRow('PAYMENT METHOD', paymentScheme),
+          const SizedBox(height: 12),
+          const Divider(color: AppColors.border, height: 1),
+          const SizedBox(height: 16),
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(12),
+            decoration: BoxDecoration(
+              color: AppColors.background,
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: AppColors.border),
+            ),
+            child: Column(
+              children: [
+                const Text(
+                  'DIGITAL TOKEN NUMBER',
+                  style: TextStyle(
                     color: AppColors.secondaryText,
-                    fontSize: 11,
+                    fontSize: 9.5,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-        ),
-        const SizedBox(height: 6),
-        Text(
-          label,
-          style: AppTextStyles.labelSmall.copyWith(
-            color: isDone ? AppColors.primaryText : AppColors.secondaryText,
-            fontSize: 9.5,
-            fontWeight: isDone ? FontWeight.bold : FontWeight.normal,
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildStepDivider(bool isActive) {
-    return Container(
-      width: 40,
-      height: 2,
-      color: isActive ? AppColors.primary : AppColors.border,
-    );
-  }
-
-  Widget _buildStepSelection(Hospital? hosp, String spec, Doctor? doc) {
-    return ListView(
-      padding: const EdgeInsets.all(AppSpacing.md),
-      children: [
-        // Hospital Selector
-        const Text(
-          '1. SELECT REGIONAL HOSPITAL',
-          style: AppTextStyles.labelSmall,
-        ),
-        const SizedBox(height: 8),
-        ...hospitals.map((h) {
-          final isSel = hosp?.id == h.id;
-          return Container(
-            margin: const EdgeInsets.only(bottom: 8),
-            decoration: BoxDecoration(
-              color: isSel
-                  ? AppColors.primary.withValues(alpha: 0.1)
-                  : AppColors.card,
-              border: Border.all(
-                color: isSel ? AppColors.primary : AppColors.border,
-              ),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: ListTile(
-              leading: Icon(
-                Icons.local_hospital_rounded,
-                color: isSel ? AppColors.primaryLight : AppColors.secondaryText,
-              ),
-              title: Text(
-                h.name,
-                style: AppTextStyles.labelLarge.copyWith(color: Colors.white),
-              ),
-              subtitle: Text(
-                '${h.location} • ${h.distanceKm} km away',
-                style: AppTextStyles.labelSmall,
-              ),
-              trailing: isSel
-                  ? const Icon(
-                      Icons.radio_button_checked_rounded,
-                      color: AppColors.primary,
-                    )
-                  : const Icon(
-                      Icons.radio_button_off_rounded,
-                      color: AppColors.secondaryText,
-                    ),
-              onTap: () {
-                ref.read(selectedHospitalProvider.notifier).state = h;
-              },
-            ),
-          );
-        }),
-
-        const SizedBox(height: 16),
-
-        // Specialty Selector
-        const Text('2. SELECT SPECIALTY', style: AppTextStyles.labelSmall),
-        const SizedBox(height: 10),
-        SizedBox(
-          height: 38,
-          child: ListView(
-            scrollDirection: Axis.horizontal,
-            children:
-                [
-                  'General Medicine',
-                  'Pulmonology',
-                  'Cardiology',
-                  'Pediatrics',
-                ].map((s) {
-                  final isSel = spec == s;
-                  return Container(
-                    margin: const EdgeInsets.only(right: 8),
-                    child: ChoiceChip(
-                      label: Text(s),
-                      selected: isSel,
-                      selectedColor: AppColors.primary,
-                      backgroundColor: AppColors.card,
-                      labelStyle: TextStyle(
-                        color: isSel ? Colors.white : AppColors.secondaryText,
-                        fontSize: 11,
-                      ),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                        side: BorderSide(
-                          color: isSel
-                              ? AppColors.primaryLight
-                              : AppColors.border,
-                        ),
-                      ),
-                      onSelected: (_) {
-                        ref.read(selectedSpecialtyProvider.notifier).state = s;
-                        // Auto switch doctor matching specialty
-                        final match = doctorsList.firstWhere(
-                          (d) => d.specialty == s,
-                          orElse: () => doctorsList[0],
-                        );
-                        ref.read(selectedDoctorProvider.notifier).state = match;
-                      },
-                    ),
-                  );
-                }).toList(),
-          ),
-        ),
-
-        const SizedBox(height: 20),
-
-        // Doctors List
-        const Text(
-          '3. AVAILABLE SPECIALISTS TODAY',
-          style: AppTextStyles.labelSmall,
-        ),
-        const SizedBox(height: 10),
-        if (doc != null)
-          Container(
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: AppColors.card,
-              border: Border.all(
-                color: AppColors.primary.withValues(alpha: 0.5),
-              ),
-              borderRadius: BorderRadius.circular(16),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const CircleAvatar(
-                      radius: 22,
-                      backgroundColor: AppColors.primaryLight,
-                      child: Icon(
-                        Icons.person_pin_rounded,
-                        color: Colors.white,
-                        size: 28,
-                      ),
-                    ),
-                    const SizedBox(width: 14),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            doc.name,
-                            style: AppTextStyles.labelLarge.copyWith(
-                              color: Colors.white,
-                              fontSize: 15,
-                            ),
-                          ),
-                          Text(
-                            '${doc.specialty} (${doc.degree})',
-                            style: AppTextStyles.labelSmall.copyWith(
-                              color: AppColors.secondaryText,
-                            ),
-                          ),
-                          const SizedBox(height: 6),
-                          Row(
-                            children: [
-                              const Icon(
-                                Icons.timer_outlined,
-                                size: 12,
-                                color: AppColors.secondaryAccent,
-                              ),
-                              const SizedBox(width: 4),
-                              Text(
-                                doc.availability,
-                                style: AppTextStyles.labelSmall.copyWith(
-                                  color: AppColors.secondaryAccent,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                const Divider(height: 24, color: AppColors.border),
-                Row(
-                  children: [
-                    const Icon(
-                      Icons.people_outline_rounded,
-                      color: AppColors.success,
-                      size: 14,
-                    ),
-                    const SizedBox(width: 6),
-                    Text(
-                      'Live Waiting Status: ',
-                      style: AppTextStyles.labelSmall.copyWith(
-                        color: AppColors.secondaryText,
-                      ),
-                    ),
-                    Text(
-                      doc.queueInfo,
-                      style: AppTextStyles.labelSmall.copyWith(
-                        color: AppColors.success,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
+                const SizedBox(height: 4),
+                Text(
+                  _generatedToken ?? '',
+                  style: TextStyle(
+                    color: AppColors.secondaryAccent,
+                    fontSize: 19,
+                    fontWeight: FontWeight.w800,
+                    letterSpacing: 1.2,
+                  ),
                 ),
               ],
             ),
           ),
-      ],
-    );
-  }
-
-  Widget _buildStepDateSlot(DateTime date, String? slot, Doctor? doc) {
-    return ListView(
-      padding: const EdgeInsets.all(AppSpacing.md),
-      children: [
-        // Date Selector Cards
-        const Text('SELECT CONSULTATION DATE', style: AppTextStyles.labelSmall),
-        const SizedBox(height: 10),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: List.generate(4, (index) {
-            final cardDate = DateTime.now().add(Duration(days: index + 1));
-            final isSel = date.day == cardDate.day;
-            final weekdayName = [
-              'MON',
-              'TUE',
-              'WED',
-              'THU',
-              'FRI',
-              'SAT',
-              'SUN',
-            ][cardDate.weekday - 1];
-            final monthName = [
-              'JAN',
-              'FEB',
-              'MAR',
-              'APR',
-              'MAY',
-              'JUN',
-              'JUL',
-              'AUG',
-              'SEP',
-              'OCT',
-              'NOV',
-              'DEC',
-            ][cardDate.month - 1];
-
-            return InkWell(
-              onTap: () {
-                ref.read(selectedDateProvider.notifier).state = cardDate;
-              },
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 150),
-                width: 72,
-                padding: const EdgeInsets.symmetric(vertical: 12),
-                decoration: BoxDecoration(
-                  color: isSel ? AppColors.primary : AppColors.card,
-                  border: Border.all(
-                    color: isSel ? AppColors.primaryLight : AppColors.border,
-                  ),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Column(
-                  children: [
-                    Text(
-                      weekdayName,
-                      style: AppTextStyles.labelSmall.copyWith(
-                        color: isSel ? Colors.white : AppColors.secondaryText,
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      '${cardDate.day}',
-                      style: AppTextStyles.titleMedium.copyWith(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      monthName,
-                      style: AppTextStyles.labelSmall.copyWith(
-                        color: isSel
-                            ? Colors.white.withValues(alpha: 0.8)
-                            : AppColors.secondaryText,
-                        fontSize: 9,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            );
-          }),
-        ),
-
-        const SizedBox(height: 24),
-
-        // Slots grid
-        const Text('AVAILABLE SLOTS', style: AppTextStyles.labelSmall),
-        const SizedBox(height: 10),
-        GridView.count(
-          shrinkWrap: true,
-          physics: const NeverScrollableScrollPhysics(),
-          crossAxisCount: 3,
-          mainAxisSpacing: 8,
-          crossAxisSpacing: 8,
-          childAspectRatio: 2.3,
-          children:
-              [
-                '09:15 AM',
-                '10:00 AM',
-                '10:45 AM',
-                '11:30 AM',
-                '02:00 PM',
-                '02:45 PM',
-              ].map((s) {
-                final isSel = slot == s;
-                return InkWell(
-                  onTap: () {
-                    ref.read(selectedSlotProvider.notifier).state = s;
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: isSel
-                          ? AppColors.success.withValues(alpha: 0.15)
-                          : AppColors.card,
-                      border: Border.all(
-                        color: isSel ? AppColors.success : AppColors.border,
-                      ),
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                    alignment: Alignment.center,
-                    child: Text(
-                      s,
-                      style: TextStyle(
-                        color: isSel ? AppColors.success : Colors.white,
-                        fontSize: 12,
-                        fontWeight: isSel ? FontWeight.bold : FontWeight.normal,
-                      ),
-                    ),
-                  ),
-                );
-              }).toList(),
-        ),
-
-        const SizedBox(height: 24),
-
-        // Live Queue Banner
-        Container(
-          padding: const EdgeInsets.all(12),
-          decoration: BoxDecoration(
-            color: AppColors.surface,
-            borderRadius: BorderRadius.circular(12),
-            border: Border.all(color: AppColors.border),
-          ),
-          child: Row(
+          const SizedBox(height: 20),
+          Row(
             children: [
-              const Icon(
-                Icons.info_outline_rounded,
-                color: AppColors.primaryLight,
-                size: 20,
+              Expanded(
+                child: OutlinedButton.icon(
+                  onPressed: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Downloading PDF ticket...'),
+                      ),
+                    );
+                  },
+                  style: OutlinedButton.styleFrom(
+                    side: const BorderSide(color: AppColors.border),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    padding: const EdgeInsets.symmetric(vertical: 12),
+                  ),
+                  icon: const Icon(
+                    Icons.download_rounded,
+                    color: AppColors.secondaryText,
+                    size: 16,
+                  ),
+                  label: const Text(
+                    'Get PDF',
+                    style: TextStyle(
+                      color: AppColors.secondaryText,
+                      fontSize: 11.5,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
               ),
               const SizedBox(width: 10),
               Expanded(
-                child: Text(
-                  'Bookings made via the ParaCarePlus engine sync directly with the state E-Health registries, ensuring minimal physical queue wait times.',
-                  style: AppTextStyles.labelSmall.copyWith(
-                    color: AppColors.secondaryText,
-                    height: 1.3,
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _buildStepReceipt(
-    Hospital? hosp,
-    Doctor? doc,
-    DateTime date,
-    String? slot,
-  ) {
-    final formatStrDate = '${date.day}/${date.month}/${date.year}';
-    return Center(
-      child: SingleChildScrollView(
-        padding: const EdgeInsets.all(24),
-        child: Container(
-          width: double.infinity,
-          padding: const EdgeInsets.all(24),
-          decoration: BoxDecoration(
-            color: AppColors.card,
-            borderRadius: BorderRadius.circular(20),
-            border: Border.all(color: AppColors.success.withValues(alpha: 0.5)),
-            boxShadow: [
-              BoxShadow(
-                color: AppColors.success.withValues(alpha: 0.1),
-                blurRadius: 16,
-                spreadRadius: 2,
-              ),
-            ],
-          ),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Icon(
-                Icons.check_circle_rounded,
-                color: AppColors.success,
-                size: 52,
-              ),
-              const SizedBox(height: 14),
-              const Text(
-                'OPD SLOT REGISTERED SECURELY',
-                style: AppTextStyles.labelLarge,
-              ),
-              Text(
-                'ABDM Token generated successfully',
-                style: AppTextStyles.labelSmall.copyWith(
-                  color: AppColors.success,
-                ),
-              ),
-              const SizedBox(height: 20),
-              const Divider(color: AppColors.border),
-              const SizedBox(height: 10),
-              _buildReceiptRow('PATIENT', 'RAMESH KUMAR'),
-              _buildReceiptRow('ABHA ID', '43-8912-3456-7890'),
-              _buildReceiptRow('HOSPITAL', hosp?.name ?? 'AIIMS Rishikesh'),
-              _buildReceiptRow('DOCTOR', doc?.name ?? 'Dr. Satish Semwal'),
-              _buildReceiptRow(
-                'DEPARTMENT',
-                doc?.specialty ?? 'General Medicine',
-              ),
-              _buildReceiptRow('APPOINTMENT DATE', formatStrDate),
-              _buildReceiptRow('TIME SLOT', slot ?? '09:15 AM'),
-              const SizedBox(height: 12),
-              const Divider(color: AppColors.border),
-              const SizedBox(height: 14),
-              Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 12,
-                ),
-                decoration: BoxDecoration(
-                  color: AppColors.background,
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: AppColors.border),
-                ),
-                child: Column(
-                  children: [
-                    const Text(
-                      'DIGITAL TOKEN NUMBER',
-                      style: TextStyle(
-                        color: AppColors.secondaryText,
-                        fontSize: 10,
-                      ),
-                    ),
-                    const SizedBox(height: 4),
-                    Text(
-                      _generatedToken ?? '',
-                      style: const TextStyle(
-                        color: AppColors.secondaryAccent,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        letterSpacing: 1.2,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(height: 20),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
+                child: ElevatedButton.icon(
                   onPressed: () {
-                    Navigator.pop(context);
+                    setState(() {
+                      _generatedToken = null;
+                      _currentStep = 0;
+                    });
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primary,
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
+                      borderRadius: BorderRadius.circular(10),
                     ),
-                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    padding: const EdgeInsets.symmetric(vertical: 12),
                   ),
-                  child: const Text(
-                    'Return to Home Dashboard',
+                  icon: const Icon(
+                    Icons.calendar_today_rounded,
+                    color: Colors.white,
+                    size: 15,
+                  ),
+                  label: const Text(
+                    'Book New',
                     style: TextStyle(
                       color: Colors.white,
+                      fontSize: 11.5,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -724,14 +665,14 @@ class _PatientOpdBookingScreenState
               ),
             ],
           ),
-        ),
+        ],
       ),
     );
   }
 
   Widget _buildReceiptRow(String label, String value) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 6),
+      padding: const EdgeInsets.symmetric(vertical: 5),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -742,7 +683,7 @@ class _PatientOpdBookingScreenState
               fontSize: 10,
             ),
           ),
-          const SizedBox(width: 12),
+          const SizedBox(width: 14),
           Expanded(
             child: Text(
               value,
@@ -755,88 +696,6 @@ class _PatientOpdBookingScreenState
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
             ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildNavigationFooter(Hospital? hosp, Doctor? doc, String? slot) {
-    final nextEnabled = _currentStep == 0
-        ? (hosp != null && doc != null)
-        : slot != null;
-
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: const BoxDecoration(
-        color: AppColors.surface,
-        border: Border(top: BorderSide(color: AppColors.border)),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          if (_currentStep > 0)
-            OutlinedButton(
-              onPressed: () {
-                setState(() {
-                  _currentStep--;
-                });
-              },
-              style: OutlinedButton.styleFrom(
-                side: const BorderSide(color: AppColors.border),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 20,
-                  vertical: 14,
-                ),
-              ),
-              child: const Text(
-                'Back',
-                style: TextStyle(color: AppColors.secondaryText),
-              ),
-            )
-          else
-            const SizedBox(),
-          ElevatedButton(
-            onPressed: nextEnabled
-                ? () {
-                    if (_currentStep == 1) {
-                      _confirmBooking();
-                    } else {
-                      setState(() {
-                        _currentStep++;
-                      });
-                    }
-                  }
-                : null,
-            style: ElevatedButton.styleFrom(
-              backgroundColor: _currentStep == 1
-                  ? AppColors.success
-                  : AppColors.primary,
-              disabledBackgroundColor: AppColors.border,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-              padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 14),
-            ),
-            child: _isBooking
-                ? const SizedBox(
-                    width: 16,
-                    height: 16,
-                    child: CircularProgressIndicator(
-                      strokeWidth: 2,
-                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                    ),
-                  )
-                : Text(
-                    _currentStep == 1 ? 'Book Appointment' : 'Proceed',
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
           ),
         ],
       ),
