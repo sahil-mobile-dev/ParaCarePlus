@@ -3,6 +3,16 @@ import 'package:paracareplus/core/theme/app_colors.dart';
 import 'package:paracareplus/core/theme/app_text_styles.dart';
 
 class AppButton extends StatelessWidget {
+  const AppButton({
+    required this.text,
+    required this.onPressed,
+    super.key,
+    this.isLoading = false,
+    this.isOutlined = false,
+    this.backgroundColor,
+    this.width,
+    this.icon,
+  });
   final String text;
   final VoidCallback onPressed;
   final bool isLoading;
@@ -10,17 +20,6 @@ class AppButton extends StatelessWidget {
   final Color? backgroundColor;
   final double? width;
   final IconData? icon;
-
-  const AppButton({
-    super.key,
-    required this.text,
-    required this.onPressed,
-    this.isLoading = false,
-    this.isOutlined = false,
-    this.backgroundColor,
-    this.width,
-    this.icon,
-  });
 
   @override
   Widget build(BuildContext context) {
@@ -57,10 +56,7 @@ class AppButton extends StatelessWidget {
       return const SizedBox(
         height: 20,
         width: 20,
-        child: CircularProgressIndicator(
-          strokeWidth: 2,
-          color: Colors.white,
-        ),
+        child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white),
       );
     }
 
@@ -75,7 +71,11 @@ class AppButton extends StatelessWidget {
       return Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 20, color: isOutlined ? AppColors.primary : Colors.white),
+          Icon(
+            icon,
+            size: 20,
+            color: isOutlined ? AppColors.primary : Colors.white,
+          ),
           const SizedBox(width: 8),
           textWidget,
         ],

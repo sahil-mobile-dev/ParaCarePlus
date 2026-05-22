@@ -4,7 +4,7 @@ class RouteNames {
   static const String splash = 'splash';
   static const String login = 'login';
   static const String dashboard = 'dashboard';
-  
+
   // Feature modules
   static const String patient = 'patient';
   static const String opd = 'opd';
@@ -20,4 +20,26 @@ class RouteNames {
   static const String ipdAdmission = 'ipdAdmission';
   static const String hr = 'hr';
   static const String tpa = 'tpa';
+
+  // Patient Portal (Phase C)
+  static const String patientLogin = 'patientLogin';
+  static const String patientHome = 'patientHome';
+  static const String patientEMR = 'patientEMR';
+  static const String patientAI = 'patientAI';
+  static const String patientOPD = 'patientOPD';
+  static const String patientEmergency = 'patientEmergency';
+  static const String patientHealthAnalytics = 'patientHealthAnalytics';
+  static const String patientLab = 'patientLab';
+  static const String patientRadiology = 'patientRadiology';
+  static const String patientPrescription = 'patientPrescription';
+  static const String patientVaccination = 'patientVaccination';
+  static const String patientChronic = 'patientChronic';
+  static const String patientMch = 'patientMch';
+  static const String patientTele = 'patientTele';
+  static const String patientFinance = 'patientFinance';
+  static const String patientWellness = 'patientWellness';
+  static const String patientFamily = 'patientFamily';
+  static const String patientNotifications = 'patientNotifications';
+  static const String patientMaps = 'patientMaps';
+  static const String patientFeedback = 'patientFeedback';
 }

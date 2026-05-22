@@ -65,7 +65,7 @@ class RefundsTab extends StatelessWidget {
             4: FlexColumnWidth(1.2),
             5: FlexColumnWidth(1.5),
             6: FlexColumnWidth(1.2),
-            7: FlexColumnWidth(1),
+            7: FlexColumnWidth(),
           },
           children: [
             _buildTableHeader(),

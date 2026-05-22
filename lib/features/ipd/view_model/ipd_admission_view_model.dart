@@ -14,17 +14,72 @@ class IpdAdmissionViewModel extends _$IpdAdmissionViewModel {
   IpdAdmission _initialState() {
     return const IpdAdmission(
       availableBeds: [
-        BedInfo(id: 'GW-101-B1', wardName: 'General Ward', roomNumber: '101', bedNumber: 'B1'),
-        BedInfo(id: 'GW-101-B2', wardName: 'General Ward', roomNumber: '101', bedNumber: 'B2'),
-        BedInfo(id: 'GW-101-B3', wardName: 'General Ward', roomNumber: '101', bedNumber: 'B3'),
-        BedInfo(id: 'GW-101-B4', wardName: 'General Ward', roomNumber: '101', bedNumber: 'B4'),
-        BedInfo(id: 'GW-102-B1', wardName: 'General Ward', roomNumber: '102', bedNumber: 'B1'),
-        BedInfo(id: 'GW-102-B2', wardName: 'General Ward', roomNumber: '102', bedNumber: 'B2'),
-        BedInfo(id: 'GW-102-B3', wardName: 'General Ward', roomNumber: '102', bedNumber: 'B3'),
-        BedInfo(id: 'GW-102-B4', wardName: 'General Ward', roomNumber: '102', bedNumber: 'B4'),
-        BedInfo(id: 'ICU-101-B1', wardName: 'ICU', roomNumber: '101', bedNumber: 'B1'),
-        BedInfo(id: 'ICU-101-B2', wardName: 'ICU', roomNumber: '101', bedNumber: 'B2'),
-        BedInfo(id: 'ICU-102-B1', wardName: 'ICU', roomNumber: '102', bedNumber: 'B1'),
+        BedInfo(
+          id: 'GW-101-B1',
+          wardName: 'General Ward',
+          roomNumber: '101',
+          bedNumber: 'B1',
+        ),
+        BedInfo(
+          id: 'GW-101-B2',
+          wardName: 'General Ward',
+          roomNumber: '101',
+          bedNumber: 'B2',
+        ),
+        BedInfo(
+          id: 'GW-101-B3',
+          wardName: 'General Ward',
+          roomNumber: '101',
+          bedNumber: 'B3',
+        ),
+        BedInfo(
+          id: 'GW-101-B4',
+          wardName: 'General Ward',
+          roomNumber: '101',
+          bedNumber: 'B4',
+        ),
+        BedInfo(
+          id: 'GW-102-B1',
+          wardName: 'General Ward',
+          roomNumber: '102',
+          bedNumber: 'B1',
+        ),
+        BedInfo(
+          id: 'GW-102-B2',
+          wardName: 'General Ward',
+          roomNumber: '102',
+          bedNumber: 'B2',
+        ),
+        BedInfo(
+          id: 'GW-102-B3',
+          wardName: 'General Ward',
+          roomNumber: '102',
+          bedNumber: 'B3',
+        ),
+        BedInfo(
+          id: 'GW-102-B4',
+          wardName: 'General Ward',
+          roomNumber: '102',
+          bedNumber: 'B4',
+        ),
+        BedInfo(
+          id: 'ICU-101-B1',
+          wardName: 'ICU',
+          roomNumber: '101',
+          bedNumber: 'B1',
+        ),
+        BedInfo(
+          id: 'ICU-101-B2',
+          wardName: 'ICU',
+          roomNumber: '101',
+          bedNumber: 'B2',
+        ),
+        BedInfo(
+          id: 'ICU-102-B1',
+          wardName: 'ICU',
+          roomNumber: '102',
+          bedNumber: 'B1',
+        ),
       ],
     );
   }
@@ -46,20 +101,23 @@ class IpdAdmissionViewModel extends _$IpdAdmissionViewModel {
     final currentState = state.value;
     if (currentState == null) return;
 
-    state = AsyncData(currentState.copyWith(
-      searchQuery: searchQuery ?? currentState.searchQuery,
-      patientName: patientName ?? currentState.patientName,
-      mrn: mrn ?? currentState.mrn,
-      department: department ?? currentState.department,
-      admissionReason: admissionReason ?? currentState.admissionReason,
-      ward: ward ?? currentState.ward,
-      selectedBed: selectedBed ?? currentState.selectedBed,
-      doctorName: doctorName ?? currentState.doctorName,
-      expectedDuration: expectedDuration ?? currentState.expectedDuration,
-      paymentMode: paymentMode ?? currentState.paymentMode,
-      advanceDeposit: advanceDeposit ?? currentState.advanceDeposit,
-      specialInstructions: specialInstructions ?? currentState.specialInstructions,
-    ));
+    state = AsyncData(
+      currentState.copyWith(
+        searchQuery: searchQuery ?? currentState.searchQuery,
+        patientName: patientName ?? currentState.patientName,
+        mrn: mrn ?? currentState.mrn,
+        department: department ?? currentState.department,
+        admissionReason: admissionReason ?? currentState.admissionReason,
+        ward: ward ?? currentState.ward,
+        selectedBed: selectedBed ?? currentState.selectedBed,
+        doctorName: doctorName ?? currentState.doctorName,
+        expectedDuration: expectedDuration ?? currentState.expectedDuration,
+        paymentMode: paymentMode ?? currentState.paymentMode,
+        advanceDeposit: advanceDeposit ?? currentState.advanceDeposit,
+        specialInstructions:
+            specialInstructions ?? currentState.specialInstructions,
+      ),
+    );
 
     if (searchQuery != null) {
       _searchPatients(searchQuery);
@@ -71,7 +129,9 @@ class IpdAdmissionViewModel extends _$IpdAdmissionViewModel {
     if (currentState == null) return;
 
     if (query.isEmpty) {
-      state = AsyncData(currentState.copyWith(searchResults: [], isSearching: false));
+      state = AsyncData(
+        currentState.copyWith(searchResults: [], isSearching: false),
+      );
       return;
     }
 
@@ -79,35 +139,57 @@ class IpdAdmissionViewModel extends _$IpdAdmissionViewModel {
 
     // Mock search
     await Future<void>.delayed(const Duration(milliseconds: 300));
-    
+
     final allMockPatients = [
-      const PatientSummary(mrn: 'MRN001', name: 'John Doe', age: '45', sex: 'Male', phone: '9876543210'),
-      const PatientSummary(mrn: 'MRN002', name: 'Jane Smith', age: '32', sex: 'Female', phone: '8765432109'),
-      const PatientSummary(mrn: 'MRN003', name: 'Robert Johnson', age: '58', sex: 'Male', phone: '7654321098'),
+      const PatientSummary(
+        mrn: 'MRN001',
+        name: 'John Doe',
+        age: '45',
+        sex: 'Male',
+        phone: '9876543210',
+      ),
+      const PatientSummary(
+        mrn: 'MRN002',
+        name: 'Jane Smith',
+        age: '32',
+        sex: 'Female',
+        phone: '8765432109',
+      ),
+      const PatientSummary(
+        mrn: 'MRN003',
+        name: 'Robert Johnson',
+        age: '58',
+        sex: 'Male',
+        phone: '7654321098',
+      ),
     ];
 
-    final results = allMockPatients.where((p) => 
-      p.name.toLowerCase().contains(query.toLowerCase()) || 
-      p.mrn.toLowerCase().contains(query.toLowerCase())
-    ).toList();
+    final results = allMockPatients
+        .where(
+          (p) =>
+              p.name.toLowerCase().contains(query.toLowerCase()) ||
+              p.mrn.toLowerCase().contains(query.toLowerCase()),
+        )
+        .toList();
 
-    state = AsyncData(state.value!.copyWith(
-      searchResults: results,
-      isSearching: false,
-    ));
+    state = AsyncData(
+      state.value!.copyWith(searchResults: results, isSearching: false),
+    );
   }
 
   void selectPatient(PatientSummary patient) {
     final currentState = state.value;
     if (currentState == null) return;
 
-    state = AsyncData(currentState.copyWith(
-      selectedPatient: patient,
-      patientName: patient.name,
-      mrn: patient.mrn,
-      searchResults: [],
-      searchQuery: patient.mrn,
-    ));
+    state = AsyncData(
+      currentState.copyWith(
+        selectedPatient: patient,
+        patientName: patient.name,
+        mrn: patient.mrn,
+        searchResults: [],
+        searchQuery: patient.mrn,
+      ),
+    );
   }
 
   Future<void> admitPatient() async {

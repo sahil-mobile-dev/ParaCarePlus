@@ -4,14 +4,14 @@ import 'package:paracareplus/core/theme/app_colors.dart';
 import 'package:paracareplus/core/theme/app_spacing.dart';
 import 'package:paracareplus/core/theme/app_text_styles.dart';
 import 'package:paracareplus/features/dashboard/view/widgets/app_sidebar.dart';
+import 'package:paracareplus/features/hr/view/tabs/attendance_tab.dart';
 import 'package:paracareplus/features/hr/view/tabs/dashboard_tab.dart';
 import 'package:paracareplus/features/hr/view/tabs/directory_tab.dart';
-import 'package:paracareplus/features/hr/view/tabs/attendance_tab.dart';
 import 'package:paracareplus/features/hr/view/tabs/leave_tab.dart';
 import 'package:paracareplus/features/hr/view/tabs/payroll_tab.dart';
 import 'package:paracareplus/features/hr/view/tabs/recruitment_tab.dart';
-import 'package:paracareplus/features/hr/view/tabs/training_tab.dart';
 import 'package:paracareplus/features/hr/view/tabs/reports_tab.dart';
+import 'package:paracareplus/features/hr/view/tabs/training_tab.dart';
 import 'package:paracareplus/features/hr/view_model/hr_view_model.dart';
 
 class HrScreen extends ConsumerWidget {
@@ -72,10 +72,7 @@ class HrScreen extends ConsumerWidget {
       body: SafeArea(
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (isWide) const AppSidebar(),
-            mainContent,
-          ],
+          children: [if (isWide) const AppSidebar(), mainContent],
         ),
       ),
     );
@@ -84,7 +81,9 @@ class HrScreen extends ConsumerWidget {
   Widget _buildTelemetryGrid() {
     return LayoutBuilder(
       builder: (context, constraints) {
-        final columns = constraints.maxWidth > 900 ? 5 : (constraints.maxWidth > 600 ? 3 : 2);
+        final columns = constraints.maxWidth > 900
+            ? 5
+            : (constraints.maxWidth > 600 ? 3 : 2);
         return GridView.count(
           crossAxisCount: columns,
           shrinkWrap: true,
@@ -93,18 +92,48 @@ class HrScreen extends ConsumerWidget {
           mainAxisSpacing: 12,
           childAspectRatio: 1.6,
           children: [
-            _telemetryCard('Total Enterprise Staff', '342', AppColors.primary, Icons.groups_rounded),
-            _telemetryCard('Active On Duty', '184', AppColors.success, Icons.badge_rounded),
-            _telemetryCard('On Authorized Leave', '12', AppColors.error, Icons.beach_access_rounded),
-            _telemetryCard('Open Openings', '08', AppColors.secondaryAccent, Icons.work_rounded),
-            _telemetryCard('CME Compliance', '88.5%', AppColors.primaryLight, Icons.verified_user_rounded),
+            _telemetryCard(
+              'Total Enterprise Staff',
+              '342',
+              AppColors.primary,
+              Icons.groups_rounded,
+            ),
+            _telemetryCard(
+              'Active On Duty',
+              '184',
+              AppColors.success,
+              Icons.badge_rounded,
+            ),
+            _telemetryCard(
+              'On Authorized Leave',
+              '12',
+              AppColors.error,
+              Icons.beach_access_rounded,
+            ),
+            _telemetryCard(
+              'Open Openings',
+              '08',
+              AppColors.secondaryAccent,
+              Icons.work_rounded,
+            ),
+            _telemetryCard(
+              'CME Compliance',
+              '88.5%',
+              AppColors.primaryLight,
+              Icons.verified_user_rounded,
+            ),
           ],
         );
       },
     );
   }
 
-  Widget _telemetryCard(String title, String value, Color color, IconData icon) {
+  Widget _telemetryCard(
+    String title,
+    String value,
+    Color color,
+    IconData icon,
+  ) {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
@@ -121,14 +150,21 @@ class HrScreen extends ConsumerWidget {
             children: [
               Text(
                 title,
-                style: const TextStyle(color: AppColors.secondaryText, fontSize: 10, fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                  color: AppColors.secondaryText,
+                  fontSize: 10,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               Icon(icon, color: color, size: 16),
             ],
           ),
           Text(
             value,
-            style: AppTextStyles.titleLarge.copyWith(color: color, fontWeight: FontWeight.bold),
+            style: AppTextStyles.titleLarge.copyWith(
+              color: color,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ],
       ),
@@ -178,7 +214,9 @@ class HrScreen extends ConsumerWidget {
               child: Text(
                 tab,
                 style: AppTextStyles.labelMedium.copyWith(
-                  color: isSelected ? AppColors.primaryText : AppColors.secondaryText,
+                  color: isSelected
+                      ? AppColors.primaryText
+                      : AppColors.secondaryText,
                   fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
                 ),
               ),

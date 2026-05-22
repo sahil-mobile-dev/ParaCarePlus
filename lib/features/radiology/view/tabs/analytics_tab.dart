@@ -38,7 +38,7 @@ class AnalyticsTab extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: AppRadius.md),
+            const SizedBox(height: AppRadius.md),
             Row(
               children: [
                 Expanded(
@@ -165,7 +165,7 @@ class AnalyticsTab extends StatelessWidget {
   }
 
   Widget _buildVolumeByModalityCard() {
-    final List<Map<String, dynamic>> data = [
+    final data = <Map<String, dynamic>>[
       {
         'modality': 'CT Scan',
         'count': 540,
@@ -269,7 +269,7 @@ class AnalyticsTab extends StatelessWidget {
   }
 
   Widget _buildRadiologistReportingLoadCard() {
-    final List<Map<String, dynamic>> load = [
+    final load = <Map<String, dynamic>>[
       {
         'name': 'Dr. Meera Gupta',
         'assigned': 25,
@@ -327,8 +327,8 @@ class AnalyticsTab extends StatelessWidget {
           Table(
             columnWidths: const {
               0: FlexColumnWidth(1.8),
-              1: FlexColumnWidth(1.0),
-              2: FlexColumnWidth(1.0),
+              1: FlexColumnWidth(),
+              2: FlexColumnWidth(),
               3: FlexColumnWidth(1.2),
             },
             children: [

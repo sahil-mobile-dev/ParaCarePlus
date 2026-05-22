@@ -75,7 +75,7 @@ class _ScheduleTabState extends State<ScheduleTab> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    const Text(
                       'Schedule Scanner Slot',
                       style: AppTextStyles.titleSmall,
                     ),
@@ -205,7 +205,7 @@ class _ScheduleTabState extends State<ScheduleTab> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildDevicesList(),
-        SizedBox(height: AppSpacing.xxl),
+        const SizedBox(height: AppSpacing.xxl),
         _buildSlotsGrid(),
       ],
     );
@@ -222,14 +222,14 @@ class _ScheduleTabState extends State<ScheduleTab> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
+          const Row(
             children: [
-              const Icon(
+              Icon(
                 Icons.settings_remote_rounded,
                 color: AppColors.primary,
                 size: 20,
               ),
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               Text('Available Scanners', style: AppTextStyles.titleSmall),
             ],
           ),
@@ -303,7 +303,10 @@ class _ScheduleTabState extends State<ScheduleTab> {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Daily Slot Grid', style: AppTextStyles.titleSmall),
+                  const Text(
+                    'Daily Slot Grid',
+                    style: AppTextStyles.titleSmall,
+                  ),
                   const SizedBox(height: 2),
                   Text(
                     _selectedModality,

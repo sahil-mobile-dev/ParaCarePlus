@@ -3,22 +3,21 @@ import 'package:paracareplus/core/theme/app_colors.dart';
 import 'package:paracareplus/core/theme/app_text_styles.dart';
 
 class DashboardMetricTile extends StatelessWidget {
+  const DashboardMetricTile({
+    required this.title,
+    required this.value,
+    required this.icon,
+    super.key,
+    this.color,
+    this.trend,
+    this.isPositive,
+  });
   final String title;
   final String value;
   final IconData icon;
   final Color? color;
   final String? trend;
   final bool? isPositive;
-
-  const DashboardMetricTile({
-    super.key,
-    required this.title,
-    required this.value,
-    required this.icon,
-    this.color,
-    this.trend,
-    this.isPositive,
-  });
 
   @override
   Widget build(BuildContext context) {

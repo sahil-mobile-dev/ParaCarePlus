@@ -108,14 +108,14 @@ class _ReportingTabState extends State<ReportingTab> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
+          const Row(
             children: [
-              const Icon(
+              Icon(
                 Icons.person_outline_rounded,
                 color: AppColors.primary,
                 size: 20,
               ),
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               Text('Reporting Target', style: AppTextStyles.titleSmall),
             ],
           ),
@@ -239,14 +239,14 @@ class _ReportingTabState extends State<ReportingTab> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
+              const Row(
                 children: [
-                  const Icon(
+                  Icon(
                     Icons.edit_note_rounded,
                     color: AppColors.primary,
                     size: 22,
                   ),
-                  const SizedBox(width: 8),
+                  SizedBox(width: 8),
                   Text('Report Workspace', style: AppTextStyles.titleSmall),
                 ],
               ),

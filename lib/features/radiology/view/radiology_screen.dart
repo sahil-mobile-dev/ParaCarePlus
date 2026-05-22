@@ -4,14 +4,14 @@ import 'package:paracareplus/core/theme/app_colors.dart';
 import 'package:paracareplus/core/theme/app_spacing.dart';
 import 'package:paracareplus/core/theme/app_text_styles.dart';
 import 'package:paracareplus/features/dashboard/view/widgets/app_sidebar.dart';
-import 'package:paracareplus/features/radiology/view/tabs/worklist_tab.dart';
-import 'package:paracareplus/features/radiology/view/tabs/schedule_tab.dart';
+import 'package:paracareplus/features/radiology/view/tabs/ai_findings_tab.dart';
+import 'package:paracareplus/features/radiology/view/tabs/analytics_tab.dart';
+import 'package:paracareplus/features/radiology/view/tabs/completed_reports_tab.dart';
+import 'package:paracareplus/features/radiology/view/tabs/modality_control_tab.dart';
 import 'package:paracareplus/features/radiology/view/tabs/protocols_tab.dart';
 import 'package:paracareplus/features/radiology/view/tabs/reporting_tab.dart';
-import 'package:paracareplus/features/radiology/view/tabs/completed_reports_tab.dart';
-import 'package:paracareplus/features/radiology/view/tabs/ai_findings_tab.dart';
-import 'package:paracareplus/features/radiology/view/tabs/modality_control_tab.dart';
-import 'package:paracareplus/features/radiology/view/tabs/analytics_tab.dart';
+import 'package:paracareplus/features/radiology/view/tabs/schedule_tab.dart';
+import 'package:paracareplus/features/radiology/view/tabs/worklist_tab.dart';
 import 'package:paracareplus/features/radiology/view_model/radiology_view_model.dart';
 
 class RadiologyScreen extends ConsumerWidget {
@@ -72,10 +72,7 @@ class RadiologyScreen extends ConsumerWidget {
       body: SafeArea(
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            if (isWide) const AppSidebar(),
-            mainContent,
-          ],
+          children: [if (isWide) const AppSidebar(), mainContent],
         ),
       ),
     );
@@ -84,7 +81,9 @@ class RadiologyScreen extends ConsumerWidget {
   Widget _buildTelemetryGrid() {
     return LayoutBuilder(
       builder: (context, constraints) {
-        final columns = constraints.maxWidth > 900 ? 5 : (constraints.maxWidth > 600 ? 3 : 2);
+        final columns = constraints.maxWidth > 900
+            ? 5
+            : (constraints.maxWidth > 600 ? 3 : 2);
         return GridView.count(
           crossAxisCount: columns,
           shrinkWrap: true,
@@ -93,18 +92,48 @@ class RadiologyScreen extends ConsumerWidget {
           mainAxisSpacing: 12,
           childAspectRatio: 1.6,
           children: [
-            _telemetryCard('Total Daily Scans', '48', AppColors.primary, Icons.camera_rounded),
-            _telemetryCard('Scans In Queue', '08', AppColors.secondaryAccent, Icons.hourglass_empty_rounded),
-            _telemetryCard('AI Brain Alerts', '02', AppColors.error, Icons.psychology_rounded),
-            _telemetryCard('Completed Reports', '36', AppColors.success, Icons.assignment_turned_in_rounded),
-            _telemetryCard('Mean TAT', '34 mins', AppColors.success, Icons.timer_outlined),
+            _telemetryCard(
+              'Total Daily Scans',
+              '48',
+              AppColors.primary,
+              Icons.camera_rounded,
+            ),
+            _telemetryCard(
+              'Scans In Queue',
+              '08',
+              AppColors.secondaryAccent,
+              Icons.hourglass_empty_rounded,
+            ),
+            _telemetryCard(
+              'AI Brain Alerts',
+              '02',
+              AppColors.error,
+              Icons.psychology_rounded,
+            ),
+            _telemetryCard(
+              'Completed Reports',
+              '36',
+              AppColors.success,
+              Icons.assignment_turned_in_rounded,
+            ),
+            _telemetryCard(
+              'Mean TAT',
+              '34 mins',
+              AppColors.success,
+              Icons.timer_outlined,
+            ),
           ],
         );
       },
     );
   }
 
-  Widget _telemetryCard(String title, String value, Color color, IconData icon) {
+  Widget _telemetryCard(
+    String title,
+    String value,
+    Color color,
+    IconData icon,
+  ) {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
@@ -121,14 +150,21 @@ class RadiologyScreen extends ConsumerWidget {
             children: [
               Text(
                 title,
-                style: const TextStyle(color: AppColors.secondaryText, fontSize: 10, fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                  color: AppColors.secondaryText,
+                  fontSize: 10,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               Icon(icon, color: color, size: 16),
             ],
           ),
           Text(
             value,
-            style: AppTextStyles.titleLarge.copyWith(color: color, fontWeight: FontWeight.bold),
+            style: AppTextStyles.titleLarge.copyWith(
+              color: color,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ],
       ),
@@ -183,15 +219,21 @@ class RadiologyScreen extends ConsumerWidget {
                       padding: const EdgeInsets.only(right: 4),
                       child: Icon(
                         Icons.psychology_rounded,
-                        color: isSelected ? AppColors.secondaryAccent : AppColors.secondaryText,
+                        color: isSelected
+                            ? AppColors.secondaryAccent
+                            : AppColors.secondaryText,
                         size: 14,
                       ),
                     ),
                   Text(
                     tab,
                     style: AppTextStyles.labelMedium.copyWith(
-                      color: isSelected ? AppColors.primaryText : AppColors.secondaryText,
-                      fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                      color: isSelected
+                          ? AppColors.primaryText
+                          : AppColors.secondaryText,
+                      fontWeight: isSelected
+                          ? FontWeight.bold
+                          : FontWeight.normal,
                     ),
                   ),
                 ],

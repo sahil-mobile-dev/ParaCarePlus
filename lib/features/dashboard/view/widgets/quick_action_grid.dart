@@ -60,7 +60,6 @@ class QuickActionGrid extends StatelessWidget {
         crossAxisCount: 4,
         crossAxisSpacing: AppSpacing.md,
         mainAxisSpacing: AppSpacing.md,
-        childAspectRatio: 1.0,
       ),
       itemCount: actions.length,
       itemBuilder: (context, index) => actions[index],
@@ -79,15 +78,14 @@ class QuickActionGrid extends StatelessWidget {
 }
 
 class _QuickActionItem extends StatelessWidget {
-  final IconData icon;
-  final String label;
-  final VoidCallback onTap;
-
   const _QuickActionItem({
     required this.icon,
     required this.label,
     required this.onTap,
   });
+  final IconData icon;
+  final String label;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {

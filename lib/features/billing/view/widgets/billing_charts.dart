@@ -373,7 +373,6 @@ class PaymentModesChart extends StatelessWidget {
                   rightTitles: const AxisTitles(),
                 ),
                 gridData: FlGridData(
-                  show: true,
                   horizontalInterval: 1,
                   drawHorizontalLine: false,
                   getDrawingVerticalLine: (value) => FlLine(

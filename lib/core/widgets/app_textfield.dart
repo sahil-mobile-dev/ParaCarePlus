@@ -4,8 +4,8 @@ import 'package:paracareplus/core/theme/app_text_styles.dart';
 
 class AppTextField extends StatelessWidget {
   const AppTextField({
-    super.key,
     required this.label,
+    super.key,
     this.hintText,
     this.controller,
     this.initialValue,

@@ -11,7 +11,7 @@ class NewBillTab extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         final isWide = constraints.maxWidth > 900;
-        
+
         if (isWide) {
           return Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -30,7 +30,6 @@ class NewBillTab extends StatelessWidget {
               ),
               const SizedBox(width: AppSpacing.lg),
               Expanded(
-                flex: 1,
                 child: Column(
                   children: [
                     _buildBillSummaryCard(),
@@ -79,9 +78,13 @@ class NewBillTab extends StatelessWidget {
         children: [
           Row(
             children: [
-              Expanded(child: _buildTextField('UHID / MRD No', hint: 'Enter UHID...')),
+              Expanded(
+                child: _buildTextField('UHID / MRD No', hint: 'Enter UHID...'),
+              ),
               const SizedBox(width: AppSpacing.md),
-              Expanded(child: _buildTextField('Patient Name', hint: 'Ramesh Kumar')),
+              Expanded(
+                child: _buildTextField('Patient Name', hint: 'Ramesh Kumar'),
+              ),
               const SizedBox(width: AppSpacing.md),
               Expanded(child: _buildTextField('Age / Sex', hint: '42 / M')),
             ],
@@ -91,9 +94,16 @@ class NewBillTab extends StatelessWidget {
             children: [
               Expanded(child: _buildDropdown('Visit Type', value: 'OPD')),
               const SizedBox(width: AppSpacing.md),
-              Expanded(child: _buildDropdown('Department', value: 'General Medicine')),
+              Expanded(
+                child: _buildDropdown('Department', value: 'General Medicine'),
+              ),
               const SizedBox(width: AppSpacing.md),
-              Expanded(child: _buildDropdown('Consulting Doctor', value: 'Dr. Priya Sharma')),
+              Expanded(
+                child: _buildDropdown(
+                  'Consulting Doctor',
+                  value: 'Dr. Priya Sharma',
+                ),
+              ),
             ],
           ),
           const SizedBox(height: AppSpacing.md),
@@ -103,7 +113,13 @@ class NewBillTab extends StatelessWidget {
               const SizedBox(width: AppSpacing.md),
               Expanded(child: _buildDropdown('Payment Type', value: 'Cash')),
               const SizedBox(width: AppSpacing.md),
-              Expanded(child: _buildTextField('Date', hint: '12/04/2025', suffixIcon: Icons.calendar_today_rounded)),
+              Expanded(
+                child: _buildTextField(
+                  'Date',
+                  hint: '12/04/2025',
+                  suffixIcon: Icons.calendar_today_rounded,
+                ),
+              ),
             ],
           ),
         ],
@@ -138,11 +154,57 @@ class NewBillTab extends StatelessWidget {
             ),
             child: Row(
               children: [
-                Expanded(flex: 3, child: Text('Service / Item', style: AppTextStyles.labelSmall.copyWith(color: AppColors.success, fontWeight: FontWeight.bold))),
-                Expanded(flex: 2, child: Text('Category', style: AppTextStyles.labelSmall.copyWith(color: AppColors.success, fontWeight: FontWeight.bold))),
-                Expanded(flex: 1, child: Text('Qty', style: AppTextStyles.labelSmall.copyWith(color: AppColors.success, fontWeight: FontWeight.bold))),
-                Expanded(flex: 2, child: Text('Rate (₹)', style: AppTextStyles.labelSmall.copyWith(color: AppColors.success, fontWeight: FontWeight.bold))),
-                const SizedBox(width: 48, child: Text('Action', style: TextStyle(color: AppColors.success, fontSize: 12, fontWeight: FontWeight.bold), textAlign: TextAlign.center)),
+                Expanded(
+                  flex: 3,
+                  child: Text(
+                    'Service / Item',
+                    style: AppTextStyles.labelSmall.copyWith(
+                      color: AppColors.success,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 2,
+                  child: Text(
+                    'Category',
+                    style: AppTextStyles.labelSmall.copyWith(
+                      color: AppColors.success,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: Text(
+                    'Qty',
+                    style: AppTextStyles.labelSmall.copyWith(
+                      color: AppColors.success,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 2,
+                  child: Text(
+                    'Rate (₹)',
+                    style: AppTextStyles.labelSmall.copyWith(
+                      color: AppColors.success,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  width: 48,
+                  child: Text(
+                    'Action',
+                    style: TextStyle(
+                      color: AppColors.success,
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
               ],
             ),
           ),
@@ -150,18 +212,28 @@ class NewBillTab extends StatelessWidget {
           // Service Item 1
           Row(
             children: [
-              Expanded(flex: 3, child: _buildDropdown(null, value: 'OPD Consultation')),
+              Expanded(
+                flex: 3,
+                child: _buildDropdown(null, value: 'OPD Consultation'),
+              ),
               const SizedBox(width: 8),
-              Expanded(flex: 2, child: _buildDropdown(null, value: 'Consultation')),
+              Expanded(
+                flex: 2,
+                child: _buildDropdown(null, value: 'Consultation'),
+              ),
               const SizedBox(width: 8),
-              Expanded(flex: 1, child: _buildTextField(null, hint: '1')),
+              Expanded(child: _buildTextField(null, hint: '1')),
               const SizedBox(width: 8),
               Expanded(flex: 2, child: _buildTextField(null, hint: '300')),
               const SizedBox(width: 8),
               SizedBox(
                 width: 40,
                 child: IconButton(
-                  icon: const Icon(Icons.delete_outline, color: AppColors.error, size: 20),
+                  icon: const Icon(
+                    Icons.delete_outline,
+                    color: AppColors.error,
+                    size: 20,
+                  ),
                   onPressed: () {},
                   padding: EdgeInsets.zero,
                   constraints: const BoxConstraints(),
@@ -175,16 +247,23 @@ class NewBillTab extends StatelessWidget {
             children: [
               Expanded(flex: 3, child: _buildDropdown(null, value: 'CBC')),
               const SizedBox(width: 8),
-              Expanded(flex: 2, child: _buildDropdown(null, value: 'Pathology')),
+              Expanded(
+                flex: 2,
+                child: _buildDropdown(null, value: 'Pathology'),
+              ),
               const SizedBox(width: 8),
-              Expanded(flex: 1, child: _buildTextField(null, hint: '1')),
+              Expanded(child: _buildTextField(null, hint: '1')),
               const SizedBox(width: 8),
               Expanded(flex: 2, child: _buildTextField(null, hint: '250')),
               const SizedBox(width: 8),
               SizedBox(
                 width: 40,
                 child: IconButton(
-                  icon: const Icon(Icons.delete_outline, color: AppColors.error, size: 20),
+                  icon: const Icon(
+                    Icons.delete_outline,
+                    color: AppColors.error,
+                    size: 20,
+                  ),
                   onPressed: () {},
                   padding: EdgeInsets.zero,
                   constraints: const BoxConstraints(),
@@ -220,7 +299,12 @@ class NewBillTab extends StatelessWidget {
               const SizedBox(width: AppSpacing.md),
               Expanded(child: _buildTextField('Value', hint: '0')),
               const SizedBox(width: AppSpacing.md),
-              Expanded(child: _buildTextField('Approved By', hint: 'Doctor / Admin name')),
+              Expanded(
+                child: _buildTextField(
+                  'Approved By',
+                  hint: 'Doctor / Admin name',
+                ),
+              ),
             ],
           ),
           const SizedBox(height: AppSpacing.md),
@@ -228,7 +312,12 @@ class NewBillTab extends StatelessWidget {
             children: [
               Expanded(child: _buildDropdown('Govt. Scheme', value: 'None')),
               const SizedBox(width: AppSpacing.md),
-              Expanded(child: _buildTextField('Scheme ID / Card No', hint: 'Scheme card / policy number')),
+              Expanded(
+                child: _buildTextField(
+                  'Scheme ID / Card No',
+                  hint: 'Scheme card / policy number',
+                ),
+              ),
             ],
           ),
         ],
@@ -249,7 +338,11 @@ class NewBillTab extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Icon(Icons.receipt_long_rounded, size: 20, color: Colors.white),
+              const Icon(
+                Icons.receipt_long_rounded,
+                size: 20,
+                color: Colors.white,
+              ),
               const SizedBox(width: 8),
               Text(
                 'Bill Summary',
@@ -274,18 +367,35 @@ class NewBillTab extends StatelessWidget {
             decoration: BoxDecoration(
               color: AppColors.success.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(6),
-              border: Border.all(color: AppColors.success.withValues(alpha: 0.3)),
+              border: Border.all(
+                color: AppColors.success.withValues(alpha: 0.3),
+              ),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('GRAND TOTAL', style: AppTextStyles.titleSmall.copyWith(color: AppColors.success)),
-                Text('₹605', style: AppTextStyles.titleMedium.copyWith(color: AppColors.success)),
+                Text(
+                  'GRAND TOTAL',
+                  style: AppTextStyles.titleSmall.copyWith(
+                    color: AppColors.success,
+                  ),
+                ),
+                Text(
+                  '₹605',
+                  style: AppTextStyles.titleMedium.copyWith(
+                    color: AppColors.success,
+                  ),
+                ),
               ],
             ),
           ),
           const SizedBox(height: AppSpacing.lg),
-          Text('Amount Received (₹)', style: AppTextStyles.labelSmall.copyWith(color: AppColors.secondaryText)),
+          Text(
+            'Amount Received (₹)',
+            style: AppTextStyles.labelSmall.copyWith(
+              color: AppColors.secondaryText,
+            ),
+          ),
           const SizedBox(height: 8),
           TextField(
             style: const TextStyle(color: Colors.white),
@@ -294,7 +404,10 @@ class NewBillTab extends StatelessWidget {
               hintStyle: const TextStyle(color: AppColors.secondaryText),
               filled: true,
               fillColor: AppColors.background,
-              contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 12),
+              contentPadding: const EdgeInsets.symmetric(
+                horizontal: 12,
+                vertical: 12,
+              ),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(6),
                 borderSide: const BorderSide(color: AppColors.border),
@@ -313,8 +426,18 @@ class NewBillTab extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Balance Due', style: AppTextStyles.bodyMedium.copyWith(color: AppColors.primaryText)),
-              Text('₹605', style: AppTextStyles.titleSmall.copyWith(color: AppColors.error)),
+              Text(
+                'Balance Due',
+                style: AppTextStyles.bodyMedium.copyWith(
+                  color: AppColors.primaryText,
+                ),
+              ),
+              Text(
+                '₹605',
+                style: AppTextStyles.titleSmall.copyWith(
+                  color: AppColors.error,
+                ),
+              ),
             ],
           ),
           const SizedBox(height: AppSpacing.xl),
@@ -326,7 +449,9 @@ class NewBillTab extends StatelessWidget {
               backgroundColor: AppColors.success,
               foregroundColor: Colors.white,
               minimumSize: const Size(double.infinity, 44),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(6),
+              ),
             ),
           ),
           const SizedBox(height: AppSpacing.sm),
@@ -339,7 +464,9 @@ class NewBillTab extends StatelessWidget {
               foregroundColor: AppColors.primaryText,
               side: const BorderSide(color: AppColors.border),
               minimumSize: const Size(double.infinity, 44),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(6),
+              ),
             ),
           ),
           const SizedBox(height: AppSpacing.sm),
@@ -352,7 +479,9 @@ class NewBillTab extends StatelessWidget {
               foregroundColor: AppColors.error,
               side: const BorderSide(color: AppColors.border),
               minimumSize: const Size(double.infinity, 44),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(6),
+              ),
             ),
           ),
         ],
@@ -370,32 +499,51 @@ class NewBillTab extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _buildPaymentToggle('Cash', Icons.money_rounded, isSelected: true),
+              _buildPaymentToggle(
+                'Cash',
+                Icons.money_rounded,
+                isSelected: true,
+              ),
               _buildPaymentToggle('UPI', Icons.qr_code_rounded),
               _buildPaymentToggle('Card', Icons.credit_card_rounded),
               _buildPaymentToggle('NEFT', Icons.account_balance_rounded),
             ],
           ),
           const SizedBox(height: AppSpacing.lg),
-          _buildTextField('Transaction / Reference No', hint: 'UTR / Txn Reference (if any)'),
+          _buildTextField(
+            'Transaction / Reference No',
+            hint: 'UTR / Txn Reference (if any)',
+          ),
         ],
       ),
     );
   }
 
-  Widget _buildPaymentToggle(String label, IconData icon, {bool isSelected = false}) {
+  Widget _buildPaymentToggle(
+    String label,
+    IconData icon, {
+    bool isSelected = false,
+  }) {
     return Expanded(
       child: Container(
         margin: const EdgeInsets.symmetric(horizontal: 4),
         padding: const EdgeInsets.symmetric(vertical: 12),
         decoration: BoxDecoration(
-          color: isSelected ? AppColors.success.withValues(alpha: 0.1) : AppColors.background,
-          border: Border.all(color: isSelected ? AppColors.success : AppColors.border),
+          color: isSelected
+              ? AppColors.success.withValues(alpha: 0.1)
+              : AppColors.background,
+          border: Border.all(
+            color: isSelected ? AppColors.success : AppColors.border,
+          ),
           borderRadius: BorderRadius.circular(6),
         ),
         child: Column(
           children: [
-            Icon(icon, size: 24, color: isSelected ? AppColors.success : AppColors.secondaryText),
+            Icon(
+              icon,
+              size: 24,
+              color: isSelected ? AppColors.success : AppColors.secondaryText,
+            ),
             const SizedBox(height: 4),
             Text(
               label,
@@ -438,7 +586,12 @@ class NewBillTab extends StatelessWidget {
     );
   }
 
-  Widget _buildCard({required String title, required IconData icon, required Widget child, Widget? action}) {
+  Widget _buildCard({
+    required String title,
+    required IconData icon,
+    required Widget child,
+    Widget? action,
+  }) {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
@@ -469,23 +622,40 @@ class NewBillTab extends StatelessWidget {
     );
   }
 
-  Widget _buildTextField(String? label, {required String hint, IconData? suffixIcon}) {
+  Widget _buildTextField(
+    String? label, {
+    required String hint,
+    IconData? suffixIcon,
+  }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (label != null) ...[
-          Text(label, style: AppTextStyles.labelSmall.copyWith(color: AppColors.secondaryText)),
+          Text(
+            label,
+            style: AppTextStyles.labelSmall.copyWith(
+              color: AppColors.secondaryText,
+            ),
+          ),
           const SizedBox(height: 4),
         ],
         TextField(
           style: const TextStyle(color: Colors.white, fontSize: 13),
           decoration: InputDecoration(
             hintText: hint,
-            hintStyle: const TextStyle(color: AppColors.secondaryText, fontSize: 13),
+            hintStyle: const TextStyle(
+              color: AppColors.secondaryText,
+              fontSize: 13,
+            ),
             filled: true,
             fillColor: AppColors.background,
-            contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
-            suffixIcon: suffixIcon != null ? Icon(suffixIcon, size: 16, color: AppColors.secondaryText) : null,
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 12,
+              vertical: 10,
+            ),
+            suffixIcon: suffixIcon != null
+                ? Icon(suffixIcon, size: 16, color: AppColors.secondaryText)
+                : null,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(6),
               borderSide: const BorderSide(color: AppColors.border),
@@ -509,7 +679,12 @@ class NewBillTab extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (label != null) ...[
-          Text(label, style: AppTextStyles.labelSmall.copyWith(color: AppColors.secondaryText)),
+          Text(
+            label,
+            style: AppTextStyles.labelSmall.copyWith(
+              color: AppColors.secondaryText,
+            ),
+          ),
           const SizedBox(height: 4),
         ],
         Container(
@@ -523,12 +698,14 @@ class NewBillTab extends StatelessWidget {
             child: DropdownButton<String>(
               value: value,
               isExpanded: true,
-              icon: const Icon(Icons.keyboard_arrow_down_rounded, color: AppColors.secondaryText, size: 18),
+              icon: const Icon(
+                Icons.keyboard_arrow_down_rounded,
+                color: AppColors.secondaryText,
+                size: 18,
+              ),
               dropdownColor: AppColors.card,
               style: const TextStyle(color: Colors.white, fontSize: 13),
-              items: [
-                DropdownMenuItem(value: value, child: Text(value)),
-              ],
+              items: [DropdownMenuItem(value: value, child: Text(value))],
               onChanged: (_) {},
             ),
           ),

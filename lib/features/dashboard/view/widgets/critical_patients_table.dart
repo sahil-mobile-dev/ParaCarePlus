@@ -5,9 +5,8 @@ import 'package:paracareplus/core/theme/app_text_styles.dart';
 import 'package:paracareplus/features/dashboard/model/dashboard_models.dart';
 
 class CriticalPatientsTable extends StatelessWidget {
+  const CriticalPatientsTable({required this.patients, super.key});
   final List<CriticalPatient> patients;
-
-  const CriticalPatientsTable({super.key, required this.patients});
 
   @override
   Widget build(BuildContext context) {

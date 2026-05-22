@@ -2,17 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:paracareplus/routes/route_names.dart';
 
 class SidebarItem {
-  final String title;
-  final IconData icon;
-  final String routeName;
-  final bool isSeparator;
-
   const SidebarItem({
     required this.title,
     required this.icon,
     required this.routeName,
     this.isSeparator = false,
   });
+  final String title;
+  final IconData icon;
+  final String routeName;
+  final bool isSeparator;
 
   static const List<SidebarItem> items = [
     SidebarItem(

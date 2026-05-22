@@ -73,7 +73,7 @@ class AppHeader extends StatelessWidget implements PreferredSizeWidget {
             Text(
               'GOVERNMENT OF UTTARAKHAND',
               style: AppTextStyles.labelSmall.copyWith(
-                letterSpacing: 1.0,
+                letterSpacing: 1,
                 fontSize: 10,
               ),
             ),

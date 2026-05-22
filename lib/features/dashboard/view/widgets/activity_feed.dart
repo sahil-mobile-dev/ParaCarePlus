@@ -6,9 +6,8 @@ import 'package:paracareplus/core/theme/app_text_styles.dart';
 import 'package:paracareplus/features/dashboard/model/dashboard_models.dart';
 
 class ActivityFeed extends StatelessWidget {
+  const ActivityFeed({required this.items, super.key});
   final List<ActivityFeedItem> items;
-
-  const ActivityFeed({super.key, required this.items});
 
   @override
   Widget build(BuildContext context) {
@@ -83,9 +82,8 @@ class ActivityFeed extends StatelessWidget {
 }
 
 class _ActivityIcon extends StatelessWidget {
-  final ActivityType type;
-
   const _ActivityIcon({required this.type});
+  final ActivityType type;
 
   @override
   Widget build(BuildContext context) {

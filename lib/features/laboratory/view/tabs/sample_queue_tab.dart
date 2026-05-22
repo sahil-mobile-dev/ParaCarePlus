@@ -386,7 +386,7 @@ class _SampleQueueTabState extends State<SampleQueueTab> {
                                       ),
                                       Padding(
                                         padding: const EdgeInsets.symmetric(
-                                          vertical: 8.0,
+                                          vertical: 8,
                                           horizontal: 12,
                                         ),
                                         child: _buildRowAction(sample),
@@ -646,7 +646,7 @@ class _SampleQueueTabState extends State<SampleQueueTab> {
   }
 
   Widget _buildStatusBadge(String status, double width) {
-    Color color = AppColors.secondaryText;
+    var color = AppColors.secondaryText;
     if (status == 'Processing') {
       color = AppColors.primary;
     } else if (status == 'Results Entered') {

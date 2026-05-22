@@ -11,15 +11,6 @@ class CriticalAlertsTab extends StatefulWidget {
 }
 
 class _RxAlertItem {
-  final String id;
-  final String patient;
-  final String ward;
-  final String testName;
-  final String parameter;
-  final String observedVal;
-  final String refRange;
-  final String severity;
-
   _RxAlertItem({
     required this.id,
     required this.patient,
@@ -30,6 +21,14 @@ class _RxAlertItem {
     required this.refRange,
     required this.severity,
   });
+  final String id;
+  final String patient;
+  final String ward;
+  final String testName;
+  final String parameter;
+  final String observedVal;
+  final String refRange;
+  final String severity;
 }
 
 class _CriticalAlertsTabState extends State<CriticalAlertsTab> {

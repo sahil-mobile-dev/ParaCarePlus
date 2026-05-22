@@ -12,7 +12,7 @@ class BillingDashboardTab extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         final isWide = constraints.maxWidth > 900;
-        
+
         if (isWide) {
           return const Row(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -29,7 +29,6 @@ class BillingDashboardTab extends StatelessWidget {
               ),
               SizedBox(width: AppSpacing.lg),
               Expanded(
-                flex: 1,
                 child: Column(
                   children: [
                     RevenueByServiceChart(),

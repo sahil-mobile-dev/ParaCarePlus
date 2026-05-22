@@ -160,7 +160,6 @@ class _CriticalValuesTabState extends State<CriticalValuesTab> {
                         ),
                       ),
                       Expanded(
-                        flex: 1,
                         child: _buildValueColumn(
                           'OBSERVED VALUE',
                           log['observedValue'] as String,
@@ -168,7 +167,6 @@ class _CriticalValuesTabState extends State<CriticalValuesTab> {
                         ),
                       ),
                       Expanded(
-                        flex: 1,
                         child: _buildValueColumn(
                           'NORMAL BOUNDS',
                           log['referenceRange'] as String,
@@ -176,7 +174,6 @@ class _CriticalValuesTabState extends State<CriticalValuesTab> {
                         ),
                       ),
                       Expanded(
-                        flex: 1,
                         child: _buildValueColumn(
                           'DETECTED TIME',
                           log['timestamp'] as String,

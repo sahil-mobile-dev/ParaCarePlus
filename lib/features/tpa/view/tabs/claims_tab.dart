@@ -82,7 +82,9 @@ class _ClaimsTabState extends State<ClaimsTab> {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             backgroundColor: AppColors.success,
-            content: Text('Remittance register re-synced! Harendra Pal claim settled successfully.'),
+            content: Text(
+              'Remittance register re-synced! Harendra Pal claim settled successfully.',
+            ),
           ),
         );
       }
@@ -107,17 +109,33 @@ class _ClaimsTabState extends State<ClaimsTab> {
               children: [
                 const Row(
                   children: [
-                    Icon(Icons.account_balance_wallet_rounded, color: AppColors.primary, size: 22),
+                    Icon(
+                      Icons.account_balance_wallet_rounded,
+                      color: AppColors.primary,
+                      size: 22,
+                    ),
                     SizedBox(width: 8),
-                    Text('Electronic Claims Settlement (ECS) Register', style: AppTextStyles.titleSmall),
+                    Text(
+                      'Electronic Claims Settlement (ECS) Register',
+                      style: AppTextStyles.titleSmall,
+                    ),
                   ],
                 ),
                 ElevatedButton.icon(
                   onPressed: _isSyncing ? null : _syncRemittance,
                   icon: _isSyncing
-                      ? const SizedBox(width: 14, height: 14, child: CircularProgressIndicator(strokeWidth: 2, color: Colors.white))
+                      ? const SizedBox(
+                          width: 14,
+                          height: 14,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2,
+                            color: Colors.white,
+                          ),
+                        )
                       : const Icon(Icons.sync_rounded, size: 16),
-                  label: Text(_isSyncing ? 'Syncing...' : 'Sync TPA Remittance'),
+                  label: Text(
+                    _isSyncing ? 'Syncing...' : 'Sync TPA Remittance',
+                  ),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.success,
                     foregroundColor: Colors.white,
@@ -204,7 +222,11 @@ class _ClaimsTabState extends State<ClaimsTab> {
               ),
               child: Text(
                 status,
-                style: TextStyle(color: statusColor, fontSize: 10, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  color: statusColor,
+                  fontSize: 10,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),
@@ -216,7 +238,13 @@ class _ClaimsTabState extends State<ClaimsTab> {
   Widget _headerCell(String t) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-      child: Text(t, style: AppTextStyles.labelSmall.copyWith(color: AppColors.secondaryText, fontWeight: FontWeight.bold)),
+      child: Text(
+        t,
+        style: AppTextStyles.labelSmall.copyWith(
+          color: AppColors.secondaryText,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
     );
   }
 

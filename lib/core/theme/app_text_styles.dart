@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:paracareplus/core/theme/app_colors.dart';
 
-
 class AppTextStyles {
   const AppTextStyles._();
 
-  static const String fontFamily = 'Outfit'; // Recommended for professional healthcare UI
+  static const String fontFamily =
+      'Outfit'; // Recommended for professional healthcare UI
 
   static const TextStyle titleLarge = TextStyle(
     fontSize: 24,

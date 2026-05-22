@@ -80,9 +80,9 @@ class _RecruitmentTabState extends State<RecruitmentTab> {
     showDialog(
       context: context,
       builder: (context) {
-        String name = '';
-        String role = 'Intensive Care Nurse';
-        String time = 'May 24, 03:00 PM';
+        var name = '';
+        var role = 'Intensive Care Nurse';
+        const time = 'May 24, 03:00 PM';
         return AlertDialog(
           backgroundColor: AppColors.surface,
           title: Text(
@@ -110,7 +110,7 @@ class _RecruitmentTabState extends State<RecruitmentTab> {
               ),
               const SizedBox(height: AppSpacing.md),
               DropdownButtonFormField<String>(
-                value: role,
+                initialValue: role,
                 dropdownColor: AppColors.surface,
                 decoration: const InputDecoration(
                   labelText: 'Opening Role',

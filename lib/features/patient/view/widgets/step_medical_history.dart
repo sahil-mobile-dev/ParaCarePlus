@@ -186,7 +186,7 @@ class StepMedicalHistory extends ConsumerWidget {
         const SizedBox(height: 8),
         DropdownButtonFormField<String>(
           isExpanded: true,
-          value: items.contains(value)
+          initialValue: items.contains(value)
               ? value
               : (items.isNotEmpty ? items.first : null),
           dropdownColor: AppColors.card,

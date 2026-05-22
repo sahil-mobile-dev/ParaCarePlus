@@ -257,7 +257,6 @@ class RevenueTab extends StatelessWidget {
                         }
                         return SideTitleWidget(
                           meta: meta,
-                          space: 8,
                           child: Text(text, style: style),
                         );
                       },
@@ -271,7 +270,6 @@ class RevenueTab extends StatelessWidget {
                       getTitlesWidget: (value, meta) {
                         return SideTitleWidget(
                           meta: meta,
-                          space: 8,
                           child: Text(
                             '₹${value.toInt()}K',
                             style: const TextStyle(
@@ -283,15 +281,10 @@ class RevenueTab extends StatelessWidget {
                       },
                     ),
                   ),
-                  topTitles: const AxisTitles(
-                    sideTitles: SideTitles(showTitles: false),
-                  ),
-                  rightTitles: const AxisTitles(
-                    sideTitles: SideTitles(showTitles: false),
-                  ),
+                  topTitles: const AxisTitles(),
+                  rightTitles: const AxisTitles(),
                 ),
                 gridData: FlGridData(
-                  show: true,
                   drawVerticalLine: false,
                   horizontalInterval: 25,
                   getDrawingHorizontalLine: (value) => FlLine(
@@ -402,7 +395,7 @@ class RevenueTab extends StatelessWidget {
             columnWidths: const {
               0: FlexColumnWidth(2),
               1: FlexColumnWidth(1.5),
-              2: FlexColumnWidth(1),
+              2: FlexColumnWidth(),
             },
             children: [
               TableRow(

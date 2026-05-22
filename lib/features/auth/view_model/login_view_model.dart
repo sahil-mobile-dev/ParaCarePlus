@@ -30,11 +30,15 @@ class LoginViewModel extends _$LoginViewModel {
   }
 
   void updateEmployeeId(String value) {
-    state = AsyncValue.data(state.value!.copyWith(employeeId: value, errorMessage: null));
+    state = AsyncValue.data(
+      state.value!.copyWith(employeeId: value, errorMessage: null),
+    );
   }
 
   void updatePassword(String value) {
-    state = AsyncValue.data(state.value!.copyWith(password: value, errorMessage: null));
+    state = AsyncValue.data(
+      state.value!.copyWith(password: value, errorMessage: null),
+    );
   }
 
   void toggleRememberMe(bool? value) {
@@ -42,23 +46,31 @@ class LoginViewModel extends _$LoginViewModel {
   }
 
   void toggleObscure() {
-    state = AsyncValue.data(state.value!.copyWith(isObscured: !state.value!.isObscured));
+    state = AsyncValue.data(
+      state.value!.copyWith(isObscured: !state.value!.isObscured),
+    );
   }
 
   Future<bool> login() async {
     final currentState = state.value!;
-    
+
     if (currentState.selectedRole == null) {
-      state = AsyncValue.data(currentState.copyWith(errorMessage: 'Please select your role'));
+      state = AsyncValue.data(
+        currentState.copyWith(errorMessage: 'Please select your role'),
+      );
       return false;
     }
 
     if (currentState.employeeId.isEmpty || currentState.password.isEmpty) {
-      state = AsyncValue.data(currentState.copyWith(errorMessage: 'Please fill all fields'));
+      state = AsyncValue.data(
+        currentState.copyWith(errorMessage: 'Please fill all fields'),
+      );
       return false;
     }
 
-    state = AsyncValue.data(currentState.copyWith(isLoading: true, errorMessage: null));
+    state = AsyncValue.data(
+      currentState.copyWith(isLoading: true, errorMessage: null),
+    );
 
     // Simulate API call
     await Future<void>.delayed(const Duration(seconds: 2));
@@ -68,11 +80,13 @@ class LoginViewModel extends _$LoginViewModel {
   }
 
   void fillDemoCredentials(UserRole role) {
-    state = AsyncValue.data(state.value!.copyWith(
-      selectedRole: role,
-      employeeId: '${role.name.toLowerCase()}@demo.com',
-      password: 'password123',
-      errorMessage: null,
-    ));
+    state = AsyncValue.data(
+      state.value!.copyWith(
+        selectedRole: role,
+        employeeId: '${role.name.toLowerCase()}@demo.com',
+        password: 'password123',
+        errorMessage: null,
+      ),
+    );
   }
 }

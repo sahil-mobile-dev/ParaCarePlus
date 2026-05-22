@@ -77,14 +77,10 @@ class _PayrollTabState extends State<PayrollTab> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Row(
+          const Row(
             children: [
-              const Icon(
-                Icons.payments_outlined,
-                color: AppColors.primary,
-                size: 24,
-              ),
-              const SizedBox(width: 8),
+              Icon(Icons.payments_outlined, color: AppColors.primary, size: 24),
+              SizedBox(width: 8),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -92,7 +88,7 @@ class _PayrollTabState extends State<PayrollTab> {
                     'Salaries & Disbursal Center',
                     style: AppTextStyles.titleSmall,
                   ),
-                  const SizedBox(height: 2),
+                  SizedBox(height: 2),
                   Text(
                     'Disbursal cycle: May 2026',
                     style: AppTextStyles.bodySmall,
@@ -133,16 +129,16 @@ class _PayrollTabState extends State<PayrollTab> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Padding(
-            padding: const EdgeInsets.all(AppSpacing.md),
+          const Padding(
+            padding: EdgeInsets.all(AppSpacing.md),
             child: Row(
               children: [
-                const Icon(
+                Icon(
                   Icons.receipt_long_outlined,
                   color: AppColors.secondaryAccent,
                   size: 20,
                 ),
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 Text(
                   'Employee Compensation & Allowances',
                   style: AppTextStyles.titleSmall,
@@ -157,7 +153,7 @@ class _PayrollTabState extends State<PayrollTab> {
               constraints: const BoxConstraints(minWidth: 850),
               child: Table(
                 columnWidths: const {
-                  0: FlexColumnWidth(1.0),
+                  0: FlexColumnWidth(),
                   1: FlexColumnWidth(1.8),
                   2: FlexColumnWidth(1.2),
                   3: FlexColumnWidth(1.2),
@@ -190,7 +186,7 @@ class _PayrollTabState extends State<PayrollTab> {
                     final name = row['name'] as String;
                     final role = row['role'] as String;
                     final id = row['id'] as String;
-                    final int net = base + allowance - deductions - tax;
+                    final net = base + allowance - deductions - tax;
                     return TableRow(
                       decoration: const BoxDecoration(
                         border: Border(

@@ -91,7 +91,6 @@ class DashboardViewModel extends _$DashboardViewModel {
           department: 'Medical Ward',
           totalBeds: 50,
           occupiedBeds: 45,
-          color: Colors.blue,
         ),
         const BedStatus(
           department: 'Surgical Ward',

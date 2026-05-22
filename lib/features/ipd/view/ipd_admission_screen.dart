@@ -564,7 +564,7 @@ class _IpdAdmissionScreenState extends ConsumerState<IpdAdmissionScreen> {
         Text(label, style: AppTextStyles.labelMedium),
         const SizedBox(height: 8),
         DropdownButtonFormField<String>(
-          value: items.contains(value)
+          initialValue: items.contains(value)
               ? value
               : (items.isNotEmpty ? items.first : null),
           focusNode: focusNode,

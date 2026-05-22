@@ -16,7 +16,7 @@ class PaymentsTab extends StatelessWidget {
           return Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Expanded(flex: 1, child: _buildCollectPaymentCard()),
+              Expanded(child: _buildCollectPaymentCard()),
               const SizedBox(width: AppSpacing.lg),
               Expanded(flex: 2, child: _buildCollectionsCard()),
             ],
@@ -207,7 +207,7 @@ class PaymentsTab extends StatelessWidget {
                     color: AppColors.primary,
                   ),
                   SizedBox(width: 8),
-                  Text('Today\'s Collections', style: AppTextStyles.titleSmall),
+                  Text("Today's Collections", style: AppTextStyles.titleSmall),
                 ],
               ),
               OutlinedButton.icon(
@@ -308,7 +308,7 @@ class PaymentsTab extends StatelessWidget {
             3: FlexColumnWidth(1.2),
             4: FlexColumnWidth(1.2),
             5: FlexColumnWidth(1.2),
-            6: FlexColumnWidth(1),
+            6: FlexColumnWidth(),
           },
           children: [
             _buildTableHeader(),

@@ -242,7 +242,6 @@ class DashboardScreen extends ConsumerWidget {
         if (isWide) ...[
           const SizedBox(width: AppSpacing.lg),
           Expanded(
-            flex: 1,
             child: Column(
               children: [
                 const PendingTasksList(),

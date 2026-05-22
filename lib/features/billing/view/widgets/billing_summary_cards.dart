@@ -28,7 +28,6 @@ class BillingSummaryCards extends StatelessWidget {
               title: "Today's Revenue",
               value: '₹1.24L',
               trend: '↑ 12% vs yest',
-              trendUp: true,
             ),
             _SummaryCard(
               title: 'Bills Generated',
@@ -69,15 +68,6 @@ class BillingSummaryCards extends StatelessWidget {
 }
 
 class _SummaryCard extends StatelessWidget {
-  final String title;
-  final String value;
-  final String? subtitle;
-  final String? trend;
-  final bool trendUp;
-  final IconData? icon;
-  final Color? iconColor;
-  final Color? valueColor;
-
   const _SummaryCard({
     required this.title,
     required this.value,
@@ -88,6 +78,14 @@ class _SummaryCard extends StatelessWidget {
     this.iconColor,
     this.valueColor,
   });
+  final String title;
+  final String value;
+  final String? subtitle;
+  final String? trend;
+  final bool trendUp;
+  final IconData? icon;
+  final Color? iconColor;
+  final Color? valueColor;
 
   @override
   Widget build(BuildContext context) {

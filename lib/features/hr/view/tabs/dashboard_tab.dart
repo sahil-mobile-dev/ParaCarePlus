@@ -126,7 +126,7 @@ class DashboardTab extends StatelessWidget {
   }
 
   Widget _buildDistributionCard() {
-    final List<Map<String, dynamic>> data = [
+    final data = <Map<String, dynamic>>[
       {
         'dept': 'Medical / Doctors',
         'count': 82,
@@ -230,7 +230,7 @@ class DashboardTab extends StatelessWidget {
   }
 
   Widget _buildApprovalsList() {
-    final List<Map<String, String>> approvals = [
+    final approvals = <Map<String, String>>[
       {
         'name': 'Shashi Kiran',
         'role': 'Staff Nurse - ICU',

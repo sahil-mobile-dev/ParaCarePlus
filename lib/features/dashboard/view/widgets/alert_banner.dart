@@ -5,10 +5,9 @@ import 'package:paracareplus/core/theme/app_text_styles.dart';
 import 'package:paracareplus/features/dashboard/model/dashboard_models.dart';
 
 class AlertBanner extends StatelessWidget {
+  const AlertBanner({required this.alert, super.key, this.onClose});
   final AlertItem alert;
   final VoidCallback? onClose;
-
-  const AlertBanner({super.key, required this.alert, this.onClose});
 
   @override
   Widget build(BuildContext context) {

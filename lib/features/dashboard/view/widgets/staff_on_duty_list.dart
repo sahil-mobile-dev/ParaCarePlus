@@ -5,9 +5,8 @@ import 'package:paracareplus/core/theme/app_text_styles.dart';
 import 'package:paracareplus/features/dashboard/model/dashboard_models.dart';
 
 class StaffOnDutyList extends StatelessWidget {
+  const StaffOnDutyList({required this.staff, super.key});
   final List<StaffOnDuty> staff;
-
-  const StaffOnDutyList({super.key, required this.staff});
 
   @override
   Widget build(BuildContext context) {

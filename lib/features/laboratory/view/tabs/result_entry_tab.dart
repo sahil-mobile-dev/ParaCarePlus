@@ -376,9 +376,9 @@ class _ResultEntryTabState extends State<ResultEntryTab> {
                     ElevatedButton(
                       onPressed: () {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
+                          const SnackBar(
                             backgroundColor: AppColors.success,
-                            content: const Text(
+                            content: Text(
                               'Diagnostic results for Mr. Nilesh Patel saved & dispatched successfully!',
                             ),
                           ),

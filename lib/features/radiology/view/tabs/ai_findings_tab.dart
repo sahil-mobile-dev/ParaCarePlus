@@ -146,7 +146,6 @@ class _AiFindingsTabState extends State<AiFindingsTab> {
         border: Border.all(color: AppColors.border),
       ),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(label, style: AppTextStyles.labelSmall.copyWith(fontSize: 8)),
           const SizedBox(height: 2),

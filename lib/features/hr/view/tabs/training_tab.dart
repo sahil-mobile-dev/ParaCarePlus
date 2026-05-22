@@ -82,9 +82,9 @@ class _TrainingTabState extends State<TrainingTab> {
     showDialog(
       context: context,
       builder: (context) {
-        String title = '';
-        String code = '';
-        String credits = '4.0 CME Hours';
+        var title = '';
+        var code = '';
+        const credits = '4.0 CME Hours';
         return AlertDialog(
           backgroundColor: AppColors.surface,
           title: Text(
@@ -347,7 +347,7 @@ class _TrainingTabState extends State<TrainingTab> {
               final dueDate = crs['dueDate'] as String;
               final status = crs['status'] as String;
               final statusColor = crs['statusColor'] as Color;
-              final double ratio = enrolled > 0 ? (completed / enrolled) : 0.0;
+              final ratio = enrolled > 0 ? (completed / enrolled) : 0.0;
               return Container(
                 margin: const EdgeInsets.symmetric(vertical: 6),
                 padding: const EdgeInsets.all(12),
@@ -561,7 +561,7 @@ class _TrainingTabState extends State<TrainingTab> {
                   color: AppColors.secondaryAccent,
                   size: 20,
                 ),
-                const SizedBox(width: 10),
+                SizedBox(width: 10),
                 Expanded(
                   child: Text(
                     'Annual nursing and paramedic license audits scheduled for June 08. Ensure all credentials are uploaded in Directory Profile panels before deadline.',

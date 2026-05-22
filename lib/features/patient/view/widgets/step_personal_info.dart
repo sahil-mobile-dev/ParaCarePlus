@@ -213,7 +213,7 @@ class StepPersonalInfo extends ConsumerWidget {
         const SizedBox(height: 8),
         DropdownButtonFormField<T>(
           isExpanded: true,
-          value: items.contains(value)
+          initialValue: items.contains(value)
               ? value
               : (items.isNotEmpty ? items.first : null),
           dropdownColor: AppColors.card,

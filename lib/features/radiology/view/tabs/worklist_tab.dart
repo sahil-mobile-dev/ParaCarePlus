@@ -241,10 +241,10 @@ class _WorklistTabState extends State<WorklistTab> {
                   columnWidths: const {
                     0: FlexColumnWidth(1.2),
                     1: FlexColumnWidth(1.8),
-                    2: FlexColumnWidth(2.0),
+                    2: FlexColumnWidth(2),
                     3: FlexColumnWidth(1.5),
-                    4: FlexColumnWidth(1.0),
-                    5: FlexColumnWidth(1.0),
+                    4: FlexColumnWidth(),
+                    5: FlexColumnWidth(),
                     6: FlexColumnWidth(1.5),
                   },
                   children: [
@@ -262,7 +262,7 @@ class _WorklistTabState extends State<WorklistTab> {
                         _headerCell('Quick Dispatch'),
                       ],
                     ),
-                    ...items.map((item) => _buildRow(item)),
+                    ...items.map(_buildRow),
                   ],
                 ),
               ),

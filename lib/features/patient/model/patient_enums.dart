@@ -6,8 +6,8 @@ enum PatientTitle {
   ms('Ms.'),
   dr('Dr.');
 
-  final String label;
   const PatientTitle(this.label);
+  final String label;
 }
 
 enum Gender {
@@ -15,8 +15,8 @@ enum Gender {
   female('Female'),
   other('Other');
 
-  final String label;
   const Gender(this.label);
+  final String label;
 }
 
 enum BloodGroup {
@@ -30,8 +30,8 @@ enum BloodGroup {
   abPositive('AB+'),
   abNegative('AB-');
 
-  final String label;
   const BloodGroup(this.label);
+  final String label;
 }
 
 enum MaritalStatus {
@@ -40,8 +40,8 @@ enum MaritalStatus {
   widowed('Widowed'),
   divorced('Divorced');
 
-  final String label;
   const MaritalStatus(this.label);
+  final String label;
 }
 
 enum Religion {
@@ -51,8 +51,8 @@ enum Religion {
   sikh('Sikh'),
   other('Other');
 
-  final String label;
   const Religion(this.label);
+  final String label;
 }
 
 enum Category {
@@ -61,6 +61,6 @@ enum Category {
   sc('SC'),
   st('ST');
 
-  final String label;
   const Category(this.label);
+  final String label;
 }

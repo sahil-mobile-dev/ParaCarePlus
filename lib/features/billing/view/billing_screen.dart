@@ -182,7 +182,7 @@ class BillingScreen extends ConsumerWidget {
               child: InkWell(
                 onTap: () {
                   ref.read(billingTabProvider.notifier).state =
-                      tab['label'] as String;
+                      tab['label']! as String;
                 },
                 borderRadius: BorderRadius.circular(6),
                 child: Container(
@@ -197,7 +197,7 @@ class BillingScreen extends ConsumerWidget {
                   child: Row(
                     children: [
                       Icon(
-                        tab['icon'] as IconData,
+                        tab['icon']! as IconData,
                         size: 16,
                         color: isSelected
                             ? Colors.white
@@ -205,7 +205,7 @@ class BillingScreen extends ConsumerWidget {
                       ),
                       const SizedBox(width: 8),
                       Text(
-                        tab['label'] as String,
+                        tab['label']! as String,
                         style: AppTextStyles.labelSmall.copyWith(
                           color: isSelected
                               ? Colors.white

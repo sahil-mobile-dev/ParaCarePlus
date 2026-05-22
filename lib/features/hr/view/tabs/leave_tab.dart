@@ -151,14 +151,14 @@ class _LeaveTabState extends State<LeaveTab> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
+          const Row(
             children: [
-              const Icon(
+              Icon(
                 Icons.beach_access_rounded,
                 color: AppColors.primary,
                 size: 20,
               ),
-              const SizedBox(width: 8),
+              SizedBox(width: 8),
               Text(
                 'Pending Staff Leave Requests',
                 style: AppTextStyles.titleSmall,

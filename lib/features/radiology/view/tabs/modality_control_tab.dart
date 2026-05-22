@@ -77,14 +77,14 @@ class _ModalityControlTabState extends State<ModalityControlTab> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
+            const Row(
               children: [
-                const Icon(
+                Icon(
                   Icons.settings_remote_outlined,
                   color: AppColors.primary,
                   size: 18,
                 ),
-                const SizedBox(width: 8),
+                SizedBox(width: 8),
                 Text(
                   'PACS Hardware & DICOM Modalities',
                   style: AppTextStyles.bodyLarge,
@@ -194,7 +194,7 @@ class _ModalityControlTabState extends State<ModalityControlTab> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
+                              const Text(
                                 'Modality load',
                                 style: AppTextStyles.bodySmall,
                               ),

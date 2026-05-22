@@ -34,7 +34,7 @@ class _UrgentStatTabState extends State<UrgentStatTab> {
       'tatRemaining': '18 min remaining',
       'criticalValue': 'pH 7.21 (Critical Acidosis)',
       'status': 'Ordered',
-    }
+    },
   ];
 
   @override
@@ -46,7 +46,9 @@ class _UrgentStatTabState extends State<UrgentStatTab> {
         Container(
           width: double.infinity,
           padding: const EdgeInsets.symmetric(
-              horizontal: AppSpacing.md, vertical: 14),
+            horizontal: AppSpacing.md,
+            vertical: 14,
+          ),
           decoration: BoxDecoration(
             color: AppColors.error.withValues(alpha: 0.1),
             borderRadius: BorderRadius.circular(8),
@@ -99,8 +101,9 @@ class _UrgentStatTabState extends State<UrgentStatTab> {
           children: [
             Text(
               'Active Emergency Requests (${_urgentSamples.length})',
-              style: AppTextStyles.labelLarge
-                  .copyWith(fontWeight: FontWeight.bold),
+              style: AppTextStyles.labelLarge.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
             ),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
@@ -173,8 +176,9 @@ class _UrgentStatTabState extends State<UrgentStatTab> {
                     const SizedBox(height: 2),
                     Text(
                       '${sample['mrn']} | ${sample['wardLocation']}',
-                      style: AppTextStyles.bodySmall
-                          .copyWith(color: AppColors.secondaryText),
+                      style: AppTextStyles.bodySmall.copyWith(
+                        color: AppColors.secondaryText,
+                      ),
                     ),
                   ],
                 ),
@@ -204,7 +208,10 @@ class _UrgentStatTabState extends State<UrgentStatTab> {
                 child: _buildInfoItem('REQ TEST', sample['testName'] as String),
               ),
               Expanded(
-                child: _buildInfoItem('REQ PHYSICIAN', sample['orderedBy'] as String),
+                child: _buildInfoItem(
+                  'REQ PHYSICIAN',
+                  sample['orderedBy'] as String,
+                ),
               ),
             ],
           ),
@@ -218,9 +225,10 @@ class _UrgentStatTabState extends State<UrgentStatTab> {
                     const Text(
                       'PRE-ALERT / PRELIM VAL',
                       style: TextStyle(
-                          color: AppColors.secondaryText,
-                          fontSize: 9,
-                          fontWeight: FontWeight.bold),
+                        color: AppColors.secondaryText,
+                        fontSize: 9,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     const SizedBox(height: 2),
                     Text(
@@ -239,18 +247,27 @@ class _UrgentStatTabState extends State<UrgentStatTab> {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       backgroundColor: AppColors.success,
-                      content: Text('Dispatched fast priority alert to ${sample['wardLocation']}!'),
+                      content: Text(
+                        'Dispatched fast priority alert to ${sample['wardLocation']}!',
+                      ),
                     ),
                   );
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: AppColors.error,
                   foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 8,
+                  ),
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(4)),
+                    borderRadius: BorderRadius.circular(4),
+                  ),
                 ),
-                child: const Text('DISPATCH ALERT', style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold)),
+                child: const Text(
+                  'DISPATCH ALERT',
+                  style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+                ),
               ),
             ],
           ),
@@ -266,9 +283,10 @@ class _UrgentStatTabState extends State<UrgentStatTab> {
         Text(
           label,
           style: const TextStyle(
-              color: AppColors.secondaryText,
-              fontSize: 9,
-              fontWeight: FontWeight.bold),
+            color: AppColors.secondaryText,
+            fontSize: 9,
+            fontWeight: FontWeight.bold,
+          ),
         ),
         const SizedBox(height: 2),
         Text(

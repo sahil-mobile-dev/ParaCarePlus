@@ -590,7 +590,7 @@ class _OpdTokenScreenState extends ConsumerState<OpdTokenScreen> {
         Text(label, style: AppTextStyles.labelMedium),
         const SizedBox(height: 8),
         DropdownButtonFormField<String>(
-          value: items.contains(value) ? value : items.first,
+          initialValue: items.contains(value) ? value : items.first,
           focusNode: focusNode,
           onChanged: onChanged,
           items: items.map((item) {

@@ -153,7 +153,7 @@ class StepConfirmPrint extends ConsumerWidget {
 }
 
 class _SummaryItem {
+  _SummaryItem(this.label, this.value);
   final String label;
   final String value;
-  _SummaryItem(this.label, this.value);
 }

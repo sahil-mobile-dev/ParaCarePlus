@@ -5,47 +5,55 @@ import 'package:paracareplus/core/theme/app_text_styles.dart';
 import 'package:paracareplus/features/dashboard/model/dashboard_models.dart';
 
 class BedOccupancyChart extends StatelessWidget {
+  const BedOccupancyChart({required this.statuses, super.key});
   final List<BedStatus> statuses;
-
-  const BedOccupancyChart({super.key, required this.statuses});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('Bed Occupancy by Department', style: AppTextStyles.titleMedium),
+        const Text(
+          'Bed Occupancy by Department',
+          style: AppTextStyles.titleMedium,
+        ),
         const SizedBox(height: AppSpacing.md),
-        ...statuses.map((status) => Padding(
-          padding: const EdgeInsets.only(bottom: AppSpacing.md),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(status.department, style: AppTextStyles.bodyMedium),
-                  Text(
-                    '${status.occupiedBeds}/${status.totalBeds}',
-                    style: AppTextStyles.bodySmall.copyWith(fontWeight: FontWeight.bold),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 8),
-              ClipRRect(
-                borderRadius: BorderRadius.circular(4),
-                child: LinearProgressIndicator(
-                  value: status.occupiedBeds / status.totalBeds,
-                  minHeight: 8,
-                  backgroundColor: AppColors.border,
-                  valueColor: AlwaysStoppedAnimation<Color>(
-                    _getColorForOccupancy(status.occupiedBeds / status.totalBeds),
+        ...statuses.map(
+          (status) => Padding(
+            padding: const EdgeInsets.only(bottom: AppSpacing.md),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(status.department, style: AppTextStyles.bodyMedium),
+                    Text(
+                      '${status.occupiedBeds}/${status.totalBeds}',
+                      style: AppTextStyles.bodySmall.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 8),
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(4),
+                  child: LinearProgressIndicator(
+                    value: status.occupiedBeds / status.totalBeds,
+                    minHeight: 8,
+                    backgroundColor: AppColors.border,
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                      _getColorForOccupancy(
+                        status.occupiedBeds / status.totalBeds,
+                      ),
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        )),
+        ),
       ],
     );
   }

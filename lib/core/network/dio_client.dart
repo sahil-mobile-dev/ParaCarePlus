@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:paracareplus/core/network/api_endpoints.dart';
 
-
 final dioProvider = Provider<Dio>((ref) {
   final dio = Dio(
     BaseOptions(
@@ -14,14 +13,9 @@ final dioProvider = Provider<Dio>((ref) {
   );
 
   dio.interceptors.addAll([
-    LogInterceptor(
-      requestHeader: true,
-      requestBody: true,
-      responseHeader: true,
-      responseBody: true,
-    ),
-    // TODO(arch): AuthInterceptor will be added here
+    LogInterceptor(requestBody: true, responseBody: true),
 
+    // TODO(arch): AuthInterceptor will be added here
   ]);
 
   return dio;

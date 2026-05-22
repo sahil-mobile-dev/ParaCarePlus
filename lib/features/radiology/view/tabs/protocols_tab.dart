@@ -213,14 +213,10 @@ class _ProtocolsTabState extends State<ProtocolsTab> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Row(
+        const Row(
           children: [
-            const Icon(
-              Icons.science_outlined,
-              color: AppColors.primary,
-              size: 20,
-            ),
-            const SizedBox(width: 8),
+            Icon(Icons.science_outlined, color: AppColors.primary, size: 20),
+            SizedBox(width: 8),
             Text(
               'Technical Scanning Protocols',
               style: AppTextStyles.titleSmall,

@@ -22,7 +22,7 @@ class BillingKPIsCard extends StatelessWidget {
             children: [
               Icon(Icons.speed_rounded, size: 20, color: AppColors.success),
               SizedBox(width: 8),
-              Text('Today\'s KPIs', style: AppTextStyles.titleSmall),
+              Text("Today's KPIs", style: AppTextStyles.titleSmall),
             ],
           ),
           const SizedBox(height: AppSpacing.lg),

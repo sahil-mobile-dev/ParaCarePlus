@@ -4,22 +4,21 @@ import 'package:paracareplus/core/theme/app_spacing.dart';
 import 'package:paracareplus/core/theme/app_text_styles.dart';
 
 class StatCard extends StatelessWidget {
+  const StatCard({
+    required this.title,
+    required this.value,
+    required this.icon,
+    super.key,
+    this.iconColor = AppColors.primary,
+    this.trend,
+    this.isPositiveTrend = true,
+  });
   final String title;
   final String value;
   final IconData icon;
   final Color iconColor;
   final String? trend;
   final bool isPositiveTrend;
-
-  const StatCard({
-    super.key,
-    required this.title,
-    required this.value,
-    required this.icon,
-    this.iconColor = AppColors.primary,
-    this.trend,
-    this.isPositiveTrend = true,
-  });
 
   @override
   Widget build(BuildContext context) {

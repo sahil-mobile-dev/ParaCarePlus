@@ -215,10 +215,10 @@ class _AttendanceTabState extends State<AttendanceTab> {
                 columnWidths: const {
                   0: FlexColumnWidth(1.2),
                   1: FlexColumnWidth(1.8),
-                  2: FlexColumnWidth(2.0),
+                  2: FlexColumnWidth(2),
                   3: FlexColumnWidth(1.2),
                   4: FlexColumnWidth(1.2),
-                  5: FlexColumnWidth(1.0),
+                  5: FlexColumnWidth(),
                   6: FlexColumnWidth(1.2),
                 },
                 children: [
@@ -236,7 +236,7 @@ class _AttendanceTabState extends State<AttendanceTab> {
                       _headerCell('Shift Status'),
                     ],
                   ),
-                  ..._attendance.map((row) => _buildTableRow(row)),
+                  ..._attendance.map(_buildTableRow),
                 ],
               ),
             ),

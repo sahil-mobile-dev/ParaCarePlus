@@ -13,7 +13,7 @@ class AppColors {
   static const Color error = Color(0xFFEF4444);
   static const Color primaryText = Color(0xFFF2F4F6);
   static const Color secondaryText = Color(0xFFA1A4A9);
-  
+
   // Additional shades for glassmorphism and depth
   static const Color primaryLight = Color(0xFF1E70D1);
   static const Color divider = Color(0xFF2A4158);

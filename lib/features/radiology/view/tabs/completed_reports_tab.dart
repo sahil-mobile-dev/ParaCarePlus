@@ -112,7 +112,7 @@ class _CompletedReportsTabState extends State<CompletedReportsTab> {
               child: Table(
                 columnWidths: const {
                   0: FlexColumnWidth(1.2),
-                  1: FlexColumnWidth(2.0),
+                  1: FlexColumnWidth(2),
                   2: FlexColumnWidth(1.5),
                   3: FlexColumnWidth(1.5),
                   4: FlexColumnWidth(1.8),
@@ -134,7 +134,7 @@ class _CompletedReportsTabState extends State<CompletedReportsTab> {
                       _headerCell('Report Action'),
                     ],
                   ),
-                  ..._reports.map((item) => _buildRow(item)),
+                  ..._reports.map(_buildRow),
                 ],
               ),
             ),

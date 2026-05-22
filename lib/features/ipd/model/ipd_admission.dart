@@ -26,7 +26,8 @@ class IpdAdmission with _$IpdAdmission {
     @Default(false) bool isSubmitting,
   }) = _IpdAdmission;
 
-  factory IpdAdmission.fromJson(Map<String, dynamic> json) => _$IpdAdmissionFromJson(json);
+  factory IpdAdmission.fromJson(Map<String, dynamic> json) =>
+      _$IpdAdmissionFromJson(json);
 }
 
 @freezed
@@ -39,5 +40,6 @@ class BedInfo with _$BedInfo {
     @Default(true) bool isAvailable,
   }) = _BedInfo;
 
-  factory BedInfo.fromJson(Map<String, dynamic> json) => _$BedInfoFromJson(json);
+  factory BedInfo.fromJson(Map<String, dynamic> json) =>
+      _$BedInfoFromJson(json);
 }

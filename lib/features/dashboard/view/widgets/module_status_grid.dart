@@ -5,7 +5,7 @@ import 'package:paracareplus/core/theme/app_text_styles.dart';
 import 'package:paracareplus/features/dashboard/model/dashboard_models.dart';
 
 class ModuleStatusGrid extends StatelessWidget {
-  const ModuleStatusGrid({super.key, required this.modules});
+  const ModuleStatusGrid({required this.modules, super.key});
   final List<ModuleStatus> modules;
 
   @override

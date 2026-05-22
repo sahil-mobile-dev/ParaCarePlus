@@ -63,7 +63,9 @@ class _PreauthTabState extends State<PreauthTab> {
           backgroundColor: AppColors.surface,
           title: Text(
             'New Pre-Authorization Request',
-            style: AppTextStyles.titleMedium.copyWith(color: AppColors.primaryText),
+            style: AppTextStyles.titleMedium.copyWith(
+              color: AppColors.primaryText,
+            ),
           ),
           content: Column(
             mainAxisSize: MainAxisSize.min,
@@ -105,10 +107,22 @@ class _PreauthTabState extends State<PreauthTab> {
                 ),
                 style: const TextStyle(color: AppColors.primaryText),
                 items: const [
-                  DropdownMenuItem(value: 'Star Health Insurance', child: Text('Star Health Insurance')),
-                  DropdownMenuItem(value: 'Niva Bupa Health', child: Text('Niva Bupa Health')),
-                  DropdownMenuItem(value: 'HDFC ERGO General', child: Text('HDFC ERGO General')),
-                  DropdownMenuItem(value: 'ICICI Lombard GIC', child: Text('ICICI Lombard GIC')),
+                  DropdownMenuItem(
+                    value: 'Star Health Insurance',
+                    child: Text('Star Health Insurance'),
+                  ),
+                  DropdownMenuItem(
+                    value: 'Niva Bupa Health',
+                    child: Text('Niva Bupa Health'),
+                  ),
+                  DropdownMenuItem(
+                    value: 'HDFC ERGO General',
+                    child: Text('HDFC ERGO General'),
+                  ),
+                  DropdownMenuItem(
+                    value: 'ICICI Lombard GIC',
+                    child: Text('ICICI Lombard GIC'),
+                  ),
                 ],
                 onChanged: (val) {
                   if (val != null) insurer = val;
@@ -119,12 +133,19 @@ class _PreauthTabState extends State<PreauthTab> {
           actions: [
             TextButton(
               onPressed: () => Navigator.pop(context),
-              child: const Text('Cancel', style: TextStyle(color: AppColors.secondaryText)),
+              child: const Text(
+                'Cancel',
+                style: TextStyle(color: AppColors.secondaryText),
+              ),
             ),
             ElevatedButton(
-              style: ElevatedButton.styleFrom(backgroundColor: AppColors.primary),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.primary,
+              ),
               onPressed: () {
-                if (patient.isNotEmpty && procedure.isNotEmpty && amount.isNotEmpty) {
+                if (patient.isNotEmpty &&
+                    procedure.isNotEmpty &&
+                    amount.isNotEmpty) {
                   setState(() {
                     _queue.insert(0, {
                       'id': 'PA-2026-${908 + _queue.length}',
@@ -140,12 +161,17 @@ class _PreauthTabState extends State<PreauthTab> {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       backgroundColor: AppColors.success,
-                      content: Text('Pre-Auth request generated and sent to $insurer!'),
+                      content: Text(
+                        'Pre-Auth request generated and sent to $insurer!',
+                      ),
                     ),
                   );
                 }
               },
-              child: const Text('Submit Request', style: TextStyle(color: Colors.white)),
+              child: const Text(
+                'Submit Request',
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ],
         );
@@ -171,9 +197,16 @@ class _PreauthTabState extends State<PreauthTab> {
               children: [
                 const Row(
                   children: [
-                    Icon(Icons.playlist_add_check_rounded, color: AppColors.primary, size: 22),
+                    Icon(
+                      Icons.playlist_add_check_rounded,
+                      color: AppColors.primary,
+                      size: 22,
+                    ),
                     SizedBox(width: 8),
-                    Text('Active Pre-Authorization Worklist', style: AppTextStyles.titleSmall),
+                    Text(
+                      'Active Pre-Authorization Worklist',
+                      style: AppTextStyles.titleSmall,
+                    ),
                   ],
                 ),
                 ElevatedButton.icon(
@@ -260,7 +293,11 @@ class _PreauthTabState extends State<PreauthTab> {
               ),
               child: Text(
                 status,
-                style: TextStyle(color: statusColor, fontSize: 10, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  color: statusColor,
+                  fontSize: 10,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
           ),
@@ -279,12 +316,24 @@ class _PreauthTabState extends State<PreauthTab> {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         backgroundColor: AppColors.success,
-                        content: Text('Additional diagnostics uploaded. Claim $id re-submitted!'),
+                        content: Text(
+                          'Additional diagnostics uploaded. Claim $id re-submitted!',
+                        ),
                       ),
                     );
                   },
-                  style: TextButton.styleFrom(padding: EdgeInsets.zero, minimumSize: Size.zero),
-                  child: const Text('Resolve', style: TextStyle(color: AppColors.secondaryAccent, fontSize: 11, fontWeight: FontWeight.bold)),
+                  style: TextButton.styleFrom(
+                    padding: EdgeInsets.zero,
+                    minimumSize: Size.zero,
+                  ),
+                  child: const Text(
+                    'Resolve',
+                    style: TextStyle(
+                      color: AppColors.secondaryAccent,
+                      fontSize: 11,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 )
               else if (status == 'Draft')
                 TextButton(
@@ -296,15 +345,30 @@ class _PreauthTabState extends State<PreauthTab> {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         backgroundColor: AppColors.success,
-                        content: Text('Pre-authorization $id submitted to TPA!'),
+                        content: Text(
+                          'Pre-authorization $id submitted to TPA!',
+                        ),
                       ),
                     );
                   },
-                  style: TextButton.styleFrom(padding: EdgeInsets.zero, minimumSize: Size.zero),
-                  child: const Text('Submit', style: TextStyle(color: AppColors.primary, fontSize: 11, fontWeight: FontWeight.bold)),
+                  style: TextButton.styleFrom(
+                    padding: EdgeInsets.zero,
+                    minimumSize: Size.zero,
+                  ),
+                  child: const Text(
+                    'Submit',
+                    style: TextStyle(
+                      color: AppColors.primary,
+                      fontSize: 11,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 )
               else
-                const Text('--', style: TextStyle(color: AppColors.secondaryText)),
+                const Text(
+                  '--',
+                  style: TextStyle(color: AppColors.secondaryText),
+                ),
             ],
           ),
         ),
@@ -315,7 +379,13 @@ class _PreauthTabState extends State<PreauthTab> {
   Widget _headerCell(String t) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
-      child: Text(t, style: AppTextStyles.labelSmall.copyWith(color: AppColors.secondaryText, fontWeight: FontWeight.bold)),
+      child: Text(
+        t,
+        style: AppTextStyles.labelSmall.copyWith(
+          color: AppColors.secondaryText,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
     );
   }
 

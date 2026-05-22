@@ -29,7 +29,7 @@ class GrnLogTab extends StatelessWidget {
     },
     {
       'grnNo': 'GRN-2024-0456',
-      'supplier': 'Dr. Reddy\'s',
+      'supplier': "Dr. Reddy's",
       'invoice': 'INV-DR-1123',
       'items': 31,
       'value': '₹1,15,800',
@@ -140,7 +140,7 @@ class GrnLogTab extends StatelessWidget {
                               vertical: 14,
                             ),
                             child: Text(
-                              item['grnNo'] as String,
+                              item['grnNo']! as String,
                               style: AppTextStyles.bodyMedium.copyWith(
                                 color: AppColors.primary,
                                 fontWeight: FontWeight.bold,

@@ -24,7 +24,8 @@ class OpdToken with _$OpdToken {
     @Default(false) bool isSubmitting,
   }) = _OpdToken;
 
-  factory OpdToken.fromJson(Map<String, dynamic> json) => _$OpdTokenFromJson(json);
+  factory OpdToken.fromJson(Map<String, dynamic> json) =>
+      _$OpdTokenFromJson(json);
 }
 
 @freezed
@@ -37,5 +38,6 @@ class PatientSummary with _$PatientSummary {
     required String phone,
   }) = _PatientSummary;
 
-  factory PatientSummary.fromJson(Map<String, dynamic> json) => _$PatientSummaryFromJson(json);
+  factory PatientSummary.fromJson(Map<String, dynamic> json) =>
+      _$PatientSummaryFromJson(json);
 }

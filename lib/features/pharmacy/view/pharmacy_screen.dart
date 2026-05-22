@@ -74,7 +74,7 @@ class PharmacyScreen extends ConsumerWidget {
     return Container(
       height: 48,
       decoration: const BoxDecoration(
-        border: Border(bottom: BorderSide(color: AppColors.border, width: 1)),
+        border: Border(bottom: BorderSide(color: AppColors.border)),
       ),
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
