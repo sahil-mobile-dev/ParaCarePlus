@@ -345,10 +345,7 @@ class _HistoryPainter extends CustomPainter {
           style: const TextStyle(color: AppColors.secondaryText, fontSize: 8),
         )
         ..layout()
-        ..paint(
-          canvas,
-          Offset(x - textPainter.width / 2, size.height - 12),
-        );
+        ..paint(canvas, Offset(x - textPainter.width / 2, size.height - 12));
     }
   }
 
@@ -356,98 +353,201 @@ class _HistoryPainter extends CustomPainter {
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
 
-// 3. PIE CHART
+// 3. WELLNESS DONUT CHART (Widget-based for reliable layout)
 class CustomWellnessDonutChart extends StatelessWidget {
   const CustomWellnessDonutChart({super.key});
 
+  static const _segments = [
+    _WellnessSegment('Physical', 78, Color(0xFF00B4D8)),
+    _WellnessSegment('Mental', 72, Color(0xFFC77DFF)),
+    _WellnessSegment('Social', 65, Color(0xFF22C55E)),
+    _WellnessSegment('Nutritional', 70, Color(0xFFFFD166)),
+    _WellnessSegment('Sleep', 68, Color(0xFF3A86FF)),
+    _WellnessSegment('Preventive', 80, Color(0xFFF77F00)),
+  ];
+
   @override
   Widget build(BuildContext context) {
-    return CustomPaint(size: Size.infinite, painter: _PiePainter());
+    return Row(
+      children: [
+        // Donut chart
+        Expanded(
+          flex: 5,
+          child: CustomPaint(
+            size: Size.infinite,
+            painter: _DonutPainter(segments: _segments),
+          ),
+        ),
+        // Legend column
+        Expanded(
+          flex: 5,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 8),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: _segments
+                  .map(
+                    (s) => Padding(
+                      padding: const EdgeInsets.only(bottom: 7),
+                      child: _LegendItem(segment: s),
+                    ),
+                  )
+                  .toList(),
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }
 
-class _PiePainter extends CustomPainter {
+class _LegendItem extends StatelessWidget {
+  const _LegendItem({required this.segment});
+  final _WellnessSegment segment;
+
   @override
-  void paint(Canvas canvas, Size size) {
-    final center = Offset(size.width * 0.35, size.height / 2);
-    final outerRadius = math.min(size.width, size.height) * 0.35;
-    final innerRadius = outerRadius * 0.55;
-
-    final dimensions = [
-      _PieSegment('Physical', 78, AppColors.primaryLight),
-      _PieSegment('Mental', 72, const Color(0xFFC77DFF)),
-      _PieSegment('Social', 65, AppColors.success),
-      _PieSegment('Nutritional', 70, AppColors.secondaryAccent),
-      _PieSegment('Sleep', 68, const Color(0xFF3A86FF)),
-      _PieSegment('Preventive', 80, const Color(0xFFF77F00)),
-    ];
-
-    final totalValue = dimensions.fold(
-      0,
-      (sum, item) => sum + int.parse(item.value.toString()),
-    );
-    var startAngle = -math.pi / 2;
-
-    for (final seg in dimensions) {
-      final sweepAngle = (seg.value / totalValue) * 2 * math.pi;
-
-      final paint = Paint()
-        ..color = seg.color
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = outerRadius - innerRadius;
-
-      canvas.drawArc(
-        Rect.fromCircle(
-          center: center,
-          radius: (outerRadius + innerRadius) / 2,
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Container(
+          width: 8,
+          height: 8,
+          decoration: BoxDecoration(
+            color: segment.color,
+            shape: BoxShape.circle,
+          ),
         ),
-        startAngle,
-        sweepAngle,
-        false,
-        paint,
-      );
-
-      startAngle += sweepAngle;
-    }
-
-    // Draw center donut hole background
-    canvas.drawCircle(center, innerRadius, Paint()..color = AppColors.card);
-
-    // Draw Legends to the right
-    final legendX = size.width * 0.70;
-    var legendY = size.height * 0.15;
-    final textPainter = TextPainter(textDirection: TextDirection.ltr);
-
-    for (final seg in dimensions) {
-      // Legend color dot
-      canvas.drawCircle(
-        Offset(legendX - 8, legendY + 5),
-        4,
-        Paint()..color = seg.color,
-      );
-
-      // Legend Text
-      textPainter
-        ..text = TextSpan(
-          text: '${seg.name} (${seg.value}%)',
+        const SizedBox(width: 6),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                segment.name,
+                style: const TextStyle(
+                  color: AppColors.secondaryText,
+                  fontSize: 9,
+                  fontWeight: FontWeight.w500,
+                ),
+                overflow: TextOverflow.ellipsis,
+              ),
+              const SizedBox(height: 2),
+              ClipRRect(
+                borderRadius: BorderRadius.circular(2),
+                child: LinearProgressIndicator(
+                  value: segment.value / 100,
+                  minHeight: 3,
+                  backgroundColor: AppColors.border,
+                  valueColor: AlwaysStoppedAnimation(segment.color),
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(width: 4),
+        Text(
+          '${segment.value}%',
           style: const TextStyle(
             color: AppColors.primaryText,
             fontSize: 9,
             fontWeight: FontWeight.bold,
           ),
-        )
-        ..layout()
-        ..paint(canvas, Offset(legendX, legendY));
-      legendY += 20;
+        ),
+      ],
+    );
+  }
+}
+
+class _DonutPainter extends CustomPainter {
+  const _DonutPainter({required this.segments});
+  final List<_WellnessSegment> segments;
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    final center = Offset(size.width / 2, size.height / 2);
+    final radius = math.min(size.width, size.height) * 0.42;
+    final strokeW = radius * 0.38;
+    final arcRadius = radius - strokeW / 2;
+
+    final total = segments.fold(0.0, (s, e) => s + e.value);
+    const gapAngle = 0.04; // radians gap between segments
+    var startAngle = -math.pi / 2;
+
+    for (final seg in segments) {
+      final sweep = (seg.value / total) * (2 * math.pi) - gapAngle;
+
+      canvas.drawArc(
+        Rect.fromCircle(center: center, radius: arcRadius),
+        startAngle + gapAngle / 2,
+        sweep,
+        false,
+        Paint()
+          ..color = seg.color
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = strokeW
+          ..strokeCap = StrokeCap.butt,
+      );
+
+      startAngle += sweep + gapAngle;
     }
+
+    // Draw donut hole background
+    canvas.drawCircle(
+      center,
+      arcRadius - strokeW / 2 - 2,
+      Paint()..color = AppColors.card,
+    );
+
+    // Center label
+    final innerR = arcRadius - strokeW / 2 - 2;
+    _paintCenteredText(
+      canvas,
+      center,
+      '72',
+      const TextStyle(
+        color: AppColors.primaryText,
+        fontSize: 18,
+        fontWeight: FontWeight.w700,
+      ),
+      offsetY: -7,
+    );
+    _paintCenteredText(
+      canvas,
+      center,
+      'Overall',
+      const TextStyle(
+        color: AppColors.secondaryText,
+        fontSize: 8,
+        fontWeight: FontWeight.w500,
+      ),
+      offsetY: innerR * 0.35,
+    );
+  }
+
+  void _paintCenteredText(
+    Canvas canvas,
+    Offset center,
+    String text,
+    TextStyle style, {
+    double offsetY = 0,
+  }) {
+    final tp = TextPainter(
+      text: TextSpan(text: text, style: style),
+      textDirection: TextDirection.ltr,
+    )..layout();
+    tp.paint(
+      canvas,
+      Offset(center.dx - tp.width / 2, center.dy - tp.height / 2 + offsetY),
+    );
   }
 
   @override
   bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
 
-class _PieSegment {
-  _PieSegment(this.name, this.value, this.color);
+class _WellnessSegment {
+  const _WellnessSegment(this.name, this.value, this.color);
   final String name;
   final double value;
   final Color color;
