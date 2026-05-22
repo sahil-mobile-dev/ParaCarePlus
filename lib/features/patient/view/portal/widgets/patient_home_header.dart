@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:paracareplus/core/theme/app_colors.dart';
 import 'package:paracareplus/core/theme/app_spacing.dart';
 import 'package:paracareplus/core/theme/app_text_styles.dart';
-import 'package:paracareplus/routes/route_names.dart';
 
 class PatientHomeHeader extends StatelessWidget implements PreferredSizeWidget {
   const PatientHomeHeader({required this.onShowQR, super.key});
@@ -29,7 +27,6 @@ class PatientHomeHeader extends StatelessWidget implements PreferredSizeWidget {
                 ),
                 const SizedBox(width: 8),
                 Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
