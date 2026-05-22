@@ -33,7 +33,7 @@ class PatientEMRScreen extends ConsumerWidget {
           backgroundColor: AppColors.surface,
           elevation: 0,
           title: const Text(
-            'Electronic Medical Records',
+            'Electronic Health Records (EMR/EHR)',
             style: TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.bold,
@@ -78,6 +78,7 @@ class PatientEMRScreen extends ConsumerWidget {
                             fontSize: 12,
                             fontWeight: FontWeight.bold,
                           ),
+                          dividerHeight: 0,
                           unselectedLabelStyle: TextStyle(
                             fontSize: 12,
                             fontWeight: FontWeight.w500,
