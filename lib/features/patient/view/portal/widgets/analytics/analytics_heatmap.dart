@@ -68,12 +68,12 @@ class AnalyticsHeatmap extends StatelessWidget {
     }
     if (currentWeek != null) weeks.add(currentWeek);
 
-    const double cellSize = 10;
-    const double cellGap = 2.5;
-    const double step = cellSize + cellGap;
+    const cellSize = 10.0;
+    const cellGap = 2.5;
+    const step = cellSize + cellGap;
 
     // Map week-column index → month label to show
-    final Map<int, String> monthLabels = {};
+    final monthLabels = <int, String>{};
     const mNames = [
       'Jan',
       'Feb',
@@ -197,7 +197,7 @@ class AnalyticsHeatmap extends StatelessWidget {
                                     color: weeks[w][row]!.$2,
                                     size: cellSize,
                                   )
-                                : SizedBox(width: cellSize, height: cellSize),
+                                : const SizedBox(width: cellSize, height: cellSize),
                           ),
                       ],
                     ),

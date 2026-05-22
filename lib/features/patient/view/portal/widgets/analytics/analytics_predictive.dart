@@ -371,7 +371,7 @@ class CustomWellnessDonutChart extends StatelessWidget {
     return Row(
       children: [
         // Donut chart
-        Expanded(
+        const Expanded(
           flex: 5,
           child: CustomPaint(
             size: Size.infinite,
