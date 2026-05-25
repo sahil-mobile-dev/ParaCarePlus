@@ -561,255 +561,256 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         // Card with dark-navy header + saffron top-border
         Container(
           decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withValues(alpha: 0.3),
-                blurRadius: 64,
-                offset: const Offset(0, 16),
-              ),
-            ],
-            border: Border.all(color: Colors.grey),
+            border: Border.all(color: Colors.white, width: .5),
+            borderRadius: BorderRadius.circular(12),
           ),
-          child: Column(
-            children: [
-              // Dark navy header
-              _buildCardHeader(),
-              // White body
-              Container(
-                decoration: const BoxDecoration(color: Colors.white),
-                padding: const EdgeInsets.all(AppSpacing.lg),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    if (state.errorMessage != null)
-                      _buildErrorAlert(state.errorMessage!),
-                    // Role grid
-                    const Text(
-                      'SELECT YOUR ROLE',
-                      style: TextStyle(
-                        color: Color(0xFF5A7894),
-                        fontSize: 10,
-                        fontWeight: FontWeight.w700,
-                        letterSpacing: 0.5,
-                      ),
-                    ),
-                    const SizedBox(height: AppSpacing.sm),
-                    const RoleSelectionGrid(),
-                    const SizedBox(height: AppSpacing.md),
-                    // Credentials
-                    const Text(
-                      'Employee ID / Username',
-                      style: TextStyle(
-                        color: Color(0xFF2C4460),
-                        fontSize: 11.5,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                    const SizedBox(height: 5),
-                    TextField(
-                      onChanged: (value) {
-                        ref
-                            .read(loginViewModelProvider.notifier)
-                            .updateEmployeeId(value);
-                      },
-                      style: const TextStyle(
-                        color: Color(0xFF0D1B2A),
-                        fontSize: 13,
-                      ),
-                      decoration: const InputDecoration(
-                        hintText: 'Enter your employee ID',
-                        fillColor: Colors.white,
-                        prefixIcon: Icon(Icons.person, color: AppColors.border),
-                        hintStyle: TextStyle(color: AppColors.border),
-                        border: InputBorder.none,
-                        contentPadding: EdgeInsets.symmetric(
-                          horizontal: 10,
-                          vertical: 10,
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(12),
+            child: Column(
+              children: [
+                // Dark navy header
+                _buildCardHeader(),
+                // White body
+                Container(
+                  decoration: const BoxDecoration(color: Colors.white),
+                  padding: const EdgeInsets.all(AppSpacing.lg),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      if (state.errorMessage != null)
+                        _buildErrorAlert(state.errorMessage!),
+                      // Role grid
+                      const Text(
+                        'SELECT YOUR ROLE',
+                        style: TextStyle(
+                          color: Color(0xFF5A7894),
+                          fontSize: 10,
+                          fontWeight: FontWeight.w700,
+                          letterSpacing: 0.5,
                         ),
                       ),
-                    ),
-                    SizedBox(height: 10),
-
-                    const Text(
-                      'Password',
-                      style: TextStyle(
-                        color: Color(0xFF2C4460),
-                        fontSize: 11.5,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-
-                    const SizedBox(height: 5),
-                    TextField(
-                      obscureText: state.isObscured,
-                      onChanged: (value) {
-                        ref
-                            .read(loginViewModelProvider.notifier)
-                            .updatePassword(value);
-                      },
-                      style: const TextStyle(
-                        color: Color(0xFF0D1B2A),
-                        fontSize: 13,
-                      ),
-                      decoration: InputDecoration(
-                        hintText: 'Enter your password',
-                        fillColor: Colors.white,
-                        prefixIcon: const Icon(
-                          Icons.lock,
-                          color: AppColors.border,
+                      const SizedBox(height: AppSpacing.sm),
+                      const RoleSelectionGrid(),
+                      const SizedBox(height: AppSpacing.md),
+                      // Credentials
+                      const Text(
+                        'Employee ID / Username',
+                        style: TextStyle(
+                          color: Color(0xFF2C4460),
+                          fontSize: 11.5,
+                          fontWeight: FontWeight.w700,
                         ),
-                        suffixIcon: IconButton(
-                          icon: Icon(
-                            state.isObscured
-                                ? Icons.visibility
-                                : Icons.visibility_off,
+                      ),
+                      const SizedBox(height: 5),
+                      TextField(
+                        onChanged: (value) {
+                          ref
+                              .read(loginViewModelProvider.notifier)
+                              .updateEmployeeId(value);
+                        },
+                        style: const TextStyle(
+                          color: Color(0xFF0D1B2A),
+                          fontSize: 13,
+                        ),
+                        decoration: const InputDecoration(
+                          hintText: 'Enter your employee ID',
+                          fillColor: Colors.white,
+                          prefixIcon: Icon(
+                            Icons.person,
                             color: AppColors.border,
                           ),
-                          onPressed: () {
-                            ref
-                                .read(loginViewModelProvider.notifier)
-                                .toggleObscure();
-                          },
-                        ),
-                        hintStyle: const TextStyle(color: AppColors.border),
-                        border: InputBorder.none,
-                        contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 10,
-                          vertical: 10,
+                          hintStyle: TextStyle(color: AppColors.border),
+                          border: InputBorder.none,
+                          contentPadding: EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 10,
+                          ),
                         ),
                       ),
-                    ),
+                      SizedBox(height: 10),
 
-                    // _buildLightTextField(
-                    //   label: 'Employee ID / Username',
-                    //   hint: 'e.g. EMP-00123 or admin',
-                    //   prefixEmoji: '👤',
-                    //   onChanged: (v) => ref
-                    //       .read(loginViewModelProvider.notifier)
-                    //       .updateEmployeeId(v),
-                    // ),
-                    // const SizedBox(height: AppSpacing.sm),
-                    // _buildLightTextField(
-                    //   label: 'Password',
-                    //   hint: 'Enter your password',
-                    //   prefixEmoji: '🔒',
-                    //   isPassword: state.isObscured,
-                    //   onChanged: (v) => ref
-                    //       .read(loginViewModelProvider.notifier)
-                    //       .updatePassword(v),
-                    //   trailing: GestureDetector(
-                    //     onTap: () => ref
-                    //         .read(loginViewModelProvider.notifier)
-                    //         .toggleObscure(),
-                    //     child: Text(
-                    //       state.isObscured ? '👁️' : '🙈',
-                    //       style: const TextStyle(fontSize: 16),
-                    //     ),
-                    //   ),
-                    // ),
-                    const SizedBox(height: AppSpacing.sm),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            SizedBox(
-                              width: 18,
-                              height: 18,
-                              child: Checkbox(
-                                value: state.rememberMe,
-                                onChanged: (v) => ref
-                                    .read(loginViewModelProvider.notifier)
-                                    .toggleRememberMe(v),
-                                activeColor: AppColors.primary,
-                                side: const BorderSide(
-                                  color: Color(0xFFCCD8E8),
-                                ),
-                                materialTapTargetSize:
-                                    MaterialTapTargetSize.shrinkWrap,
-                              ),
+                      const Text(
+                        'Password',
+                        style: TextStyle(
+                          color: Color(0xFF2C4460),
+                          fontSize: 11.5,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+
+                      const SizedBox(height: 5),
+                      TextField(
+                        obscureText: state.isObscured,
+                        onChanged: (value) {
+                          ref
+                              .read(loginViewModelProvider.notifier)
+                              .updatePassword(value);
+                        },
+                        style: const TextStyle(
+                          color: Color(0xFF0D1B2A),
+                          fontSize: 13,
+                        ),
+                        decoration: InputDecoration(
+                          hintText: 'Enter your password',
+                          fillColor: Colors.white,
+                          prefixIcon: const Icon(
+                            Icons.lock,
+                            color: AppColors.border,
+                          ),
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              state.isObscured
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                              color: AppColors.border,
                             ),
-                            const SizedBox(width: 8),
-                            const Text(
-                              'Remember me',
+                            onPressed: () {
+                              ref
+                                  .read(loginViewModelProvider.notifier)
+                                  .toggleObscure();
+                            },
+                          ),
+                          hintStyle: const TextStyle(color: AppColors.border),
+                          border: InputBorder.none,
+                          contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 10,
+                          ),
+                        ),
+                      ),
+
+                      // _buildLightTextField(
+                      //   label: 'Employee ID / Username',
+                      //   hint: 'e.g. EMP-00123 or admin',
+                      //   prefixEmoji: '👤',
+                      //   onChanged: (v) => ref
+                      //       .read(loginViewModelProvider.notifier)
+                      //       .updateEmployeeId(v),
+                      // ),
+                      // const SizedBox(height: AppSpacing.sm),
+                      // _buildLightTextField(
+                      //   label: 'Password',
+                      //   hint: 'Enter your password',
+                      //   prefixEmoji: '🔒',
+                      //   isPassword: state.isObscured,
+                      //   onChanged: (v) => ref
+                      //       .read(loginViewModelProvider.notifier)
+                      //       .updatePassword(v),
+                      //   trailing: GestureDetector(
+                      //     onTap: () => ref
+                      //         .read(loginViewModelProvider.notifier)
+                      //         .toggleObscure(),
+                      //     child: Text(
+                      //       state.isObscured ? '👁️' : '🙈',
+                      //       style: const TextStyle(fontSize: 16),
+                      //     ),
+                      //   ),
+                      // ),
+                      const SizedBox(height: AppSpacing.sm),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              SizedBox(
+                                width: 18,
+                                height: 18,
+                                child: Checkbox(
+                                  value: state.rememberMe,
+                                  onChanged: (v) => ref
+                                      .read(loginViewModelProvider.notifier)
+                                      .toggleRememberMe(v),
+                                  activeColor: AppColors.primary,
+                                  side: const BorderSide(
+                                    color: Color(0xFFCCD8E8),
+                                  ),
+                                  materialTapTargetSize:
+                                      MaterialTapTargetSize.shrinkWrap,
+                                ),
+                              ),
+                              const SizedBox(width: 8),
+                              const Text(
+                                'Remember me',
+                                style: TextStyle(
+                                  color: Color(0xFF5A7894),
+                                  fontSize: 11.5,
+                                ),
+                              ),
+                            ],
+                          ),
+                          TextButton(
+                            onPressed: () {},
+                            child: const Text(
+                              'Forgot Password?',
                               style: TextStyle(
-                                color: Color(0xFF5A7894),
+                                color: Color(0xFF1565C0),
                                 fontSize: 11.5,
                               ),
                             ),
-                          ],
-                        ),
-                        TextButton(
-                          onPressed: () {},
-                          child: const Text(
-                            'Forgot Password?',
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: AppSpacing.md),
+                      // Main login button
+                      _buildLoginBtn(state),
+                      const SizedBox(height: AppSpacing.sm),
+                      // Public quick-access buttons
+                      Row(
+                        children: [
+                          Expanded(
+                            child: _buildPublicBtn(
+                              '📅 Quick Appointment',
+                              const [Color(0xFF00695C), Color(0xFF00897B)],
+                              () {},
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Expanded(
+                            child: _buildPublicBtn('🔀 Transfer Portal', const [
+                              Color(0xFF4527A0),
+                              Color(0xFF5E35B1),
+                            ], () {}),
+                          ),
+                        ],
+                      ),
+                      const Center(
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(vertical: 6),
+                          child: Text(
+                            '👆 Public portals — no login needed',
                             style: TextStyle(
-                              color: Color(0xFF1565C0),
-                              fontSize: 11.5,
+                              color: Color(0xFF7A9AB5),
+                              fontSize: 10,
                             ),
                           ),
                         ),
-                      ],
-                    ),
-                    const SizedBox(height: AppSpacing.md),
-                    // Main login button
-                    _buildLoginBtn(state),
-                    const SizedBox(height: AppSpacing.sm),
-                    // Public quick-access buttons
-                    Row(
-                      children: [
-                        Expanded(
-                          child: _buildPublicBtn('📅 Quick Appointment', const [
-                            Color(0xFF00695C),
-                            Color(0xFF00897B),
-                          ], () {}),
-                        ),
-                        const SizedBox(width: 8),
-                        Expanded(
-                          child: _buildPublicBtn('🔀 Transfer Portal', const [
-                            Color(0xFF4527A0),
-                            Color(0xFF5E35B1),
-                          ], () {}),
-                        ),
-                      ],
-                    ),
-                    const Center(
-                      child: Padding(
-                        padding: EdgeInsets.symmetric(vertical: 6),
+                      ),
+                      // Dashboard Ecosystem button
+                      _buildDashboardEcosystemBtn(),
+                      const SizedBox(height: 8),
+                      // Patient Portal button
+                      _buildPatientPortalBtn(),
+                      const SizedBox(height: 6),
+                      const Center(
                         child: Text(
-                          '👆 Public portals — no login needed',
+                          '☝️ ABHA · Health Records · OPD · Lab · AI Assistant · Telemedicine',
                           style: TextStyle(
                             color: Color(0xFF7A9AB5),
-                            fontSize: 10,
+                            fontSize: 9.5,
                           ),
                         ),
                       ),
-                    ),
-                    // Dashboard Ecosystem button
-                    _buildDashboardEcosystemBtn(),
-                    const SizedBox(height: 8),
-                    // Patient Portal button
-                    _buildPatientPortalBtn(),
-                    const SizedBox(height: 6),
-                    const Center(
-                      child: Text(
-                        '☝️ ABHA · Health Records · OPD · Lab · AI Assistant · Telemedicine',
-                        style: TextStyle(
-                          color: Color(0xFF7A9AB5),
-                          fontSize: 9.5,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: AppSpacing.md),
-                    _buildDivider('Quick Demo Access'),
-                    const SizedBox(height: AppSpacing.sm),
-                    const DemoCredentialsBar(),
-                  ],
+                      const SizedBox(height: AppSpacing.md),
+                      _buildDivider('Quick Demo Access'),
+                      const SizedBox(height: AppSpacing.sm),
+                      const DemoCredentialsBar(),
+                    ],
+                  ),
                 ),
-              ),
-              // Footer bar
-              _buildCardFooterBar(),
-            ],
+                // Footer bar
+                _buildCardFooterBar(),
+              ],
+            ),
           ),
         ),
         // Version info
