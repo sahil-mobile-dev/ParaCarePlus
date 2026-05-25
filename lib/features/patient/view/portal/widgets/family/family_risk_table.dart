@@ -10,54 +10,84 @@ class FamilyRiskTable extends StatelessWidget {
   Widget build(BuildContext context) {
     final records = <Map<String, dynamic>>[
       {
-        'name': 'Ramesh Kumar',
-        'relation': 'Self (48M)',
-        'bp': '138/88',
-        'sugar': '112 mg/dL',
-        'hba1c': '6.1%',
-        'cardiac': 'Moderate',
-        'priority': 'Medium',
-        'priorityColor': AppColors.secondaryAccent,
+        'name': 'Ramesh',
+        'age': '48M',
+        'wellness': '78/100',
+        'wellnessColor': AppColors.secondaryAccent,
+        'cvRisk': 0.42,
+        'cvRiskColor': Colors.orange,
+        'dbRisk': 0.68,
+        'dbRiskColor': AppColors.error,
+        'htn': 'Stage 1',
+        'htnColor': AppColors.secondaryAccent,
+        'cancer': 'Done 2026',
+        'cancerColor': AppColors.success,
+        'due': 'Jun 2026',
+        'dueColor': AppColors.secondaryAccent,
       },
       {
-        'name': 'Geeta Kumar',
-        'relation': 'Spouse (44F)',
-        'bp': '118/76',
-        'sugar': '94 mg/dL',
-        'hba1c': '5.2%',
-        'cardiac': 'Low',
-        'priority': 'Normal',
-        'priorityColor': AppColors.success,
+        'name': 'Geeta',
+        'age': '46F',
+        'wellness': '84/100',
+        'wellnessColor': AppColors.success,
+        'cvRisk': 0.22,
+        'cvRiskColor': AppColors.success,
+        'dbRisk': 0.30,
+        'dbRiskColor': AppColors.secondaryAccent,
+        'htn': 'Normal',
+        'htnColor': AppColors.success,
+        'cancer': 'Done 2026',
+        'cancerColor': AppColors.success,
+        'due': 'Feb 2027',
+        'dueColor': AppColors.success,
       },
       {
-        'name': 'Savitri Devi',
-        'relation': 'Mother (72F)',
-        'bp': '152/94',
-        'sugar': '145 mg/dL',
-        'hba1c': '7.4%',
-        'cardiac': 'High Risk',
-        'priority': 'Critical',
-        'priorityColor': AppColors.error,
+        'name': 'Aryan',
+        'age': '22M',
+        'wellness': '92/100',
+        'wellnessColor': AppColors.success,
+        'cvRisk': 0.05,
+        'cvRiskColor': AppColors.success,
+        'dbRisk': 0.15,
+        'dbRiskColor': AppColors.success,
+        'htn': 'Normal',
+        'htnColor': AppColors.success,
+        'cancer': 'N/A at age',
+        'cancerColor': AppColors.secondaryText,
+        'due': 'Annual 2027',
+        'dueColor': AppColors.success,
       },
       {
-        'name': 'Aryan Kumar',
-        'relation': 'Son (14M)',
-        'bp': '110/70',
-        'sugar': '88 mg/dL',
-        'hba1c': '4.8%',
-        'cardiac': 'Optimal',
-        'priority': 'Normal',
-        'priorityColor': AppColors.success,
+        'name': 'Priya',
+        'age': '18F',
+        'wellness': '88/100',
+        'wellnessColor': AppColors.primaryLight,
+        'cvRisk': 0.04,
+        'cvRiskColor': AppColors.success,
+        'dbRisk': 0.18,
+        'dbRiskColor': AppColors.success,
+        'htn': 'Normal',
+        'htnColor': AppColors.success,
+        'cancer': 'N/A at age',
+        'cancerColor': AppColors.secondaryText,
+        'due': 'Dental May 2026',
+        'dueColor': AppColors.secondaryAccent,
       },
       {
-        'name': 'Priya Kumar',
-        'relation': 'Daughter (10F)',
-        'bp': '106/68',
-        'sugar': '85 mg/dL',
-        'hba1c': '4.7%',
-        'cardiac': 'Optimal',
-        'priority': 'Normal',
-        'priorityColor': AppColors.success,
+        'name': 'Savitri',
+        'age': '74F',
+        'wellness': '68/100',
+        'wellnessColor': AppColors.secondaryAccent,
+        'cvRisk': 0.72,
+        'cvRiskColor': AppColors.error,
+        'dbRisk': 0.80,
+        'dbRiskColor': AppColors.error,
+        'htn': 'Stage 2',
+        'htnColor': AppColors.error,
+        'cancer': 'Due 2026',
+        'cancerColor': AppColors.secondaryAccent,
+        'due': 'Urgent consult',
+        'dueColor': AppColors.error,
       },
     ];
 
@@ -72,7 +102,7 @@ class FamilyRiskTable extends StatelessWidget {
               size: 18,
             ),
             SizedBox(width: 8),
-            Text('CLINICAL TELEMETRY MATRIX', style: AppTextStyles.labelSmall),
+            Text('FAMILY RISK OVERVIEW', style: AppTextStyles.labelSmall),
           ],
         ),
         const SizedBox(height: AppSpacing.sm),
@@ -83,193 +113,230 @@ class FamilyRiskTable extends StatelessWidget {
             border: Border.all(color: AppColors.border),
           ),
           clipBehavior: Clip.antiAlias,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              // Horizontal Scrollable Table Wrapper
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                physics: const BouncingScrollPhysics(),
-                child: DataTable(
-                  horizontalMargin: 16,
-                  columnSpacing: 24,
-                  headingRowColor: WidgetStateProperty.all(AppColors.surface),
-                  headingRowHeight: 40,
-                  dataRowMinHeight: 48,
-                  dataRowMaxHeight: 48,
-                  columns: const [
-                    DataColumn(
-                      label: Text(
-                        'MEMBER',
-                        style: TextStyle(
-                          color: AppColors.secondaryText,
-                          fontSize: 9.5,
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            physics: const BouncingScrollPhysics(),
+            child: DataTable(
+              horizontalMargin: 16,
+              columnSpacing: 20,
+              headingRowColor: WidgetStateProperty.all(AppColors.surface),
+              headingRowHeight: 40,
+              dataRowMinHeight: 48,
+              dataRowMaxHeight: 48,
+              columns: const [
+                DataColumn(
+                  label: Text(
+                    'MEMBER',
+                    style: TextStyle(
+                      color: AppColors.secondaryText,
+                      fontSize: 9.5,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                DataColumn(
+                  label: Text(
+                    'AGE',
+                    style: TextStyle(
+                      color: AppColors.secondaryText,
+                      fontSize: 9.5,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                DataColumn(
+                  label: Text(
+                    'WELLNESS',
+                    style: TextStyle(
+                      color: AppColors.secondaryText,
+                      fontSize: 9.5,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                DataColumn(
+                  label: Text(
+                    'CV RISK',
+                    style: TextStyle(
+                      color: AppColors.secondaryText,
+                      fontSize: 9.5,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                DataColumn(
+                  label: Text(
+                    'DIABETES RISK',
+                    style: TextStyle(
+                      color: AppColors.secondaryText,
+                      fontSize: 9.5,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                DataColumn(
+                  label: Text(
+                    'HYPERTENSION',
+                    style: TextStyle(
+                      color: AppColors.secondaryText,
+                      fontSize: 9.5,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                DataColumn(
+                  label: Text(
+                    'CANCER SCREEN',
+                    style: TextStyle(
+                      color: AppColors.secondaryText,
+                      fontSize: 9.5,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                DataColumn(
+                  label: Text(
+                    'NEXT DUE',
+                    style: TextStyle(
+                      color: AppColors.secondaryText,
+                      fontSize: 9.5,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
+              rows: records.map((r) {
+                final cvRisk = r['cvRisk'] as double;
+                final dbRisk = r['dbRisk'] as double;
+
+                return DataRow(
+                  cells: [
+                    DataCell(
+                      Text(
+                        r['name'] as String,
+                        style: const TextStyle(
+                          color: Colors.white,
                           fontWeight: FontWeight.bold,
+                          fontSize: 11.5,
                         ),
                       ),
                     ),
-                    DataColumn(
-                      label: Text(
-                        'RELATION',
-                        style: TextStyle(
+                    DataCell(
+                      Text(
+                        r['age'] as String,
+                        style: const TextStyle(
                           color: AppColors.secondaryText,
-                          fontSize: 9.5,
-                          fontWeight: FontWeight.bold,
+                          fontSize: 11,
                         ),
                       ),
                     ),
-                    DataColumn(
-                      label: Text(
-                        'SYS/DIA BP',
+                    DataCell(
+                      Text(
+                        r['wellness'] as String,
                         style: TextStyle(
-                          color: AppColors.secondaryText,
-                          fontSize: 9.5,
-                          fontWeight: FontWeight.bold,
+                          color: r['wellnessColor'] as Color,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 11,
                         ),
                       ),
                     ),
-                    DataColumn(
-                      label: Text(
-                        'FAST SUGAR',
+                    DataCell(
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Container(
+                            width: 60,
+                            height: 6,
+                            decoration: BoxDecoration(
+                              color: Colors.white.withValues(alpha: 0.08),
+                              borderRadius: BorderRadius.circular(3),
+                            ),
+                            alignment: Alignment.centerLeft,
+                            child: Container(
+                              width: 60 * cvRisk,
+                              height: 6,
+                              decoration: BoxDecoration(
+                                color: r['cvRiskColor'] as Color,
+                                borderRadius: BorderRadius.circular(3),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            '${(cvRisk * 100).toInt()}%',
+                            style: const TextStyle(
+                              color: Colors.white70,
+                              fontSize: 10,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    DataCell(
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Container(
+                            width: 60,
+                            height: 6,
+                            decoration: BoxDecoration(
+                              color: Colors.white.withValues(alpha: 0.08),
+                              borderRadius: BorderRadius.circular(3),
+                            ),
+                            alignment: Alignment.centerLeft,
+                            child: Container(
+                              width: 60 * dbRisk,
+                              height: 6,
+                              decoration: BoxDecoration(
+                                color: r['dbRiskColor'] as Color,
+                                borderRadius: BorderRadius.circular(3),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Text(
+                            '${(dbRisk * 100).toInt()}%',
+                            style: const TextStyle(
+                              color: Colors.white70,
+                              fontSize: 10,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    DataCell(
+                      Text(
+                        r['htn'] as String,
                         style: TextStyle(
-                          color: AppColors.secondaryText,
-                          fontSize: 9.5,
-                          fontWeight: FontWeight.bold,
+                          color: r['htnColor'] as Color,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 11,
                         ),
                       ),
                     ),
-                    DataColumn(
-                      label: Text(
-                        'HBA1C',
+                    DataCell(
+                      Text(
+                        r['cancer'] as String,
                         style: TextStyle(
-                          color: AppColors.secondaryText,
-                          fontSize: 9.5,
-                          fontWeight: FontWeight.bold,
+                          color: r['cancerColor'] as Color,
+                          fontSize: 11,
                         ),
                       ),
                     ),
-                    DataColumn(
-                      label: Text(
-                        'CARDIAC VECTOR',
+                    DataCell(
+                      Text(
+                        r['due'] as String,
                         style: TextStyle(
-                          color: AppColors.secondaryText,
-                          fontSize: 9.5,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    DataColumn(
-                      label: Text(
-                        'PRIORITY',
-                        style: TextStyle(
-                          color: AppColors.secondaryText,
-                          fontSize: 9.5,
-                          fontWeight: FontWeight.bold,
+                          color: r['dueColor'] as Color,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 11,
                         ),
                       ),
                     ),
                   ],
-                  rows: records.map((r) {
-                    final isCritical = r['priority'] == 'Critical';
-
-                    return DataRow(
-                      cells: [
-                        DataCell(
-                          Text(
-                            r['name'] as String,
-                            style: TextStyle(
-                              color: isCritical
-                                  ? AppColors.error
-                                  : Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 11.5,
-                            ),
-                          ),
-                        ),
-                        DataCell(
-                          Text(
-                            r['relation'] as String,
-                            style: const TextStyle(
-                              color: AppColors.secondaryText,
-                              fontSize: 11,
-                            ),
-                          ),
-                        ),
-                        DataCell(
-                          Text(
-                            r['bp'] as String,
-                            style: TextStyle(
-                              color: (isCritical || r['bp'] == '138/88')
-                                  ? AppColors.secondaryAccent
-                                  : Colors.white,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 11,
-                            ),
-                          ),
-                        ),
-                        DataCell(
-                          Text(
-                            r['sugar'] as String,
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 11,
-                            ),
-                          ),
-                        ),
-                        DataCell(
-                          Text(
-                            r['hba1c'] as String,
-                            style: TextStyle(
-                              color: isCritical
-                                  ? AppColors.error
-                                  : Colors.white,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 11,
-                            ),
-                          ),
-                        ),
-                        DataCell(
-                          Text(
-                            r['cardiac'] as String,
-                            style: TextStyle(
-                              color: isCritical
-                                  ? AppColors.error
-                                  : Colors.white,
-                              fontSize: 11,
-                            ),
-                          ),
-                        ),
-                        DataCell(
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 8,
-                              vertical: 4,
-                            ),
-                            decoration: BoxDecoration(
-                              color: (r['priorityColor'] as Color).withValues(
-                                alpha: 0.15,
-                              ),
-                              border: Border.all(
-                                color: r['priorityColor'] as Color,
-                              ),
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                            child: Text(
-                              (r['priority'] as String).toUpperCase(),
-                              style: TextStyle(
-                                color: r['priorityColor'] as Color,
-                                fontSize: 8.5,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    );
-                  }).toList(),
-                ),
-              ),
-            ],
+                );
+              }).toList(),
+            ),
           ),
         ),
       ],

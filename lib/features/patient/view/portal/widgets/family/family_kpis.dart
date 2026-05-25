@@ -8,131 +8,140 @@ class FamilyKpis extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final kpis = <Map<String, dynamic>>[
+      {
+        'icon': Icons.people_rounded,
+        'value': '5',
+        'label': 'Family Members',
+        'subText': 'All linked to ABHA',
+        'color': AppColors.primaryLight,
+      },
+      {
+        'icon': Icons.vaccines_rounded,
+        'value': '4 / 5',
+        'label': 'Vaccinations Up-to-Date',
+        'subText': '1 member overdue',
+        'color': AppColors.success,
+      },
+      {
+        'icon': Icons.warning_amber_rounded,
+        'value': '3',
+        'label': 'Active Health Alerts',
+        'subText': 'Requires attention',
+        'color': AppColors.secondaryAccent,
+      },
+      {
+        'icon': Icons.medical_services_rounded,
+        'value': '12',
+        'label': 'Consultations This Year',
+        'subText': 'Family combined',
+        'color': Colors.blueAccent,
+      },
+      {
+        'icon': Icons.science_rounded,
+        'value': '2',
+        'label': 'Hereditary Risk Flags',
+        'subText': 'HTN + Diabetes genetic',
+        'color': AppColors.error,
+      },
+    ];
+
     return LayoutBuilder(
       builder: (context, constraints) {
-        final crossAxisCount = constraints.maxWidth > 900
-            ? 4
-            : (constraints.maxWidth > 600 ? 2 : 2);
+        final width = constraints.maxWidth;
+        final crossAxisCount = width > 1000
+            ? 5
+            : (width > 600 ? 3 : 2);
 
-        return GridView.count(
+        return GridView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
-          crossAxisCount: crossAxisCount,
-          crossAxisSpacing: AppSpacing.md,
-          mainAxisSpacing: AppSpacing.md,
-          childAspectRatio: constraints.maxWidth > 900 ? 1.45 : 1.35,
-          children: [
-            _buildKpiCard(
-              icon: Icons.people_rounded,
-              value: '5 Members',
-              label: 'Central Network',
-              subText: 'Ramesh, Geeta + 3 relatives',
-              accentColor: AppColors.primaryLight,
-            ),
-            _buildKpiCard(
-              icon: Icons.vaccines_rounded,
-              value: '94%',
-              label: 'Vaccine Adherence',
-              subText: 'Priya & Aryan up to date',
-              accentColor: AppColors.success,
-            ),
-            _buildKpiCard(
-              icon: Icons.notifications_active_rounded,
-              value: '2 Alerts',
-              label: 'Critical Actions',
-              subText: 'Savitri Devi BP check overdue',
-              accentColor: AppColors.error,
-            ),
-            _buildKpiCard(
-              icon: Icons.analytics_rounded,
-              value: 'High Risk',
-              label: 'Hereditary Vector',
-              subText: 'HTN & Type 2 Diabetes',
-              accentColor: AppColors.secondaryAccent,
-            ),
-          ],
+          itemCount: kpis.length,
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: crossAxisCount,
+            crossAxisSpacing: AppSpacing.sm,
+            mainAxisSpacing: AppSpacing.sm,
+            childAspectRatio: width > 1000 ? 1.35 : 1.45,
+          ),
+          itemBuilder: (context, index) {
+            final kpi = kpis[index];
+            final color = kpi['color'] as Color;
+
+            return Container(
+              decoration: BoxDecoration(
+                color: AppColors.card,
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: AppColors.border),
+              ),
+              clipBehavior: Clip.antiAlias,
+              child: Stack(
+                children: [
+                  Positioned(
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    height: 3,
+                    child: Container(color: color),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(12),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(6),
+                          decoration: BoxDecoration(
+                            color: color.withValues(alpha: 0.15),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Icon(kpi['icon'] as IconData, color: color, size: 16),
+                        ),
+                        const SizedBox(height: 4),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              kpi['value'] as String,
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            const SizedBox(height: 2),
+                            Text(
+                              kpi['label'] as String,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: AppTextStyles.labelSmall.copyWith(
+                                color: AppColors.secondaryText,
+                                fontSize: 9.5,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                            const SizedBox(height: 1),
+                            Text(
+                              kpi['subText'] as String,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                color: color,
+                                fontSize: 8.5,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
         );
       },
-    );
-  }
-
-  Widget _buildKpiCard({
-    required IconData icon,
-    required String value,
-    required String label,
-    required String subText,
-    required Color accentColor,
-  }) {
-    return Container(
-      decoration: BoxDecoration(
-        color: AppColors.card,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: AppColors.border),
-      ),
-      clipBehavior: Clip.antiAlias,
-      child: Stack(
-        children: [
-          Positioned(
-            left: 0,
-            right: 0,
-            bottom: 0,
-            height: 3,
-            child: Container(color: accentColor),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(12),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(6),
-                  decoration: BoxDecoration(
-                    color: accentColor.withValues(alpha: 0.15),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Icon(icon, color: accentColor, size: 18),
-                ),
-                const SizedBox(height: 4),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      value,
-                      style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 2),
-                    Text(
-                      label,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: AppTextStyles.labelSmall.copyWith(
-                        color: AppColors.secondaryText,
-                        fontSize: 9.5,
-                      ),
-                    ),
-                    const SizedBox(height: 1),
-                    Text(
-                      subText,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        color: accentColor,
-                        fontSize: 8.5,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

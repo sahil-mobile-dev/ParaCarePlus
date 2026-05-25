@@ -10,59 +10,109 @@ class FamilyMemberCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final members = <Map<String, dynamic>>[
       {
-        'name': 'Ramesh Kumar (Self)',
-        'relation': 'Self · Male · 48 yrs',
-        'wellnessIndex': 0.82,
-        'wellnessText': '82%',
-        'primaryRisk': 'Hypertension, Pre-DM',
-        'lastCheckup': '15 May 2026',
-        'avatar': 'RK',
-        'avatarColor': AppColors.primaryLight,
-        'alert': false,
+        'name': 'Ramesh Kumar',
+        'relation': 'Self · 48 yrs · Male',
+        'wellnessScore': 78,
+        'wellnessColor': AppColors.secondaryAccent,
+        'stats': [
+          {'lbl': 'BP', 'val': '128/82', 'color': AppColors.secondaryAccent},
+          {'lbl': 'Sugar', 'val': '142', 'color': Colors.orange},
+          {'lbl': 'BMI', 'val': '26.2', 'color': AppColors.secondaryAccent},
+        ],
+        'conditions': ['HTN', 'Pre-DM', 'Hyperlipidemia'],
+        'alertText': '3 AI alerts — review HbA1c & BP',
+        'alertColor': AppColors.secondaryAccent,
+        'avatarGradient': const [Color(0xFF00B4D8), Color(0xFF3A86FF)],
+        'avatarIcon': Icons.person_rounded,
+        'actions': [
+          {'label': 'View', 'msg': 'Opening Ramesh health profile…'},
+          {'label': 'EMR', 'msg': 'Opening Ramesh EMR…'},
+          {'label': 'Book', 'msg': 'Booking appointment for Ramesh…'},
+        ],
       },
       {
         'name': 'Geeta Kumar',
-        'relation': 'Spouse · Female · 44 yrs',
-        'wellnessIndex': 0.89,
-        'wellnessText': '89%',
-        'primaryRisk': 'None (Healthy)',
-        'lastCheckup': '18 May 2026',
-        'avatar': 'GK',
-        'avatarColor': AppColors.success,
-        'alert': false,
-      },
-      {
-        'name': 'Savitri Devi',
-        'relation': 'Mother · Female · 72 yrs',
-        'wellnessIndex': 0.68,
-        'wellnessText': '68%',
-        'primaryRisk': 'Cardiac, Severe Arthritis',
-        'lastCheckup': '22 Apr 2026',
-        'avatar': 'SD',
-        'avatarColor': AppColors.error,
-        'alert': true,
+        'relation': 'Spouse · 46 yrs · Female',
+        'wellnessScore': 84,
+        'wellnessColor': AppColors.success,
+        'stats': [
+          {'lbl': 'BP', 'val': '114/74', 'color': AppColors.success},
+          {'lbl': 'Hb', 'val': '11.6', 'color': AppColors.secondaryAccent},
+          {'lbl': 'BMI', 'val': '23.4', 'color': AppColors.success},
+        ],
+        'conditions': ['Osteopenia', 'Mild Anemia'],
+        'alertText': 'Calcium + Vit D supplement needed',
+        'alertColor': AppColors.secondaryAccent,
+        'avatarGradient': const [Color(0xFFF72585), Color(0xFFC77DFF)],
+        'avatarIcon': Icons.person_3_rounded,
+        'actions': [
+          {'label': 'View', 'msg': 'Opening Geeta health profile…'},
+          {'label': 'EMR', 'msg': 'Opening Geeta EMR…'},
+          {'label': 'Book', 'msg': 'Booking appointment for Geeta…'},
+        ],
       },
       {
         'name': 'Aryan Kumar',
-        'relation': 'Son · Male · 14 yrs',
-        'wellnessIndex': 0.94,
-        'wellnessText': '94%',
-        'primaryRisk': 'Seasonal Allergies',
-        'lastCheckup': '05 Apr 2026',
-        'avatar': 'AK',
-        'avatarColor': Colors.teal,
-        'alert': false,
+        'relation': 'Son · 22 yrs · Male',
+        'wellnessScore': 92,
+        'wellnessColor': AppColors.success,
+        'stats': [
+          {'lbl': 'BP', 'val': '118/76', 'color': AppColors.success},
+          {'lbl': 'Hb', 'val': '15.2', 'color': AppColors.success},
+          {'lbl': 'BMI', 'val': '22.5', 'color': AppColors.success},
+        ],
+        'conditions': ['Healthy'],
+        'alertText': 'No active health alerts',
+        'alertColor': AppColors.success,
+        'avatarGradient': const [Color(0xFF00C897), Color(0xFF0D9488)],
+        'avatarIcon': Icons.person_2_rounded,
+        'actions': [
+          {'label': 'View', 'msg': 'Opening Aryan health profile…'},
+          {'label': 'EMR', 'msg': 'Opening Aryan EMR…'},
+          {'label': 'Book', 'msg': 'Booking appointment for Aryan…'},
+        ],
       },
       {
         'name': 'Priya Kumar',
-        'relation': 'Daughter · Female · 10 yrs',
-        'wellnessIndex': 0.96,
-        'wellnessText': '96%',
-        'primaryRisk': 'None (Healthy)',
-        'lastCheckup': '12 May 2026',
-        'avatar': 'PK',
-        'avatarColor': Colors.purpleAccent,
-        'alert': false,
+        'relation': 'Daughter · 18 yrs · Female',
+        'wellnessScore': 88,
+        'wellnessColor': AppColors.primaryLight,
+        'stats': [
+          {'lbl': 'BP', 'val': '110/70', 'color': AppColors.success},
+          {'lbl': 'Hb', 'val': '12.4', 'color': AppColors.secondaryAccent},
+          {'lbl': 'BMI', 'val': '20.6', 'color': AppColors.success},
+        ],
+        'conditions': ['Borderline Hb'],
+        'alertText': 'Dental checkup pending',
+        'alertColor': AppColors.secondaryAccent,
+        'avatarGradient': const [Color(0xFFF77F00), Color(0xFFFFD166)],
+        'avatarIcon': Icons.person_4_rounded,
+        'actions': [
+          {'label': 'View', 'msg': 'Opening Priya health profile…'},
+          {'label': 'EMR', 'msg': 'Opening Priya EMR…'},
+          {'label': 'Dental', 'msg': 'Booking dental for Priya…'},
+        ],
+      },
+      {
+        'name': 'Savitri Devi',
+        'relation': 'Mother · 74 yrs · Female',
+        'wellnessScore': 68,
+        'wellnessColor': AppColors.secondaryAccent,
+        'stats': [
+          {'lbl': 'BP', 'val': '142/88', 'color': AppColors.error},
+          {'lbl': 'Sugar', 'val': '168', 'color': Colors.orange},
+          {'lbl': 'BMI', 'val': '27.8', 'color': AppColors.secondaryAccent},
+        ],
+        'conditions': ['T2 Diabetes', 'HTN Stage 2', 'Osteoarthritis'],
+        'alertText': 'BP elevated — consult needed',
+        'alertColor': AppColors.error,
+        'avatarGradient': const [Color(0xFF4361EE), Color(0xFFC77DFF)],
+        'avatarIcon': Icons.elderly_rounded,
+        'actions': [
+          {'label': 'View', 'msg': 'Opening Savitri health profile…'},
+          {'label': 'EMR', 'msg': 'Opening Savitri EMR…'},
+          {'label': 'Book', 'msg': 'Booking appointment for Savitri…'},
+        ],
       },
     ];
 
@@ -70,352 +120,301 @@ class FamilyMemberCard extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         const Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text('FAMILY MEMBER DIRECTORY', style: AppTextStyles.labelSmall),
+            Icon(
+              Icons.badge_rounded,
+              color: AppColors.primaryLight,
+              size: 18,
+            ),
+            SizedBox(width: 8),
             Text(
-              '5 ACTIVE',
-              style: TextStyle(
-                color: AppColors.success,
-                fontSize: 10,
-                fontWeight: FontWeight.bold,
-              ),
+              'FAMILY HEALTH PROFILES',
+              style: AppTextStyles.labelSmall,
             ),
           ],
         ),
         const SizedBox(height: AppSpacing.sm),
         LayoutBuilder(
           builder: (context, constraints) {
-            final isLargeScreen = constraints.maxWidth > 900;
-            final isMediumScreen = constraints.maxWidth > 600 && !isLargeScreen;
+            final width = constraints.maxWidth;
+            final crossAxisCount = width > 1200
+                ? 3
+                : (width > 768 ? 2 : 1);
 
-            if (isLargeScreen) {
-              return Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: Column(
-                      children: [
-                        _buildMemberTile(context, members[0]),
-                        const SizedBox(height: 8),
-                        _buildMemberTile(context, members[1]),
-                      ],
-                    ),
+            return GridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: members.length + 1,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: crossAxisCount,
+                crossAxisSpacing: AppSpacing.md,
+                mainAxisSpacing: AppSpacing.md,
+                childAspectRatio: 1.45,
+              ),
+              itemBuilder: (context, index) {
+                if (index == members.length) {
+                  return _buildAddMemberCard(context);
+                }
+
+                final m = members[index];
+                final gradientColors = m['avatarGradient'] as List<Color>;
+                final avatarIcon = m['avatarIcon'] as IconData;
+                final conditions = m['conditions'] as List<String>;
+                final stats = m['stats'] as List<Map<String, dynamic>>;
+                final actions = m['actions'] as List<Map<String, String>>;
+                final alertColor = m['alertColor'] as Color;
+
+                return Container(
+                  decoration: BoxDecoration(
+                    color: AppColors.card,
+                    borderRadius: BorderRadius.circular(14),
+                    border: Border.all(color: AppColors.border),
                   ),
-                  const SizedBox(width: AppSpacing.md),
-                  Expanded(
-                    child: Column(
-                      children: [
-                        _buildMemberTile(context, members[2]),
-                        const SizedBox(height: 8),
-                        _buildMemberTile(context, members[3]),
-                      ],
-                    ),
+                  clipBehavior: Clip.antiAlias,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      // Header
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(14, 14, 14, 8),
+                        child: Row(
+                          children: [
+                            Container(
+                              width: 44,
+                              height: 44,
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: gradientColors,
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                ),
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Icon(avatarIcon, color: Colors.white, size: 22),
+                            ),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    m['name'] as String,
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                  const SizedBox(height: 2),
+                                  Text(
+                                    m['relation'] as String,
+                                    style: const TextStyle(
+                                      color: AppColors.secondaryText,
+                                      fontSize: 10,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(width: 8),
+                            Column(
+                              children: [
+                                Text(
+                                  '${m['wellnessScore']}',
+                                  style: TextStyle(
+                                    color: m['wellnessColor'] as Color,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w800,
+                                  ),
+                                ),
+                                const Text(
+                                  'WELLNESS',
+                                  style: TextStyle(
+                                    color: AppColors.secondaryText,
+                                    fontSize: 8,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      // Stats Row
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 14),
+                        child: Row(
+                          children: stats.map((st) {
+                            final sc = st['color'] as Color;
+                            return Expanded(
+                              child: Container(
+                                margin: const EdgeInsets.only(right: 6),
+                                padding: const EdgeInsets.symmetric(vertical: 4),
+                                decoration: BoxDecoration(
+                                  color: AppColors.surface,
+                                  borderRadius: BorderRadius.circular(6),
+                                ),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      (st['lbl'] as String?) ?? '',
+                                      style: const TextStyle(
+                                        color: AppColors.secondaryText,
+                                        fontSize: 9,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 1),
+                                    Text(
+                                      (st['val'] as String?) ?? '',
+                                      style: TextStyle(
+                                        color: sc,
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                      ),
+
+                      const SizedBox(height: 8),
+
+                      // Conditions Tags
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 14),
+                        child: Wrap(
+                          spacing: 4,
+                          runSpacing: 4,
+                          children: conditions.map((cond) {
+                            final isActive = cond != 'Healthy';
+                            return Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 6,
+                                vertical: 2,
+                              ),
+                              decoration: BoxDecoration(
+                                color: isActive
+                                    ? AppColors.error.withValues(alpha: 0.12)
+                                    : Colors.white.withValues(alpha: 0.06),
+                                borderRadius: BorderRadius.circular(4),
+                              ),
+                              child: Text(
+                                cond,
+                                style: TextStyle(
+                                  color: isActive
+                                      ? AppColors.error
+                                      : AppColors.secondaryText,
+                                  fontSize: 8.5,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                      ),
+
+                      const Spacer(),
+
+                      // Alerts Strip
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 14,
+                          vertical: 4,
+                        ),
+                        color: Colors.white.withValues(alpha: 0.02),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.warning_amber_rounded,
+                              color: alertColor,
+                              size: 11,
+                            ),
+                            const SizedBox(width: 6),
+                            Expanded(
+                              child: Text(
+                                m['alertText'] as String,
+                                style: TextStyle(
+                                  color: alertColor,
+                                  fontSize: 10,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      // Actions Button bar
+                      Container(
+                        color: AppColors.surface,
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 14,
+                          vertical: 6,
+                        ),
+                        child: Row(
+                          children: actions.map((act) {
+                            return Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 3),
+                                child: OutlinedButton(
+                                  onPressed: () {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text(act['msg'] ?? ''),
+                                        backgroundColor: AppColors.primaryLight,
+                                      ),
+                                    );
+                                  },
+                                  style: OutlinedButton.styleFrom(
+                                    side: const BorderSide(
+                                      color: AppColors.border,
+                                    ),
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 6,
+                                    ),
+                                    minimumSize: Size.zero,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(6),
+                                    ),
+                                  ),
+                                  child: Text(
+                                    act['label'] ?? '',
+                                    style: const TextStyle(
+                                      color: AppColors.secondaryText,
+                                      fontSize: 9.5,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                    ],
                   ),
-                  const SizedBox(width: AppSpacing.md),
-                  Expanded(
-                    child: Column(
-                      children: [
-                        _buildMemberTile(context, members[4]),
-                        const SizedBox(height: 8),
-                        _buildAddMemberCard(context),
-                      ],
-                    ),
-                  ),
-                ],
-              );
-            } else if (isMediumScreen) {
-              return Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: Column(
-                      children: [
-                        _buildMemberTile(context, members[0]),
-                        const SizedBox(height: 8),
-                        _buildMemberTile(context, members[1]),
-                        const SizedBox(height: 8),
-                        _buildMemberTile(context, members[2]),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(width: AppSpacing.md),
-                  Expanded(
-                    child: Column(
-                      children: [
-                        _buildMemberTile(context, members[3]),
-                        const SizedBox(height: 8),
-                        _buildMemberTile(context, members[4]),
-                        const SizedBox(height: 8),
-                        _buildAddMemberCard(context),
-                      ],
-                    ),
-                  ),
-                ],
-              );
-            } else {
-              return Column(
-                children: [
-                  for (final member in members) ...[
-                    _buildMemberTile(context, member),
-                    const SizedBox(height: 8),
-                  ],
-                  _buildAddMemberCard(context),
-                ],
-              );
-            }
+                );
+              },
+            );
           },
         ),
       ],
     );
   }
 
-  Widget _buildMemberTile(BuildContext context, Map<String, dynamic> m) {
-    final wellnessVal = m['wellnessIndex'] as double;
-    final wellnessColor = wellnessVal > 0.9
-        ? AppColors.success
-        : (wellnessVal > 0.8
-              ? AppColors.primaryLight
-              : AppColors.secondaryAccent);
-    final strokeColor = (m['alert'] as bool)
-        ? AppColors.error
-        : AppColors.border;
-
-    return Container(
-      padding: const EdgeInsets.all(14),
-      decoration: BoxDecoration(
-        color: AppColors.card,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: strokeColor,
-          width: (m['alert'] as bool) ? 1.5 : 1,
-        ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Row(
-            children: [
-              CircleAvatar(
-                radius: 20,
-                backgroundColor: m['avatarColor'] as Color?,
-                child: Text(
-                  m['avatar'] as String,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 13,
-                  ),
-                ),
-              ),
-              const SizedBox(width: 12),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Flexible(
-                          child: Text(
-                            m['name'] as String,
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 13,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                        ),
-                        if (m['alert'] as bool) ...[
-                          const SizedBox(width: 6),
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 5,
-                              vertical: 2,
-                            ),
-                            decoration: BoxDecoration(
-                              color: AppColors.error.withValues(alpha: 0.15),
-                              border: Border.all(color: AppColors.error),
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                            child: const Text(
-                              'ATTENTION',
-                              style: TextStyle(
-                                color: AppColors.error,
-                                fontSize: 7,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ],
-                    ),
-                    const SizedBox(height: 2),
-                    Text(
-                      m['relation'] as String,
-                      style: const TextStyle(
-                        color: AppColors.secondaryText,
-                        fontSize: 9.5,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const SizedBox(width: 8),
-              // Circular progress score
-              Stack(
-                alignment: Alignment.center,
-                children: [
-                  SizedBox(
-                    width: 32,
-                    height: 32,
-                    child: CircularProgressIndicator(
-                      value: wellnessVal,
-                      strokeWidth: 3,
-                      backgroundColor: AppColors.surface,
-                      valueColor: AlwaysStoppedAnimation<Color>(wellnessColor),
-                    ),
-                  ),
-                  Text(
-                    m['wellnessText'] as String,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 8.5,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          const SizedBox(height: 12),
-          const Divider(color: AppColors.border, height: 1),
-          const SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text(
-                    'PRIMARY HEALTH METRICS',
-                    style: TextStyle(
-                      color: AppColors.secondaryText,
-                      fontSize: 7.5,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 2),
-                  Text(
-                    m['primaryRisk'] as String,
-                    style: TextStyle(
-                      color: (m['alert'] as bool)
-                          ? AppColors.error
-                          : Colors.white,
-                      fontSize: 10.5,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  const Text(
-                    'LAST CHECKUP',
-                    style: TextStyle(
-                      color: AppColors.secondaryText,
-                      fontSize: 7.5,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 2),
-                  Text(
-                    m['lastCheckup'] as String,
-                    style: const TextStyle(color: Colors.white70, fontSize: 10),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          const SizedBox(height: 12),
-          Row(
-            children: [
-              Expanded(
-                child: ElevatedButton.icon(
-                  onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('Viewing Telemetry for ${m['name']}...'),
-                        backgroundColor: AppColors.primaryLight,
-                      ),
-                    );
-                  },
-                  icon: const Icon(Icons.analytics_rounded, size: 12),
-                  label: const Text(
-                    'TELEMETRY',
-                    style: TextStyle(
-                      fontSize: 9.5,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.surface,
-                    foregroundColor: Colors.white,
-                    elevation: 0,
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      side: const BorderSide(color: AppColors.border),
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: ElevatedButton(
-                  onPressed: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          'Switched workspace context to ${m['name']}.',
-                        ),
-                        backgroundColor: AppColors.success,
-                      ),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.primaryLight,
-                    foregroundColor: Colors.white,
-                    elevation: 0,
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                  child: const Text(
-                    'FOCUS',
-                    style: TextStyle(
-                      fontSize: 9.5,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
   Widget _buildAddMemberCard(BuildContext context) {
     return Container(
-      height: 180,
       decoration: BoxDecoration(
         color: AppColors.card.withValues(alpha: 0.4),
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(14),
         border: Border.all(color: AppColors.border, style: BorderStyle.none),
       ),
       child: Material(
@@ -425,10 +424,11 @@ class FamilyMemberCard extends StatelessWidget {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                 content: Text('Opening Link New Family Member Form...'),
+                backgroundColor: AppColors.primaryLight,
               ),
             );
           },
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(14),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -450,14 +450,14 @@ class FamilyMemberCard extends StatelessWidget {
                 style: TextStyle(
                   color: AppColors.primaryLight,
                   fontWeight: FontWeight.bold,
-                  fontSize: 12,
+                  fontSize: 11.5,
                   letterSpacing: 1.1,
                 ),
               ),
               const SizedBox(height: 4),
               const Text(
                 'Add ABHA or National ID',
-                style: TextStyle(color: AppColors.secondaryText, fontSize: 9.5),
+                style: TextStyle(color: AppColors.secondaryText, fontSize: 9),
               ),
             ],
           ),

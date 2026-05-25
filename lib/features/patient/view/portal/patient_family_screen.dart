@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:paracareplus/core/theme/app_colors.dart';
 import 'package:paracareplus/core/theme/app_spacing.dart';
 import 'package:paracareplus/features/patient/view/portal/widgets/family/family_kpis.dart';
@@ -14,13 +15,15 @@ class PatientFamilyScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final currentDateStr = DateFormat('dd MMM yyyy').format(DateTime.now());
+
     return Scaffold(
       backgroundColor: AppColors.background,
       drawer: const PatientPortalDrawer(
         activeRouteName: RouteNames.patientFamily,
       ),
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: AppColors.surface,
         elevation: 0,
         iconTheme: const IconThemeData(color: Colors.white),
         leading: Builder(
@@ -41,66 +44,198 @@ class PatientFamilyScreen extends ConsumerWidget {
       ),
       body: SafeArea(
         child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              _buildNetworkHeader(),
+              // Page Header Row
+              LayoutBuilder(
+                builder: (context, constraints) {
+                  final isMobile = constraints.maxWidth < 600;
+
+                  final titleRow = Row(
+                    children: [
+                      Icon(
+                        Icons.verified_user,
+                        color: AppColors.primaryLight,
+                        size: 22,
+                      ),
+                      const SizedBox(width: 8),
+                      const Text(
+                        'Family Health Dashboard',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      if (!isMobile) ...[
+                        const SizedBox(width: 12),
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 3,
+                          ),
+                          decoration: BoxDecoration(
+                            color: AppColors.primaryLight.withValues(
+                              alpha: 0.15,
+                            ),
+                            border: Border.all(
+                              color: AppColors.primaryLight.withValues(
+                                alpha: 0.3,
+                              ),
+                            ),
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: const Text(
+                            'ABHA Linked',
+                            style: TextStyle(
+                              color: AppColors.primaryLight,
+                              fontSize: 9,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ],
+                  );
+
+                  final actionsRow = Wrap(
+                    spacing: 8,
+                    runSpacing: 8,
+                    alignment: WrapAlignment.end,
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 4,
+                        ),
+                        decoration: BoxDecoration(
+                          color: AppColors.primaryLight.withValues(alpha: 0.15),
+                          border: Border.all(
+                            color: AppColors.primaryLight.withValues(
+                              alpha: 0.3,
+                            ),
+                          ),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: const Row(
+                          children: [
+                            Icon(
+                              Icons.person_rounded,
+                              color: AppColors.primaryLight,
+                              size: 11,
+                            ),
+                            SizedBox(width: 4),
+                            Text(
+                              'Ramesh Kumar (Head)',
+                              style: TextStyle(
+                                color: AppColors.primaryLight,
+                                fontSize: 10,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 4,
+                        ),
+                        decoration: BoxDecoration(
+                          color: AppColors.primaryLight.withValues(alpha: 0.15),
+                          border: Border.all(
+                            color: AppColors.primaryLight.withValues(
+                              alpha: 0.3,
+                            ),
+                          ),
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Text(
+                          currentDateStr,
+                          style: const TextStyle(
+                            color: AppColors.primaryLight,
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      ElevatedButton.icon(
+                        onPressed: () {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Opening add family member flow…'),
+                              backgroundColor: AppColors.primaryLight,
+                            ),
+                          );
+                        },
+                        icon: const Icon(Icons.person_add_rounded, size: 12),
+                        label: const Text(
+                          'Add Member',
+                          style: TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.primaryLight.withValues(
+                            alpha: 0.2,
+                          ),
+                          foregroundColor: AppColors.primaryLight,
+                          elevation: 0,
+                          side: BorderSide(
+                            color: AppColors.primaryLight.withValues(
+                              alpha: 0.4,
+                            ),
+                          ),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 8,
+                          ),
+                          minimumSize: Size.zero,
+                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        ),
+                      ),
+                    ],
+                  );
+
+                  return Column(
+                    children: [
+                      titleRow,
+                      const SizedBox(height: 20),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [actionsRow],
+                      ),
+                    ],
+                  );
+                },
+              ),
               const SizedBox(height: AppSpacing.lg),
+
+              // KPI Cards
               const FamilyKpis(),
               const SizedBox(height: AppSpacing.lg),
-              const FamilyRiskSunburst(),
-              const SizedBox(height: AppSpacing.lg),
+
+              // Family Profiles
               const FamilyMemberCard(),
               const SizedBox(height: AppSpacing.lg),
+
+              // Family Risk Table
               const FamilyRiskTable(),
+              const SizedBox(height: AppSpacing.lg),
+
+              // Dual Sunburst Charts
+              const FamilyRiskSunburst(),
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildNetworkHeader() {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: AppColors.primaryLight.withValues(alpha: 0.08),
-        borderRadius: BorderRadius.circular(16),
-        border: Border.all(
-          color: AppColors.primaryLight.withValues(alpha: 0.5),
-        ),
-      ),
-      child: const Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Icon(Icons.hub_rounded, color: AppColors.primaryLight, size: 24),
-          SizedBox(width: 14),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'CENTRALIZED FAMILY HEALTH NETWORK',
-                  style: TextStyle(
-                    color: AppColors.primaryLight,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 13,
-                  ),
-                ),
-                SizedBox(height: 4),
-                Text(
-                  'Synchronize and overview wellness indicators, genetic risk profiles, and clinical timelines for linked members from a single HIMS dashboard.',
-                  style: TextStyle(
-                    color: AppColors.primaryText,
-                    fontSize: 11,
-                    height: 1.35,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
       ),
     );
   }
