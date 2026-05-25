@@ -1,227 +1,269 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:paracareplus/core/theme/app_colors.dart';
 import 'package:paracareplus/core/theme/app_spacing.dart';
 import 'package:paracareplus/core/theme/app_text_styles.dart';
+import 'package:paracareplus/features/patient/view/portal/widgets/mch/antenatal_history_tab.dart';
+import 'package:paracareplus/features/patient/view/portal/widgets/mch/child_growth_tab.dart';
+import 'package:paracareplus/features/patient/view/portal/widgets/mch/mch_kpis.dart';
+import 'package:paracareplus/features/patient/view/portal/widgets/mch/nutrition_tab.dart';
+import 'package:paracareplus/features/patient/view/portal/widgets/mch/womens_health_tab.dart';
 import 'package:paracareplus/features/patient/view/portal/widgets/patient_portal_drawer.dart';
 import 'package:paracareplus/routes/route_names.dart';
 
-class PatientMchScreen extends ConsumerWidget {
+class PatientMchScreen extends ConsumerStatefulWidget {
   const PatientMchScreen({super.key});
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<PatientMchScreen> createState() => _PatientMchScreenState();
+}
+
+class _PatientMchScreenState extends ConsumerState<PatientMchScreen> {
+  int _activeTabIndex = 0;
+
+  final List<String> _tabNames = [
+    'Child Growth',
+    'Antenatal History',
+    "Women's Health",
+    'Nutrition',
+  ];
+
+  final List<IconData> _tabIcons = [
+    Icons.child_care_rounded,
+    Icons.pregnant_woman_rounded,
+    Icons.female_rounded,
+    Icons.apple_rounded,
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    final todayStr = DateFormat('dd MMM yyyy').format(DateTime.now());
+    const mchPink = Color(0xFFF72585);
+
     return Scaffold(
       backgroundColor: AppColors.background,
       drawer: const PatientPortalDrawer(activeRouteName: RouteNames.patientMch),
       appBar: AppBar(
         backgroundColor: AppColors.surface,
-        title: const Text('Women & Child Care (MCH)'),
+        elevation: 0,
         leading: Builder(
           builder: (context) => IconButton(
             icon: const Icon(Icons.menu_rounded, color: AppColors.primaryText),
             onPressed: () => Scaffold.of(context).openDrawer(),
           ),
         ),
-      ),
-      body: ListView(
-        physics: const BouncingScrollPhysics(),
-        padding: const EdgeInsets.all(AppSpacing.md),
-        children: [
-          _buildPrenatalProfileBanner(),
-          const SizedBox(height: AppSpacing.md),
-          const Text(
-            'PREGNANCY MILESTONES CALENDAR',
-            style: AppTextStyles.labelSmall,
-          ),
-          const SizedBox(height: AppSpacing.sm),
-          _buildMilestoneCard(
-            week: 'Week 24 Milestone',
-            desc:
-                'Fetal hearing developed. Regularly monitor movements twice daily.',
-            status: 'COMPLETED',
-            statusColor: AppColors.success,
-          ),
-          _buildMilestoneCard(
-            week: 'Week 28 Milestone',
-            desc:
-                'Third-trimester ultrasound due. Check growth velocities and amniotic index.',
-            status: 'UPCOMING',
-            statusColor: AppColors.secondaryAccent,
-          ),
-          const SizedBox(height: AppSpacing.md),
-          const Text(
-            'PEDIATRIC IMMUNIZATION & GROWTH',
-            style: AppTextStyles.labelSmall,
-          ),
-          const SizedBox(height: AppSpacing.sm),
-          _buildPediatricCard(),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildPrenatalProfileBanner() {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [Color(0xFFE91E63), Color(0xFFC2185B)],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-        borderRadius: BorderRadius.circular(AppRadius.lg),
-        border: Border.all(color: Colors.white12),
-      ),
-      child: const Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'ACTIVE PRENATAL TRACKER',
-                style: TextStyle(
-                  color: Colors.white70,
-                  fontSize: 9,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Icon(Icons.favorite_rounded, color: Colors.white70, size: 16),
-            ],
-          ),
-          SizedBox(height: 12),
-          Text(
-            'Weekly Maternal Diary',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
+        title: Row(
+          children: [
+            const Icon(Icons.female_rounded, color: mchPink, size: 20),
+            const SizedBox(width: 8),
+            Text(
+              'Women & Child Health (MCH)',
+              style: AppTextStyles.titleMedium.copyWith(color: Colors.white),
             ),
-          ),
-          SizedBox(height: 4),
-          Text(
-            'Currently: 26 Weeks Pregnant · Third Trimester',
-            style: TextStyle(color: Colors.white70, fontSize: 12),
-          ),
-          SizedBox(height: 12),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'Expected Date: 12 Aug 2026',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 11,
-                  fontWeight: FontWeight.bold,
+          ],
+        ),
+        actions: [],
+      ),
+      body: SafeArea(
+        child: ListView(
+          children: [
+            const SizedBox(height: AppSpacing.md),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: AppRadius.md),
+              child: Row(
+                children: [
+                  // MCH Module Info Tag
+                  Container(
+                    margin: const EdgeInsets.only(right: 8),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 4,
+                    ),
+                    decoration: BoxDecoration(
+                      color: mchPink.withValues(alpha: 0.15),
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(color: mchPink.withValues(alpha: 0.3)),
+                    ),
+                    child: Row(
+                      children: [
+                        const Icon(
+                          Icons.favorite_rounded,
+                          color: mchPink,
+                          size: 11,
+                        ),
+                        const SizedBox(width: 4),
+                        Text(
+                          'MCH Module',
+                          style: AppTextStyles.labelSmall.copyWith(
+                            color: mchPink,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  // Today's Date Badge
+                  Container(
+                    margin: const EdgeInsets.only(right: 8),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 4,
+                    ),
+                    decoration: BoxDecoration(
+                      color: Colors.white.withValues(alpha: 0.05),
+                      borderRadius: BorderRadius.circular(20),
+                      border: Border.all(
+                        color: Colors.white.withValues(alpha: 0.1),
+                      ),
+                    ),
+                    child: Text(
+                      todayStr,
+                      style: AppTextStyles.labelSmall.copyWith(
+                        color: AppColors.secondaryText,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  // Book ANC Button
+                  TextButton.icon(
+                    onPressed: () {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Opening ANC booking…'),
+                          backgroundColor: AppColors.surface,
+                        ),
+                      );
+                    },
+                    icon: const Icon(
+                      Icons.calendar_today_outlined,
+                      size: 12,
+                      color: mchPink,
+                    ),
+                    label: const Text(
+                      'Book ANC',
+                      style: TextStyle(
+                        color: mchPink,
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    style: TextButton.styleFrom(
+                      backgroundColor: mchPink.withValues(alpha: 0.15),
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                        side: BorderSide(color: mchPink.withValues(alpha: 0.3)),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            // KPI metrics grid at top (does not scroll with tabs)
+            const Padding(
+              padding: EdgeInsets.fromLTRB(
+                AppSpacing.md,
+                AppSpacing.md,
+                AppSpacing.md,
+                0,
+              ),
+              child: MchKpis(),
+            ),
+            const SizedBox(height: AppSpacing.md),
+
+            // Tab bar selector
+            Container(
+              margin: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
+              decoration: const BoxDecoration(
+                border: Border(bottom: BorderSide(color: AppColors.border)),
+              ),
+              child: Row(
+                children: List.generate(_tabNames.length, (index) {
+                  final isActive = _activeTabIndex == index;
+                  return Expanded(
+                    child: InkWell(
+                      onTap: () {
+                        setState(() {
+                          _activeTabIndex = index;
+                        });
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        decoration: BoxDecoration(
+                          border: Border(
+                            bottom: BorderSide(
+                              color: isActive ? mchPink : Colors.transparent,
+                              width: 2,
+                            ),
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              _tabIcons[index],
+                              size: 14,
+                              color: isActive
+                                  ? mchPink
+                                  : AppColors.secondaryText,
+                            ),
+                            const SizedBox(width: 6),
+                            Flexible(
+                              child: Text(
+                                _tabNames[index],
+                                overflow: TextOverflow.ellipsis,
+                                style: TextStyle(
+                                  color: isActive
+                                      ? mchPink
+                                      : AppColors.secondaryText,
+                                  fontSize: 11.5,
+                                  fontWeight: isActive
+                                      ? FontWeight.bold
+                                      : FontWeight.normal,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                }),
+              ),
+            ),
+            const SizedBox(height: AppSpacing.md),
+
+            // Tab content area (scrollable)
+            Expanded(
+              child: SingleChildScrollView(
+                physics: const BouncingScrollPhysics(),
+                padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: AppSpacing.lg),
+                  child: _buildActiveTabContent(),
                 ),
               ),
-              Text(
-                'Consults Done: 6/9',
-                style: TextStyle(color: Colors.white70, fontSize: 11),
-              ),
-            ],
-          ),
-        ],
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  Widget _buildMilestoneCard({
-    required String week,
-    required String desc,
-    required String status,
-    required Color statusColor,
-  }) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: AppSpacing.sm),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: AppColors.card,
-        borderRadius: BorderRadius.circular(AppRadius.md),
-        border: Border.all(color: AppColors.border),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                week,
-                style: AppTextStyles.labelLarge.copyWith(color: Colors.white),
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                decoration: BoxDecoration(
-                  color: statusColor.withValues(alpha: 0.15),
-                  borderRadius: BorderRadius.circular(4),
-                ),
-                child: Text(
-                  status,
-                  style: TextStyle(
-                    color: statusColor,
-                    fontSize: 8,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Text(desc, style: AppTextStyles.bodySmall),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildPediatricCard() {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: AppColors.card,
-        borderRadius: BorderRadius.circular(AppRadius.md),
-        border: Border.all(color: AppColors.border),
-      ),
-      child: const Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text('Child Profile Switcher', style: AppTextStyles.labelLarge),
-          SizedBox(height: 4),
-          Text(
-            'Log growth indicators, height and weight curves for linked children.',
-            style: AppTextStyles.bodySmall,
-          ),
-          SizedBox(height: 12),
-          Row(
-            children: [
-              CircleAvatar(
-                radius: 14,
-                backgroundColor: AppColors.primary,
-                child: Text(
-                  'K',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 10,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              SizedBox(width: 8),
-              Text(
-                'Kunal Sharma (Age: 3)',
-                style: TextStyle(color: Colors.white, fontSize: 12),
-              ),
-              Spacer(),
-              Icon(
-                Icons.arrow_forward_ios_rounded,
-                color: AppColors.secondaryText,
-                size: 12,
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
+  Widget _buildActiveTabContent() {
+    switch (_activeTabIndex) {
+      case 0:
+        return const ChildGrowthTab();
+      case 1:
+        return const AntenatalHistoryTab();
+      case 2:
+        return const WomensHealthTab();
+      case 3:
+        return const NutritionTab();
+      default:
+        return const ChildGrowthTab();
+    }
   }
 }

@@ -43,42 +43,49 @@ class PatientChronicScreen extends ConsumerWidget {
             onPressed: () => Scaffold.of(context).openDrawer(),
           ),
         ),
-        actions: [
-          Container(
-            margin: const EdgeInsets.only(right: 12),
-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-            decoration: BoxDecoration(
-              color: AppColors.primary.withValues(alpha: 0.15),
-              borderRadius: BorderRadius.circular(20),
-              border: Border.all(
-                color: AppColors.primaryLight.withValues(alpha: 0.3),
-              ),
-            ),
-            child: Row(
-              children: [
-                const Icon(
-                  Icons.person_outline_rounded,
-                  color: AppColors.primaryLight,
-                  size: 12,
-                ),
-                const SizedBox(width: 4),
-                Text(
-                  'Ramesh Kumar',
-                  style: AppTextStyles.labelSmall.copyWith(
-                    color: AppColors.primaryLight,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
+        actions: [],
       ),
       body: SafeArea(
         child: ListView(
           physics: const BouncingScrollPhysics(),
           padding: const EdgeInsets.all(AppSpacing.md),
           children: [
+            Row(
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(right: 12),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 4,
+                  ),
+                  decoration: BoxDecoration(
+                    color: AppColors.primary.withValues(alpha: 0.15),
+                    borderRadius: BorderRadius.circular(20),
+                    border: Border.all(
+                      color: AppColors.primaryLight.withValues(alpha: 0.3),
+                    ),
+                  ),
+                  child: Row(
+                    children: [
+                      const Icon(
+                        Icons.person_outline_rounded,
+                        color: AppColors.primaryLight,
+                        size: 12,
+                      ),
+                      const SizedBox(width: 4),
+                      Text(
+                        'Ramesh Kumar',
+                        style: AppTextStyles.labelSmall.copyWith(
+                          color: AppColors.primaryLight,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: AppSpacing.md),
             // Top Section - Active Registered Profiles
             _buildActiveProfilesStrip(),
             const SizedBox(height: AppSpacing.md),
