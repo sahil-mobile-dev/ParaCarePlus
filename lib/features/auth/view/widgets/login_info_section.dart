@@ -12,7 +12,6 @@ class LoginInfoSection extends StatefulWidget {
 class _LoginInfoSectionState extends State<LoginInfoSection>
     with SingleTickerProviderStateMixin {
   late AnimationController _floatController;
-  late Animation<double> _floatAnimation;
 
   @override
   void initState() {
@@ -21,9 +20,6 @@ class _LoginInfoSectionState extends State<LoginInfoSection>
       vsync: this,
       duration: const Duration(seconds: 4),
     )..repeat(reverse: true);
-    _floatAnimation = Tween<double>(begin: 0, end: -8).animate(
-      CurvedAnimation(parent: _floatController, curve: Curves.easeInOut),
-    );
   }
 
   @override
@@ -81,33 +77,16 @@ class _LoginInfoSectionState extends State<LoginInfoSection>
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // Floating hospital logo
-        AnimatedBuilder(
-          animation: _floatAnimation,
-          builder: (context, child) => Transform.translate(
-            offset: Offset(0, _floatAnimation.value),
-            child: child,
+        ClipRRect(
+          borderRadius: const BorderRadiusGeometry.vertical(
+            top: Radius.circular(30),
+            bottom: Radius.circular(20),
           ),
-          child: Container(
-            width: 68,
-            height: 68,
-            decoration: BoxDecoration(
-              gradient: const LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [Color(0xFFE65100), Color(0xFFF9A825)],
-              ),
-              borderRadius: BorderRadius.circular(18),
-              boxShadow: [
-                BoxShadow(
-                  color: const Color(0xFFE65100).withValues(alpha: 0.45),
-                  blurRadius: 24,
-                  offset: const Offset(0, 4),
-                ),
-              ],
-            ),
-            child: const Center(
-              child: Text('🏥', style: TextStyle(fontSize: 34)),
-            ),
+          child: Image.asset(
+            'assets/images/para_care_logo.png',
+            width: 100,
+            height: 100,
+            fit: BoxFit.cover,
           ),
         ),
         const SizedBox(height: AppSpacing.md),

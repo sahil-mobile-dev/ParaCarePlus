@@ -843,7 +843,19 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       ),
       child: Column(
         children: [
-          const Text('🏥', style: TextStyle(fontSize: 32)),
+          ClipRRect(
+            borderRadius: const BorderRadiusGeometry.vertical(
+              top: Radius.circular(30),
+              bottom: Radius.circular(20),
+            ),
+            child: Image.asset(
+              'assets/images/para_care_logo.png',
+              width: 80,
+              height: 80,
+              fit: BoxFit.cover,
+            ),
+          ),
+
           const SizedBox(height: 8),
           const Text(
             'ParaCare+ HIMS — Secure Login',
