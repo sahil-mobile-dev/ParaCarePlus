@@ -3,14 +3,13 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:paracareplus/core/theme/app_colors.dart';
 import 'package:paracareplus/core/theme/app_spacing.dart';
-import 'package:paracareplus/core/theme/app_text_styles.dart';
 import 'package:paracareplus/features/patient/view/portal/widgets/patient_portal_drawer.dart';
 import 'package:paracareplus/features/patient/view/portal/widgets/tele/available_specialists.dart';
 import 'package:paracareplus/features/patient/view/portal/widgets/tele/consultation_chat_panel.dart';
 import 'package:paracareplus/features/patient/view/portal/widgets/tele/consultation_history_table.dart';
+import 'package:paracareplus/features/patient/view/portal/widgets/tele/live_consultation_video.dart';
 import 'package:paracareplus/features/patient/view/portal/widgets/tele/tele_charts.dart';
 import 'package:paracareplus/features/patient/view/portal/widgets/tele/tele_kpis.dart';
-import 'package:paracareplus/features/patient/view/portal/widgets/tele/live_consultation_video.dart';
 import 'package:paracareplus/routes/route_names.dart';
 
 class PatientTeleScreen extends ConsumerWidget {
@@ -262,11 +261,10 @@ class PatientTeleScreen extends ConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: elements,
             ),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Text(
+                Text(
                   'Telemedicine Services',
                   style: TextStyle(
                     color: Colors.white,

@@ -63,7 +63,7 @@ class _PatientMchScreenState extends ConsumerState<PatientMchScreen> {
             ),
           ],
         ),
-        actions: [],
+        actions: const [],
       ),
       body: SafeArea(
         child: ListView(

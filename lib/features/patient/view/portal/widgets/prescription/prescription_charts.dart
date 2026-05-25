@@ -63,7 +63,6 @@ class PrescriptionCharts extends StatelessWidget {
                 maxY: 32,
                 barTouchData: const BarTouchData(),
                 titlesData: FlTitlesData(
-                  show: true,
                   bottomTitles: AxisTitles(
                     sideTitles: SideTitles(
                       showTitles: true,
@@ -108,7 +107,6 @@ class PrescriptionCharts extends StatelessWidget {
                   topTitles: const AxisTitles(),
                 ),
                 gridData: FlGridData(
-                  show: true,
                   drawVerticalLine: false,
                   getDrawingHorizontalLine: (value) => FlLine(
                     color: AppColors.border.withValues(alpha: 0.4),

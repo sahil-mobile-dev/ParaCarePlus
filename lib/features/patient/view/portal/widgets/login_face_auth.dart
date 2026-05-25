@@ -8,9 +8,9 @@ import 'package:paracareplus/core/widgets/app_button.dart';
 /// Shows circular camera viewport with animated scanning ring
 /// and liveness check steps (Look Left, Look Right, Blink, Smile).
 class LoginFaceAuth extends StatefulWidget {
-  final VoidCallback onSuccess;
 
-  const LoginFaceAuth({super.key, required this.onSuccess});
+  const LoginFaceAuth({required this.onSuccess, super.key});
+  final VoidCallback onSuccess;
 
   @override
   State<LoginFaceAuth> createState() => _LoginFaceAuthState();

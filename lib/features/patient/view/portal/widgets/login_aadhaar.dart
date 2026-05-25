@@ -6,9 +6,9 @@ import 'package:paracareplus/core/widgets/app_button.dart';
 
 /// Aadhaar-based OTP login tab for the Patient Portal.
 class LoginAadhaar extends StatefulWidget {
-  final VoidCallback onSuccess;
 
-  const LoginAadhaar({super.key, required this.onSuccess});
+  const LoginAadhaar({required this.onSuccess, super.key});
+  final VoidCallback onSuccess;
 
   @override
   State<LoginAadhaar> createState() => _LoginAadhaarState();
@@ -122,10 +122,10 @@ class _LoginAadhaarState extends State<LoginAadhaar> {
                 color: const Color(0xFFC77DFF).withValues(alpha: 0.2),
               ),
             ),
-            child: Column(
+            child: const Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Row(
+                Row(
                   children: [
                     Icon(
                       Icons.shield_rounded,
@@ -143,8 +143,8 @@ class _LoginAadhaarState extends State<LoginAadhaar> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 4),
-                const Text(
+                SizedBox(height: 4),
+                Text(
                   'An OTP will be sent to your Aadhaar-linked mobile. '
                   'We do not store your Aadhaar number. '
                   'Verification powered by UIDAI.',

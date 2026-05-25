@@ -114,15 +114,15 @@ class _PatientLoginScreenState extends State<PatientLoginScreen> {
         // Left brand panel
         Expanded(
           child: Container(
-            decoration: BoxDecoration(
-              gradient: const LinearGradient(
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 colors: [Color(0xF30F2137), Color(0xF9071221)],
               ),
               border: Border(
                 right: BorderSide(
-                    color: const Color(0xFF1E3A5F)),
+                    color: Color(0xFF1E3A5F)),
               ),
             ),
             padding: const EdgeInsets.all(48),

@@ -50,7 +50,7 @@ class BillsTransactionsTable extends StatelessWidget {
               dataRowMaxHeight: 44,
               horizontalMargin: 12,
               columnSpacing: 22,
-              dividerThickness: 1.0,
+              dividerThickness: 1,
               columns: const [
                 DataColumn(
                   label: Text(

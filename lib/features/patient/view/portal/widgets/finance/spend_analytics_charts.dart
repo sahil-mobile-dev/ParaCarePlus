@@ -22,9 +22,8 @@ class SpendAnalyticsCharts extends StatelessWidget {
                 BarChartData(
                   alignment: BarChartAlignment.spaceAround,
                   maxY: 11000,
-                  barTouchData: BarTouchData(enabled: true),
+                  barTouchData: const BarTouchData(enabled: true),
                   titlesData: FlTitlesData(
-                    show: true,
                     bottomTitles: AxisTitles(
                       sideTitles: SideTitles(
                         showTitles: true,
@@ -65,11 +64,10 @@ class SpendAnalyticsCharts extends StatelessWidget {
                         reservedSize: 32,
                       ),
                     ),
-                    topTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
-                    rightTitles: const AxisTitles(sideTitles: SideTitles(showTitles: false)),
+                    topTitles: const AxisTitles(),
+                    rightTitles: const AxisTitles(),
                   ),
                   gridData: FlGridData(
-                    show: true,
                     drawVerticalLine: false,
                     getDrawingHorizontalLine: (value) {
                       return FlLine(

@@ -9,20 +9,6 @@ final activeToolProvider = StateProvider<String>((ref) => 'W/L');
 final imageInvertedProvider = StateProvider<bool>((ref) => false);
 
 class ScanData {
-  final String title;
-  final String date;
-  final String subtitle;
-  final String modality;
-  final String bodyPart;
-  final String radiologist;
-  final String institution;
-  final String accessionNo;
-  final String dob;
-  final String ref;
-  final String technicalData;
-  final String wwWl;
-  final String notes;
-  final List<Map<String, dynamic>> aiFindings;
 
   const ScanData({
     required this.title,
@@ -40,6 +26,20 @@ class ScanData {
     required this.notes,
     required this.aiFindings,
   });
+  final String title;
+  final String date;
+  final String subtitle;
+  final String modality;
+  final String bodyPart;
+  final String radiologist;
+  final String institution;
+  final String accessionNo;
+  final String dob;
+  final String ref;
+  final String technicalData;
+  final String wwWl;
+  final String notes;
+  final List<Map<String, dynamic>> aiFindings;
 }
 
 class DicomViewerPanel extends ConsumerWidget {
@@ -268,7 +268,7 @@ class _Toolbar extends ConsumerWidget {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
                   content: Text('Downloading DICOM file...'),
-                  duration: const Duration(seconds: 1),
+                  duration: Duration(seconds: 1),
                 ),
               );
             } else {
@@ -406,8 +406,8 @@ class _ThumbnailsRow extends ConsumerWidget {
 }
 
 Widget _buildThumbItem(WidgetRef ref, int index, ScanData scan, bool isActive) {
-  IconData icon = Icons.image_rounded;
-  Color iconColor = Colors.white24;
+  var icon = Icons.image_rounded;
+  var iconColor = Colors.white24;
 
   if (scan.title.contains('Chest')) {
     icon = Icons.align_vertical_center_rounded;
@@ -464,8 +464,8 @@ Widget _buildThumbItem(WidgetRef ref, int index, ScanData scan, bool isActive) {
 }
 
 class _CanvasArea extends ConsumerWidget {
-  final ScanData scan;
   const _CanvasArea({required this.scan});
+  final ScanData scan;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -505,7 +505,7 @@ class _CanvasArea extends ConsumerWidget {
       }
     }
 
-    return Container(
+    return ColoredBox(
       color: Colors.black,
       child: Stack(
         children: [
@@ -523,7 +523,6 @@ class _CanvasArea extends ConsumerWidget {
               child: Container(
                 decoration: const BoxDecoration(
                   gradient: RadialGradient(
-                    center: Alignment.center,
                     radius: 0.8,
                     colors: [
                       Color(0xFF0F2C4C),
@@ -571,8 +570,8 @@ class _CanvasArea extends ConsumerWidget {
 }
 
 class _DetailsPanel extends StatelessWidget {
-  final ScanData scan;
   const _DetailsPanel({required this.scan});
+  final ScanData scan;
 
   @override
   Widget build(BuildContext context) {
@@ -587,7 +586,7 @@ class _DetailsPanel extends StatelessWidget {
             style: AppTextStyles.labelSmall.copyWith(
               color: AppColors.secondaryText,
               fontWeight: FontWeight.bold,
-              letterSpacing: 1.0,
+              letterSpacing: 1,
             ),
           ),
           const SizedBox(height: AppSpacing.sm),
@@ -605,11 +604,11 @@ class _DetailsPanel extends StatelessWidget {
             style: AppTextStyles.labelSmall.copyWith(
               color: AppColors.secondaryText,
               fontWeight: FontWeight.bold,
-              letterSpacing: 1.0,
+              letterSpacing: 1,
             ),
           ),
           const SizedBox(height: AppSpacing.sm),
-          ...scan.aiFindings.map((finding) => _buildFindingBox(finding)),
+          ...scan.aiFindings.map(_buildFindingBox),
           const SizedBox(height: AppSpacing.md),
           Container(height: 1, color: AppColors.border),
           const SizedBox(height: AppSpacing.md),
@@ -618,7 +617,7 @@ class _DetailsPanel extends StatelessWidget {
             style: AppTextStyles.labelSmall.copyWith(
               color: AppColors.secondaryText,
               fontWeight: FontWeight.bold,
-              letterSpacing: 1.0,
+              letterSpacing: 1,
             ),
           ),
           const SizedBox(height: AppSpacing.sm),

@@ -63,7 +63,6 @@ class RadiologyCharts extends StatelessWidget {
                 maxY: 5,
                 barTouchData: const BarTouchData(),
                 titlesData: FlTitlesData(
-                  show: true,
                   bottomTitles: AxisTitles(
                     sideTitles: SideTitles(
                       showTitles: true,
@@ -110,7 +109,6 @@ class RadiologyCharts extends StatelessWidget {
                   topTitles: const AxisTitles(),
                 ),
                 gridData: FlGridData(
-                  show: true,
                   drawVerticalLine: false,
                   getDrawingHorizontalLine: (value) => FlLine(
                     color: AppColors.border.withValues(alpha: 0.4),

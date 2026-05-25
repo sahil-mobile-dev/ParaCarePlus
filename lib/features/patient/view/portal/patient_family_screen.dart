@@ -56,7 +56,7 @@ class PatientFamilyScreen extends ConsumerWidget {
 
                   final titleRow = Row(
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.verified_user,
                         color: AppColors.primaryLight,
                         size: 22,

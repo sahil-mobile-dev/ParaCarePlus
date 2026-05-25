@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:paracareplus/core/theme/app_colors.dart';
-import 'package:paracareplus/core/theme/app_spacing.dart';
 import 'package:paracareplus/features/patient/view/portal/widgets/emergency/emergency_sos_panel.dart';
 
 class AmbulanceTrackerPanel extends ConsumerStatefulWidget {

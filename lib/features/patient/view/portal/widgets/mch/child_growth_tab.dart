@@ -2,7 +2,6 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:paracareplus/core/theme/app_colors.dart';
 import 'package:paracareplus/core/theme/app_spacing.dart';
-import 'package:paracareplus/core/theme/app_text_styles.dart';
 
 class ChildGrowthTab extends StatelessWidget {
   const ChildGrowthTab({super.key});
@@ -37,14 +36,14 @@ class ChildGrowthTab extends StatelessWidget {
                   bmi: '22.5',
                   percentile: 0.82,
                   percentileText: 'Growth Percentile: 82nd — Normal range',
-                  extraInfo: Row(
+                  extraInfo: const Row(
                     children: [
-                      const Text(
+                      Text(
                         'Vaccinations: ',
                         style: TextStyle(
                             color: AppColors.secondaryText, fontSize: 10.5),
                       ),
-                      const Text(
+                      Text(
                         '✓ All complete',
                         style:
                             TextStyle(color: AppColors.success, fontSize: 10.5),
@@ -54,7 +53,7 @@ class ChildGrowthTab extends StatelessWidget {
                         style: TextStyle(
                             color: AppColors.secondaryText, fontSize: 10.5),
                       ),
-                      const Text(
+                      Text(
                         'B+',
                         style: TextStyle(
                             color: Colors.white,
@@ -77,14 +76,14 @@ class ChildGrowthTab extends StatelessWidget {
                   bmi: '20.6',
                   percentile: 0.70,
                   percentileText: 'Growth Percentile: 70th — Normal range',
-                  extraInfo: Row(
+                  extraInfo: const Row(
                     children: [
-                      const Text(
+                      Text(
                         'Vaccinations: ',
                         style: TextStyle(
                             color: AppColors.secondaryText, fontSize: 10.5),
                       ),
-                      const Text(
+                      Text(
                         '✓ All complete',
                         style:
                             TextStyle(color: AppColors.success, fontSize: 10.5),
@@ -94,7 +93,7 @@ class ChildGrowthTab extends StatelessWidget {
                         style: TextStyle(
                             color: AppColors.secondaryText, fontSize: 10.5),
                       ),
-                      const Text(
+                      Text(
                         'O+',
                         style: TextStyle(
                             color: Colors.white,
@@ -304,13 +303,13 @@ class ChildGrowthTab extends StatelessWidget {
 }
 
 class _GrowthChartContainer extends StatelessWidget {
-  final String title;
-  final Widget child;
 
   const _GrowthChartContainer({
     required this.title,
     required this.child,
   });
+  final String title;
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
@@ -364,7 +363,6 @@ class _AryanGrowthChart extends StatelessWidget {
         minY: 40,
         maxY: 185,
         gridData: FlGridData(
-          show: true,
           drawVerticalLine: false,
           getDrawingHorizontalLine: (value) => FlLine(
             color: AppColors.border.withValues(alpha: 0.15),
@@ -410,10 +408,10 @@ class _AryanGrowthChart extends StatelessWidget {
             ),
           ),
           topTitles: const AxisTitles(
-            sideTitles: SideTitles(showTitles: false),
+            
           ),
           rightTitles: const AxisTitles(
-            sideTitles: SideTitles(showTitles: false),
+            
           ),
         ),
         lineBarsData: [
@@ -425,7 +423,6 @@ class _AryanGrowthChart extends StatelessWidget {
             isCurved: true,
             color: AppColors.primaryLight,
             barWidth: 2.5,
-            dotData: const FlDotData(show: true),
             belowBarData: BarAreaData(
               show: true,
               color: AppColors.primaryLight.withValues(alpha: 0.15),
@@ -462,7 +459,6 @@ class _PriyaGrowthChart extends StatelessWidget {
         minY: 40,
         maxY: 180,
         gridData: FlGridData(
-          show: true,
           drawVerticalLine: false,
           getDrawingHorizontalLine: (value) => FlLine(
             color: AppColors.border.withValues(alpha: 0.15),
@@ -508,10 +504,10 @@ class _PriyaGrowthChart extends StatelessWidget {
             ),
           ),
           topTitles: const AxisTitles(
-            sideTitles: SideTitles(showTitles: false),
+            
           ),
           rightTitles: const AxisTitles(
-            sideTitles: SideTitles(showTitles: false),
+            
           ),
         ),
         lineBarsData: [
@@ -523,7 +519,6 @@ class _PriyaGrowthChart extends StatelessWidget {
             isCurved: true,
             color: const Color(0xFFF72585),
             barWidth: 2.5,
-            dotData: const FlDotData(show: true),
             belowBarData: BarAreaData(
               show: true,
               color: const Color(0xFFF72585).withValues(alpha: 0.15),

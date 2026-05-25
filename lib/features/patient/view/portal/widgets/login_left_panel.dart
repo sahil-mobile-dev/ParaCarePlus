@@ -61,10 +61,10 @@ class LoginLeftPanel extends StatelessWidget {
           ),
         ),
         const SizedBox(width: 14),
-        Column(
+        const Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+            Text(
               'ParaCare+',
               style: TextStyle(
                 color: Colors.white,
@@ -72,11 +72,11 @@ class LoginLeftPanel extends StatelessWidget {
                 fontWeight: FontWeight.w800,
               ),
             ),
-            const Text(
+            Text(
               'Govt. of Uttarakhand · Dept. of Health',
               style: TextStyle(color: Color(0xFF7A9BBF), fontSize: 11),
             ),
-            const Text(
+            Text(
               'By Parakore Enterprises Pvt Ltd',
               style: TextStyle(
                 color: Color(0xFF4A6A8A),
@@ -84,7 +84,7 @@ class LoginLeftPanel extends StatelessWidget {
                 fontWeight: FontWeight.w600,
               ),
             ),
-            const Text(
+            Text(
               'ParaCare — Patient Portal',
               style: TextStyle(color: Color(0xFF4A6A8A), fontSize: 10),
             ),
@@ -107,12 +107,12 @@ class LoginLeftPanel extends StatelessWidget {
             border: Border.all(
                 color: const Color(0xFF00B4D8).withValues(alpha: 0.3)),
           ),
-          child: Row(
+          child: const Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              _PulseDot(color: const Color(0xFF00C897)),
-              const SizedBox(width: 8),
-              const Text(
+              _PulseDot(color: Color(0xFF00C897)),
+              SizedBox(width: 8),
+              Text(
                 'Secure Patient Access Portal v4.0',
                 style: TextStyle(
                   color: Color(0xFF00B4D8),
@@ -178,9 +178,9 @@ class LoginLeftPanel extends StatelessWidget {
         const SizedBox(height: AppSpacing.lg),
 
         // Stats row
-        Row(
+        const Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: const [
+          children: [
             _StatItem(value: '42L+', label: 'Registered\nPatients'),
             _StatItem(value: '3,200+', label: 'Health\nFacilities'),
             _StatItem(value: '99.8%', label: 'Uptime\nSLA'),
@@ -285,8 +285,8 @@ class LoginLeftPanel extends StatelessWidget {
 // Helper widgets
 // ────────────────────────────
 class _PulseDot extends StatefulWidget {
-  final Color color;
   const _PulseDot({required this.color});
+  final Color color;
 
   @override
   State<_PulseDot> createState() => _PulseDotState();
@@ -325,9 +325,9 @@ class _PulseDotState extends State<_PulseDot>
 }
 
 class _StatItem extends StatelessWidget {
+  const _StatItem({required this.value, required this.label});
   final String value;
   final String label;
-  const _StatItem({required this.value, required this.label});
 
   @override
   Widget build(BuildContext context) {

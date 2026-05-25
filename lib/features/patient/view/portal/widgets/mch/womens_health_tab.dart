@@ -99,16 +99,16 @@ class WomensHealthTab extends StatelessWidget {
                     color: AppColors.secondaryAccent.withValues(alpha: 0.2),
                   ),
                 ),
-                child: Row(
+                child: const Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Icon(
+                    Icon(
                       Icons.insights_rounded,
                       color: AppColors.secondaryAccent,
                       size: 18,
                     ),
-                    const SizedBox(width: 10),
-                    const Expanded(
+                    SizedBox(width: 10),
+                    Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -275,7 +275,6 @@ class _BoneDensityChart extends StatelessWidget {
         minY: -2.5,
         maxY: 0.5,
         gridData: FlGridData(
-          show: true,
           drawVerticalLine: false,
           getDrawingHorizontalLine: (value) => FlLine(
             color: AppColors.border.withValues(alpha: 0.15),
@@ -321,10 +320,10 @@ class _BoneDensityChart extends StatelessWidget {
             ),
           ),
           topTitles: const AxisTitles(
-            sideTitles: SideTitles(showTitles: false),
+            
           ),
           rightTitles: const AxisTitles(
-            sideTitles: SideTitles(showTitles: false),
+            
           ),
         ),
         lineBarsData: [
@@ -336,7 +335,6 @@ class _BoneDensityChart extends StatelessWidget {
             isCurved: true,
             color: const Color(0xFFF72585),
             barWidth: 2.5,
-            dotData: const FlDotData(show: true),
             belowBarData: BarAreaData(
               show: true,
               color: const Color(0xFFF72585).withValues(alpha: 0.15),
@@ -346,9 +344,8 @@ class _BoneDensityChart extends StatelessWidget {
           LineChartBarData(
             spots: List.generate(
               years.length,
-              (i) => FlSpot(i.toDouble(), -1.0),
+              (i) => FlSpot(i.toDouble(), -1),
             ),
-            isCurved: false,
             color: AppColors.secondaryAccent.withValues(alpha: 0.5),
             barWidth: 1.2,
             dashArray: [5, 5],
@@ -428,13 +425,13 @@ class _WomenHealthStatusChart extends StatelessWidget {
 }
 
 class _LegendItem extends StatelessWidget {
-  final Color color;
-  final String label;
 
   const _LegendItem({
     required this.color,
     required this.label,
   });
+  final Color color;
+  final String label;
 
   @override
   Widget build(BuildContext context) {

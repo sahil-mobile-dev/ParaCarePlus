@@ -470,7 +470,7 @@ class _DonutPainter extends CustomPainter {
     final strokeW = radius * 0.38;
     final arcRadius = radius - strokeW / 2;
 
-    final total = segments.fold(0.0, (s, e) => s + e.value);
+    final total = segments.fold(0, (s, e) => s + int.parse(e.value.toString()));
     const gapAngle = 0.04; // radians gap between segments
     var startAngle = -math.pi / 2;
 

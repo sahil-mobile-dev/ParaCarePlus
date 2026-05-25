@@ -60,15 +60,15 @@ class AntenatalHistoryTab extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Row(
+          const Row(
             children: [
-              const Icon(
+              Icon(
                 Icons.pregnant_woman_rounded,
                 color: Color(0xFFF72585),
                 size: 16,
               ),
-              const SizedBox(width: 8),
-              const Expanded(
+              SizedBox(width: 8),
+              Expanded(
                 child: Text(
                   'Antenatal Care History — Geeta Kumar (Spouse)',
                   style: TextStyle(

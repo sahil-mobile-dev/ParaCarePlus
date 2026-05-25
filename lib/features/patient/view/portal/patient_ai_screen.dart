@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:paracareplus/core/theme/app_colors.dart';
 import 'package:paracareplus/core/theme/app_spacing.dart';
-import 'package:paracareplus/core/theme/app_text_styles.dart';
 import 'package:paracareplus/features/patient/view/portal/widgets/ai/ai_charts.dart';
 import 'package:paracareplus/features/patient/view/portal/widgets/ai/ai_chat_workspace.dart';
 import 'package:paracareplus/features/patient/view/portal/widgets/ai/ai_esanjeevani.dart';
@@ -20,9 +19,7 @@ class PatientAiScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      drawer: const PatientPortalDrawer(
-        activeRouteName: RouteNames.patientAI,
-      ),
+      drawer: const PatientPortalDrawer(activeRouteName: RouteNames.patientAI),
       appBar: AppBar(
         backgroundColor: AppColors.surface,
         elevation: 0,
@@ -101,27 +98,27 @@ class PatientAiScreen extends ConsumerWidget {
             children: [
               // Top KPIs Strip
               AiKpis(),
-              const SizedBox(height: AppSpacing.lg),
+              SizedBox(height: AppSpacing.lg),
 
               // AI Feature Suite Grid
               AiFeatureSuite(),
-              const SizedBox(height: AppSpacing.lg),
+              SizedBox(height: AppSpacing.lg),
 
               // MedBot Chat & Analytics Workspace
               AiChatWorkspace(),
-              const SizedBox(height: AppSpacing.lg),
+              SizedBox(height: AppSpacing.lg),
 
               // Predictive Risk Cards
               AiPredictiveRisks(),
-              const SizedBox(height: AppSpacing.lg),
+              SizedBox(height: AppSpacing.lg),
 
               // Personalised AI Health Insights
               AiInsights(),
-              const SizedBox(height: AppSpacing.lg),
+              SizedBox(height: AppSpacing.lg),
 
               // Bottom Analytics Charts
               AiCharts(),
-              const SizedBox(height: AppSpacing.lg),
+              SizedBox(height: AppSpacing.lg),
 
               // eSanjeevani Integration
               AiEsanjeevani(),

@@ -76,7 +76,7 @@ class ActiveInsuranceGrid extends StatelessWidget {
               policyNo: 'Policy: SH-2023-UKX-88812 · Valid till Dec 2026',
               limitLeftLabel: 'No claims used',
               limitRightLabel: '₹3,00,000 deductible top-up',
-              pctUsed: 0.0,
+              pctUsed: 0,
               subText: 'Activates after ₹3L base coverage exhausted',
               progressColors: [const Color(0xFFFFD166), const Color(0xFFF77F00)],
               details: [
@@ -248,9 +248,9 @@ class ActiveInsuranceGrid extends StatelessWidget {
 }
 
 class _DetailItem {
+
+  _DetailItem(this.label, this.val, {this.color});
   final String label;
   final String val;
   final Color? color;
-
-  _DetailItem(this.label, this.val, {this.color});
 }

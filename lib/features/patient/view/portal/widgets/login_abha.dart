@@ -7,9 +7,9 @@ import 'package:paracareplus/core/widgets/app_button.dart';
 /// ABHA (Ayushman Bharat Health Account) login tab.
 /// Shows live ABHA card preview + input + OTP flow.
 class LoginAbha extends StatefulWidget {
-  final VoidCallback onSuccess;
 
-  const LoginAbha({super.key, required this.onSuccess});
+  const LoginAbha({required this.onSuccess, super.key});
+  final VoidCallback onSuccess;
 
   @override
   State<LoginAbha> createState() => _LoginAbhaState();
@@ -35,10 +35,11 @@ class _LoginAbhaState extends State<LoginAbha> {
   }
 
   String _formatAbha(String raw) {
-    final digits = raw.replaceAll(RegExp(r'[^0-9]'), '');
+    final digits = raw.replaceAll(RegExp('[^0-9]'), '');
     if (digits.length <= 2) return digits;
-    if (digits.length <= 6)
+    if (digits.length <= 6) {
       return '${digits.substring(0, 2)}-${digits.substring(2)}';
+    }
     if (digits.length <= 10) {
       return '${digits.substring(0, 2)}-${digits.substring(2, 6)}-${digits.substring(6)}';
     }
@@ -375,11 +376,11 @@ class _LoginAbhaState extends State<LoginAbha> {
 }
 
 class _AbhaFeat extends StatelessWidget {
+
+  const _AbhaFeat({required this.icon, required this.title, required this.sub});
   final IconData icon;
   final String title;
   final String sub;
-
-  const _AbhaFeat({required this.icon, required this.title, required this.sub});
 
   @override
   Widget build(BuildContext context) {

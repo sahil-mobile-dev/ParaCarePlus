@@ -12,7 +12,7 @@ class EmergencyMedicalCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(14),
         border: Border.all(
           color: const Color(0xFFFF4D6D).withValues(alpha: 0.3),
-          width: 2.0,
+          width: 2,
         ),
         gradient: const LinearGradient(
           begin: Alignment.topLeft,

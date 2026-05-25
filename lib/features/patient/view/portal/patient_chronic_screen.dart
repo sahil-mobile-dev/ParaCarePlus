@@ -43,7 +43,7 @@ class PatientChronicScreen extends ConsumerWidget {
             onPressed: () => Scaffold.of(context).openDrawer(),
           ),
         ),
-        actions: [],
+        actions: const [],
       ),
       body: SafeArea(
         child: ListView(
@@ -85,7 +85,7 @@ class PatientChronicScreen extends ConsumerWidget {
                 ),
               ],
             ),
-            SizedBox(height: AppSpacing.md),
+            const SizedBox(height: AppSpacing.md),
             // Top Section - Active Registered Profiles
             _buildActiveProfilesStrip(),
             const SizedBox(height: AppSpacing.md),

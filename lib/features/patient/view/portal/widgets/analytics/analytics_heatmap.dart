@@ -31,7 +31,7 @@ class AnalyticsHeatmap extends StatelessWidget {
   /// Each entry is (month-index, dayOfWeek 0=Mon..6=Sun, color)
   List<(DateTime, Color)> _buildYearData() {
     final rng = math.Random(20260101);
-    final start = DateTime(2026, 1, 1);
+    final start = DateTime(2026);
     final end = DateTime(2026, 12, 31);
     final result = <(DateTime, Color)>[];
     for (var d = start; !d.isAfter(end); d = d.add(const Duration(days: 1))) {

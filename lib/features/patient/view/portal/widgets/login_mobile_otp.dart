@@ -11,14 +11,12 @@ import 'package:paracareplus/core/widgets/app_button.dart';
 /// Step 2: Select profile from family grid
 /// Step 3: Access granted (navigate to dashboard)
 class LoginMobileOtp extends StatefulWidget {
-  final VoidCallback onSuccess;
-  final ValueChanged<String> onSwitchTab;
 
   const LoginMobileOtp({
-    super.key,
-    required this.onSuccess,
-    required this.onSwitchTab,
+    required this.onSuccess, required this.onSwitchTab, super.key,
   });
+  final VoidCallback onSuccess;
+  final ValueChanged<String> onSwitchTab;
 
   @override
   State<LoginMobileOtp> createState() => _LoginMobileOtpState();
@@ -249,18 +247,18 @@ class _LoginMobileOtpState extends State<LoginMobileOtp> {
             keyboardType: TextInputType.phone,
             maxLength: 10,
             style: const TextStyle(color: Color(0xFFE2E8F0)),
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               hintText: '98765 43210',
 
-              hintStyle: const TextStyle(color: Color(0xFF4A6A8A)),
+              hintStyle: TextStyle(color: Color(0xFF4A6A8A)),
               border: InputBorder.none,
               counterText: '',
               prefixIcon: Icon(Icons.phone),
-              contentPadding: const EdgeInsets.symmetric(vertical: 11),
+              contentPadding: EdgeInsets.symmetric(vertical: 11),
             ),
           ),
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         _buildInputRow(
           label: 'Date of Birth (for verification)',
           child: TextField(
@@ -270,7 +268,7 @@ class _LoginMobileOtpState extends State<LoginMobileOtp> {
               hintText: 'YYYY-MM-DD',
               hintStyle: TextStyle(color: Color(0xFF4A6A8A)),
               border: InputBorder.none,
-              prefixIcon: const Icon(
+              prefixIcon: Icon(
                 Icons.calendar_today_rounded,
                 size: 16,
                 color: Color(0xFF4A6A8A),
@@ -646,7 +644,6 @@ class _LoginMobileOtpState extends State<LoginMobileOtp> {
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
           color: const Color(0xFF4A6A8A),
-          style: BorderStyle.solid,
           width: 1.5,
         ),
       ),

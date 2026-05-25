@@ -47,7 +47,7 @@ class PatientVaccinationScreen extends ConsumerWidget {
             ),
           ],
         ),
-        actions: [
+        actions: const [
           // Patient Switched Name Badge
         ],
       ),
@@ -147,25 +147,25 @@ class PatientVaccinationScreen extends ConsumerWidget {
                 ),
               ],
             ),
-            SizedBox(height: AppSpacing.lg),
+            const SizedBox(height: AppSpacing.lg),
             // KPI Grid Summary
-            VaccinationKpiGrid(),
-            SizedBox(height: AppSpacing.lg),
+            const VaccinationKpiGrid(),
+            const SizedBox(height: AppSpacing.lg),
 
             // Upcoming & Overdue List
-            UpcomingVaccinations(),
-            SizedBox(height: AppSpacing.lg),
+            const UpcomingVaccinations(),
+            const SizedBox(height: AppSpacing.lg),
 
             // Complete Immunization Record Table
-            ImmunizationRecordTable(),
-            SizedBox(height: AppSpacing.lg),
+            const ImmunizationRecordTable(),
+            const SizedBox(height: AppSpacing.lg),
 
             // Coverage and Status Charts
-            VaccinationCharts(),
-            SizedBox(height: AppSpacing.lg),
+            const VaccinationCharts(),
+            const SizedBox(height: AppSpacing.lg),
 
             // Family Vaccination Heatmap
-            FamilyVaccinationHeatmap(),
+            const FamilyVaccinationHeatmap(),
           ],
         ),
       ),

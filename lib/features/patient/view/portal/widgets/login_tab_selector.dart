@@ -6,14 +6,12 @@ import 'package:paracareplus/core/theme/app_text_styles.dart';
 /// 5-tab selector for the Patient Portal login page.
 /// Tabs: Mobile OTP | ABHA | Aadhaar | Face | Family
 class LoginTabSelector extends ConsumerWidget {
-  final String activeTab;
-  final ValueChanged<String> onTabChanged;
 
   const LoginTabSelector({
-    super.key,
-    required this.activeTab,
-    required this.onTabChanged,
+    required this.activeTab, required this.onTabChanged, super.key,
   });
+  final String activeTab;
+  final ValueChanged<String> onTabChanged;
 
   static const _tabs = [
     (id: 'mobile', icon: Icons.phone_android_rounded, label: 'OTP'),

@@ -232,11 +232,10 @@ class PatientFinanceScreen extends ConsumerWidget {
           children: [
             Row(children: elements),
             const SizedBox(height: AppSpacing.md),
-            Row(
+            const Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Text(
+                Text(
                   'Financial & Insurance Dashboard',
                   style: TextStyle(
                     color: Colors.white,
