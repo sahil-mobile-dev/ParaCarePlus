@@ -9,15 +9,15 @@ class EmergencyMedicalCard extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(14),
         border: Border.all(
-          color: AppColors.error.withValues(alpha: 0.4),
-          width: 1.5,
+          color: const Color(0xFFFF4D6D).withValues(alpha: 0.3),
+          width: 2.0,
         ),
         gradient: const LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
-          colors: [Color(0xFF2C0B14), Color(0xFF0F1E36)],
+          colors: [Color(0xFF1A0010), Color(0xFF2A0015)],
         ),
       ),
       child: Column(
@@ -95,17 +95,17 @@ class EmergencyMedicalCard extends StatelessWidget {
                     'B+',
                     valueColor: AppColors.error,
                   ),
-                  _buildCardItem('ABHA ID', '43-8912-3456-7890'),
-                  _buildCardItem('Active profiles', 'HTN, Pre-DM, Lipids'),
+                  _buildCardItem('ABHA Number', '43-8912-3456-7890'),
+                  _buildCardItem('Conditions', 'HTN, Pre-DM, Hyperlipidemia'),
                   _buildCardItem(
                     'Allergies',
                     'Penicillin (Anaphylaxis)',
                     valueColor: AppColors.error,
                   ),
-                  _buildCardItem('Current Meds', 'Amlodipine, Metformin'),
+                  _buildCardItem('Current Meds', 'Amlodipine 5mg, Metformin 500mg, Atorvastatin'),
                   _buildCardItem(
                     'Emergency Contact',
-                    'Geeta (+91 98765 43210)',
+                    'Geeta Kumar +91 98765 43210',
                   ),
                 ],
               );

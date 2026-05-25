@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:paracareplus/core/theme/app_colors.dart';
 import 'package:paracareplus/core/theme/app_spacing.dart';
 import 'package:paracareplus/core/theme/app_text_styles.dart';
 import 'package:paracareplus/features/patient/view/portal/widgets/patient_portal_drawer.dart';
+import 'package:paracareplus/features/patient/view/portal/widgets/tele/available_specialists.dart';
+import 'package:paracareplus/features/patient/view/portal/widgets/tele/consultation_chat_panel.dart';
+import 'package:paracareplus/features/patient/view/portal/widgets/tele/consultation_history_table.dart';
+import 'package:paracareplus/features/patient/view/portal/widgets/tele/tele_charts.dart';
+import 'package:paracareplus/features/patient/view/portal/widgets/tele/tele_kpis.dart';
+import 'package:paracareplus/features/patient/view/portal/widgets/tele/live_consultation_video.dart';
 import 'package:paracareplus/routes/route_names.dart';
 
 class PatientTeleScreen extends ConsumerWidget {
@@ -11,6 +18,8 @@ class PatientTeleScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final todayStr = DateFormat('dd MMM yyyy').format(DateTime.now());
+
     return Scaffold(
       backgroundColor: AppColors.background,
       drawer: const PatientPortalDrawer(
@@ -18,172 +27,258 @@ class PatientTeleScreen extends ConsumerWidget {
       ),
       appBar: AppBar(
         backgroundColor: AppColors.surface,
-        title: const Text('Telemedicine Hub'),
+        elevation: 0,
         leading: Builder(
           builder: (context) => IconButton(
-            icon: const Icon(Icons.menu_rounded, color: AppColors.primaryText),
+            icon: const Icon(Icons.menu_rounded, color: Colors.white),
             onPressed: () => Scaffold.of(context).openDrawer(),
           ),
         ),
+        title: const Row(
+          children: [
+            Icon(
+              Icons.video_camera_back_rounded,
+              color: Color(0xFF00B4D8),
+              size: 20,
+            ),
+            SizedBox(width: 8),
+            Text(
+              'Telemedicine Hub',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+              ),
+            ),
+          ],
+        ),
       ),
-      body: ListView(
-        physics: const BouncingScrollPhysics(),
-        padding: const EdgeInsets.all(AppSpacing.md),
-        children: [
-          _buildTeleconsultActiveCard(),
-          const SizedBox(height: AppSpacing.md),
-          const Text('AVAILABLE TELE-DOCTORS', style: AppTextStyles.labelSmall),
-          const SizedBox(height: AppSpacing.sm),
-          _buildDoctorTeleCard(
-            name: 'Dr. Anjali Sharma',
-            dept: 'Cardiology Department',
-            time: 'Available: Today 4:00 PM',
-            avatar: 'AS',
+      body: SafeArea(
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          padding: const EdgeInsets.all(AppSpacing.md),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              // Page Header
+              _buildPageHeader(context, todayStr),
+              const SizedBox(height: AppSpacing.md),
+
+              // KPI Grid
+              const TeleKpis(),
+              const SizedBox(height: AppSpacing.lg),
+
+              // Live section header
+              const Row(
+                children: [
+                  Icon(Icons.sensors_rounded, color: AppColors.error, size: 16),
+                  SizedBox(width: 8),
+                  Text(
+                    'Live Consultation — Dr. Rajesh Kumar (Cardiologist)',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 13,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: AppSpacing.sm),
+
+              // Responsive video & chat row
+              LayoutBuilder(
+                builder: (context, constraints) {
+                  if (constraints.maxWidth > 900) {
+                    return const Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Expanded(flex: 3, child: LiveConsultationVideo()),
+                        SizedBox(width: AppSpacing.md),
+                        Expanded(flex: 2, child: ConsultationChatPanel()),
+                      ],
+                    );
+                  } else {
+                    return const Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        LiveConsultationVideo(),
+                        SizedBox(height: AppSpacing.md),
+                        ConsultationChatPanel(),
+                      ],
+                    );
+                  }
+                },
+              ),
+              const SizedBox(height: AppSpacing.lg),
+
+              // Specialists Grid Section
+              const Row(
+                children: [
+                  Icon(
+                    Icons.people_rounded,
+                    color: Color(0xFF00B4D8),
+                    size: 16,
+                  ),
+                  SizedBox(width: 8),
+                  Text(
+                    'Available Specialists',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 13,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: AppSpacing.sm),
+              const AvailableSpecialists(),
+              const SizedBox(height: AppSpacing.lg),
+
+              // Consultation history
+              const ConsultationHistoryTable(),
+              const SizedBox(height: AppSpacing.lg),
+
+              // Tele charts
+              const TeleCharts(),
+            ],
           ),
-          _buildDoctorTeleCard(
-            name: 'Dr. Priya Negi',
-            dept: 'Diabetology Department',
-            time: 'Available: Tomorrow 10:00 AM',
-            avatar: 'PN',
-          ),
-        ],
+        ),
       ),
     );
   }
 
-  Widget _buildTeleconsultActiveCard() {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: AppColors.primary.withValues(alpha: 0.15),
-        border: Border.all(color: AppColors.primary.withValues(alpha: 0.3)),
-        borderRadius: BorderRadius.circular(AppRadius.lg),
-        gradient: LinearGradient(
-          colors: [
-            AppColors.primary.withValues(alpha: 0.2),
-            AppColors.surface.withValues(alpha: 0.1),
-          ],
-        ),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          const Row(
+  Widget _buildPageHeader(BuildContext context, String dateStr) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isMobile = constraints.maxWidth < 600;
+
+        final elements = [
+          Row(
+            mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(
-                Icons.video_call_rounded,
-                color: AppColors.success,
-                size: 22,
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 4,
+                ),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF00B4D8).withValues(alpha: 0.15),
+                  border: Border.all(
+                    color: const Color(0xFF00B4D8).withValues(alpha: 0.3),
+                  ),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: const Row(
+                  children: [
+                    Icon(
+                      Icons.person_rounded,
+                      color: Color(0xFF00B4D8),
+                      size: 12,
+                    ),
+                    SizedBox(width: 4),
+                    Text(
+                      'Ramesh Kumar',
+                      style: TextStyle(
+                        color: Color(0xFF00B4D8),
+                        fontSize: 10.5,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-              SizedBox(width: 8),
-              Text(
-                'Next Scheduled Teleconsult',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 14,
+              const SizedBox(width: 8),
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 4,
+                ),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF00B4D8).withValues(alpha: 0.15),
+                  border: Border.all(
+                    color: const Color(0xFF00B4D8).withValues(alpha: 0.3),
+                  ),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.calendar_today_rounded,
+                      color: Color(0xFF00B4D8),
+                      size: 10,
+                    ),
+                    const SizedBox(width: 4),
+                    Text(
+                      dateStr,
+                      style: const TextStyle(
+                        color: Color(0xFF00B4D8),
+                        fontSize: 10.5,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              if (isMobile) const SizedBox(height: AppSpacing.sm),
+
+              ElevatedButton.icon(
+                onPressed: () {
+                  ScaffoldMessenger.of(context).clearSnackBars();
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('Joining consultation queue…'),
+                      backgroundColor: AppColors.primaryLight,
+                    ),
+                  );
+                },
+                icon: const Icon(Icons.video_call_rounded, size: 14),
+                label: const Text(
+                  'Start Consultation',
+                  style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold),
+                ),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.success.withValues(alpha: 0.15),
+                  foregroundColor: AppColors.success,
+                  elevation: 0,
+                  side: BorderSide(
+                    color: AppColors.success.withValues(alpha: 0.3),
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 8,
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
                 ),
               ),
             ],
           ),
-          const SizedBox(height: 12),
-          const Text(
-            'Dr. Rajesh Kumar — Endocrinology',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 13,
-            ),
-          ),
-          const SizedBox(height: 4),
-          const Text(
-            'Today · 4:00 PM · Follow-up Diabetes management review',
-            style: TextStyle(color: AppColors.secondaryText, fontSize: 11),
-          ),
-          const SizedBox(height: 16),
-          ElevatedButton.icon(
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(
-              backgroundColor: AppColors.success,
-              foregroundColor: Colors.white,
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(8),
-              ),
-            ),
-            icon: const Icon(Icons.videocam_rounded, size: 16),
-            label: const Text(
-              'JOIN CALL ROOM NOW',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 12),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+        ];
 
-  Widget _buildDoctorTeleCard({
-    required String name,
-    required String dept,
-    required String time,
-    required String avatar,
-  }) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: AppSpacing.sm),
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: AppColors.card,
-        borderRadius: BorderRadius.circular(AppRadius.md),
-        border: Border.all(color: AppColors.border),
-      ),
-      child: Row(
-        children: [
-          CircleAvatar(
-            radius: 20,
-            backgroundColor: AppColors.primaryLight,
-            child: Text(
-              avatar,
-              style: const TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 13,
-              ),
-            ),
-          ),
-          const SizedBox(width: 12),
-          Expanded(
-            child: Column(
+        return Column(
+          children: [
+            Row(
               crossAxisAlignment: CrossAxisAlignment.start,
+              children: elements,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
-                  name,
-                  style: AppTextStyles.labelMedium.copyWith(
+                const Text(
+                  'Telemedicine Services',
+                  style: TextStyle(
                     color: Colors.white,
-                  ),
-                ),
-                Text(dept, style: AppTextStyles.bodySmall),
-                const SizedBox(height: 2),
-                Text(
-                  time,
-                  style: const TextStyle(
-                    color: AppColors.success,
-                    fontSize: 10,
-                    fontWeight: FontWeight.w600,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ],
             ),
-          ),
-          IconButton(
-            icon: const Icon(
-              Icons.video_call_rounded,
-              color: AppColors.primaryLight,
-              size: 24,
-            ),
-            onPressed: () {},
-          ),
-        ],
-      ),
+          ],
+        );
+      },
     );
   }
 }

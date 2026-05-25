@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:paracareplus/core/theme/app_colors.dart';
 import 'package:paracareplus/core/theme/app_spacing.dart';
-import 'package:paracareplus/core/theme/app_text_styles.dart';
+import 'package:paracareplus/features/patient/view/portal/widgets/finance/active_insurance_grid.dart';
+import 'package:paracareplus/features/patient/view/portal/widgets/finance/bills_transactions_table.dart';
+import 'package:paracareplus/features/patient/view/portal/widgets/finance/expenditure_flow_sankey_sunburst.dart';
+import 'package:paracareplus/features/patient/view/portal/widgets/finance/finance_kpis.dart';
+import 'package:paracareplus/features/patient/view/portal/widgets/finance/spend_analytics_charts.dart';
 import 'package:paracareplus/features/patient/view/portal/widgets/patient_portal_drawer.dart';
 import 'package:paracareplus/routes/route_names.dart';
 
@@ -11,6 +16,8 @@ class PatientFinanceScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final todayStr = DateFormat('dd MMM yyyy').format(DateTime.now());
+
     return Scaffold(
       backgroundColor: AppColors.background,
       drawer: const PatientPortalDrawer(
@@ -18,430 +25,228 @@ class PatientFinanceScreen extends ConsumerWidget {
       ),
       appBar: AppBar(
         backgroundColor: AppColors.surface,
-        title: const Text('Finance & Insurance'),
+        elevation: 0,
         leading: Builder(
           builder: (context) => IconButton(
-            icon: const Icon(Icons.menu_rounded, color: AppColors.primaryText),
+            icon: const Icon(Icons.menu_rounded, color: Colors.white),
             onPressed: () => Scaffold.of(context).openDrawer(),
           ),
         ),
-      ),
-      body: ListView(
-        physics: const BouncingScrollPhysics(),
-        padding: const EdgeInsets.all(AppSpacing.md),
-        children: [
-          _buildInsuranceCard(),
-          const SizedBox(height: AppSpacing.md),
-          const Text(
-            'PENDING & UNPAID HOSPITAL BILLS',
-            style: AppTextStyles.labelSmall,
-          ),
-          const SizedBox(height: AppSpacing.sm),
-          _buildBillCard(
-            context,
-            id: 'TXN-2026-84210',
-            title: 'OPD Consultation Fee — Cardiology',
-            amount: '₹800',
-            date: '10 May 2026',
-            status: 'UNPAID',
-            statusColor: AppColors.error,
-            isOverdue: true,
-          ),
-          _buildBillCard(
-            context,
-            id: 'TXN-2026-84209',
-            title: 'Pathology Diagnostics — HbA1c Test',
-            amount: '₹1,600',
-            date: '12 May 2026',
-            status: 'UNPAID',
-            statusColor: AppColors.secondaryAccent,
-            isOverdue: false,
-          ),
-          const SizedBox(height: AppSpacing.md),
-          const Text(
-            'TRANSACTIONS HISTORY (PAID)',
-            style: AppTextStyles.labelSmall,
-          ),
-          const SizedBox(height: AppSpacing.sm),
-          _buildPaidBillItem(
-            title: 'Knee Surgery Package — IPD Ward',
-            amount: '₹12,400',
-            date: 'Paid: 15 Apr 2026',
-            method: 'Claimed via Ayushman Cover',
-          ),
-          _buildPaidBillItem(
-            title: 'Emergency Ambulance Dispatch',
-            amount: '₹2,500',
-            date: 'Paid: 02 Jan 2026',
-            method: 'Paid online via UPI Gateway',
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildInsuranceCard() {
-    return Container(
-      padding: const EdgeInsets.all(18),
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          colors: [Color(0xFF0D9488), Color(0xFF065F46)],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
-        borderRadius: BorderRadius.circular(AppRadius.lg),
-        border: Border.all(color: Colors.white12),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          const Text(
-            '🏥 AYUSHMAN BHARAT — PM-JAY',
-            style: TextStyle(
-              color: Colors.white70,
-              fontSize: 10,
-              fontWeight: FontWeight.bold,
-              letterSpacing: 1,
-            ),
-          ),
-          const SizedBox(height: 12),
-          const Text(
-            'Rahul Kumar Sharma',
-            style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              fontSize: 16,
-            ),
-          ),
-          const Text(
-            'Policy: UK-ABP-2024-084210 · Active till 31 Mar 2027',
-            style: TextStyle(color: Colors.white70, fontSize: 11),
-          ),
-          const SizedBox(height: 16),
-          const Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Total Cover',
-                    style: TextStyle(color: Colors.white60, fontSize: 9),
-                  ),
-                  SizedBox(height: 2),
-                  Text(
-                    '₹5,00,000',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14,
-                    ),
-                  ),
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Claimed',
-                    style: TextStyle(color: Colors.white60, fontSize: 9),
-                  ),
-                  SizedBox(height: 2),
-                  Text(
-                    '₹87,400',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14,
-                    ),
-                  ),
-                ],
-              ),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Balance Limit',
-                    style: TextStyle(color: Colors.white60, fontSize: 9),
-                  ),
-                  SizedBox(height: 2),
-                  Text(
-                    '₹4,12,600',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 14,
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          const SizedBox(height: 16),
-          const Text(
-            'Limit Utilised: 17.5%',
-            style: TextStyle(
-              color: Colors.white70,
-              fontSize: 9,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(height: 4),
-          LinearProgressIndicator(
-            value: 0.175,
-            color: Colors.white,
-            backgroundColor: Colors.white24,
-            minHeight: 6,
-            borderRadius: BorderRadius.circular(3),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildBillCard(
-    BuildContext context, {
-    required String id,
-    required String title,
-    required String amount,
-    required String date,
-    required String status,
-    required Color statusColor,
-    required bool isOverdue,
-  }) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: AppSpacing.sm),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: AppColors.card,
-        borderRadius: BorderRadius.circular(AppRadius.md),
-        border: Border.all(color: AppColors.border),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                'ID: $id',
-                style: AppTextStyles.labelSmall.copyWith(
-                  color: AppColors.secondaryText,
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
-                decoration: BoxDecoration(
-                  color: statusColor.withValues(alpha: 0.15),
-                  borderRadius: BorderRadius.circular(4),
-                ),
-                child: Text(
-                  status,
-                  style: TextStyle(
-                    color: statusColor,
-                    fontSize: 8,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Text(
-            title,
-            style: AppTextStyles.labelMedium.copyWith(color: Colors.white),
-          ),
-          const SizedBox(height: 12),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                amount,
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
-                ),
-              ),
-              ElevatedButton(
-                onPressed: () =>
-                    _showPaymentGatewaySheet(context, amount, title),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primaryLight,
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                    vertical: 8,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                ),
-                child: const Text(
-                  'PAY BILL NOW',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 10,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          const Divider(color: AppColors.border, height: 1),
-          const SizedBox(height: 6),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(date, style: AppTextStyles.bodySmall),
-              if (isOverdue)
-                const Text(
-                  '⚠ Overdue > 30 Days',
-                  style: TextStyle(
-                    color: AppColors.error,
-                    fontSize: 10,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-            ],
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildPaidBillItem({
-    required String title,
-    required String amount,
-    required String date,
-    required String method,
-  }) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: AppSpacing.sm),
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: AppColors.card.withValues(alpha: 0.5),
-        borderRadius: BorderRadius.circular(AppRadius.md),
-        border: Border.all(color: AppColors.border.withValues(alpha: 0.5)),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: AppTextStyles.labelMedium.copyWith(
-                    color: Colors.white,
-                  ),
-                ),
-                const SizedBox(height: 2),
-                Text('$date · $method', style: AppTextStyles.bodySmall),
-              ],
-            ),
-          ),
-          Text(
-            amount,
-            style: const TextStyle(
+        title: const Row(
+          children: [
+            Icon(
+              Icons.account_balance_wallet_rounded,
               color: AppColors.success,
-              fontWeight: FontWeight.bold,
-              fontSize: 14,
+              size: 20,
             ),
+            SizedBox(width: 8),
+            Text(
+              'Finance & Insurance',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+              ),
+            ),
+          ],
+        ),
+      ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          physics: const BouncingScrollPhysics(),
+          padding: const EdgeInsets.all(AppSpacing.md),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              // Page Header
+              _buildPageHeader(context, todayStr),
+              const SizedBox(height: AppSpacing.md),
+
+              // KPI Grid
+              const FinanceKpis(),
+              const SizedBox(height: AppSpacing.lg),
+
+              // Insurance section header
+              const Row(
+                children: [
+                  Icon(
+                    Icons.shield_rounded,
+                    color: AppColors.success,
+                    size: 16,
+                  ),
+                  SizedBox(width: 8),
+                  Text(
+                    'Active Insurance Policies',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 13,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: AppSpacing.sm),
+              const ActiveInsuranceGrid(),
+              const SizedBox(height: AppSpacing.lg),
+
+              // Transactions Table
+              const BillsTransactionsTable(),
+              const SizedBox(height: AppSpacing.lg),
+
+              // Sankey + Sunburst Chart Panel
+              const Row(
+                children: [
+                  Icon(
+                    Icons.query_stats_rounded,
+                    color: AppColors.success,
+                    size: 16,
+                  ),
+                  SizedBox(width: 8),
+                  Text(
+                    'Health Expenditure Flow Analysis',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 13,
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: AppSpacing.sm),
+              const ExpenditureFlowSankeySunburst(),
+              const SizedBox(height: AppSpacing.lg),
+
+              // Spend Charts
+              const SpendAnalyticsCharts(),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
 
-  void _showPaymentGatewaySheet(
-    BuildContext context,
-    String amount,
-    String title,
-  ) {
-    showModalBottomSheet<void>(
-      context: context,
-      backgroundColor: AppColors.surface,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-      ),
-      builder: (context) {
-        return SafeArea(
-          child: Container(
-            padding: const EdgeInsets.all(AppSpacing.lg),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const Row(
+  Widget _buildPageHeader(BuildContext context, String dateStr) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final isMobile = constraints.maxWidth < 600;
+
+        final elements = [
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 4,
+                ),
+                decoration: BoxDecoration(
+                  color: AppColors.success.withValues(alpha: 0.15),
+                  border: Border.all(
+                    color: AppColors.success.withValues(alpha: 0.3),
+                  ),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: const Row(
                   children: [
-                    Icon(Icons.payment_rounded, color: AppColors.primaryLight),
-                    SizedBox(width: 8),
+                    Icon(
+                      Icons.person_rounded,
+                      color: AppColors.success,
+                      size: 12,
+                    ),
+                    SizedBox(width: 4),
                     Text(
-                      'ParaCare+ Secure Checkout',
+                      'Ramesh Kumar',
                       style: TextStyle(
-                        color: Colors.white,
+                        color: AppColors.success,
+                        fontSize: 10.5,
                         fontWeight: FontWeight.bold,
-                        fontSize: 16,
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 16),
-                Text(
-                  title,
-                  style: const TextStyle(
-                    color: AppColors.secondaryText,
-                    fontSize: 12,
-                  ),
+              ),
+              const SizedBox(width: 8),
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 4,
                 ),
-                const SizedBox(height: 4),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                decoration: BoxDecoration(
+                  color: AppColors.success.withValues(alpha: 0.15),
+                  border: Border.all(
+                    color: AppColors.success.withValues(alpha: 0.3),
+                  ),
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: Row(
                   children: [
-                    const Text(
-                      'Amount Due',
-                      style: TextStyle(color: Colors.white70, fontSize: 13),
+                    const Icon(
+                      Icons.calendar_today_rounded,
+                      color: AppColors.success,
+                      size: 10,
                     ),
+                    const SizedBox(width: 4),
                     Text(
-                      amount,
+                      dateStr,
                       style: const TextStyle(
-                        color: Colors.white,
+                        color: AppColors.success,
+                        fontSize: 10.5,
                         fontWeight: FontWeight.bold,
-                        fontSize: 20,
                       ),
                     ),
                   ],
                 ),
-                const SizedBox(height: 24),
-                ElevatedButton.icon(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('Payment of $amount successful via UPI.'),
-                        backgroundColor: AppColors.success,
-                      ),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.success,
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                  ),
-                  icon: const Icon(Icons.flash_on_rounded),
-                  label: const Text(
-                    'Pay Instantly via UPI App',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+          const SizedBox(width: AppSpacing.sm),
+          ElevatedButton.icon(
+            onPressed: () {
+              ScaffoldMessenger.of(context).clearSnackBars();
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('Opening claim form…'),
+                  backgroundColor: AppColors.primaryLight,
+                ),
+              );
+            },
+            icon: const Icon(Icons.file_copy_rounded, size: 14),
+            label: const Text(
+              'File Claim',
+              style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold),
+            ),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: AppColors.success.withValues(alpha: 0.15),
+              foregroundColor: AppColors.success,
+              elevation: 0,
+              side: BorderSide(color: AppColors.success.withValues(alpha: 0.3)),
+              padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(20),
+              ),
+            ),
+          ),
+        ];
+
+        return Column(
+          children: [
+            Row(children: elements),
+            const SizedBox(height: AppSpacing.md),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Text(
+                  'Financial & Insurance Dashboard',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ],
             ),
-          ),
+          ],
         );
       },
     );
