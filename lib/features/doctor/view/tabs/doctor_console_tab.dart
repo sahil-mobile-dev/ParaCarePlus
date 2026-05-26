@@ -1781,7 +1781,7 @@ class _DoctorConsoleTabState extends ConsumerState<DoctorConsoleTab> {
                       onPressed: () {
                         ref
                             .read(doctorDashboardViewModelProvider.notifier)
-                            .changeTab(DoctorTab.ePrescriptions);
+                            .changeTab(DoctorTab.labOrders);
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.surface,
@@ -1968,7 +1968,7 @@ class _DoctorConsoleTabState extends ConsumerState<DoctorConsoleTab> {
                       onPressed: () {
                         ref
                             .read(doctorDashboardViewModelProvider.notifier)
-                            .changeTab(DoctorTab.ePrescriptions);
+                            .changeTab(DoctorTab.radiologyOrders);
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.surface,

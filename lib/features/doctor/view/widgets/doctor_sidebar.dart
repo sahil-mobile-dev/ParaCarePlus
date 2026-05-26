@@ -65,6 +65,32 @@ class DoctorSidebar extends ConsumerWidget {
                   notifier,
                   DoctorSidebarItem.items[4],
                 ), // Clinical Notes / SOAP
+                _buildNavItem(
+                  context,
+                  state,
+                  notifier,
+                  DoctorSidebarItem.items[5],
+                ), // Lab Orders
+                _buildNavItem(
+                  context,
+                  state,
+                  notifier,
+                  DoctorSidebarItem.items[6],
+                ), // Radiology Orders
+                _buildNavItem(
+                  context,
+                  state,
+                  notifier,
+                  DoctorSidebarItem.items[7],
+                ), // Blood Requests
+                const SizedBox(height: AppSpacing.md),
+                _buildSectionHeader('FINANCES & SCHEDULING'),
+                _buildNavItem(
+                  context,
+                  state,
+                  notifier,
+                  DoctorSidebarItem.items[8],
+                ), // Patient Bills
               ],
             ),
           ),
@@ -225,7 +251,7 @@ class DoctorSidebar extends ConsumerWidget {
     int? badgeCount;
     if (item.tab == DoctorTab.opdQueue) {
       badgeCount = state.opdPatients.where((p) => p.status == 'Waiting').length;
-    } else if (item.tab == DoctorTab.ePrescriptions) {
+    } else if (item.tab == DoctorTab.labOrders) {
       badgeCount = state.pendingLabCount;
     }
 
