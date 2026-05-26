@@ -60,7 +60,9 @@ class _SplashScreenState extends State<SplashScreen>
       final userRoleStr = prefs.getString('user_role');
 
       if (isLoggedIn && userRoleStr != null) {
-        if (userRoleStr == UserRole.doctor.name) {
+        if (userRoleStr == 'patient') {
+          context.goNamed(RouteNames.patientHome);
+        } else if (userRoleStr == UserRole.doctor.name) {
           context.goNamed(RouteNames.doctorDashboard);
         } else {
           context.goNamed(RouteNames.dashboard);

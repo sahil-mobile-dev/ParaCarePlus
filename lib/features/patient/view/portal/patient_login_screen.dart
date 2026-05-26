@@ -10,6 +10,7 @@ import 'package:paracareplus/features/patient/view/portal/widgets/login_left_pan
 import 'package:paracareplus/features/patient/view/portal/widgets/login_mobile_otp.dart';
 import 'package:paracareplus/features/patient/view/portal/widgets/login_tab_selector.dart';
 import 'package:paracareplus/routes/route_names.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 /// Patient Portal Login Screen — orchestrates the left brand panel,
 /// 5-tab selector, and the active login method widget.
@@ -27,8 +28,15 @@ class _PatientLoginScreenState extends State<PatientLoginScreen> {
     setState(() => _activeTab = tab);
   }
 
-  void _onLoginSuccess() {
-    if (mounted) context.goNamed(RouteNames.patientHome);
+  Future<void> _onLoginSuccess() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setBool('is_logged_in', true);
+      await prefs.setString('user_role', 'patient');
+    } catch (_) {}
+    if (mounted) {
+      context.goNamed(RouteNames.patientHome);
+    }
   }
 
   @override

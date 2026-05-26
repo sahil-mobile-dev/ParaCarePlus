@@ -4,6 +4,7 @@ import 'package:paracareplus/core/theme/app_colors.dart';
 import 'package:paracareplus/core/theme/app_spacing.dart';
 import 'package:paracareplus/core/theme/app_text_styles.dart';
 import 'package:paracareplus/routes/route_names.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PatientPortalDrawer extends StatelessWidget {
   const PatientPortalDrawer({required this.activeRouteName, super.key});
@@ -327,9 +328,15 @@ class PatientPortalDrawer extends StatelessWidget {
     return ColoredBox(
       color: AppColors.surface,
       child: ListTile(
-        onTap: () {
+        onTap: () async {
           Navigator.of(context).pop();
-          context.goNamed(RouteNames.patientLogin);
+          try {
+            final prefs = await SharedPreferences.getInstance();
+            await prefs.clear();
+          } catch (_) {}
+          if (context.mounted) {
+            context.goNamed(RouteNames.patientLogin);
+          }
         },
         leading: const Icon(
           Icons.logout_rounded,

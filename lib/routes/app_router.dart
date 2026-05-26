@@ -217,18 +217,21 @@ final appRouterStateProvider = Provider<GoRouter>((ref) {
       final userRoleStr = prefs.getString('user_role');
 
       final goingToLogin = state.matchedLocation == RoutePaths.login;
+      final goingToPatientLogin = state.matchedLocation == RoutePaths.patientLogin;
 
       if (!isLoggedIn) {
         // Guard protected routes from unauthorized access, except login, patient portal login, and splash screen.
         if (!goingToLogin &&
-            state.matchedLocation != RoutePaths.patientLogin &&
+            !goingToPatientLogin &&
             state.matchedLocation != RoutePaths.splash) {
           return RoutePaths.login;
         }
       } else {
-        // Prevent logged-in users from displaying the login screen
-        if (goingToLogin) {
-          if (userRoleStr == UserRole.doctor.name) {
+        // Prevent logged-in users from displaying the login screen or patient login screen
+        if (goingToLogin || goingToPatientLogin) {
+          if (userRoleStr == 'patient') {
+            return RoutePaths.patientHome;
+          } else if (userRoleStr == UserRole.doctor.name) {
             return RoutePaths.doctorDashboard;
           } else {
             return RoutePaths.dashboard;
