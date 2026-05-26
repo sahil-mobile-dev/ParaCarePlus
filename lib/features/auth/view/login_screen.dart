@@ -8,6 +8,7 @@ import 'package:paracareplus/features/auth/view/widgets/demo_credentials_bar.dar
 import 'package:paracareplus/features/auth/view/widgets/login_info_section.dart';
 import 'package:paracareplus/features/auth/view/widgets/role_selection_grid.dart';
 import 'package:paracareplus/features/auth/view_model/login_view_model.dart';
+import 'package:paracareplus/features/auth/model/user_role.dart';
 import 'package:paracareplus/routes/route_names.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
@@ -995,7 +996,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       .read(loginViewModelProvider.notifier)
                       .login();
                   if (success && context.mounted) {
-                    context.goNamed(RouteNames.dashboard);
+                    final loginState = ref.read(loginViewModelProvider).value;
+                    if (loginState?.selectedRole == UserRole.doctor) {
+                      context.goNamed(RouteNames.doctorDashboard);
+                    } else {
+                      context.goNamed(RouteNames.dashboard);
+                    }
                   }
                 },
           borderRadius: BorderRadius.circular(10),

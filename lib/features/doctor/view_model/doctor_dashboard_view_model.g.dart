@@ -1,30 +1,30 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'dashboard_view_model.dart';
+part of 'doctor_dashboard_view_model.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$dashboardViewModelHash() =>
-    r'ff2c7cbb29d6f5e11310cfea9efd88f040c21e29';
+String _$doctorDashboardViewModelHash() =>
+    r'0ba2b9925bd60e6bbee7cc400da8a11200b44ad4';
 
-/// See also [DashboardViewModel].
-@ProviderFor(DashboardViewModel)
-final dashboardViewModelProvider =
-    AutoDisposeAsyncNotifierProvider<
-      DashboardViewModel,
-      DashboardState
+/// See also [DoctorDashboardViewModel].
+@ProviderFor(DoctorDashboardViewModel)
+final doctorDashboardViewModelProvider =
+    AutoDisposeNotifierProvider<
+      DoctorDashboardViewModel,
+      DoctorDashboardState
     >.internal(
-      DashboardViewModel.new,
-      name: r'dashboardViewModelProvider',
+      DoctorDashboardViewModel.new,
+      name: r'doctorDashboardViewModelProvider',
       debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
           ? null
-          : _$dashboardViewModelHash,
+          : _$doctorDashboardViewModelHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );
 
-typedef _$DashboardViewModel = AutoDisposeAsyncNotifier<DashboardState>;
+typedef _$DoctorDashboardViewModel = AutoDisposeNotifier<DoctorDashboardState>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

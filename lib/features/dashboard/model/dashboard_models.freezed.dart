@@ -240,7 +240,7 @@ class _$DashboardStatsImpl implements _DashboardStats {
     this.totalIpdAdmissions = 0,
     this.activeEmergencyCases = 0,
     this.pendingLabReports = 0,
-    this.bedOccupancyRate = 0.0,
+    this.bedOccupancyRate = 0,
     this.totalAmbulancesOnDuty = 0,
     this.dischargedToday = 0,
     this.labTestsToday = 0,

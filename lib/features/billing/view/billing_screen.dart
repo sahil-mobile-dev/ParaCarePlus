@@ -17,7 +17,8 @@ import 'package:paracareplus/features/dashboard/view/widgets/app_header.dart';
 import 'package:paracareplus/features/dashboard/view/widgets/app_sidebar.dart';
 
 class BillingScreen extends ConsumerWidget {
-  const BillingScreen({super.key});
+  final bool isDoctor;
+  const BillingScreen({super.key, this.isDoctor = false});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -26,8 +27,12 @@ class BillingScreen extends ConsumerWidget {
 
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: const AppHeader(),
-      drawer: isWideScreen ? null : const Drawer(child: AppSidebar()),
+      appBar: isDoctor ? null : const AppHeader(),
+      drawer: isDoctor
+          ? null
+          : isWideScreen
+          ? null
+          : const Drawer(child: AppSidebar()),
       body: SafeArea(
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,

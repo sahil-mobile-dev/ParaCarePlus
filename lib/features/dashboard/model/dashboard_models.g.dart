@@ -13,7 +13,7 @@ _$DashboardStatsImpl _$$DashboardStatsImplFromJson(
   totalIpdAdmissions: (json['totalIpdAdmissions'] as num?)?.toInt() ?? 0,
   activeEmergencyCases: (json['activeEmergencyCases'] as num?)?.toInt() ?? 0,
   pendingLabReports: (json['pendingLabReports'] as num?)?.toInt() ?? 0,
-  bedOccupancyRate: (json['bedOccupancyRate'] as num?)?.toDouble() ?? 0.0,
+  bedOccupancyRate: (json['bedOccupancyRate'] as num?)?.toDouble() ?? 0,
   totalAmbulancesOnDuty: (json['totalAmbulancesOnDuty'] as num?)?.toInt() ?? 0,
   dischargedToday: (json['dischargedToday'] as num?)?.toInt() ?? 0,
   labTestsToday: (json['labTestsToday'] as num?)?.toInt() ?? 0,
@@ -53,7 +53,7 @@ Map<String, dynamic> _$$ActivityFeedItemImplToJson(
   'title': instance.title,
   'description': instance.description,
   'timestamp': instance.timestamp.toIso8601String(),
-  'type': _$ActivityTypeEnumMap[instance.type],
+  'type': _$ActivityTypeEnumMap[instance.type]!,
 };
 
 const _$ActivityTypeEnumMap = {
@@ -100,7 +100,7 @@ Map<String, dynamic> _$$CriticalPatientImplToJson(
   'bed': instance.bed,
   'condition': instance.condition,
   'assignedTo': instance.assignedTo,
-  'severity': _$PatientSeverityEnumMap[instance.severity],
+  'severity': _$PatientSeverityEnumMap[instance.severity]!,
 };
 
 const _$PatientSeverityEnumMap = {

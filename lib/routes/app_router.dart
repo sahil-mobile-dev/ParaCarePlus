@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:paracareplus/features/auth/view/login_screen.dart';
 import 'package:paracareplus/features/billing/view/billing_screen.dart';
 import 'package:paracareplus/features/dashboard/view/dashboard_screen.dart';
+import 'package:paracareplus/features/doctor/view/doctor_dashboard_screen.dart';
 import 'package:paracareplus/features/hr/view/hr_screen.dart';
 import 'package:paracareplus/features/ipd/view/ipd_admission_screen.dart';
 import 'package:paracareplus/features/laboratory/view/laboratory_screen.dart';
@@ -47,6 +48,11 @@ final appRouterStateProvider = Provider<GoRouter>((ref) {
         path: RoutePaths.dashboard,
         name: RouteNames.dashboard,
         builder: (context, state) => const DashboardScreen(),
+      ),
+      GoRoute(
+        path: RoutePaths.doctorDashboard,
+        name: RouteNames.doctorDashboard,
+        builder: (context, state) => const DoctorDashboardScreen(),
       ),
       GoRoute(
         path: RoutePaths.patientRegistration,
