@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:paracareplus/features/auth/model/user_role.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 part 'login_view_model.freezed.dart';
 part 'login_view_model.g.dart';
@@ -74,6 +75,10 @@ class LoginViewModel extends _$LoginViewModel {
 
     // Simulate API call
     await Future<void>.delayed(const Duration(seconds: 2));
+
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('is_logged_in', true);
+    await prefs.setString('user_role', currentState.selectedRole!.name);
 
     state = AsyncValue.data(state.value!.copyWith(isLoading: false));
     return true;

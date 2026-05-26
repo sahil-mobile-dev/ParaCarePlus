@@ -220,12 +220,12 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                     color: const Color(0xFF43A047),
                     showLiveDot: true,
                   ),
-                  // const SizedBox(width: 6),
+                  const SizedBox(width: 4),
                   _buildRibbonBadge(
                     label: '🔒 256-bit SSL',
                     color: const Color(0xFF90CAF9),
                   ),
-                  // const SizedBox(width: 6),
+                  const SizedBox(width: 4),
                   _buildRibbonBadge(
                     label: '⏰ $_timeString',
                     color: const Color(0xFFFFD54F),
@@ -628,7 +628,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
 
                       const Text(
                         'Password',
@@ -845,16 +845,28 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       ),
       child: Column(
         children: [
-          ClipRRect(
-            borderRadius: const BorderRadiusGeometry.vertical(
-              top: Radius.circular(30),
-              bottom: Radius.circular(20),
+          Container(
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: const Color(0xFF03142c),
+              border: Border.all(
+                color: const Color(0xFF135AB0).withOpacity(0.5),
+                width: 1.5,
+              ),
             ),
-            child: Image.asset(
-              'assets/images/para_care_logo.png',
-              width: 80,
-              height: 80,
-              fit: BoxFit.cover,
+            padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
+            child: ClipRRect(
+              borderRadius: const BorderRadius.vertical(
+                top: Radius.circular(80),
+                bottom: Radius.circular(50),
+              ),
+              child: Image.asset(
+                'assets/images/para_care_logo.png',
+                width: 75,
+                height: 75,
+                fit: BoxFit.cover,
+                colorBlendMode: BlendMode.colorBurn,
+              ),
             ),
           ),
 

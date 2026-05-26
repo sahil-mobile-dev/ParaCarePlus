@@ -77,18 +77,31 @@ class _LoginInfoSectionState extends State<LoginInfoSection>
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         // Floating hospital logo
-        ClipRRect(
-          borderRadius: const BorderRadiusGeometry.vertical(
-            top: Radius.circular(30),
-            bottom: Radius.circular(20),
+        Container(
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            color: const Color(0xFF03142c),
+            border: Border.all(
+              color: const Color(0xFF135AB0).withOpacity(0.5),
+              width: 1.5,
+            ),
           ),
-          child: Image.asset(
-            'assets/images/para_care_logo.png',
-            width: 100,
-            height: 100,
-            fit: BoxFit.cover,
+          padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
+          child: ClipRRect(
+            borderRadius: BorderRadius.vertical(
+              top: Radius.circular(80),
+              bottom: Radius.circular(50),
+            ),
+            child: Image.asset(
+              'assets/images/para_care_logo.png',
+              width: 90,
+              height: 90,
+              fit: BoxFit.cover,
+              colorBlendMode: BlendMode.colorBurn,
+            ),
           ),
         ),
+
         const SizedBox(height: AppSpacing.md),
 
         // Version badge

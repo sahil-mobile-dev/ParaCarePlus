@@ -1,6 +1,8 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:paracareplus/features/auth/model/user_role.dart';
 import 'package:paracareplus/features/auth/view/login_screen.dart';
+import 'package:paracareplus/features/auth/view/splash_screen.dart';
 import 'package:paracareplus/features/billing/view/billing_screen.dart';
 import 'package:paracareplus/features/dashboard/view/dashboard_screen.dart';
 import 'package:paracareplus/features/doctor/view/doctor_dashboard_screen.dart';
@@ -34,11 +36,17 @@ import 'package:paracareplus/features/radiology/view/radiology_screen.dart';
 import 'package:paracareplus/features/tpa/view/tpa_screen.dart';
 import 'package:paracareplus/routes/route_names.dart';
 import 'package:paracareplus/routes/route_paths.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 final appRouterStateProvider = Provider<GoRouter>((ref) {
   return GoRouter(
-    initialLocation: RoutePaths.login,
+    initialLocation: RoutePaths.splash,
     routes: [
+      GoRoute(
+        path: RoutePaths.splash,
+        name: RouteNames.splash,
+        builder: (context, state) => const SplashScreen(),
+      ),
       GoRoute(
         path: RoutePaths.login,
         name: RouteNames.login,
@@ -203,8 +211,30 @@ final appRouterStateProvider = Provider<GoRouter>((ref) {
       ),
     ],
     // Redirect logic for Auth Guards will be added here
-    redirect: (context, state) {
-      // TODO(arch): Implement Auth Logic
+    redirect: (context, state) async {
+      final prefs = await SharedPreferences.getInstance();
+      final isLoggedIn = prefs.getBool('is_logged_in') ?? false;
+      final userRoleStr = prefs.getString('user_role');
+
+      final goingToLogin = state.matchedLocation == RoutePaths.login;
+
+      if (!isLoggedIn) {
+        // Guard protected routes from unauthorized access, except login, patient portal login, and splash screen.
+        if (!goingToLogin &&
+            state.matchedLocation != RoutePaths.patientLogin &&
+            state.matchedLocation != RoutePaths.splash) {
+          return RoutePaths.login;
+        }
+      } else {
+        // Prevent logged-in users from displaying the login screen
+        if (goingToLogin) {
+          if (userRoleStr == UserRole.doctor.name) {
+            return RoutePaths.doctorDashboard;
+          } else {
+            return RoutePaths.dashboard;
+          }
+        }
+      }
       return null;
     },
   );

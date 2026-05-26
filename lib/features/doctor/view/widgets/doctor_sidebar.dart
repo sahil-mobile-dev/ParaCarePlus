@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:paracareplus/core/theme/app_colors.dart';
 import 'package:paracareplus/core/theme/app_spacing.dart';
 import 'package:paracareplus/core/theme/app_text_styles.dart';
@@ -344,8 +345,12 @@ class DoctorSidebar extends ConsumerWidget {
             Icons.logout_rounded,
             'Secure Logout',
             color: AppColors.error,
-            onTap: () {
-              context.goNamed(RouteNames.login);
+            onTap: () async {
+              final prefs = await SharedPreferences.getInstance();
+              await prefs.clear();
+              if (context.mounted) {
+                context.goNamed(RouteNames.login);
+              }
             },
           ),
         ],
