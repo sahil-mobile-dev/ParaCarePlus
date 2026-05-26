@@ -32,13 +32,14 @@ class DoctorSidebar extends ConsumerWidget {
             child: ListView(
               padding: const EdgeInsets.symmetric(vertical: AppSpacing.sm),
               children: [
-                _buildSectionHeader('CLINICAL WORKSPACE'),
                 _buildNavItem(
                   context,
                   state,
                   notifier,
                   DoctorSidebarItem.items[0],
                 ), // Console
+                _buildSectionHeader('CLINICAL WORKSPACE'),
+
                 _buildNavItem(
                   context,
                   state,
@@ -51,8 +52,6 @@ class DoctorSidebar extends ConsumerWidget {
                   notifier,
                   DoctorSidebarItem.items[2],
                 ), // My IPD Patients
-                const SizedBox(height: AppSpacing.md),
-                _buildSectionHeader('📝 ORDERS & CLINICAL NOTES'),
                 _buildNavItem(
                   context,
                   state,
@@ -65,6 +64,9 @@ class DoctorSidebar extends ConsumerWidget {
                   notifier,
                   DoctorSidebarItem.items[4],
                 ), // Clinical Notes / SOAP
+
+                const SizedBox(height: AppSpacing.md),
+                _buildSectionHeader('📝 ORDERS & CLINICAL NOTES'),
                 _buildNavItem(
                   context,
                   state,
@@ -83,8 +85,6 @@ class DoctorSidebar extends ConsumerWidget {
                   notifier,
                   DoctorSidebarItem.items[7],
                 ), // Blood Requests
-                const SizedBox(height: AppSpacing.md),
-                _buildSectionHeader('FINANCES & SCHEDULING'),
                 _buildNavItem(
                   context,
                   state,
