@@ -88,7 +88,7 @@ class _LoginInfoSectionState extends State<LoginInfoSection>
           ),
           padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
           child: ClipRRect(
-            borderRadius: BorderRadius.vertical(
+            borderRadius: const BorderRadius.vertical(
               top: Radius.circular(80),
               bottom: Radius.circular(50),
             ),
