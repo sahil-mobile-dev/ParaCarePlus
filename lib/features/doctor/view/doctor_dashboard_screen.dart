@@ -1,21 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:paracareplus/core/theme/app_colors.dart';
-import 'package:paracareplus/features/billing/view/billing_screen.dart';
 import 'package:paracareplus/features/doctor/model/doctor_sidebar_item.dart';
-import 'package:paracareplus/features/doctor/view/tabs/blood_requests_tab.dart';
 import 'package:paracareplus/features/doctor/view/tabs/doctor_console_tab.dart';
-import 'package:paracareplus/features/doctor/view/tabs/duty_roster_tab.dart';
-import 'package:paracareplus/features/doctor/view/tabs/ipd_rounds_tab.dart';
-import 'package:paracareplus/features/doctor/view/tabs/lab_orders_tab.dart';
-import 'package:paracareplus/features/doctor/view/tabs/opd_queue_tab.dart';
-import 'package:paracareplus/features/doctor/view/tabs/patient_bills_tab.dart';
-import 'package:paracareplus/features/doctor/view/tabs/radiology_orders_tab.dart';
 import 'package:paracareplus/features/doctor/view/widgets/doctor_header.dart';
 import 'package:paracareplus/features/doctor/view/widgets/doctor_sidebar.dart';
 import 'package:paracareplus/features/doctor/view_model/doctor_dashboard_view_model.dart';
-import 'package:paracareplus/features/laboratory/view/laboratory_screen.dart';
-import 'package:paracareplus/features/radiology/view/radiology_screen.dart';
 
 class DoctorDashboardScreen extends ConsumerWidget {
   const DoctorDashboardScreen({super.key});
@@ -50,19 +40,25 @@ class DoctorDashboardScreen extends ConsumerWidget {
   Widget _buildSelectedTabContent(DoctorTab tab) {
     switch (tab) {
       case DoctorTab.console:
-        return const DoctorConsoleTab();
+        return const DoctorConsoleTab(
+          viewMode: DoctorConsoleViewMode.fullConsole,
+        );
       case DoctorTab.opdQueue:
-        return const OpdQueueTab();
+        return const DoctorConsoleTab(
+          viewMode: DoctorConsoleViewMode.opdQueue,
+        );
       case DoctorTab.ipdRound:
-        return const IpdRoundsTab();
-      case DoctorTab.labOrders:
-        return const LaboratoryScreen();
-      case DoctorTab.radiologyOrders:
-        return const RadiologyScreen();
-      case DoctorTab.bloodRequests:
-        return const BloodRequestsTab();
-      case DoctorTab.patientBills:
-        return const BillingScreen(isDoctor: true);
+        return const DoctorConsoleTab(
+          viewMode: DoctorConsoleViewMode.ipdPatients,
+        );
+      case DoctorTab.ePrescriptions:
+        return const DoctorConsoleTab(
+          viewMode: DoctorConsoleViewMode.ePrescriptions,
+        );
+      case DoctorTab.clinicalNotes:
+        return const DoctorConsoleTab(
+          viewMode: DoctorConsoleViewMode.clinicalNotes,
+        );
     }
   }
 }

@@ -7,8 +7,21 @@ import 'package:paracareplus/core/theme/app_text_styles.dart';
 import 'package:paracareplus/features/doctor/model/doctor_sidebar_item.dart';
 import 'package:paracareplus/features/doctor/view_model/doctor_dashboard_view_model.dart';
 
+enum DoctorConsoleViewMode {
+  fullConsole,
+  opdQueue,
+  ipdPatients,
+  ePrescriptions,
+  clinicalNotes,
+}
+
 class DoctorConsoleTab extends ConsumerStatefulWidget {
-  const DoctorConsoleTab({super.key});
+  const DoctorConsoleTab({
+    super.key,
+    this.viewMode = DoctorConsoleViewMode.fullConsole,
+  });
+
+  final DoctorConsoleViewMode viewMode;
 
   @override
   ConsumerState<DoctorConsoleTab> createState() => _DoctorConsoleTabState();
@@ -506,63 +519,102 @@ class _DoctorConsoleTabState extends ConsumerState<DoctorConsoleTab> {
   Widget build(BuildContext context) {
     final isWide = MediaQuery.of(context).size.width > 950;
 
-    return Scaffold(
-      backgroundColor: AppColors.background,
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(AppSpacing.lg),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildWorkspaceHeader(),
-            const SizedBox(height: 16),
-            _buildStatsTelemetryGrid(),
-            const SizedBox(height: 20),
+    switch (widget.viewMode) {
+      case DoctorConsoleViewMode.fullConsole:
+        return Scaffold(
+          backgroundColor: AppColors.background,
+          body: SingleChildScrollView(
+            padding: const EdgeInsets.all(AppSpacing.lg),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildWorkspaceHeader(),
+                const SizedBox(height: 16),
+                _buildStatsTelemetryGrid(),
+                const SizedBox(height: 20),
 
-            // Queue & IPD grid/row
-            if (isWide)
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(flex: 6, child: _buildOPDQueueCard()),
-                  const SizedBox(width: 16),
-                  Expanded(flex: 5, child: _buildIPDPatientsCard()),
-                ],
-              )
-            else
-              Column(
-                children: [
-                  _buildOPDQueueCard(),
-                  const SizedBox(height: 16),
-                  _buildIPDPatientsCard(),
-                ],
-              ),
+                // Queue & IPD grid/row
+                if (isWide)
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(flex: 6, child: _buildOPDQueueCard()),
+                      const SizedBox(width: 16),
+                      Expanded(flex: 5, child: _buildIPDPatientsCard()),
+                    ],
+                  )
+                else
+                  Column(
+                    children: [
+                      _buildOPDQueueCard(),
+                      const SizedBox(height: 16),
+                      _buildIPDPatientsCard(),
+                    ],
+                  ),
 
-            const SizedBox(height: 20),
-            _buildOrdersAndPrescriptionsCard(),
-            const SizedBox(height: 20),
+                const SizedBox(height: 20),
+                _buildOrdersAndPrescriptionsCard(),
+                const SizedBox(height: 20),
 
-            // Schedule & Alerts Row
-            if (isWide)
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(child: _buildTodayScheduleCard()),
-                  const SizedBox(width: 16),
-                  Expanded(child: _buildClinicalAlertsCard()),
-                ],
-              )
-            else
-              Column(
-                children: [
-                  _buildTodayScheduleCard(),
-                  const SizedBox(height: 16),
-                  _buildClinicalAlertsCard(),
-                ],
-              ),
-          ],
-        ),
-      ),
-    );
+                // Schedule & Alerts Row
+                if (isWide)
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Expanded(child: _buildTodayScheduleCard()),
+                      const SizedBox(width: 16),
+                      Expanded(child: _buildClinicalAlertsCard()),
+                    ],
+                  )
+                else
+                  Column(
+                    children: [
+                      _buildTodayScheduleCard(),
+                      const SizedBox(height: 16),
+                      _buildClinicalAlertsCard(),
+                    ],
+                  ),
+              ],
+            ),
+          ),
+        );
+
+      case DoctorConsoleViewMode.opdQueue:
+        return Scaffold(
+          backgroundColor: AppColors.background,
+          body: SingleChildScrollView(
+            padding: const EdgeInsets.all(AppSpacing.lg),
+            child: _buildOPDQueueCard(),
+          ),
+        );
+
+      case DoctorConsoleViewMode.ipdPatients:
+        return Scaffold(
+          backgroundColor: AppColors.background,
+          body: SingleChildScrollView(
+            padding: const EdgeInsets.all(AppSpacing.lg),
+            child: _buildIPDPatientsCard(),
+          ),
+        );
+
+      case DoctorConsoleViewMode.ePrescriptions:
+        return Scaffold(
+          backgroundColor: AppColors.background,
+          body: SingleChildScrollView(
+            padding: const EdgeInsets.all(AppSpacing.lg),
+            child: _buildOrdersAndPrescriptionsCard(),
+          ),
+        );
+
+      case DoctorConsoleViewMode.clinicalNotes:
+        return Scaffold(
+          backgroundColor: AppColors.background,
+          body: SingleChildScrollView(
+            padding: const EdgeInsets.all(AppSpacing.lg),
+            child: _buildClinicalAlertsCard(),
+          ),
+        );
+    }
   }
 
   Widget _buildWorkspaceHeader() {
@@ -806,7 +858,7 @@ class _DoctorConsoleTabState extends ConsumerState<DoctorConsoleTab> {
 
   Widget _buildOPDQueueCard() {
     return Container(
-      height: 400,
+      height: widget.viewMode == DoctorConsoleViewMode.fullConsole ? 400 : 700,
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: AppColors.card,
@@ -1042,7 +1094,7 @@ class _DoctorConsoleTabState extends ConsumerState<DoctorConsoleTab> {
 
   Widget _buildIPDPatientsCard() {
     return Container(
-      height: 400,
+      height: widget.viewMode == DoctorConsoleViewMode.fullConsole ? 400 : 700,
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: AppColors.card,
@@ -1729,7 +1781,7 @@ class _DoctorConsoleTabState extends ConsumerState<DoctorConsoleTab> {
                       onPressed: () {
                         ref
                             .read(doctorDashboardViewModelProvider.notifier)
-                            .changeTab(DoctorTab.labOrders);
+                            .changeTab(DoctorTab.ePrescriptions);
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.surface,
@@ -1916,7 +1968,7 @@ class _DoctorConsoleTabState extends ConsumerState<DoctorConsoleTab> {
                       onPressed: () {
                         ref
                             .read(doctorDashboardViewModelProvider.notifier)
-                            .changeTab(DoctorTab.radiologyOrders);
+                            .changeTab(DoctorTab.ePrescriptions);
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.surface,
@@ -2160,7 +2212,7 @@ class _DoctorConsoleTabState extends ConsumerState<DoctorConsoleTab> {
 
   Widget _buildClinicalAlertsCard() {
     return Container(
-      height: 380,
+      height: widget.viewMode == DoctorConsoleViewMode.fullConsole ? 380 : 700,
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
         color: AppColors.card,

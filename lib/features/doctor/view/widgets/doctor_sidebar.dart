@@ -50,35 +50,21 @@ class DoctorSidebar extends ConsumerWidget {
                   state,
                   notifier,
                   DoctorSidebarItem.items[2],
-                ), // IPD Rounds
+                ), // My IPD Patients
                 const SizedBox(height: AppSpacing.md),
-                _buildSectionHeader('🔬 CLINICAL ORDERS'),
+                _buildSectionHeader('📝 ORDERS & CLINICAL NOTES'),
                 _buildNavItem(
                   context,
                   state,
                   notifier,
                   DoctorSidebarItem.items[3],
-                ), // Lab Orders
+                ), // e-Prescriptions
                 _buildNavItem(
                   context,
                   state,
                   notifier,
                   DoctorSidebarItem.items[4],
-                ), // Radiology Orders
-                _buildNavItem(
-                  context,
-                  state,
-                  notifier,
-                  DoctorSidebarItem.items[5],
-                ), // Blood Requests
-                const SizedBox(height: AppSpacing.md),
-                _buildSectionHeader('FINANCES & SCHEDULING'),
-                _buildNavItem(
-                  context,
-                  state,
-                  notifier,
-                  DoctorSidebarItem.items[6],
-                ), // Patient Bills
+                ), // Clinical Notes / SOAP
               ],
             ),
           ),
@@ -239,7 +225,7 @@ class DoctorSidebar extends ConsumerWidget {
     int? badgeCount;
     if (item.tab == DoctorTab.opdQueue) {
       badgeCount = state.opdPatients.where((p) => p.status == 'Waiting').length;
-    } else if (item.tab == DoctorTab.labOrders) {
+    } else if (item.tab == DoctorTab.ePrescriptions) {
       badgeCount = state.pendingLabCount;
     }
 
