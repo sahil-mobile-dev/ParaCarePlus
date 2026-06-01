@@ -29,10 +29,7 @@ class AiEsanjeevani extends StatelessWidget {
               borderRadius: BorderRadius.circular(14),
             ),
             alignment: Alignment.center,
-            child: const Text(
-              '🏥',
-              style: TextStyle(fontSize: 26),
-            ),
+            child: const Text('🏥', style: TextStyle(fontSize: 26)),
           );
 
           final detailsWidget = Column(
@@ -72,7 +69,10 @@ class AiEsanjeevani extends StatelessWidget {
                     icon: const Icon(Icons.video_call_rounded, size: 14),
                     label: const Text(
                       'Join eSanjeevani OPD',
-                      style: TextStyle(fontSize: 11, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF00A550),
@@ -92,7 +92,9 @@ class AiEsanjeevani extends StatelessWidget {
                     onPressed: () {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
-                          content: Text('Fetching consultation history from ABDM…'),
+                          content: Text(
+                            'Fetching consultation history from ABDM…',
+                          ),
                         ),
                       );
                     },
@@ -120,7 +122,9 @@ class AiEsanjeevani extends StatelessWidget {
                     onPressed: () {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
-                          content: Text('Health records shared with eSanjeevani'),
+                          content: Text(
+                            'Health records shared with eSanjeevani',
+                          ),
                           backgroundColor: AppColors.success,
                         ),
                       );
@@ -193,10 +197,7 @@ class AiEsanjeevani extends StatelessWidget {
               children: [
                 logoWidget,
                 const SizedBox(width: 16),
-                Expanded(
-                  flex: 3,
-                  child: detailsWidget,
-                ),
+                Expanded(flex: 3, child: detailsWidget),
                 const SizedBox(width: 24),
                 Expanded(
                   child: Column(
@@ -233,10 +234,7 @@ class AiEsanjeevani extends StatelessWidget {
         const SizedBox(height: 2),
         Text(
           lbl,
-          style: const TextStyle(
-            color: AppColors.secondaryText,
-            fontSize: 9,
-          ),
+          style: const TextStyle(color: AppColors.secondaryText, fontSize: 9),
           textAlign: TextAlign.center,
         ),
       ],

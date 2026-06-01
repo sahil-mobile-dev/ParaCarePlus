@@ -241,8 +241,7 @@ class _PatientBillsTabState extends State<PatientBillsTab> {
   // New Invoice Generator Active States
   final _newBillUhid = TextEditingController(text: 'UK-00421');
   final _newBillPatient = TextEditingController(text: 'Ramesh Kumar');
-  var _newBillType = 'OPD';
-  var _newBillDept = 'General Medicine';
+  final _newBillType = 'OPD';
   var _newBillPayType = 'Cash';
 
   // Dynamic invoice service lines
@@ -262,7 +261,6 @@ class _PatientBillsTabState extends State<PatientBillsTab> {
   ];
 
   final _customServiceName = TextEditingController();
-  var _customServiceCategory = 'Investigation';
   final _customServiceRate = TextEditingController();
 
   // Discount settings
@@ -426,7 +424,7 @@ class _PatientBillsTabState extends State<PatientBillsTab> {
             ),
           ],
         ),
-        SizedBox(height: AppSpacing.md),
+        const SizedBox(height: AppSpacing.md),
         Row(
           children: [
             _buildStatCard(
@@ -623,7 +621,7 @@ class _PatientBillsTabState extends State<PatientBillsTab> {
                 ],
               ),
               const SizedBox(height: 12),
-              Container(
+              SizedBox(
                 height: 300,
                 child: ListView.separated(
                   itemCount: _billRecords.take(5).length,
@@ -1584,8 +1582,9 @@ class _PatientBillsTabState extends State<PatientBillsTab> {
                                   )
                                   .toList(),
                               onChanged: (val) {
-                                if (val != null)
+                                if (val != null) {
                                   setState(() => _collectAmount = val);
+                                }
                               },
                               decoration: InputDecoration(
                                 filled: true,
@@ -1626,8 +1625,9 @@ class _PatientBillsTabState extends State<PatientBillsTab> {
                                       )
                                       .toList(),
                               onChanged: (val) {
-                                if (val != null)
+                                if (val != null) {
                                   setState(() => _collectMode = val);
+                                }
                               },
                               decoration: InputDecoration(
                                 filled: true,
@@ -2413,160 +2413,6 @@ class _PatientBillsTabState extends State<PatientBillsTab> {
           ),
         ],
       ),
-    );
-  }
-
-  // Modal / Dialog creators
-  void _openAddCustomServiceDialog(BuildContext context) {
-    showDialog<void>(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          backgroundColor: AppColors.card,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
-          ),
-          title: const Text(
-            'Add Service Line Item',
-            style: AppTextStyles.labelLarge,
-          ),
-          content: StatefulBuilder(
-            builder: (context, setDlgState) {
-              return Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Text('Service Name', style: AppTextStyles.labelSmall),
-                  const SizedBox(height: 6),
-                  TextField(
-                    controller: _customServiceName,
-                    style: const TextStyle(
-                      color: AppColors.primaryText,
-                      fontSize: 13,
-                    ),
-                    decoration: InputDecoration(
-                      hintText: 'e.g. ECG Diagnostic Reading',
-                      hintStyle: const TextStyle(
-                        color: AppColors.secondaryText,
-                        fontSize: 11.5,
-                      ),
-                      filled: true,
-                      fillColor: AppColors.background,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  const Text(
-                    'Service Category',
-                    style: AppTextStyles.labelSmall,
-                  ),
-                  const SizedBox(height: 6),
-                  DropdownButtonFormField<String>(
-                    dropdownColor: AppColors.card,
-                    initialValue: _customServiceCategory,
-                    items:
-                        [
-                              'Consultation',
-                              'Investigation',
-                              'Procedures',
-                              'Medication',
-                              'Bed Charges',
-                            ]
-                            .map(
-                              (c) => DropdownMenuItem(
-                                value: c,
-                                child: Text(
-                                  c,
-                                  style: const TextStyle(
-                                    color: AppColors.primaryText,
-                                  ),
-                                ),
-                              ),
-                            )
-                            .toList(),
-                    onChanged: (val) {
-                      if (val != null) {
-                        setDlgState(() => _customServiceCategory = val);
-                      }
-                    },
-                    decoration: InputDecoration(
-                      filled: true,
-                      fillColor: AppColors.background,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  const Text('Rate (₹)', style: AppTextStyles.labelSmall),
-                  const SizedBox(height: 6),
-                  TextField(
-                    controller: _customServiceRate,
-                    style: const TextStyle(
-                      color: AppColors.primaryText,
-                      fontSize: 13,
-                    ),
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(
-                      hintText: 'Rate in Rupees...',
-                      hintStyle: const TextStyle(
-                        color: AppColors.secondaryText,
-                        fontSize: 11.5,
-                      ),
-                      filled: true,
-                      fillColor: AppColors.background,
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    ),
-                  ),
-                ],
-              );
-            },
-          ),
-          actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: const Text(
-                'Cancel',
-                style: TextStyle(color: AppColors.secondaryText),
-              ),
-            ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.success,
-              ),
-              onPressed: () {
-                final rate = int.tryParse(_customServiceRate.text) ?? 500;
-                setState(() {
-                  _activeInvoiceItems.add({
-                    'name': _customServiceName.text.isEmpty
-                        ? 'Custom Clinical Procedure'
-                        : _customServiceName.text,
-                    'category': _customServiceCategory,
-                    'qty': 1,
-                    'rate': rate,
-                  });
-                });
-                Navigator.pop(context);
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text(
-                      'Service added to live invoice calculations.',
-                    ),
-                  ),
-                );
-              },
-              child: const Text(
-                'Add Service',
-                style: TextStyle(color: Colors.white),
-              ),
-            ),
-          ],
-        );
-      },
     );
   }
 

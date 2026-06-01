@@ -48,9 +48,7 @@ class DoctorDashboardScreen extends ConsumerWidget {
           viewMode: DoctorConsoleViewMode.fullConsole,
         );
       case DoctorTab.opdQueue:
-        return const DoctorConsoleTab(
-          viewMode: DoctorConsoleViewMode.opdQueue,
-        );
+        return const DoctorConsoleTab(viewMode: DoctorConsoleViewMode.opdQueue);
       case DoctorTab.ipdRound:
         return const DoctorConsoleTab(
           viewMode: DoctorConsoleViewMode.ipdPatients,

@@ -227,19 +227,20 @@ class _MiniMapPainter extends CustomPainter {
         (0.35, 0.60, 25.0),
         (0.70, 0.35, 30.0),
       ]) {
-        canvas.drawCircle(
-          Offset(size.width * spot.$1, size.height * spot.$2),
-          spot.$3,
-          Paint()..color = AppColors.secondaryAccent.withValues(alpha: 0.2),
-        );
-        canvas.drawCircle(
-          Offset(size.width * spot.$1, size.height * spot.$2),
-          spot.$3,
-          Paint()
-            ..color = const Color(0xFFF77F00).withValues(alpha: 0.35)
-            ..style = PaintingStyle.stroke
-            ..strokeWidth = 1.5,
-        );
+        canvas
+          ..drawCircle(
+            Offset(size.width * spot.$1, size.height * spot.$2),
+            spot.$3,
+            Paint()..color = AppColors.secondaryAccent.withValues(alpha: 0.2),
+          )
+          ..drawCircle(
+            Offset(size.width * spot.$1, size.height * spot.$2),
+            spot.$3,
+            Paint()
+              ..color = const Color(0xFFF77F00).withValues(alpha: 0.35)
+              ..style = PaintingStyle.stroke
+              ..strokeWidth = 1.5,
+          );
       }
       canvas.drawCircle(
         Offset(size.width * 0.55, size.height * 0.42),

@@ -34,9 +34,9 @@ enum UserRole {
     Icons.airport_shuttle_rounded,
   );
 
+  const UserRole(this.displayName, this.description, this.icon);
+
   final String displayName;
   final String description;
   final IconData icon;
-
-  const UserRole(this.displayName, this.description, this.icon);
 }

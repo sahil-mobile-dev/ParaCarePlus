@@ -55,13 +55,9 @@ class _OpdQueueTabState extends ConsumerState<OpdQueueTab> {
                   )
                 : Column(
                     children: [
-                      Expanded(
-                        child: _buildQueueList(state, notifier),
-                      ),
+                      Expanded(child: _buildQueueList(state, notifier)),
                       const SizedBox(height: AppSpacing.lg),
-                      Expanded(
-                        child: _buildConsultConsole(state, notifier),
-                      ),
+                      Expanded(child: _buildConsultConsole(state, notifier)),
                     ],
                   ),
           ),
@@ -71,7 +67,9 @@ class _OpdQueueTabState extends ConsumerState<OpdQueueTab> {
   }
 
   Widget _buildHeader(DoctorDashboardState state) {
-    final pendingCount = state.opdPatients.where((p) => p.status != 'Completed').length;
+    final pendingCount = state.opdPatients
+        .where((p) => p.status != 'Completed')
+        .length;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -79,14 +77,21 @@ class _OpdQueueTabState extends ConsumerState<OpdQueueTab> {
         const SizedBox(height: 2),
         Text(
           'Manage queue of OPD tokens. $pendingCount patients waiting for review.',
-          style: AppTextStyles.bodySmall.copyWith(color: AppColors.secondaryText),
+          style: AppTextStyles.bodySmall.copyWith(
+            color: AppColors.secondaryText,
+          ),
         ),
       ],
     );
   }
 
-  Widget _buildQueueList(DoctorDashboardState state, DoctorDashboardViewModel notifier) {
-    final activeList = state.opdPatients.where((p) => p.status != 'Completed').toList();
+  Widget _buildQueueList(
+    DoctorDashboardState state,
+    DoctorDashboardViewModel notifier,
+  ) {
+    final activeList = state.opdPatients
+        .where((p) => p.status != 'Completed')
+        .toList();
 
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
@@ -121,33 +126,38 @@ class _OpdQueueTabState extends ConsumerState<OpdQueueTab> {
                       return AnimatedContainer(
                         duration: const Duration(milliseconds: 200),
                         decoration: BoxDecoration(
-                          color: isConsulting ? AppColors.surface : AppColors.background.withValues(alpha: 0.4),
+                          color: isConsulting
+                              ? AppColors.surface
+                              : AppColors.background.withValues(alpha: 0.4),
                           borderRadius: BorderRadius.circular(12),
                           border: Border.all(
                             color: isConsulting
                                 ? AppColors.primary
                                 : isHigh
-                                    ? Colors.orange.withValues(alpha: 0.5)
-                                    : AppColors.border,
+                                ? Colors.orange.withValues(alpha: 0.5)
+                                : AppColors.border,
                             width: isConsulting ? 1.5 : 1,
                           ),
                         ),
                         child: ListTile(
-                          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                          contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 8,
+                          ),
                           leading: CircleAvatar(
                             backgroundColor: isConsulting
                                 ? AppColors.primary
                                 : isHigh
-                                    ? Colors.orange.withValues(alpha: 0.2)
-                                    : AppColors.card,
+                                ? Colors.orange.withValues(alpha: 0.2)
+                                : AppColors.card,
                             child: Text(
                               p.token.split('-').last,
                               style: TextStyle(
                                 color: isConsulting
                                     ? Colors.white
                                     : isHigh
-                                        ? Colors.orange
-                                        : AppColors.primaryText,
+                                    ? Colors.orange
+                                    : AppColors.primaryText,
                                 fontWeight: FontWeight.bold,
                                 fontSize: 13,
                               ),
@@ -165,19 +175,28 @@ class _OpdQueueTabState extends ConsumerState<OpdQueueTab> {
                                 ),
                               ),
                               Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 8,
+                                  vertical: 2,
+                                ),
                                 decoration: BoxDecoration(
-                                  color: isHigh ? Colors.orange.withValues(alpha: 0.15) : AppColors.surface,
+                                  color: isHigh
+                                      ? Colors.orange.withValues(alpha: 0.15)
+                                      : AppColors.surface,
                                   borderRadius: BorderRadius.circular(10),
                                   border: Border.all(
-                                    color: isHigh ? Colors.orange : AppColors.border,
+                                    color: isHigh
+                                        ? Colors.orange
+                                        : AppColors.border,
                                     width: 0.5,
                                   ),
                                 ),
                                 child: Text(
                                   p.urgency.toUpperCase(),
                                   style: TextStyle(
-                                    color: isHigh ? Colors.orange : AppColors.secondaryText,
+                                    color: isHigh
+                                        ? Colors.orange
+                                        : AppColors.secondaryText,
                                     fontSize: 8.5,
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -191,14 +210,22 @@ class _OpdQueueTabState extends ConsumerState<OpdQueueTab> {
                               const SizedBox(height: 4),
                               Text(
                                 '${p.gender} · ${p.age} yrs · Symptom: ${p.symptom}',
-                                style: AppTextStyles.bodySmall.copyWith(fontSize: 11),
+                                style: AppTextStyles.bodySmall.copyWith(
+                                  fontSize: 11,
+                                ),
                               ),
                             ],
                           ),
                           trailing: isConsulting
-                              ? const Icon(Icons.keyboard_arrow_right_rounded, color: AppColors.primaryLight)
+                              ? const Icon(
+                                  Icons.keyboard_arrow_right_rounded,
+                                  color: AppColors.primaryLight,
+                                )
                               : IconButton(
-                                  icon: const Icon(Icons.play_circle_outline_rounded, color: AppColors.success),
+                                  icon: const Icon(
+                                    Icons.play_circle_outline_rounded,
+                                    color: AppColors.success,
+                                  ),
                                   onPressed: () {
                                     notifier.startConsultation(p);
                                     _notesController.clear();
@@ -215,7 +242,10 @@ class _OpdQueueTabState extends ConsumerState<OpdQueueTab> {
     );
   }
 
-  Widget _buildConsultConsole(DoctorDashboardState state, DoctorDashboardViewModel notifier) {
+  Widget _buildConsultConsole(
+    DoctorDashboardState state,
+    DoctorDashboardViewModel notifier,
+  ) {
     final patient = state.consultingPatient;
 
     return Container(
@@ -235,7 +265,10 @@ class _OpdQueueTabState extends ConsumerState<OpdQueueTab> {
                 Expanded(
                   child: ListView(
                     children: [
-                      const Text('EMR Consultation Notes', style: AppTextStyles.labelMedium),
+                      const Text(
+                        'EMR Consultation Notes',
+                        style: AppTextStyles.labelMedium,
+                      ),
                       const SizedBox(height: 8),
                       Container(
                         decoration: BoxDecoration(
@@ -246,17 +279,27 @@ class _OpdQueueTabState extends ConsumerState<OpdQueueTab> {
                         child: TextField(
                           controller: _notesController,
                           maxLines: 6,
-                          style: const TextStyle(color: AppColors.primaryText, fontSize: 13),
+                          style: const TextStyle(
+                            color: AppColors.primaryText,
+                            fontSize: 13,
+                          ),
                           decoration: const InputDecoration(
-                            hintText: 'Enter clinical history, physical observations, diagnosis...',
-                            hintStyle: TextStyle(color: AppColors.secondaryText, fontSize: 12),
+                            hintText:
+                                'Enter clinical history, physical observations, diagnosis...',
+                            hintStyle: TextStyle(
+                              color: AppColors.secondaryText,
+                              fontSize: 12,
+                            ),
                             border: InputBorder.none,
                             contentPadding: EdgeInsets.all(12),
                           ),
                         ),
                       ),
                       const SizedBox(height: 16),
-                      const Text('Suggested Action Triggers', style: AppTextStyles.labelMedium),
+                      const Text(
+                        'Suggested Action Triggers',
+                        style: AppTextStyles.labelMedium,
+                      ),
                       const SizedBox(height: 8),
                       Row(
                         children: [
@@ -290,7 +333,9 @@ class _OpdQueueTabState extends ConsumerState<OpdQueueTab> {
                               () {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(
-                                    content: Text('Triage alert: Referral request routed to IPD admissions desk.'),
+                                    content: Text(
+                                      'Triage alert: Referral request routed to IPD admissions desk.',
+                                    ),
                                     backgroundColor: AppColors.primary,
                                   ),
                                 );
@@ -319,7 +364,9 @@ class _OpdQueueTabState extends ConsumerState<OpdQueueTab> {
                         onPressed: () {
                           // Cancel or suspend consult
                         },
-                        style: TextButton.styleFrom(foregroundColor: AppColors.secondaryText),
+                        style: TextButton.styleFrom(
+                          foregroundColor: AppColors.secondaryText,
+                        ),
                         child: const Text('Suspend Consult'),
                       ),
                     ),
@@ -327,7 +374,10 @@ class _OpdQueueTabState extends ConsumerState<OpdQueueTab> {
                     Expanded(
                       flex: 2,
                       child: ElevatedButton.icon(
-                        icon: const Icon(Icons.check_circle_outline_rounded, size: 18),
+                        icon: const Icon(
+                          Icons.check_circle_outline_rounded,
+                          size: 18,
+                        ),
                         label: const Text('Complete Consultation'),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.success,
@@ -341,7 +391,9 @@ class _OpdQueueTabState extends ConsumerState<OpdQueueTab> {
                           notifier.completeConsultation(patient.token);
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
-                              content: Text('OPD Consultation for ${patient.name} recorded successfully.'),
+                              content: Text(
+                                'OPD Consultation for ${patient.name} recorded successfully.',
+                              ),
                               backgroundColor: AppColors.success,
                             ),
                           );
@@ -361,7 +413,11 @@ class _OpdQueueTabState extends ConsumerState<OpdQueueTab> {
         CircleAvatar(
           radius: 24,
           backgroundColor: AppColors.primary.withValues(alpha: 0.15),
-          child: const Icon(Icons.person_rounded, color: AppColors.primaryLight, size: 24),
+          child: const Icon(
+            Icons.person_rounded,
+            color: AppColors.primaryLight,
+            size: 24,
+          ),
         ),
         const SizedBox(width: 14),
         Expanded(
@@ -370,12 +426,16 @@ class _OpdQueueTabState extends ConsumerState<OpdQueueTab> {
             children: [
               Text(
                 patient.name,
-                style: AppTextStyles.titleSmall.copyWith(fontWeight: FontWeight.bold),
+                style: AppTextStyles.titleSmall.copyWith(
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               const SizedBox(height: 2),
               Text(
                 'TOKEN: ${patient.token} · ${patient.gender} · ${patient.age} yrs',
-                style: AppTextStyles.bodySmall.copyWith(color: AppColors.secondaryText),
+                style: AppTextStyles.bodySmall.copyWith(
+                  color: AppColors.secondaryText,
+                ),
               ),
             ],
           ),
@@ -393,12 +453,19 @@ class _OpdQueueTabState extends ConsumerState<OpdQueueTab> {
               Container(
                 width: 6,
                 height: 6,
-                decoration: const BoxDecoration(color: AppColors.primaryLight, shape: BoxShape.circle),
+                decoration: const BoxDecoration(
+                  color: AppColors.primaryLight,
+                  shape: BoxShape.circle,
+                ),
               ),
               const SizedBox(width: 6),
               const Text(
                 'CONSULTING',
-                style: TextStyle(color: AppColors.primaryText, fontSize: 8.5, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  color: AppColors.primaryText,
+                  fontSize: 8.5,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ],
           ),
@@ -407,7 +474,12 @@ class _OpdQueueTabState extends ConsumerState<OpdQueueTab> {
     );
   }
 
-  Widget _buildActionChip(IconData icon, String label, Color color, VoidCallback onTap) {
+  Widget _buildActionChip(
+    IconData icon,
+    String label,
+    Color color,
+    VoidCallback onTap,
+  ) {
     return InkWell(
       onTap: onTap,
       borderRadius: BorderRadius.circular(10),
@@ -442,11 +514,18 @@ class _OpdQueueTabState extends ConsumerState<OpdQueueTab> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.checklist_rtl_rounded, size: 48, color: AppColors.secondaryText),
+          Icon(
+            Icons.checklist_rtl_rounded,
+            size: 48,
+            color: AppColors.secondaryText,
+          ),
           SizedBox(height: 12),
           Text(
             'Queue Complete',
-            style: TextStyle(color: AppColors.primaryText, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              color: AppColors.primaryText,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           SizedBox(height: 4),
           Text(
@@ -467,7 +546,10 @@ class _OpdQueueTabState extends ConsumerState<OpdQueueTab> {
           SizedBox(height: 12),
           Text(
             'Clinical Workspace Active',
-            style: TextStyle(color: AppColors.primaryText, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              color: AppColors.primaryText,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           SizedBox(height: 4),
           Text(

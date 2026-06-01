@@ -147,8 +147,7 @@ class _SatisfactionTrendPainter extends CustomPainter {
     }
 
     // Fill
-    final fillPath = Path();
-    fillPath.moveTo(28, size.height - 20);
+    final fillPath = Path()..moveTo(28, size.height - 20);
     for (var i = 0; i < _data.length; i++) {
       final x = 28 + i * stepX;
       final norm = (_data[i] - minV) / (maxV - minV);

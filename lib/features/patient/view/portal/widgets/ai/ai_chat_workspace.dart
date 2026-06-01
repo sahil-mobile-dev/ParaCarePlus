@@ -22,7 +22,8 @@ class _AiChatWorkspaceState extends State<AiChatWorkspace> {
   final List<Map<String, dynamic>> _messages = [
     {
       'isUser': false,
-      'text': "Namaste, Ramesh ji! 🙏 I'm your AI health assistant for ParaCare+ HIMS. I can help you with:\n\n• **Symptom analysis** — describe what you're feeling\n• **Lab report interpretation** — understanding your results\n• **Medication queries** — dosage, interactions, side effects\n• **Lifestyle advice** — diet, exercise, sleep based on your health data\n\nHow can I assist you today?",
+      'text':
+          "Namaste, Ramesh ji! 🙏 I'm your AI health assistant for ParaCare+ HIMS. I can help you with:\n\n• **Symptom analysis** — describe what you're feeling\n• **Lab report interpretation** — understanding your results\n• **Medication queries** — dosage, interactions, side effects\n• **Lifestyle advice** — diet, exercise, sleep based on your health data\n\nHow can I assist you today?",
       'time': '09:00 AM',
     },
     {
@@ -32,17 +33,20 @@ class _AiChatWorkspaceState extends State<AiChatWorkspace> {
     },
     {
       'isUser': false,
-      'text': "Based on your reading of **148/94 mmHg**, this is classified as **Stage 1 Hypertension** (JNC 8 / WHO criteria). Here's what I found in your records:\n\n📊 **Last 7-day average:** 142/91 mmHg — trending slightly upward\n💊 **Current Rx:** Amlodipine 5mg — taken this morning ✓\n⚠️ **Trigger factors today:** Reported poor sleep (5.5 hrs) + no morning walk\n\n**Recommendations:**\n1. Re-measure after 30 min rest in sitting position\n2. Reduce sodium intake today — avoid pickles/papads\n3. 20 min brisk walk recommended this evening\n\nIf reading stays above 150/95 after re-check, please contact Dr. Rajesh Sharma.",
+      'text':
+          "Based on your reading of **148/94 mmHg**, this is classified as **Stage 1 Hypertension** (JNC 8 / WHO criteria). Here's what I found in your records:\n\n📊 **Last 7-day average:** 142/91 mmHg — trending slightly upward\n💊 **Current Rx:** Amlodipine 5mg — taken this morning ✓\n⚠️ **Trigger factors today:** Reported poor sleep (5.5 hrs) + no morning walk\n\n**Recommendations:**\n1. Re-measure after 30 min rest in sitting position\n2. Reduce sodium intake today — avoid pickles/papads\n3. 20 min brisk walk recommended this evening\n\nIf reading stays above 150/95 after re-check, please contact Dr. Rajesh Sharma.",
       'time': '09:14 AM',
     },
     {
       'isUser': true,
-      'text': 'Can I take Ibuprofen for my knee pain along with my current medications?',
+      'text':
+          'Can I take Ibuprofen for my knee pain along with my current medications?',
       'time': '09:22 AM',
     },
     {
       'isUser': false,
-      'text': '⚠️ **Drug Interaction Alert Detected!**\n\nIbuprofen (NSAID) + your current medications show:\n\n🔴 **Amlodipine interaction:** NSAIDs can reduce antihypertensive efficacy — increases BP risk\n🟡 **Metformin interaction:** NSAIDs may affect renal function and metformin clearance\n\n**Safe alternatives for knee pain:**\n✅ Paracetamol 500mg (up to 3×/day) — safer with your current Rx\n✅ Topical Diclofenac gel — local application, minimal systemic absorption\n✅ Cold compress + knee elevation\n\n*Please consult Dr. Meena Verma (Orthopaedics) before starting any pain medication.*',
+      'text':
+          '⚠️ **Drug Interaction Alert Detected!**\n\nIbuprofen (NSAID) + your current medications show:\n\n🔴 **Amlodipine interaction:** NSAIDs can reduce antihypertensive efficacy — increases BP risk\n🟡 **Metformin interaction:** NSAIDs may affect renal function and metformin clearance\n\n**Safe alternatives for knee pain:**\n✅ Paracetamol 500mg (up to 3×/day) — safer with your current Rx\n✅ Topical Diclofenac gel — local application, minimal systemic absorption\n✅ Cold compress + knee elevation\n\n*Please consult Dr. Meena Verma (Orthopaedics) before starting any pain medication.*',
       'time': '09:23 AM',
     },
   ];
@@ -71,7 +75,11 @@ class _AiChatWorkspaceState extends State<AiChatWorkspace> {
 
   final List<Map<String, dynamic>> _symptomResults = [
     {'cond': 'Hypertensive Episode', 'prob': 0.78, 'color': AppColors.error},
-    {'cond': 'Tension Headache', 'prob': 0.62, 'color': AppColors.secondaryAccent},
+    {
+      'cond': 'Tension Headache',
+      'prob': 0.62,
+      'color': AppColors.secondaryAccent,
+    },
     {'cond': 'Sleep Disorder (OSA)', 'prob': 0.45, 'color': Colors.orange},
     {'cond': 'Dehydration', 'prob': 0.28, 'color': AppColors.primaryLight},
   ];
@@ -95,13 +103,17 @@ class _AiChatWorkspaceState extends State<AiChatWorkspace> {
 
       String replyText;
       if (text.contains('HbA1c')) {
-        replyText = '📊 **HbA1c Analysis:** Your last value is **6.1%** (Pre-diabetic zone). Maintain your Metformin 500mg BD dose and restrict intake of refined carbs. Dr. Rajesh Sharma recommends checking HbA1c again in 2 months.';
+        replyText =
+            '📊 **HbA1c Analysis:** Your last value is **6.1%** (Pre-diabetic zone). Maintain your Metformin 500mg BD dose and restrict intake of refined carbs. Dr. Rajesh Sharma recommends checking HbA1c again in 2 months.';
       } else if (text.contains('Diet')) {
-        replyText = '🍽️ **Pre-Diabetes Diet Plan:** Focus on complex carbs with low Glycemic Index: brown rice, millets, leafy vegetables, sprouts. Avoid refined flour (maida) and sugary drinks.';
+        replyText =
+            '🍽️ **Pre-Diabetes Diet Plan:** Focus on complex carbs with low Glycemic Index: brown rice, millets, leafy vegetables, sprouts. Avoid refined flour (maida) and sugary drinks.';
       } else if (text.contains('Amlodipine')) {
-        replyText = '💊 **Amlodipine Side Effects:** Common side effects include ankle swelling (edema), headache, or dizziness. If swelling is severe, Dr. Rajesh Sharma can adjust the dosage.';
+        replyText =
+            '💊 **Amlodipine Side Effects:** Common side effects include ankle swelling (edema), headache, or dizziness. If swelling is severe, Dr. Rajesh Sharma can adjust the dosage.';
       } else {
-        replyText = 'I have received your query: "$text". Based on your clinical profile (Hypertension + Pre-diabetic), let me check the medical knowledge base. I recommend consulting Dr. Rajesh Sharma if you feel any persistent discomfort.';
+        replyText =
+            'I have received your query: "$text". Based on your clinical profile (Hypertension + Pre-diabetic), let me check the medical knowledge base. I recommend consulting Dr. Rajesh Sharma if you feel any persistent discomfort.';
       }
 
       setState(() {
@@ -168,7 +180,11 @@ class _AiChatWorkspaceState extends State<AiChatWorkspace> {
                         ),
                         shape: BoxShape.circle,
                       ),
-                      child: const Icon(Icons.smart_toy_rounded, color: Colors.white, size: 18),
+                      child: const Icon(
+                        Icons.smart_toy_rounded,
+                        color: Colors.white,
+                        size: 18,
+                      ),
                     ),
                     const SizedBox(width: 10),
                     const Expanded(
@@ -213,7 +229,9 @@ class _AiChatWorkspaceState extends State<AiChatWorkspace> {
                               ),
                               decoration: BoxDecoration(
                                 color: isSel
-                                    ? Colors.purpleAccent.withValues(alpha: 0.15)
+                                    ? Colors.purpleAccent.withValues(
+                                        alpha: 0.15,
+                                      )
                                     : AppColors.surface,
                                 border: Border.all(
                                   color: isSel
@@ -225,7 +243,9 @@ class _AiChatWorkspaceState extends State<AiChatWorkspace> {
                               child: Text(
                                 mode,
                                 style: TextStyle(
-                                  color: isSel ? Colors.purpleAccent : AppColors.secondaryText,
+                                  color: isSel
+                                      ? Colors.purpleAccent
+                                      : AppColors.secondaryText,
                                   fontSize: 10,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -253,20 +273,28 @@ class _AiChatWorkspaceState extends State<AiChatWorkspace> {
                     final isUser = msg['isUser'] as bool;
 
                     return Align(
-                      alignment: isUser ? Alignment.centerRight : Alignment.centerLeft,
+                      alignment: isUser
+                          ? Alignment.centerRight
+                          : Alignment.centerLeft,
                       child: Container(
                         margin: const EdgeInsets.only(bottom: 12),
                         constraints: BoxConstraints(
                           maxWidth: constraints.maxWidth * 0.75,
                         ),
                         child: Column(
-                          crossAxisAlignment: isUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+                          crossAxisAlignment: isUser
+                              ? CrossAxisAlignment.end
+                              : CrossAxisAlignment.start,
                           children: [
                             if (!isUser) ...[
                               const Row(
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
-                                  Icon(Icons.smart_toy_rounded, color: Colors.purpleAccent, size: 10),
+                                  Icon(
+                                    Icons.smart_toy_rounded,
+                                    color: Colors.purpleAccent,
+                                    size: 10,
+                                  ),
                                   SizedBox(width: 4),
                                   Text(
                                     'ParaCare AI',
@@ -292,7 +320,9 @@ class _AiChatWorkspaceState extends State<AiChatWorkspace> {
                                       )
                                     : null,
                                 color: isUser ? null : AppColors.surface,
-                                border: isUser ? null : Border.all(color: AppColors.border),
+                                border: isUser
+                                    ? null
+                                    : Border.all(color: AppColors.border),
                                 borderRadius: BorderRadius.only(
                                   topLeft: const Radius.circular(12),
                                   topRight: const Radius.circular(12),
@@ -334,7 +364,10 @@ class _AiChatWorkspaceState extends State<AiChatWorkspace> {
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   physics: const BouncingScrollPhysics(),
-                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 6,
+                  ),
                   itemCount: _suggestions.length,
                   itemBuilder: (context, index) {
                     final sug = _suggestions[index];
@@ -366,10 +399,16 @@ class _AiChatWorkspaceState extends State<AiChatWorkspace> {
                 child: Row(
                   children: [
                     IconButton(
-                      icon: const Icon(Icons.attach_file_rounded, color: AppColors.secondaryText, size: 20),
+                      icon: const Icon(
+                        Icons.attach_file_rounded,
+                        color: AppColors.secondaryText,
+                        size: 20,
+                      ),
                       onPressed: () {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Attach document flow simulation…')),
+                          const SnackBar(
+                            content: Text('Attach document flow simulation…'),
+                          ),
                         );
                       },
                     ),
@@ -383,10 +422,16 @@ class _AiChatWorkspaceState extends State<AiChatWorkspace> {
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: TextField(
                           controller: _chatController,
-                          style: const TextStyle(color: Colors.white, fontSize: 12),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                          ),
                           decoration: const InputDecoration(
                             hintText: 'Ask me anything about your health…',
-                            hintStyle: TextStyle(color: AppColors.secondaryText, fontSize: 12),
+                            hintStyle: TextStyle(
+                              color: AppColors.secondaryText,
+                              fontSize: 12,
+                            ),
                             border: InputBorder.none,
                             isDense: true,
                             contentPadding: EdgeInsets.symmetric(vertical: 8),
@@ -406,7 +451,11 @@ class _AiChatWorkspaceState extends State<AiChatWorkspace> {
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: IconButton(
-                        icon: const Icon(Icons.send_rounded, color: Colors.white, size: 16),
+                        icon: const Icon(
+                          Icons.send_rounded,
+                          color: Colors.white,
+                          size: 16,
+                        ),
                         onPressed: () => _sendMessage(_chatController.text),
                       ),
                     ),
@@ -478,16 +527,22 @@ class _AiChatWorkspaceState extends State<AiChatWorkspace> {
                                 ? AppColors.error.withValues(alpha: 0.15)
                                 : AppColors.surface,
                             border: Border.all(
-                              color: isSelected ? AppColors.error : AppColors.border,
+                              color: isSelected
+                                  ? AppColors.error
+                                  : AppColors.border,
                             ),
                             borderRadius: BorderRadius.circular(20),
                           ),
                           child: Text(
                             sym,
                             style: TextStyle(
-                              color: isSelected ? AppColors.error : AppColors.secondaryText,
+                              color: isSelected
+                                  ? AppColors.error
+                                  : AppColors.secondaryText,
                               fontSize: 10,
-                              fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                              fontWeight: isSelected
+                                  ? FontWeight.bold
+                                  : FontWeight.normal,
                             ),
                           ),
                         ),
@@ -499,7 +554,9 @@ class _AiChatWorkspaceState extends State<AiChatWorkspace> {
                     onPressed: () {
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(
-                          content: Text('Analyzing selected symptom parameters…'),
+                          content: Text(
+                            'Analyzing selected symptom parameters…',
+                          ),
                           backgroundColor: AppColors.error,
                         ),
                       );
@@ -635,17 +692,33 @@ class _AiChatWorkspaceState extends State<AiChatWorkspace> {
                   // Curved Segmented Progress Bar Painter
                   const SizedBox(
                     height: 14,
-                    child: CustomPaint(
-                      painter: _GaugeSegPainter(score: 62),
-                    ),
+                    child: CustomPaint(painter: _GaugeSegPainter(score: 62)),
                   ),
                   const SizedBox(height: 4),
                   const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Low (0–39)', style: TextStyle(color: AppColors.secondaryText, fontSize: 8.5)),
-                      Text('Moderate (40–69)', style: TextStyle(color: AppColors.secondaryText, fontSize: 8.5)),
-                      Text('High (70+)', style: TextStyle(color: AppColors.secondaryText, fontSize: 8.5)),
+                      Text(
+                        'Low (0–39)',
+                        style: TextStyle(
+                          color: AppColors.secondaryText,
+                          fontSize: 8.5,
+                        ),
+                      ),
+                      Text(
+                        'Moderate (40–69)',
+                        style: TextStyle(
+                          color: AppColors.secondaryText,
+                          fontSize: 8.5,
+                        ),
+                      ),
+                      Text(
+                        'High (70+)',
+                        style: TextStyle(
+                          color: AppColors.secondaryText,
+                          fontSize: 8.5,
+                        ),
+                      ),
                     ],
                   ),
                   const SizedBox(height: 10),
@@ -738,11 +811,36 @@ class _AiChatWorkspaceState extends State<AiChatWorkspace> {
                     ),
                   ),
                   const SizedBox(height: 8),
-                  _buildMedSafetyRow('Amlodipine 5mg', 'Antihypertensive · OD', 'Safe', AppColors.success),
-                  _buildMedSafetyRow('Metformin 500mg', 'Antidiabetic · BD', 'Safe', AppColors.success),
-                  _buildMedSafetyRow('Atorvastatin 10mg', 'Lipid-lowering · HS', 'Monitor', AppColors.secondaryAccent),
-                  _buildMedSafetyRow('Aspirin 75mg', 'Antiplatelet · OD', 'Interaction', Colors.red),
-                  _buildMedSafetyRow('Vitamin D3 60K IU', 'Supplement · Weekly', 'Safe', AppColors.success),
+                  _buildMedSafetyRow(
+                    'Amlodipine 5mg',
+                    'Antihypertensive · OD',
+                    'Safe',
+                    AppColors.success,
+                  ),
+                  _buildMedSafetyRow(
+                    'Metformin 500mg',
+                    'Antidiabetic · BD',
+                    'Safe',
+                    AppColors.success,
+                  ),
+                  _buildMedSafetyRow(
+                    'Atorvastatin 10mg',
+                    'Lipid-lowering · HS',
+                    'Monitor',
+                    AppColors.secondaryAccent,
+                  ),
+                  _buildMedSafetyRow(
+                    'Aspirin 75mg',
+                    'Antiplatelet · OD',
+                    'Interaction',
+                    Colors.red,
+                  ),
+                  _buildMedSafetyRow(
+                    'Vitamin D3 60K IU',
+                    'Supplement · Weekly',
+                    'Safe',
+                    AppColors.success,
+                  ),
                 ],
               ),
             ),
@@ -801,7 +899,9 @@ class _AiChatWorkspaceState extends State<AiChatWorkspace> {
             const SizedBox(width: 8),
             Text(
               'AI is formulating analysis...',
-              style: AppTextStyles.labelSmall.copyWith(color: Colors.purpleAccent),
+              style: AppTextStyles.labelSmall.copyWith(
+                color: Colors.purpleAccent,
+              ),
             ),
           ],
         ),
@@ -809,11 +909,21 @@ class _AiChatWorkspaceState extends State<AiChatWorkspace> {
     );
   }
 
-  Widget _buildMedSafetyRow(String name, String desc, String badge, Color badgeColor) {
+  Widget _buildMedSafetyRow(
+    String name,
+    String desc,
+    String badge,
+    Color badgeColor,
+  ) {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 6),
       decoration: BoxDecoration(
-        border: Border(bottom: BorderSide(color: AppColors.border.withValues(alpha: 0.3), width: 0.5)),
+        border: Border(
+          bottom: BorderSide(
+            color: AppColors.border.withValues(alpha: 0.3),
+            width: 0.5,
+          ),
+        ),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -822,8 +932,21 @@ class _AiChatWorkspaceState extends State<AiChatWorkspace> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(name, style: const TextStyle(color: Colors.white, fontSize: 11.5, fontWeight: FontWeight.bold)),
-                Text(desc, style: const TextStyle(color: AppColors.secondaryText, fontSize: 9.5)),
+                Text(
+                  name,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 11.5,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  desc,
+                  style: const TextStyle(
+                    color: AppColors.secondaryText,
+                    fontSize: 9.5,
+                  ),
+                ),
               ],
             ),
           ),
@@ -836,7 +959,11 @@ class _AiChatWorkspaceState extends State<AiChatWorkspace> {
             ),
             child: Text(
               badge,
-              style: TextStyle(color: badgeColor, fontSize: 8.5, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                color: badgeColor,
+                fontSize: 8.5,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ],

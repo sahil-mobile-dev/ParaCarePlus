@@ -99,10 +99,7 @@ class _DutyRosterTabState extends State<DutyRosterTab> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       // Left side - Roster Weekly calendar
-                      Expanded(
-                        flex: 10,
-                        child: _buildWeeklyCalendar(),
-                      ),
+                      Expanded(flex: 10, child: _buildWeeklyCalendar()),
                       const SizedBox(width: AppSpacing.lg),
                       // Right side - Selected shift details
                       Expanded(
@@ -113,13 +110,9 @@ class _DutyRosterTabState extends State<DutyRosterTab> {
                   )
                 : Column(
                     children: [
-                      Expanded(
-                        child: _buildWeeklyCalendar(),
-                      ),
+                      Expanded(child: _buildWeeklyCalendar()),
                       const SizedBox(height: AppSpacing.lg),
-                      Expanded(
-                        child: _buildShiftDetails(selectedShift),
-                      ),
+                      Expanded(child: _buildShiftDetails(selectedShift)),
                     ],
                   ),
           ),
@@ -136,7 +129,9 @@ class _DutyRosterTabState extends State<DutyRosterTab> {
         const SizedBox(height: 2),
         Text(
           'Track your hospital weekly schedules, clinical consult slots, and surgery timings.',
-          style: AppTextStyles.bodySmall.copyWith(color: AppColors.secondaryText),
+          style: AppTextStyles.bodySmall.copyWith(
+            color: AppColors.secondaryText,
+          ),
         ),
       ],
     );
@@ -144,9 +139,24 @@ class _DutyRosterTabState extends State<DutyRosterTab> {
 
   Widget _buildMetricsRow() {
     final items = [
-      ('Active Duty Hours', '42 hrs / wk', Icons.access_time_rounded, AppColors.primaryLight),
-      ('On-Call Night Slots', '1 Scheduled', Icons.nightlight_round, Colors.purple),
-      ('Leave Balance', '14 Days Left', Icons.assignment_turned_in_outlined, Colors.green),
+      (
+        'Active Duty Hours',
+        '42 hrs / wk',
+        Icons.access_time_rounded,
+        AppColors.primaryLight,
+      ),
+      (
+        'On-Call Night Slots',
+        '1 Scheduled',
+        Icons.nightlight_round,
+        Colors.purple,
+      ),
+      (
+        'Leave Balance',
+        '14 Days Left',
+        Icons.assignment_turned_in_outlined,
+        Colors.green,
+      ),
     ];
 
     return Row(
@@ -173,7 +183,10 @@ class _DutyRosterTabState extends State<DutyRosterTab> {
                     ),
                     Text(
                       i.$2,
-                      style: AppTextStyles.labelMedium.copyWith(color: AppColors.primaryText, fontWeight: FontWeight.bold),
+                      style: AppTextStyles.labelMedium.copyWith(
+                        color: AppColors.primaryText,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ],
                 ),
@@ -218,25 +231,32 @@ class _DutyRosterTabState extends State<DutyRosterTab> {
                 return AnimatedContainer(
                   duration: const Duration(milliseconds: 180),
                   decoration: BoxDecoration(
-                    color: isSelected ? AppColors.surface : AppColors.background.withValues(alpha: 0.4),
+                    color: isSelected
+                        ? AppColors.surface
+                        : AppColors.background.withValues(alpha: 0.4),
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
                       color: isSelected
                           ? AppColors.primary
                           : isActive
-                              ? AppColors.secondaryAccent.withValues(alpha: 0.5)
-                              : AppColors.border,
+                          ? AppColors.secondaryAccent.withValues(alpha: 0.5)
+                          : AppColors.border,
                       width: isSelected ? 1.5 : 1,
                     ),
                   ),
                   child: ListTile(
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 4,
+                    ),
                     onTap: () => setState(() => _selectedDayIndex = i),
                     leading: Container(
                       width: 44,
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
-                        color: isSelected ? AppColors.primary.withValues(alpha: 0.2) : AppColors.card,
+                        color: isSelected
+                            ? AppColors.primary.withValues(alpha: 0.2)
+                            : AppColors.card,
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Column(
@@ -245,7 +265,9 @@ class _DutyRosterTabState extends State<DutyRosterTab> {
                           Text(
                             shift['day'] as String,
                             style: TextStyle(
-                              color: isSelected ? AppColors.primaryLight : AppColors.secondaryText,
+                              color: isSelected
+                                  ? AppColors.primaryLight
+                                  : AppColors.secondaryText,
                               fontWeight: FontWeight.bold,
                               fontSize: 10,
                             ),
@@ -253,7 +275,9 @@ class _DutyRosterTabState extends State<DutyRosterTab> {
                           Text(
                             (shift['date'] as String).split(' ').last,
                             style: TextStyle(
-                              color: isSelected ? Colors.white : AppColors.primaryText,
+                              color: isSelected
+                                  ? Colors.white
+                                  : AppColors.primaryText,
                               fontWeight: FontWeight.bold,
                               fontSize: 14,
                             ),
@@ -276,10 +300,22 @@ class _DutyRosterTabState extends State<DutyRosterTab> {
                       style: AppTextStyles.bodySmall.copyWith(fontSize: 10.5),
                     ),
                     trailing: isCompleted
-                        ? const Icon(Icons.check_circle_rounded, color: AppColors.success, size: 18)
+                        ? const Icon(
+                            Icons.check_circle_rounded,
+                            color: AppColors.success,
+                            size: 18,
+                          )
                         : isActive
-                            ? const Icon(Icons.star_rounded, color: AppColors.secondaryAccent, size: 18)
-                            : const Icon(Icons.radio_button_unchecked_rounded, color: AppColors.border, size: 16),
+                        ? const Icon(
+                            Icons.star_rounded,
+                            color: AppColors.secondaryAccent,
+                            size: 18,
+                          )
+                        : const Icon(
+                            Icons.radio_button_unchecked_rounded,
+                            color: AppColors.border,
+                            size: 16,
+                          ),
                   ),
                 );
               },
@@ -309,7 +345,10 @@ class _DutyRosterTabState extends State<DutyRosterTab> {
                   color: AppColors.surface,
                   shape: BoxShape.circle,
                 ),
-                child: const Icon(Icons.calendar_today_rounded, color: AppColors.primaryLight),
+                child: const Icon(
+                  Icons.calendar_today_rounded,
+                  color: AppColors.primaryLight,
+                ),
               ),
               const SizedBox(width: 12),
               Expanded(
@@ -318,12 +357,16 @@ class _DutyRosterTabState extends State<DutyRosterTab> {
                   children: [
                     Text(
                       '${shift['day']}, ${shift['date']}',
-                      style: AppTextStyles.labelLarge.copyWith(fontWeight: FontWeight.bold),
+                      style: AppTextStyles.labelLarge.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     const SizedBox(height: 2),
                     Text(
                       shift['title'] as String,
-                      style: AppTextStyles.bodySmall.copyWith(color: AppColors.secondaryText),
+                      style: AppTextStyles.bodySmall.copyWith(
+                        color: AppColors.secondaryText,
+                      ),
                     ),
                   ],
                 ),
@@ -338,21 +381,30 @@ class _DutyRosterTabState extends State<DutyRosterTab> {
                 const SizedBox(height: 6),
                 Text(
                   shift['time'] as String,
-                  style: AppTextStyles.bodyMedium.copyWith(color: AppColors.primaryText, fontWeight: FontWeight.bold),
+                  style: AppTextStyles.bodyMedium.copyWith(
+                    color: AppColors.primaryText,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 const SizedBox(height: 16),
                 _buildSectionHeader('Operational Clinical Room'),
                 const SizedBox(height: 6),
                 Text(
                   shift['location'] as String,
-                  style: AppTextStyles.bodyMedium.copyWith(color: AppColors.primaryText, fontWeight: FontWeight.w600),
+                  style: AppTextStyles.bodyMedium.copyWith(
+                    color: AppColors.primaryText,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
                 const SizedBox(height: 16),
                 _buildSectionHeader('On-Duty Staff & Colleagues'),
                 const SizedBox(height: 6),
                 Text(
                   shift['colleagues'] as String,
-                  style: AppTextStyles.bodyMedium.copyWith(color: AppColors.secondaryText, fontSize: 13),
+                  style: AppTextStyles.bodyMedium.copyWith(
+                    color: AppColors.secondaryText,
+                    fontSize: 13,
+                  ),
                 ),
                 const SizedBox(height: 24),
                 Container(
@@ -364,7 +416,11 @@ class _DutyRosterTabState extends State<DutyRosterTab> {
                   ),
                   child: Row(
                     children: [
-                      const Icon(Icons.info_outline_rounded, color: AppColors.primaryLight, size: 18),
+                      const Icon(
+                        Icons.info_outline_rounded,
+                        color: AppColors.primaryLight,
+                        size: 18,
+                      ),
                       const SizedBox(width: 10),
                       Expanded(
                         child: Text(
@@ -388,7 +444,9 @@ class _DutyRosterTabState extends State<DutyRosterTab> {
                   onPressed: () {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
-                        content: Text('Swap request submitted. Awaiting approval from Clinical HR.'),
+                        content: Text(
+                          'Swap request submitted. Awaiting approval from Clinical HR.',
+                        ),
                         backgroundColor: AppColors.primary,
                       ),
                     );
@@ -405,7 +463,9 @@ class _DutyRosterTabState extends State<DutyRosterTab> {
                     foregroundColor: AppColors.primaryText,
                     side: const BorderSide(color: AppColors.border),
                     padding: const EdgeInsets.symmetric(vertical: 12),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
                   onPressed: () {
                     ScaffoldMessenger.of(context).showSnackBar(

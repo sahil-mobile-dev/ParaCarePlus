@@ -39,7 +39,9 @@ class ConsultationHistoryTable extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             physics: const BouncingScrollPhysics(),
             child: DataTable(
-              headingRowColor: WidgetStateProperty.all(Colors.white.withValues(alpha: 0.04)),
+              headingRowColor: WidgetStateProperty.all(
+                Colors.white.withValues(alpha: 0.04),
+              ),
               dataRowMinHeight: 38,
               dataRowMaxHeight: 44,
               horizontalMargin: 12,
@@ -49,43 +51,71 @@ class ConsultationHistoryTable extends StatelessWidget {
                 DataColumn(
                   label: Text(
                     'Doctor',
-                    style: TextStyle(color: AppColors.secondaryText, fontSize: 11, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      color: AppColors.secondaryText,
+                      fontSize: 11,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 DataColumn(
                   label: Text(
                     'Specialty',
-                    style: TextStyle(color: AppColors.secondaryText, fontSize: 11, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      color: AppColors.secondaryText,
+                      fontSize: 11,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 DataColumn(
                   label: Text(
                     'Date',
-                    style: TextStyle(color: AppColors.secondaryText, fontSize: 11, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      color: AppColors.secondaryText,
+                      fontSize: 11,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 DataColumn(
                   label: Text(
                     'Duration',
-                    style: TextStyle(color: AppColors.secondaryText, fontSize: 11, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      color: AppColors.secondaryText,
+                      fontSize: 11,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 DataColumn(
                   label: Text(
                     'Type',
-                    style: TextStyle(color: AppColors.secondaryText, fontSize: 11, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      color: AppColors.secondaryText,
+                      fontSize: 11,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 DataColumn(
                   label: Text(
                     'Status',
-                    style: TextStyle(color: AppColors.secondaryText, fontSize: 11, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      color: AppColors.secondaryText,
+                      fontSize: 11,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
                 DataColumn(
                   label: Text(
                     'Rx',
-                    style: TextStyle(color: AppColors.secondaryText, fontSize: 11, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      color: AppColors.secondaryText,
+                      fontSize: 11,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ],
@@ -169,7 +199,11 @@ class ConsultationHistoryTable extends StatelessWidget {
         DataCell(
           Text(
             doctor,
-            style: const TextStyle(color: Colors.white, fontSize: 11.5, fontWeight: FontWeight.w600),
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 11.5,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ),
         DataCell(
@@ -181,13 +215,19 @@ class ConsultationHistoryTable extends StatelessWidget {
         DataCell(
           Text(
             date,
-            style: const TextStyle(color: AppColors.secondaryText, fontSize: 11),
+            style: const TextStyle(
+              color: AppColors.secondaryText,
+              fontSize: 11,
+            ),
           ),
         ),
         DataCell(
           Text(
             duration,
-            style: const TextStyle(color: AppColors.secondaryText, fontSize: 11),
+            style: const TextStyle(
+              color: AppColors.secondaryText,
+              fontSize: 11,
+            ),
           ),
         ),
         DataCell(
@@ -238,7 +278,13 @@ class ConsultationHistoryTable extends StatelessWidget {
                     ),
                   ),
                 )
-              : const Text('—', style: TextStyle(color: AppColors.secondaryText, fontSize: 11)),
+              : const Text(
+                  '—',
+                  style: TextStyle(
+                    color: AppColors.secondaryText,
+                    fontSize: 11,
+                  ),
+                ),
         ),
       ],
     );

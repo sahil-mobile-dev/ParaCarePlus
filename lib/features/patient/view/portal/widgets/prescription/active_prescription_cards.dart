@@ -7,10 +7,7 @@ class ActivePrescriptionCards extends StatelessWidget {
 
   void _showToast(BuildContext context, String message) {
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-        duration: const Duration(seconds: 2),
-      ),
+      SnackBar(content: Text(message), duration: const Duration(seconds: 2)),
     );
   }
 
@@ -114,7 +111,9 @@ class ActivePrescriptionCards extends StatelessWidget {
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
                 ),
-                border: const Border(bottom: BorderSide(color: AppColors.border)),
+                border: const Border(
+                  bottom: BorderSide(color: AppColors.border),
+                ),
               ),
               padding: const EdgeInsets.all(12),
               child: Column(
@@ -125,23 +124,38 @@ class ActivePrescriptionCards extends StatelessWidget {
                     children: [
                       Text(
                         rxNumber,
-                        style: const TextStyle(color: AppColors.secondaryText, fontSize: 9, fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                          color: AppColors.secondaryText,
+                          fontSize: 9,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                       Text(
                         date,
-                        style: const TextStyle(color: AppColors.secondaryText, fontSize: 9),
+                        style: const TextStyle(
+                          color: AppColors.secondaryText,
+                          fontSize: 9,
+                        ),
                       ),
                     ],
                   ),
                   const SizedBox(height: 4),
                   Row(
                     children: [
-                      const Icon(Icons.medical_services_rounded, color: Color(0xFF00B4D8), size: 14),
+                      const Icon(
+                        Icons.medical_services_rounded,
+                        color: Color(0xFF00B4D8),
+                        size: 14,
+                      ),
                       const SizedBox(width: 6),
                       Expanded(
                         child: Text(
                           doctor,
-                          style: const TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.bold),
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 13,
+                            fontWeight: FontWeight.bold,
+                          ),
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -151,7 +165,10 @@ class ActivePrescriptionCards extends StatelessWidget {
                   const SizedBox(height: 2),
                   Text(
                     '$hospital · $validity',
-                    style: const TextStyle(color: AppColors.secondaryText, fontSize: 10),
+                    style: const TextStyle(
+                      color: AppColors.secondaryText,
+                      fontSize: 10,
+                    ),
                   ),
                 ],
               ),
@@ -159,7 +176,10 @@ class ActivePrescriptionCards extends StatelessWidget {
             // Body section with scrollable list of drugs
             Expanded(
               child: ListView.separated(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 12,
+                  vertical: 8,
+                ),
                 itemCount: drugs.length,
                 separatorBuilder: (context, index) => Container(
                   height: 0.5,
@@ -183,23 +203,37 @@ class ActivePrescriptionCards extends StatelessWidget {
                             Container(
                               width: 6,
                               height: 6,
-                              decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+                              decoration: BoxDecoration(
+                                color: color,
+                                shape: BoxShape.circle,
+                              ),
                             ),
                             const SizedBox(width: 6),
                             Text(
                               name,
-                              style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.bold),
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 11,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ],
                         ),
                         const SizedBox(height: 2),
                         Text(
                           dose,
-                          style: const TextStyle(color: AppColors.secondaryText, fontSize: 10),
+                          style: const TextStyle(
+                            color: AppColors.secondaryText,
+                            fontSize: 10,
+                          ),
                         ),
                         Text(
                           instruction,
-                          style: const TextStyle(color: AppColors.secondaryText, fontSize: 9, fontStyle: FontStyle.italic),
+                          style: const TextStyle(
+                            color: AppColors.secondaryText,
+                            fontSize: 9,
+                            fontStyle: FontStyle.italic,
+                          ),
                         ),
                       ],
                     ),
@@ -220,11 +254,23 @@ class ActivePrescriptionCards extends StatelessWidget {
                       style: OutlinedButton.styleFrom(
                         padding: EdgeInsets.zero,
                         side: const BorderSide(color: AppColors.border),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(6),
+                        ),
                       ),
-                      onPressed: () => _showToast(context, 'Showing original prescription Rx receipt'),
-                      icon: const Icon(Icons.visibility_rounded, size: 12, color: AppColors.secondaryText),
-                      label: const Text('View Rx', style: TextStyle(color: Colors.white, fontSize: 9)),
+                      onPressed: () => _showToast(
+                        context,
+                        'Showing original prescription Rx receipt',
+                      ),
+                      icon: const Icon(
+                        Icons.visibility_rounded,
+                        size: 12,
+                        color: AppColors.secondaryText,
+                      ),
+                      label: const Text(
+                        'View Rx',
+                        style: TextStyle(color: Colors.white, fontSize: 9),
+                      ),
                     ),
                   ),
                   const SizedBox(width: 4),
@@ -233,11 +279,24 @@ class ActivePrescriptionCards extends StatelessWidget {
                       style: OutlinedButton.styleFrom(
                         padding: EdgeInsets.zero,
                         side: const BorderSide(color: AppColors.border),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(6),
+                        ),
                       ),
-                      onPressed: () => _showToast(context, 'Downloading Rx PDF...'),
-                      icon: const Icon(Icons.picture_as_pdf_rounded, size: 12, color: AppColors.secondaryText),
-                      label: const Text('PDF', style: TextStyle(color: AppColors.secondaryText, fontSize: 9)),
+                      onPressed: () =>
+                          _showToast(context, 'Downloading Rx PDF...'),
+                      icon: const Icon(
+                        Icons.picture_as_pdf_rounded,
+                        size: 12,
+                        color: AppColors.secondaryText,
+                      ),
+                      label: const Text(
+                        'PDF',
+                        style: TextStyle(
+                          color: AppColors.secondaryText,
+                          fontSize: 9,
+                        ),
+                      ),
                     ),
                   ),
                   const SizedBox(width: 4),
@@ -246,11 +305,26 @@ class ActivePrescriptionCards extends StatelessWidget {
                       style: OutlinedButton.styleFrom(
                         padding: EdgeInsets.zero,
                         side: const BorderSide(color: AppColors.border),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(6),
+                        ),
                       ),
-                      onPressed: () => _showToast(context, 'Ordering refill from nearest pharmacy...'),
-                      icon: const Icon(Icons.medication_rounded, size: 12, color: AppColors.secondaryText),
-                      label: const Text('Refill', style: TextStyle(color: AppColors.secondaryText, fontSize: 9)),
+                      onPressed: () => _showToast(
+                        context,
+                        'Ordering refill from nearest pharmacy...',
+                      ),
+                      icon: const Icon(
+                        Icons.medication_rounded,
+                        size: 12,
+                        color: AppColors.secondaryText,
+                      ),
+                      label: const Text(
+                        'Refill',
+                        style: TextStyle(
+                          color: AppColors.secondaryText,
+                          fontSize: 9,
+                        ),
+                      ),
                     ),
                   ),
                 ],

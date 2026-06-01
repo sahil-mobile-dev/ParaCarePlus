@@ -11,9 +11,10 @@ import 'package:paracareplus/core/widgets/app_button.dart';
 /// Step 2: Select profile from family grid
 /// Step 3: Access granted (navigate to dashboard)
 class LoginMobileOtp extends StatefulWidget {
-
   const LoginMobileOtp({
-    required this.onSuccess, required this.onSwitchTab, super.key,
+    required this.onSuccess,
+    required this.onSwitchTab,
+    super.key,
   });
   final VoidCallback onSuccess;
   final ValueChanged<String> onSwitchTab;
@@ -642,10 +643,7 @@ class _LoginMobileOtpState extends State<LoginMobileOtp> {
       padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 8),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: const Color(0xFF4A6A8A),
-          width: 1.5,
-        ),
+        border: Border.all(color: const Color(0xFF4A6A8A), width: 1.5),
       ),
       child: const Column(
         children: [

@@ -221,10 +221,7 @@ class _GlucosePainter extends CustomPainter {
           style: const TextStyle(color: AppColors.secondaryText, fontSize: 8),
         )
         ..layout()
-        ..paint(
-          canvas,
-          Offset(x - textPainter.width / 2, size.height - 10),
-        );
+        ..paint(canvas, Offset(x - textPainter.width / 2, size.height - 10));
     }
   }
 

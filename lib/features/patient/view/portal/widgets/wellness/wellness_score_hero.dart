@@ -112,11 +112,7 @@ class WellnessScoreHero extends StatelessWidget {
                 padding: const EdgeInsets.only(bottom: 8),
                 child: Row(
                   children: [
-                    Icon(
-                      dim['icon'] as IconData,
-                      color: color,
-                      size: 14,
-                    ),
+                    Icon(dim['icon'] as IconData, color: color, size: 14),
                     const SizedBox(width: 8),
                     SizedBox(
                       width: 80,

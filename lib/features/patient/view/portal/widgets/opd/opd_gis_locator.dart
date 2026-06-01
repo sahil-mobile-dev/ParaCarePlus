@@ -369,17 +369,17 @@ class MapMockupPainter extends CustomPainter {
 
       // Tiny labels next to pins
       TextPainter(
-        text: TextSpan(
-          text: name,
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 7.5,
-            fontWeight: FontWeight.bold,
-            backgroundColor: Color(0xCC0C1F34),
+          text: TextSpan(
+            text: name,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 7.5,
+              fontWeight: FontWeight.bold,
+              backgroundColor: Color(0xCC0C1F34),
+            ),
           ),
-        ),
-        textDirection: TextDirection.ltr,
-      )
+          textDirection: TextDirection.ltr,
+        )
         ..layout()
         ..paint(canvas, center + const Offset(8, -4));
     }

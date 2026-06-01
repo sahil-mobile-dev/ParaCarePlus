@@ -7,7 +7,6 @@ import 'package:paracareplus/core/widgets/app_button.dart';
 /// ABHA (Ayushman Bharat Health Account) login tab.
 /// Shows live ABHA card preview + input + OTP flow.
 class LoginAbha extends StatefulWidget {
-
   const LoginAbha({required this.onSuccess, super.key});
   final VoidCallback onSuccess;
 
@@ -376,7 +375,6 @@ class _LoginAbhaState extends State<LoginAbha> {
 }
 
 class _AbhaFeat extends StatelessWidget {
-
   const _AbhaFeat({required this.icon, required this.title, required this.sub});
   final IconData icon;
   final String title;

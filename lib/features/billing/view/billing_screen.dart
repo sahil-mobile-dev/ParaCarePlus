@@ -17,8 +17,8 @@ import 'package:paracareplus/features/dashboard/view/widgets/app_header.dart';
 import 'package:paracareplus/features/dashboard/view/widgets/app_sidebar.dart';
 
 class BillingScreen extends ConsumerWidget {
-  final bool isDoctor;
   const BillingScreen({super.key, this.isDoctor = false});
+  final bool isDoctor;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

@@ -96,7 +96,11 @@ class AntenatalHistoryTab extends StatelessWidget {
                   _buildCounterTile('Pregnancies', 'G2 P2 A0', Colors.white),
                   _buildCounterTile('Last Delivery', 'Sep 2007', Colors.white),
                   _buildCounterTile('Mode', 'Normal SVD', Colors.white),
-                  _buildCounterTile('Current Status', 'Not Pregnant', AppColors.success),
+                  _buildCounterTile(
+                    'Current Status',
+                    'Not Pregnant',
+                    AppColors.success,
+                  ),
                 ],
               );
             },

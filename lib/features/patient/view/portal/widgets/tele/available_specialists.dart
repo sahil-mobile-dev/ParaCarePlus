@@ -31,7 +31,10 @@ class AvailableSpecialists extends StatelessWidget {
               btnText: 'Start Consultation',
               btnIcon: Icons.videocam_rounded,
               toastMsg: 'Connecting to Dr. Rajesh Kumar…',
-              gradientColors: [const Color(0xFF0D9488), const Color(0xFF00B4D8)],
+              gradientColors: [
+                const Color(0xFF0D9488),
+                const Color(0xFF00B4D8),
+              ],
             ),
             _buildDoctorCard(
               context,
@@ -43,7 +46,10 @@ class AvailableSpecialists extends StatelessWidget {
               btnText: 'Start Consultation',
               btnIcon: Icons.videocam_rounded,
               toastMsg: 'Connecting to Dr. Meena Verma…',
-              gradientColors: [const Color(0xFFC77DFF), const Color(0xFF4361EE)],
+              gradientColors: [
+                const Color(0xFFC77DFF),
+                const Color(0xFF4361EE),
+              ],
             ),
             _buildDoctorCard(
               context,
@@ -55,7 +61,10 @@ class AvailableSpecialists extends StatelessWidget {
               btnText: 'Join Queue',
               btnIcon: Icons.access_time_rounded,
               toastMsg: "Added to Dr. Patel's queue…",
-              gradientColors: [const Color(0xFFF77F00), const Color(0xFFFFD166)],
+              gradientColors: [
+                const Color(0xFFF77F00),
+                const Color(0xFFFFD166),
+              ],
             ),
           ],
         );
@@ -188,12 +197,17 @@ class AvailableSpecialists extends StatelessWidget {
                     icon: Icon(btnIcon, size: 12),
                     label: Text(
                       btnText,
-                      style: const TextStyle(fontSize: 10.5, fontWeight: FontWeight.bold),
+                      style: const TextStyle(
+                        fontSize: 10.5,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     style: OutlinedButton.styleFrom(
                       foregroundColor: const Color(0xFF00B4D8),
                       side: const BorderSide(color: Color(0xFF2A4158)),
-                      backgroundColor: const Color(0xFF00B4D8).withValues(alpha: 0.1),
+                      backgroundColor: const Color(
+                        0xFF00B4D8,
+                      ).withValues(alpha: 0.1),
                       padding: EdgeInsets.zero,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),

@@ -61,10 +61,7 @@ class _IpdRoundsTabState extends ConsumerState<IpdRoundsTab> {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       // Left side - Patient checklist
-                      Expanded(
-                        flex: 10,
-                        child: _buildPatientList(state),
-                      ),
+                      Expanded(flex: 10, child: _buildPatientList(state)),
                       const SizedBox(width: AppSpacing.lg),
                       // Right side - Rounds details sheet
                       Expanded(
@@ -75,13 +72,9 @@ class _IpdRoundsTabState extends ConsumerState<IpdRoundsTab> {
                   )
                 : Column(
                     children: [
-                      Expanded(
-                        child: _buildPatientList(state),
-                      ),
+                      Expanded(child: _buildPatientList(state)),
                       const SizedBox(height: AppSpacing.lg),
-                      Expanded(
-                        child: _buildRoundsDetailsSheet(notifier),
-                      ),
+                      Expanded(child: _buildRoundsDetailsSheet(notifier)),
                     ],
                   ),
           ),
@@ -91,7 +84,9 @@ class _IpdRoundsTabState extends ConsumerState<IpdRoundsTab> {
   }
 
   Widget _buildHeader(DoctorDashboardState state) {
-    final pendingRounds = state.ipdPatients.where((p) => p.roundStatus == 'Pending').length;
+    final pendingRounds = state.ipdPatients
+        .where((p) => p.roundStatus == 'Pending')
+        .length;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -99,7 +94,9 @@ class _IpdRoundsTabState extends ConsumerState<IpdRoundsTab> {
         const SizedBox(height: 2),
         Text(
           'Check active ward admissions. $pendingRounds patients pending clinical rounds today.',
-          style: AppTextStyles.bodySmall.copyWith(color: AppColors.secondaryText),
+          style: AppTextStyles.bodySmall.copyWith(
+            color: AppColors.secondaryText,
+          ),
         ),
       ],
     );
@@ -146,19 +143,24 @@ class _IpdRoundsTabState extends ConsumerState<IpdRoundsTab> {
                 return AnimatedContainer(
                   duration: const Duration(milliseconds: 180),
                   decoration: BoxDecoration(
-                    color: isSelected ? AppColors.surface : AppColors.background.withValues(alpha: 0.4),
+                    color: isSelected
+                        ? AppColors.surface
+                        : AppColors.background.withValues(alpha: 0.4),
                     borderRadius: BorderRadius.circular(12),
                     border: Border.all(
                       color: isSelected
                           ? AppColors.primary
                           : isCritical
-                              ? AppColors.error.withValues(alpha: 0.5)
-                              : AppColors.border,
+                          ? AppColors.error.withValues(alpha: 0.5)
+                          : AppColors.border,
                       width: isSelected ? 1.5 : 1,
                     ),
                   ),
                   child: ListTile(
-                    contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                    contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                      vertical: 6,
+                    ),
                     onTap: () => _selectPatient(p),
                     title: Row(
                       children: [
@@ -172,9 +174,14 @@ class _IpdRoundsTabState extends ConsumerState<IpdRoundsTab> {
                           ),
                         ),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 2,
+                          ),
                           decoration: BoxDecoration(
-                            color: isDone ? AppColors.success.withValues(alpha: 0.15) : Colors.orange.withValues(alpha: 0.15),
+                            color: isDone
+                                ? AppColors.success.withValues(alpha: 0.15)
+                                : Colors.orange.withValues(alpha: 0.15),
                             borderRadius: BorderRadius.circular(20),
                             border: Border.all(
                               color: isDone ? AppColors.success : Colors.orange,
@@ -200,12 +207,16 @@ class _IpdRoundsTabState extends ConsumerState<IpdRoundsTab> {
                           children: [
                             Text(
                               p.bed,
-                              style: AppTextStyles.bodySmall.copyWith(fontSize: 11),
+                              style: AppTextStyles.bodySmall.copyWith(
+                                fontSize: 11,
+                              ),
                             ),
                             const Spacer(),
                             Text(
                               'Vitals: ',
-                              style: AppTextStyles.bodySmall.copyWith(fontSize: 10),
+                              style: AppTextStyles.bodySmall.copyWith(
+                                fontSize: 10,
+                              ),
                             ),
                             Text(
                               '${p.systolicBP}/${p.diastolicBP} BP · ${p.pulse} HR',
@@ -260,7 +271,10 @@ class _IpdRoundsTabState extends ConsumerState<IpdRoundsTab> {
                 backgroundColor: AppColors.surface,
                 child: Text(
                   p.gender == 'Male' ? 'M' : 'F',
-                  style: const TextStyle(color: AppColors.primaryLight, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                    color: AppColors.primaryLight,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               const SizedBox(width: 12),
@@ -268,11 +282,18 @@ class _IpdRoundsTabState extends ConsumerState<IpdRoundsTab> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(p.name, style: AppTextStyles.labelLarge.copyWith(fontWeight: FontWeight.bold)),
+                    Text(
+                      p.name,
+                      style: AppTextStyles.labelLarge.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     const SizedBox(height: 2),
                     Text(
                       '${p.gender} · ${p.age} yrs · Bed: ${p.bed}',
-                      style: AppTextStyles.bodySmall.copyWith(color: AppColors.secondaryText),
+                      style: AppTextStyles.bodySmall.copyWith(
+                        color: AppColors.secondaryText,
+                      ),
                     ),
                   ],
                 ),
@@ -287,7 +308,10 @@ class _IpdRoundsTabState extends ConsumerState<IpdRoundsTab> {
                 const SizedBox(height: 6),
                 Text(
                   p.diagnosis,
-                  style: AppTextStyles.bodyMedium.copyWith(color: AppColors.primaryText, fontWeight: FontWeight.w600),
+                  style: AppTextStyles.bodyMedium.copyWith(
+                    color: AppColors.primaryText,
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
                 const SizedBox(height: 16),
                 _buildSectionHeader('Current Vital Signs Monitor'),
@@ -325,10 +349,17 @@ class _IpdRoundsTabState extends ConsumerState<IpdRoundsTab> {
                   child: TextField(
                     controller: _notesController,
                     maxLines: 5,
-                    style: const TextStyle(color: AppColors.primaryText, fontSize: 12.5),
+                    style: const TextStyle(
+                      color: AppColors.primaryText,
+                      fontSize: 12.5,
+                    ),
                     decoration: const InputDecoration(
-                      hintText: 'Enter specific treatment adjustments or rounds updates...',
-                      hintStyle: TextStyle(color: AppColors.secondaryText, fontSize: 11.5),
+                      hintText:
+                          'Enter specific treatment adjustments or rounds updates...',
+                      hintStyle: TextStyle(
+                        color: AppColors.secondaryText,
+                        fontSize: 11.5,
+                      ),
                       border: InputBorder.none,
                       contentPadding: EdgeInsets.all(10),
                     ),
@@ -342,12 +373,21 @@ class _IpdRoundsTabState extends ConsumerState<IpdRoundsTab> {
             children: [
               Expanded(
                 child: TextButton.icon(
-                  icon: const Icon(Icons.exit_to_app_rounded, size: 18, color: AppColors.success),
-                  label: const Text('Discharge Fit', style: TextStyle(color: AppColors.success)),
+                  icon: const Icon(
+                    Icons.exit_to_app_rounded,
+                    size: 18,
+                    color: AppColors.success,
+                  ),
+                  label: const Text(
+                    'Discharge Fit',
+                    style: TextStyle(color: AppColors.success),
+                  ),
                   onPressed: () {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text('Discharge routing order queued for Patient ${p.name}.'),
+                        content: Text(
+                          'Discharge routing order queued for Patient ${p.name}.',
+                        ),
                         backgroundColor: AppColors.success,
                       ),
                     );
@@ -364,7 +404,9 @@ class _IpdRoundsTabState extends ConsumerState<IpdRoundsTab> {
                     backgroundColor: AppColors.primary,
                     foregroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(vertical: 12),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
                   onPressed: () {
                     notifier.updateClinicalNotes(p.bed, _notesController.text);
@@ -395,7 +437,12 @@ class _IpdRoundsTabState extends ConsumerState<IpdRoundsTab> {
     );
   }
 
-  Widget _buildVitalIndicator(IconData icon, String title, String value, Color color) {
+  Widget _buildVitalIndicator(
+    IconData icon,
+    String title,
+    String value,
+    Color color,
+  ) {
     return Container(
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(

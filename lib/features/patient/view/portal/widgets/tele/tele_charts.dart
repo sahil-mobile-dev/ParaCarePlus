@@ -29,8 +29,18 @@ class TeleCharts extends StatelessWidget {
                         showTitles: true,
                         getTitlesWidget: (value, meta) {
                           const labels = [
-                            'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov',
-                            'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May'
+                            'Jun',
+                            'Jul',
+                            'Aug',
+                            'Sep',
+                            'Oct',
+                            'Nov',
+                            'Dec',
+                            'Jan',
+                            'Feb',
+                            'Mar',
+                            'Apr',
+                            'May',
                           ];
                           final idx = value.toInt();
                           if (idx >= 0 && idx < labels.length) {
@@ -166,7 +176,10 @@ class TeleCharts extends StatelessWidget {
                     children: [
                       _buildLegendItem('Cardiology', const Color(0xFFEF4444)),
                       const SizedBox(height: 6),
-                      _buildLegendItem('Endocrinology', const Color(0xFFC77DFF)),
+                      _buildLegendItem(
+                        'Endocrinology',
+                        const Color(0xFFC77DFF),
+                      ),
                       const SizedBox(height: 6),
                       _buildLegendItem('General Medicine', AppColors.success),
                       const SizedBox(height: 6),
@@ -268,10 +281,7 @@ class TeleCharts extends StatelessWidget {
         Container(
           width: 8,
           height: 8,
-          decoration: BoxDecoration(
-            color: color,
-            shape: BoxShape.circle,
-          ),
+          decoration: BoxDecoration(color: color, shape: BoxShape.circle),
         ),
         const SizedBox(width: 6),
         Expanded(

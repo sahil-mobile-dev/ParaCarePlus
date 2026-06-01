@@ -19,7 +19,9 @@ class RadiologyAiPanel extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
-        border: Border.all(color: const Color(0xFFC77DFF).withValues(alpha: 0.2)),
+        border: Border.all(
+          color: const Color(0xFFC77DFF).withValues(alpha: 0.2),
+        ),
         borderRadius: BorderRadius.circular(AppRadius.md),
       ),
       child: Column(
@@ -27,18 +29,27 @@ class RadiologyAiPanel extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Icon(Icons.smart_toy_rounded, color: Color(0xFFC77DFF), size: 16),
+              const Icon(
+                Icons.smart_toy_rounded,
+                color: Color(0xFFC77DFF),
+                size: 16,
+              ),
               const SizedBox(width: 8),
               Text(
                 'AI-Assisted Imaging Analysis',
-                style: AppTextStyles.labelMedium.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+                style: AppTextStyles.labelMedium.copyWith(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ],
           ),
           const SizedBox(height: AppSpacing.md),
           LayoutBuilder(
             builder: (context, constraints) {
-              final crossAxisCount = constraints.maxWidth > 800 ? 4 : (constraints.maxWidth > 500 ? 2 : 1);
+              final crossAxisCount = constraints.maxWidth > 800
+                  ? 4
+                  : (constraints.maxWidth > 500 ? 2 : 1);
               return GridView.count(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
@@ -52,28 +63,32 @@ class RadiologyAiPanel extends StatelessWidget {
                     percentage: '87%',
                     color: AppColors.secondaryAccent,
                     barValue: 0.87,
-                    desc: 'CT ratio 0.51 — borderline cardiomegaly. Recommend echo for confirmation.',
+                    desc:
+                        'CT ratio 0.51 — borderline cardiomegaly. Recommend echo for confirmation.',
                   ),
                   _buildAiCard(
                     title: 'Lung Field Clear',
                     percentage: '98%',
                     color: AppColors.success,
                     barValue: 0.98,
-                    desc: 'No consolidation, effusion, or pneumothorax detected. Bilateral lung fields clear.',
+                    desc:
+                        'No consolidation, effusion, or pneumothorax detected. Bilateral lung fields clear.',
                   ),
                   _buildAiCard(
                     title: 'No Pneumonia Signs',
                     percentage: '96%',
                     color: AppColors.success,
                     barValue: 0.96,
-                    desc: 'No haziness or airspace opacification in any lung zone. Trachea central.',
+                    desc:
+                        'No haziness or airspace opacification in any lung zone. Trachea central.',
                   ),
                   _buildAiCard(
                     title: 'Diaphragm Level Normal',
                     percentage: '94%',
                     color: AppColors.success,
                     barValue: 0.94,
-                    desc: 'Both hemidiaphragms clearly delineated. Costophrenic angles acute.',
+                    desc:
+                        'Both hemidiaphragms clearly delineated. Costophrenic angles acute.',
                   ),
                 ],
               );
@@ -107,7 +122,11 @@ class RadiologyAiPanel extends StatelessWidget {
               Expanded(
                 child: Text(
                   title,
-                  style: const TextStyle(color: Colors.white, fontSize: 9, fontWeight: FontWeight.bold),
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 9,
+                    fontWeight: FontWeight.bold,
+                  ),
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -118,7 +137,11 @@ class RadiologyAiPanel extends StatelessWidget {
                 children: [
                   Text(
                     percentage,
-                    style: TextStyle(color: color, fontSize: 9, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      color: color,
+                      fontSize: 9,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   const SizedBox(width: 4),
                   SizedBox(
@@ -140,7 +163,11 @@ class RadiologyAiPanel extends StatelessWidget {
           const SizedBox(height: 2),
           Text(
             desc,
-            style: const TextStyle(color: AppColors.secondaryText, fontSize: 8, height: 1.3),
+            style: const TextStyle(
+              color: AppColors.secondaryText,
+              fontSize: 8,
+              height: 1.3,
+            ),
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
           ),

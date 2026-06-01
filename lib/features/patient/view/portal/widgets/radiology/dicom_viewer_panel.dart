@@ -9,7 +9,6 @@ final activeToolProvider = StateProvider<String>((ref) => 'W/L');
 final imageInvertedProvider = StateProvider<bool>((ref) => false);
 
 class ScanData {
-
   const ScanData({
     required this.title,
     required this.date,
@@ -59,18 +58,21 @@ class DicomViewerPanel extends ConsumerWidget {
       ref: 'RAD-2026-0421',
       technicalData: 'KVp: 110 | mAs: 4',
       wwWl: 'WW: 350 | WL: 40',
-      notes: 'Mild cardiomegaly noted. Follow-up recommended in 3 months or sooner if symptomatic. No active lung pathology. Bony skeleton intact. No rib fractures.',
+      notes:
+          'Mild cardiomegaly noted. Follow-up recommended in 3 months or sooner if symptomatic. No active lung pathology. Bony skeleton intact. No rib fractures.',
       aiFindings: [
         {
           'title': 'Lungs',
-          'desc': 'Both lung fields are clear. No consolidation, pleural effusion, or pneumothorax detected. Cardiothoracic ratio within normal limits (0.46).',
-          'isWarning': false
+          'desc':
+              'Both lung fields are clear. No consolidation, pleural effusion, or pneumothorax detected. Cardiothoracic ratio within normal limits (0.46).',
+          'isWarning': false,
         },
         {
           'title': 'Mild Cardiomegaly',
-          'desc': 'Slight increase in cardiac silhouette (CT ratio 0.51). Suggest echocardiogram for confirmation. May correlate with hypertensive disease.',
-          'isWarning': true
-        }
+          'desc':
+              'Slight increase in cardiac silhouette (CT ratio 0.51). Suggest echocardiogram for confirmation. May correlate with hypertensive disease.',
+          'isWarning': true,
+        },
       ],
     ),
     const ScanData(
@@ -86,13 +88,14 @@ class DicomViewerPanel extends ConsumerWidget {
       ref: 'RAD-2026-0422',
       technicalData: 'KVp: 115 | mAs: 5',
       wwWl: 'WW: 400 | WL: 50',
-      notes: 'Lateral view confirms minimal retrosternal space narrowing. Lung bases clear. No pleural fluid.',
+      notes:
+          'Lateral view confirms minimal retrosternal space narrowing. Lung bases clear. No pleural fluid.',
       aiFindings: [
         {
           'title': 'Lungs',
           'desc': 'Lungs clear. Retrocardiac space preserved.',
-          'isWarning': false
-        }
+          'isWarning': false,
+        },
       ],
     ),
     const ScanData(
@@ -108,13 +111,15 @@ class DicomViewerPanel extends ConsumerWidget {
       ref: 'RAD-2026-0089',
       technicalData: 'KVp: 60 | mAs: 8',
       wwWl: 'WW: 800 | WL: 120',
-      notes: 'Post-arthroscopy changes seen. Joint space preserved. No new effusion. Hardware intact. Bony alignment maintained.',
+      notes:
+          'Post-arthroscopy changes seen. Joint space preserved. No new effusion. Hardware intact. Bony alignment maintained.',
       aiFindings: [
         {
           'title': 'Joint Space',
-          'desc': 'Preservation of medial and lateral joint spaces. No acute fracture.',
-          'isWarning': false
-        }
+          'desc':
+              'Preservation of medial and lateral joint spaces. No acute fracture.',
+          'isWarning': false,
+        },
       ],
     ),
     const ScanData(
@@ -130,13 +135,15 @@ class DicomViewerPanel extends ConsumerWidget {
       ref: 'RAD-2026-0318',
       technicalData: 'Freq: 3.5 MHz | Gain: 65 dB',
       wwWl: 'DR: 75 dB',
-      notes: 'Liver mildly enlarged (15.2 cm). Mild fatty infiltration Grade I. Gall bladder, pancreas, spleen, both kidneys — normal. No free fluid.',
+      notes:
+          'Liver mildly enlarged (15.2 cm). Mild fatty infiltration Grade I. Gall bladder, pancreas, spleen, both kidneys — normal. No free fluid.',
       aiFindings: [
         {
           'title': 'Hepatomegaly',
-          'desc': 'Liver measures 15.2 cm. Mild fatty changes. Other solid organs normal.',
-          'isWarning': true
-        }
+          'desc':
+              'Liver measures 15.2 cm. Mild fatty changes. Other solid organs normal.',
+          'isWarning': true,
+        },
       ],
     ),
     const ScanData(
@@ -152,13 +159,14 @@ class DicomViewerPanel extends ConsumerWidget {
       ref: 'ECG-2026-9921',
       technicalData: 'Speed: 25 mm/s | Gain: 10 mm/mV',
       wwWl: 'Filters: 0.05-150 Hz',
-      notes: 'Normal sinus rhythm. Heart rate 72 bpm. PR interval 160ms. No significant ST-T wave abnormalities.',
+      notes:
+          'Normal sinus rhythm. Heart rate 72 bpm. PR interval 160ms. No significant ST-T wave abnormalities.',
       aiFindings: [
         {
           'title': 'Sinus Rhythm',
           'desc': 'Regular rate and rhythm. No acute ischemia signs.',
-          'isWarning': false
-        }
+          'isWarning': false,
+        },
       ],
     ),
   ];
@@ -187,28 +195,16 @@ class DicomViewerPanel extends ConsumerWidget {
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
-                        const SizedBox(
-                          width: 160,
-                          child: _ThumbnailsSidebar(),
-                        ),
-                        Container(
-                          width: 1,
-                          color: AppColors.border,
-                        ),
+                        const SizedBox(width: 160, child: _ThumbnailsSidebar()),
+                        Container(width: 1, color: AppColors.border),
                         Expanded(
                           child: AspectRatio(
                             aspectRatio: 1.2,
                             child: _CanvasArea(scan: scan),
                           ),
                         ),
-                        Container(
-                          width: 1,
-                          color: AppColors.border,
-                        ),
-                        SizedBox(
-                          width: 260,
-                          child: _DetailsPanel(scan: scan),
-                        ),
+                        Container(width: 1, color: AppColors.border),
+                        SizedBox(width: 260, child: _DetailsPanel(scan: scan)),
                       ],
                     ),
                   );
@@ -217,18 +213,12 @@ class DicomViewerPanel extends ConsumerWidget {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
                       const _ThumbnailsRow(),
-                      Container(
-                        height: 1,
-                        color: AppColors.border,
-                      ),
+                      Container(height: 1, color: AppColors.border),
                       AspectRatio(
                         aspectRatio: 1.1,
                         child: _CanvasArea(scan: scan),
                       ),
-                      Container(
-                        height: 1,
-                        color: AppColors.border,
-                      ),
+                      Container(height: 1, color: AppColors.border),
                       _DetailsPanel(scan: scan),
                     ],
                   );
@@ -250,7 +240,12 @@ class _Toolbar extends ConsumerWidget {
     final activeTool = ref.watch(activeToolProvider);
     final inverted = ref.watch(imageInvertedProvider);
 
-    Widget buildButton(String label, IconData icon, {bool isToggle = false, bool isToggled = false}) {
+    Widget buildButton(
+      String label,
+      IconData icon, {
+      bool isToggle = false,
+      bool isToggled = false,
+    }) {
       final isActive = isToggle ? isToggled : activeTool == label;
       return Material(
         color: Colors.transparent,
@@ -260,7 +255,9 @@ class _Toolbar extends ConsumerWidget {
               ref.read(imageInvertedProvider.notifier).state = !inverted;
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
-                  content: Text(inverted ? 'Inversion disabled' : 'Inversion enabled'),
+                  content: Text(
+                    inverted ? 'Inversion disabled' : 'Inversion enabled',
+                  ),
                   duration: const Duration(seconds: 1),
                 ),
               );
@@ -286,11 +283,11 @@ class _Toolbar extends ConsumerWidget {
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
             decoration: BoxDecoration(
               color: isActive
-                  ? const Color(0xFF00B4D8).withOpacity(0.2)
+                  ? const Color(0xFF00B4D8).withValues(alpha: 0.2)
                   : Colors.transparent,
               border: Border.all(
                 color: isActive
-                    ? const Color(0xFF00B4D8).withOpacity(0.5)
+                    ? const Color(0xFF00B4D8).withValues(alpha: 0.5)
                     : Colors.transparent,
               ),
               borderRadius: BorderRadius.circular(6),
@@ -301,13 +298,17 @@ class _Toolbar extends ConsumerWidget {
                 Icon(
                   icon,
                   size: 13,
-                  color: isActive ? const Color(0xFF00B4D8) : AppColors.secondaryText,
+                  color: isActive
+                      ? const Color(0xFF00B4D8)
+                      : AppColors.secondaryText,
                 ),
                 const SizedBox(width: 4),
                 Text(
                   label,
                   style: TextStyle(
-                    color: isActive ? const Color(0xFF00B4D8) : AppColors.secondaryText,
+                    color: isActive
+                        ? const Color(0xFF00B4D8)
+                        : AppColors.secondaryText,
                     fontSize: 10,
                     fontWeight: FontWeight.w600,
                   ),
@@ -330,11 +331,18 @@ class _Toolbar extends ConsumerWidget {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Icon(Icons.broken_image_outlined, color: Color(0xFF00B4D8), size: 14),
+              const Icon(
+                Icons.broken_image_outlined,
+                color: Color(0xFF00B4D8),
+                size: 14,
+              ),
               const SizedBox(width: 6),
               Text(
                 'PACS Active Viewer',
-                style: AppTextStyles.labelMedium.copyWith(color: Colors.white, fontSize: 11),
+                style: AppTextStyles.labelMedium.copyWith(
+                  color: Colors.white,
+                  fontSize: 11,
+                ),
               ),
             ],
           ),
@@ -344,7 +352,12 @@ class _Toolbar extends ConsumerWidget {
           buildButton('Pan', Icons.pan_tool_rounded),
           buildButton('Measure', Icons.square_foot),
           buildButton('Annotate', Icons.draw),
-          buildButton('Invert', Icons.hdr_strong, isToggle: true, isToggled: inverted),
+          buildButton(
+            'Invert',
+            Icons.hdr_strong,
+            isToggle: true,
+            isToggled: inverted,
+          ),
           buildButton('Export', Icons.download),
         ],
       ),
@@ -411,16 +424,16 @@ Widget _buildThumbItem(WidgetRef ref, int index, ScanData scan, bool isActive) {
 
   if (scan.title.contains('Chest')) {
     icon = Icons.align_vertical_center_rounded;
-    iconColor = const Color(0xFF00B4D8).withOpacity(0.4);
+    iconColor = const Color(0xFF00B4D8).withValues(alpha: 0.4);
   } else if (scan.title.contains('Knee')) {
     icon = Icons.airline_seat_legroom_extra_rounded;
-    iconColor = const Color(0xFFC77DFF).withOpacity(0.4);
+    iconColor = const Color(0xFFC77DFF).withValues(alpha: 0.4);
   } else if (scan.title.contains('USG')) {
     icon = Icons.radio_button_checked_rounded;
-    iconColor = const Color(0xFF22C55E).withOpacity(0.4);
+    iconColor = const Color(0xFF22C55E).withValues(alpha: 0.4);
   } else if (scan.title.contains('ECG')) {
     icon = Icons.monitor_heart_rounded;
-    iconColor = const Color(0xFFEF4444).withOpacity(0.4);
+    iconColor = const Color(0xFFEF4444).withValues(alpha: 0.4);
   }
 
   return InkWell(
@@ -451,7 +464,11 @@ Widget _buildThumbItem(WidgetRef ref, int index, ScanData scan, bool isActive) {
             padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 3),
             child: Text(
               scan.title,
-              style: const TextStyle(color: AppColors.secondaryText, fontSize: 8, fontWeight: FontWeight.bold),
+              style: const TextStyle(
+                color: AppColors.secondaryText,
+                fontSize: 8,
+                fontWeight: FontWeight.bold,
+              ),
               textAlign: TextAlign.center,
               maxLines: 1,
               overflow: TextOverflow.ellipsis,
@@ -486,20 +503,11 @@ class _CanvasArea extends ConsumerWidget {
             painter: _ChestLateralXrayPainter(),
           );
         case 2:
-          return CustomPaint(
-            size: Size.infinite,
-            painter: _KneeXrayPainter(),
-          );
+          return CustomPaint(size: Size.infinite, painter: _KneeXrayPainter());
         case 3:
-          return CustomPaint(
-            size: Size.infinite,
-            painter: _UsgPainter(),
-          );
+          return CustomPaint(size: Size.infinite, painter: _UsgPainter());
         case 4:
-          return CustomPaint(
-            size: Size.infinite,
-            painter: _EcgPainter(),
-          );
+          return CustomPaint(size: Size.infinite, painter: _EcgPainter());
         default:
           return const Center(child: Text('No Image Available'));
       }
@@ -514,20 +522,33 @@ class _CanvasArea extends ConsumerWidget {
             child: ColorFiltered(
               colorFilter: inverted
                   ? const ColorFilter.matrix([
-                      -1, 0, 0, 0, 255,
-                      0, -1, 0, 0, 255,
-                      0, 0, -1, 0, 255,
-                      0, 0, 0, 1, 0,
+                      -1,
+                      0,
+                      0,
+                      0,
+                      255,
+                      0,
+                      -1,
+                      0,
+                      0,
+                      255,
+                      0,
+                      0,
+                      -1,
+                      0,
+                      255,
+                      0,
+                      0,
+                      0,
+                      1,
+                      0,
                     ])
                   : const ColorFilter.mode(Colors.transparent, BlendMode.dst),
               child: Container(
                 decoration: const BoxDecoration(
                   gradient: RadialGradient(
                     radius: 0.8,
-                    colors: [
-                      Color(0xFF0F2C4C),
-                      Color(0xFF040A10),
-                    ],
+                    colors: [Color(0xFF0F2C4C), Color(0xFF040A10)],
                   ),
                 ),
                 padding: const EdgeInsets.all(AppSpacing.xl),
@@ -640,8 +661,21 @@ class _DetailsPanel extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: const TextStyle(color: AppColors.secondaryText, fontSize: 10)),
-          Text(value, style: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.w600)),
+          Text(
+            label,
+            style: const TextStyle(
+              color: AppColors.secondaryText,
+              fontSize: 10,
+            ),
+          ),
+          Text(
+            value,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 10,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
         ],
       ),
     );
@@ -656,9 +690,13 @@ class _DetailsPanel extends StatelessWidget {
       margin: const EdgeInsets.only(bottom: 8),
       padding: const EdgeInsets.all(8),
       decoration: BoxDecoration(
-        color: isWarn ? AppColors.secondaryAccent.withOpacity(0.05) : const Color(0xFF00B4D8).withOpacity(0.05),
+        color: isWarn
+            ? AppColors.secondaryAccent.withValues(alpha: 0.05)
+            : const Color(0xFF00B4D8).withValues(alpha: 0.05),
         border: Border.all(
-          color: isWarn ? AppColors.secondaryAccent.withOpacity(0.2) : const Color(0xFF00B4D8).withOpacity(0.15),
+          color: isWarn
+              ? AppColors.secondaryAccent.withValues(alpha: 0.2)
+              : const Color(0xFF00B4D8).withValues(alpha: 0.15),
         ),
         borderRadius: BorderRadius.circular(6),
       ),
@@ -668,7 +706,9 @@ class _DetailsPanel extends StatelessWidget {
           Text(
             title,
             style: TextStyle(
-              color: isWarn ? AppColors.secondaryAccent : const Color(0xFF00B4D8),
+              color: isWarn
+                  ? AppColors.secondaryAccent
+                  : const Color(0xFF00B4D8),
               fontSize: 10,
               fontWeight: FontWeight.bold,
             ),
@@ -694,12 +734,12 @@ class _ChestPAXrayPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = Colors.white.withOpacity(0.15)
+      ..color = Colors.white.withValues(alpha: 0.15)
       ..strokeWidth = 2
       ..style = PaintingStyle.stroke;
 
     final lungPaint = Paint()
-      ..color = Colors.white.withOpacity(0.06)
+      ..color = Colors.white.withValues(alpha: 0.06)
       ..style = PaintingStyle.fill;
 
     // Draw Spine
@@ -751,7 +791,7 @@ class _ChestPAXrayPainter extends CustomPainter {
 
     // Heart
     final heartPaint = Paint()
-      ..color = Colors.white.withOpacity(0.18)
+      ..color = Colors.white.withValues(alpha: 0.18)
       ..style = PaintingStyle.fill;
     final heartPath = Path()
       ..moveTo(size.width / 2 - 8, size.height / 2)
@@ -778,12 +818,12 @@ class _ChestLateralXrayPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = Colors.white.withOpacity(0.12)
+      ..color = Colors.white.withValues(alpha: 0.12)
       ..strokeWidth = 2
       ..style = PaintingStyle.stroke;
 
     final shapePaint = Paint()
-      ..color = Colors.white.withOpacity(0.05)
+      ..color = Colors.white.withValues(alpha: 0.05)
       ..style = PaintingStyle.fill;
 
     // Lateral Spine (curved line on the left side)
@@ -811,15 +851,26 @@ class _ChestLateralXrayPainter extends CustomPainter {
     // Lung silhouette profile
     final lungPath = Path()
       ..moveTo(size.width * 0.35, 30)
-      ..quadraticBezierTo(size.width * 0.8, 10, size.width * 0.72, size.height * 0.5)
-      ..quadraticBezierTo(size.width * 0.8, size.height - 40, size.width * 0.45, size.height - 35)
+      ..quadraticBezierTo(
+        size.width * 0.8,
+        10,
+        size.width * 0.72,
+        size.height * 0.5,
+      )
+      ..quadraticBezierTo(
+        size.width * 0.8,
+        size.height - 40,
+        size.width * 0.45,
+        size.height - 35,
+      )
       ..close();
-    canvas.drawPath(lungPath, shapePaint);
-    canvas.drawPath(lungPath, paint);
+    canvas
+      ..drawPath(lungPath, shapePaint)
+      ..drawPath(lungPath, paint);
 
     // Heart silhouette profile
     final heartPaint = Paint()
-      ..color = Colors.white.withOpacity(0.18)
+      ..color = Colors.white.withValues(alpha: 0.18)
       ..style = PaintingStyle.fill;
     final heartPath = Path()
       ..moveTo(size.width * 0.45, size.height * 0.45)
@@ -846,12 +897,12 @@ class _KneeXrayPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = Colors.white.withOpacity(0.18)
+      ..color = Colors.white.withValues(alpha: 0.18)
       ..strokeWidth = 2
       ..style = PaintingStyle.stroke;
 
     final bonePaint = Paint()
-      ..color = Colors.white.withOpacity(0.08)
+      ..color = Colors.white.withValues(alpha: 0.08)
       ..style = PaintingStyle.fill;
 
     final w = size.width;
@@ -869,8 +920,9 @@ class _KneeXrayPainter extends CustomPainter {
       ..quadraticBezierTo(w * 0.64, h * 0.44, w * 0.62, h * 0.38)
       ..lineTo(w * 0.62, 10)
       ..close();
-    canvas.drawPath(femurPath, bonePaint);
-    canvas.drawPath(femurPath, paint);
+    canvas
+      ..drawPath(femurPath, bonePaint)
+      ..drawPath(femurPath, paint);
 
     // Tibia (Lower Bone)
     final tibiaPath = Path()
@@ -883,8 +935,9 @@ class _KneeXrayPainter extends CustomPainter {
       ..lineTo(w * 0.4, h - 10)
       ..lineTo(w * 0.4, h * 0.65)
       ..close();
-    canvas.drawPath(tibiaPath, bonePaint);
-    canvas.drawPath(tibiaPath, paint);
+    canvas
+      ..drawPath(tibiaPath, bonePaint)
+      ..drawPath(tibiaPath, paint);
 
     // Fibula (Thinner side bone)
     final fibulaPath = Path()
@@ -893,8 +946,9 @@ class _KneeXrayPainter extends CustomPainter {
       ..lineTo(w * 0.68, h - 10)
       ..lineTo(w * 0.64, h - 10)
       ..close();
-    canvas.drawPath(fibulaPath, bonePaint);
-    canvas.drawPath(fibulaPath, paint);
+    canvas
+      ..drawPath(fibulaPath, bonePaint)
+      ..drawPath(fibulaPath, paint);
   }
 
   @override
@@ -905,17 +959,17 @@ class _UsgPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = Colors.white.withOpacity(0.08)
+      ..color = Colors.white.withValues(alpha: 0.08)
       ..strokeWidth = 1
       ..style = PaintingStyle.stroke;
 
     final wavePaint = Paint()
-      ..color = Colors.white.withOpacity(0.12)
+      ..color = Colors.white.withValues(alpha: 0.12)
       ..strokeWidth = 2
       ..style = PaintingStyle.stroke;
 
     final shapePaint = Paint()
-      ..color = Colors.white.withOpacity(0.04)
+      ..color = Colors.white.withValues(alpha: 0.04)
       ..style = PaintingStyle.fill;
 
     final w = size.width;
@@ -927,8 +981,9 @@ class _UsgPainter extends CustomPainter {
       ..lineTo(w * 0.15, h - 20)
       ..arcToPoint(Offset(w * 0.85, h - 20), radius: Radius.circular(h))
       ..close();
-    canvas.drawPath(wedgePath, shapePaint);
-    canvas.drawPath(wedgePath, paint);
+    canvas
+      ..drawPath(wedgePath, shapePaint)
+      ..drawPath(wedgePath, paint);
 
     // Arc wave lines
     for (var i = 1; i <= 6; i++) {
@@ -966,21 +1021,29 @@ class _EcgPainter extends CustomPainter {
 
     // Draw Grid Lines (standard ECG paper grid)
     final gridPaint = Paint()
-      ..color = const Color(0xFFEF4444).withOpacity(0.08)
+      ..color = const Color(0xFFEF4444).withValues(alpha: 0.08)
       ..strokeWidth = 0.5;
 
     final majorGridPaint = Paint()
-      ..color = const Color(0xFFEF4444).withOpacity(0.18)
+      ..color = const Color(0xFFEF4444).withValues(alpha: 0.18)
       ..strokeWidth = 1.0;
 
     const step = 8.0;
     for (var x = 0.0; x < w; x += step) {
       final isMajor = (x / step).round() % 5 == 0;
-      canvas.drawLine(Offset(x, 0), Offset(x, h), isMajor ? majorGridPaint : gridPaint);
+      canvas.drawLine(
+        Offset(x, 0),
+        Offset(x, h),
+        isMajor ? majorGridPaint : gridPaint,
+      );
     }
     for (var y = 0.0; y < h; y += step) {
       final isMajor = (y / step).round() % 5 == 0;
-      canvas.drawLine(Offset(0, y), Offset(w, y), isMajor ? majorGridPaint : gridPaint);
+      canvas.drawLine(
+        Offset(0, y),
+        Offset(w, y),
+        isMajor ? majorGridPaint : gridPaint,
+      );
     }
 
     // Draw green ECG trace lines (P-Q-R-S-T heartbeat wave)
@@ -990,8 +1053,7 @@ class _EcgPainter extends CustomPainter {
       ..strokeCap = StrokeCap.round
       ..style = PaintingStyle.stroke;
 
-    final tracePath = Path();
-    tracePath.moveTo(0, h / 2);
+    final tracePath = Path()..moveTo(0, h / 2);
 
     const period = 90.0;
     for (var x = 0.0; x < w; x += 1.0) {
@@ -1031,9 +1093,12 @@ class _EcgPainter extends CustomPainter {
 
 // Math.sin helper for Dart compilation
 class Math {
-  static double sin(double radians) => double.tryParse(
-            (radians - (radians * radians * radians / 6) + (radians * radians * radians * radians * radians / 120))
-                .toStringAsFixed(6),
-          ) ??
-          0.0;
+  static double sin(double radians) =>
+      double.tryParse(
+        (radians -
+                (radians * radians * radians / 6) +
+                (radians * radians * radians * radians * radians / 120))
+            .toStringAsFixed(6),
+      ) ??
+      0.0;
 }

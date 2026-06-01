@@ -6,9 +6,10 @@ import 'package:paracareplus/core/theme/app_text_styles.dart';
 /// 5-tab selector for the Patient Portal login page.
 /// Tabs: Mobile OTP | ABHA | Aadhaar | Face | Family
 class LoginTabSelector extends ConsumerWidget {
-
   const LoginTabSelector({
-    required this.activeTab, required this.onTabChanged, super.key,
+    required this.activeTab,
+    required this.onTabChanged,
+    super.key,
   });
   final String activeTab;
   final ValueChanged<String> onTabChanged;
@@ -45,8 +46,7 @@ class LoginTabSelector extends ConsumerWidget {
                   boxShadow: isActive
                       ? [
                           BoxShadow(
-                            color:
-                                AppColors.primary.withValues(alpha: 0.4),
+                            color: AppColors.primary.withValues(alpha: 0.4),
                             blurRadius: 12,
                             offset: const Offset(0, 2),
                           ),
@@ -59,9 +59,7 @@ class LoginTabSelector extends ConsumerWidget {
                     Icon(
                       tab.icon,
                       size: 15,
-                      color: isActive
-                          ? Colors.white
-                          : const Color(0xFF7A9BBF),
+                      color: isActive ? Colors.white : const Color(0xFF7A9BBF),
                     ),
                     const SizedBox(height: 3),
                     Text(

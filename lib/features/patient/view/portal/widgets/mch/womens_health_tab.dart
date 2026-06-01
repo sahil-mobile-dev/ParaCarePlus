@@ -149,10 +149,7 @@ class WomensHealthTab extends StatelessWidget {
               _buildChartContainer(
                 title: 'Bone Density Trend (T-score)',
                 icon: Icons.show_chart_rounded,
-                child: const SizedBox(
-                  height: 200,
-                  child: _BoneDensityChart(),
-                ),
+                child: const SizedBox(height: 200, child: _BoneDensityChart()),
               ),
               _buildChartContainer(
                 title: 'Women Health Checkup Status',
@@ -304,7 +301,9 @@ class _BoneDensityChart extends StatelessWidget {
               showTitles: true,
               getTitlesWidget: (value, meta) {
                 final idx = value.toInt();
-                if (idx < 0 || idx >= years.length) return const SizedBox.shrink();
+                if (idx < 0 || idx >= years.length) {
+                  return const SizedBox.shrink();
+                }
                 return Padding(
                   padding: const EdgeInsets.only(top: 4),
                   child: Text(
@@ -319,12 +318,8 @@ class _BoneDensityChart extends StatelessWidget {
               reservedSize: 18,
             ),
           ),
-          topTitles: const AxisTitles(
-            
-          ),
-          rightTitles: const AxisTitles(
-            
-          ),
+          topTitles: const AxisTitles(),
+          rightTitles: const AxisTitles(),
         ),
         lineBarsData: [
           LineChartBarData(
@@ -342,10 +337,7 @@ class _BoneDensityChart extends StatelessWidget {
           ),
           // Osteopenia threshold line at -1.0
           LineChartBarData(
-            spots: List.generate(
-              years.length,
-              (i) => FlSpot(i.toDouble(), -1),
-            ),
+            spots: List.generate(years.length, (i) => FlSpot(i.toDouble(), -1)),
             color: AppColors.secondaryAccent.withValues(alpha: 0.5),
             barWidth: 1.2,
             dashArray: [5, 5],
@@ -414,7 +406,10 @@ class _WomenHealthStatusChart extends StatelessWidget {
           children: [
             _LegendItem(color: AppColors.success, label: 'Complete (4)'),
             SizedBox(height: 6),
-            _LegendItem(color: AppColors.secondaryAccent, label: 'Due Soon (1)'),
+            _LegendItem(
+              color: AppColors.secondaryAccent,
+              label: 'Due Soon (1)',
+            ),
             SizedBox(height: 6),
             _LegendItem(color: AppColors.error, label: 'Overdue (0)'),
           ],
@@ -425,11 +420,7 @@ class _WomenHealthStatusChart extends StatelessWidget {
 }
 
 class _LegendItem extends StatelessWidget {
-
-  const _LegendItem({
-    required this.color,
-    required this.label,
-  });
+  const _LegendItem({required this.color, required this.label});
   final Color color;
   final String label;
 
@@ -448,10 +439,7 @@ class _LegendItem extends StatelessWidget {
         const SizedBox(width: 8),
         Text(
           label,
-          style: const TextStyle(
-            color: AppColors.secondaryText,
-            fontSize: 10,
-          ),
+          style: const TextStyle(color: AppColors.secondaryText, fontSize: 10),
         ),
       ],
     );

@@ -49,7 +49,10 @@ class PatientRadiologyScreen extends ConsumerWidget {
             const SizedBox(height: AppSpacing.lg),
 
             // DICOM Viewer Section
-            _buildSectionTitle(Icons.display_settings_rounded, 'DICOM Viewer — Chest X-Ray (28 Apr 2026)'),
+            _buildSectionTitle(
+              Icons.display_settings_rounded,
+              'DICOM Viewer — Chest X-Ray (28 Apr 2026)',
+            ),
             const SizedBox(height: AppSpacing.sm),
             const DicomViewerPanel(),
             const SizedBox(height: AppSpacing.lg),
@@ -80,7 +83,11 @@ class PatientRadiologyScreen extends ConsumerWidget {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Icon(Icons.document_scanner_outlined, color: Color(0xFF00B4D8), size: 20),
+              const Icon(
+                Icons.document_scanner_outlined,
+                color: Color(0xFF00B4D8),
+                size: 20,
+              ),
               const SizedBox(width: 8),
               Text(
                 'Radiology & Imaging',
@@ -98,18 +105,25 @@ class PatientRadiologyScreen extends ConsumerWidget {
               _buildBadge(Icons.calendar_month_rounded, dateStr),
               ElevatedButton.icon(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFFC77DFF).withOpacity(0.15),
+                  backgroundColor: const Color(
+                    0xFFC77DFF,
+                  ).withValues(alpha: 0.15),
                   foregroundColor: const Color(0xFFC77DFF),
-                  side: BorderSide(color: const Color(0xFFC77DFF).withOpacity(0.3)),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  side: BorderSide(
+                    color: const Color(0xFFC77DFF).withValues(alpha: 0.3),
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 8,
+                  ),
                   elevation: 0,
                 ),
                 onPressed: () {
                   ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Opening DICOM upload...'),
-                    ),
+                    const SnackBar(content: Text('Opening DICOM upload...')),
                   );
                 },
                 icon: const Icon(Icons.upload_file_rounded, size: 12),
@@ -139,8 +153,10 @@ class PatientRadiologyScreen extends ConsumerWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       decoration: BoxDecoration(
-        color: const Color(0xFF00B4D8).withOpacity(0.15),
-        border: Border.all(color: const Color(0xFF00B4D8).withOpacity(0.3)),
+        color: const Color(0xFF00B4D8).withValues(alpha: 0.15),
+        border: Border.all(
+          color: const Color(0xFF00B4D8).withValues(alpha: 0.3),
+        ),
         borderRadius: BorderRadius.circular(20),
       ),
       child: Row(

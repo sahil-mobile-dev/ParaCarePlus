@@ -88,7 +88,7 @@ class _KpiCard extends StatelessWidget {
         decoration: BoxDecoration(
           color: color.withValues(alpha: 0.05),
           border: Border(
-            top: BorderSide(color: color, width: 1),
+            top: BorderSide(color: color),
             left: const BorderSide(color: AppColors.border),
             right: const BorderSide(color: AppColors.border),
             bottom: const BorderSide(color: AppColors.border),

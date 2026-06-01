@@ -198,10 +198,7 @@ class WellnessCheckups extends StatelessWidget {
                           const SizedBox(height: 8),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              statusWidget,
-                              buttonWidget,
-                            ],
+                            children: [statusWidget, buttonWidget],
                           ),
                         ],
                       );
@@ -210,14 +207,8 @@ class WellnessCheckups extends StatelessWidget {
                         children: [
                           iconWidget,
                           const SizedBox(width: 10),
-                          Expanded(
-                            flex: 3,
-                            child: contentWidget,
-                          ),
-                          Expanded(
-                            flex: 2,
-                            child: statusWidget,
-                          ),
+                          Expanded(flex: 3, child: contentWidget),
+                          Expanded(flex: 2, child: statusWidget),
                           if (actionLabel != null) ...[
                             const SizedBox(width: 12),
                             buttonWidget,

@@ -82,7 +82,7 @@ class _LoginInfoSectionState extends State<LoginInfoSection>
             shape: BoxShape.circle,
             color: const Color(0xFF03142c),
             border: Border.all(
-              color: const Color(0xFF135AB0).withOpacity(0.5),
+              color: const Color(0xFF135AB0).withValues(alpha: 0.5),
               width: 1.5,
             ),
           ),

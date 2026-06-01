@@ -47,7 +47,11 @@ class PrescriptionCharts extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Icon(Icons.bar_chart_rounded, color: Color(0xFF00B4D8), size: 16),
+              const Icon(
+                Icons.bar_chart_rounded,
+                color: Color(0xFF00B4D8),
+                size: 16,
+              ),
               const SizedBox(width: 6),
               Text(
                 'Medication Adherence (Last 30 Days)',
@@ -67,7 +71,10 @@ class PrescriptionCharts extends StatelessWidget {
                     sideTitles: SideTitles(
                       showTitles: true,
                       getTitlesWidget: (value, meta) {
-                        const style = TextStyle(color: AppColors.secondaryText, fontSize: 8);
+                        const style = TextStyle(
+                          color: AppColors.secondaryText,
+                          fontSize: 8,
+                        );
                         String text;
                         switch (value.toInt()) {
                           case 0:
@@ -98,7 +105,10 @@ class PrescriptionCharts extends StatelessWidget {
                       getTitlesWidget: (value, meta) {
                         return Text(
                           value.toInt().toString(),
-                          style: const TextStyle(color: AppColors.secondaryText, fontSize: 8),
+                          style: const TextStyle(
+                            color: AppColors.secondaryText,
+                            fontSize: 8,
+                          ),
                         );
                       },
                     ),
@@ -139,8 +149,16 @@ class PrescriptionCharts extends StatelessWidget {
         BarChartRodData(
           toY: taken + missed,
           rodStackItems: [
-            BarChartRodStackItem(0, taken, const Color(0xFF00C897).withValues(alpha: 0.7)),
-            BarChartRodStackItem(taken, taken + missed, const Color(0xFFFF4D6D).withValues(alpha: 0.5)),
+            BarChartRodStackItem(
+              0,
+              taken,
+              const Color(0xFF00C897).withValues(alpha: 0.7),
+            ),
+            BarChartRodStackItem(
+              taken,
+              taken + missed,
+              const Color(0xFFFF4D6D).withValues(alpha: 0.5),
+            ),
           ],
           width: width,
           borderRadius: BorderRadius.circular(2),
@@ -153,9 +171,15 @@ class PrescriptionCharts extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        _buildLegendItem('Taken', const Color(0xFF00C897).withValues(alpha: 0.7)),
+        _buildLegendItem(
+          'Taken',
+          const Color(0xFF00C897).withValues(alpha: 0.7),
+        ),
         const SizedBox(width: 12),
-        _buildLegendItem('Missed', const Color(0xFFFF4D6D).withValues(alpha: 0.5)),
+        _buildLegendItem(
+          'Missed',
+          const Color(0xFFFF4D6D).withValues(alpha: 0.5),
+        ),
       ],
     );
   }
@@ -174,7 +198,11 @@ class PrescriptionCharts extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Icon(Icons.pie_chart_rounded, color: Color(0xFF00B4D8), size: 16),
+              const Icon(
+                Icons.pie_chart_rounded,
+                color: Color(0xFF00B4D8),
+                size: 16,
+              ),
               const SizedBox(width: 6),
               Text(
                 'Prescription Category Distribution',
@@ -198,28 +226,44 @@ class PrescriptionCharts extends StatelessWidget {
                           title: '2',
                           color: const Color(0xFFFF4D6D),
                           radius: 18,
-                          titleStyle: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.white),
+                          titleStyle: const TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
                         ),
                         PieChartSectionData(
                           value: 1,
                           title: '1',
                           color: const Color(0xFFF77F00),
                           radius: 18,
-                          titleStyle: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.white),
+                          titleStyle: const TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
                         ),
                         PieChartSectionData(
                           value: 1,
                           title: '1',
                           color: const Color(0xFF3A86FF),
                           radius: 18,
-                          titleStyle: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.white),
+                          titleStyle: const TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
                         ),
                         PieChartSectionData(
                           value: 1,
                           title: '1',
                           color: const Color(0xFF00C897),
                           radius: 18,
-                          titleStyle: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.white),
+                          titleStyle: const TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
                         ),
                       ],
                     ),
@@ -234,7 +278,10 @@ class PrescriptionCharts extends StatelessWidget {
                     children: [
                       _buildLegendItem('Cardio (2)', const Color(0xFFFF4D6D)),
                       const SizedBox(height: 6),
-                      _buildLegendItem('Anti-Diab (1)', const Color(0xFFF77F00)),
+                      _buildLegendItem(
+                        'Anti-Diab (1)',
+                        const Color(0xFFF77F00),
+                      ),
                       const SizedBox(height: 6),
                       _buildLegendItem('Gastric (1)', const Color(0xFF3A86FF)),
                       const SizedBox(height: 6),
@@ -257,15 +304,16 @@ class PrescriptionCharts extends StatelessWidget {
         Container(
           width: 8,
           height: 8,
-          decoration: BoxDecoration(
-            color: color,
-            shape: BoxShape.circle,
-          ),
+          decoration: BoxDecoration(color: color, shape: BoxShape.circle),
         ),
         const SizedBox(width: 6),
         Text(
           text,
-          style: const TextStyle(color: AppColors.secondaryText, fontSize: 9, fontWeight: FontWeight.bold),
+          style: const TextStyle(
+            color: AppColors.secondaryText,
+            fontSize: 9,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ],
     );

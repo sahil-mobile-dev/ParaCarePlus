@@ -6,7 +6,6 @@ import 'package:paracareplus/core/widgets/app_button.dart';
 
 /// Aadhaar-based OTP login tab for the Patient Portal.
 class LoginAadhaar extends StatefulWidget {
-
   const LoginAadhaar({required this.onSuccess, super.key});
   final VoidCallback onSuccess;
 

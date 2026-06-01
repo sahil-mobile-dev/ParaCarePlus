@@ -188,10 +188,7 @@ class BpTrendPainter extends CustomPainter {
           style: const TextStyle(color: AppColors.secondaryText, fontSize: 8.5),
         )
         ..layout()
-        ..paint(
-          canvas,
-          Offset(x - textPainter.width / 2, size.height - 12),
-        );
+        ..paint(canvas, Offset(x - textPainter.width / 2, size.height - 12));
     }
   }
 
@@ -272,10 +269,7 @@ class BloodSugarTrendPainter extends CustomPainter {
           style: const TextStyle(color: AppColors.secondaryText, fontSize: 8.5),
         )
         ..layout()
-        ..paint(
-          canvas,
-          Offset(x - textPainter.width / 2, size.height - 12),
-        );
+        ..paint(canvas, Offset(x - textPainter.width / 2, size.height - 12));
     }
   }
 
@@ -340,7 +334,10 @@ class RiskRadarPainter extends CustomPainter {
         ..layout()
         ..paint(
           canvas,
-          Offset(labelX - textPainter.width / 2, labelY - textPainter.height / 2),
+          Offset(
+            labelX - textPainter.width / 2,
+            labelY - textPainter.height / 2,
+          ),
         );
     }
 

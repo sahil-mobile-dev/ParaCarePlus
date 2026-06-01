@@ -123,25 +123,16 @@ class FamilyVaccinationHeatmap extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              _buildLegendItem(
-                color: AppColors.success,
-                text: '✓ Complete',
-              ),
+              _buildLegendItem(color: AppColors.success, text: '✓ Complete'),
               const SizedBox(width: 16),
               _buildLegendItem(
                 color: AppColors.secondaryAccent,
                 text: '~ Partial',
               ),
               const SizedBox(width: 16),
-              _buildLegendItem(
-                color: AppColors.error,
-                text: '✗ Not Done',
-              ),
+              _buildLegendItem(color: AppColors.error, text: '✗ Not Done'),
               const SizedBox(width: 16),
-              _buildLegendItem(
-                color: const Color(0xFF4A6A8A),
-                text: '— N/A',
-              ),
+              _buildLegendItem(color: const Color(0xFF4A6A8A), text: '— N/A'),
             ],
           ),
         ],

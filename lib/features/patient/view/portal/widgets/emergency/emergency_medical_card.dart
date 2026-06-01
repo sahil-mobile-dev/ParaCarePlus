@@ -102,7 +102,10 @@ class EmergencyMedicalCard extends StatelessWidget {
                     'Penicillin (Anaphylaxis)',
                     valueColor: AppColors.error,
                   ),
-                  _buildCardItem('Current Meds', 'Amlodipine 5mg, Metformin 500mg, Atorvastatin'),
+                  _buildCardItem(
+                    'Current Meds',
+                    'Amlodipine 5mg, Metformin 500mg, Atorvastatin',
+                  ),
                   _buildCardItem(
                     'Emergency Contact',
                     'Geeta Kumar +91 98765 43210',

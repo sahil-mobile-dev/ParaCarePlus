@@ -17,18 +17,12 @@ class VaccinationCharts extends StatelessWidget {
           _buildChartContainer(
             title: 'Immunization Coverage (%)',
             icon: Icons.bar_chart_rounded,
-            child: const SizedBox(
-              height: 200,
-              child: _CoverageBarChart(),
-            ),
+            child: const SizedBox(height: 200, child: _CoverageBarChart()),
           ),
           _buildChartContainer(
             title: 'Vaccine Status Distribution',
             icon: Icons.pie_chart_rounded,
-            child: const SizedBox(
-              height: 200,
-              child: _StatusDoughnutChart(),
-            ),
+            child: const SizedBox(height: 200, child: _StatusDoughnutChart()),
           ),
         ];
 
@@ -280,7 +274,10 @@ class _StatusDoughnutChart extends StatelessWidget {
           children: [
             _LegendItem(color: AppColors.success, label: 'Complete (8)'),
             SizedBox(height: 6),
-            _LegendItem(color: AppColors.secondaryAccent, label: 'Due Soon (2)'),
+            _LegendItem(
+              color: AppColors.secondaryAccent,
+              label: 'Due Soon (2)',
+            ),
             SizedBox(height: 6),
             _LegendItem(color: AppColors.error, label: 'Overdue (1)'),
             SizedBox(height: 6),
@@ -293,10 +290,7 @@ class _StatusDoughnutChart extends StatelessWidget {
 }
 
 class _LegendItem extends StatelessWidget {
-  const _LegendItem({
-    required this.color,
-    required this.label,
-  });
+  const _LegendItem({required this.color, required this.label});
 
   final Color color;
   final String label;
@@ -316,10 +310,7 @@ class _LegendItem extends StatelessWidget {
         const SizedBox(width: 8),
         Text(
           label,
-          style: const TextStyle(
-            color: AppColors.secondaryText,
-            fontSize: 10,
-          ),
+          style: const TextStyle(color: AppColors.secondaryText, fontSize: 10),
         ),
       ],
     );

@@ -7,7 +7,6 @@ import 'package:paracareplus/core/widgets/app_button.dart';
 /// Family login tab for Patient Portal.
 /// Shows 4-column avatar grid with linked family profiles and an Add Member card.
 class LoginFamily extends StatefulWidget {
-
   const LoginFamily({required this.onSuccess, super.key});
   final VoidCallback onSuccess;
 
@@ -297,9 +296,7 @@ class _LoginFamilyState extends State<LoginFamily> {
         padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 6),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12),
-          border: Border.all(
-            color: const Color(0xFF4A6A8A),
-          ),
+          border: Border.all(color: const Color(0xFF4A6A8A)),
         ),
         child: const Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -323,7 +320,6 @@ class _LoginFamilyState extends State<LoginFamily> {
 }
 
 class _FamilyProfile {
-
   const _FamilyProfile({
     required this.id,
     required this.initial,

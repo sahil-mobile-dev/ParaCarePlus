@@ -37,7 +37,11 @@ class PatientEmergencyScreen extends ConsumerWidget {
         ),
         title: const Row(
           children: [
-            Icon(Icons.airport_shuttle_rounded, color: AppColors.error, size: 20),
+            Icon(
+              Icons.airport_shuttle_rounded,
+              color: AppColors.error,
+              size: 20,
+            ),
             SizedBox(width: 8),
             Text(
               'Emergency & Ambulance',
@@ -143,7 +147,11 @@ class PatientEmergencyScreen extends ConsumerWidget {
           ),
           child: Row(
             children: [
-              const Icon(Icons.calendar_today_rounded, color: AppColors.error, size: 10),
+              const Icon(
+                Icons.calendar_today_rounded,
+                color: AppColors.error,
+                size: 10,
+              ),
               const SizedBox(width: 4),
               Text(
                 dateStr,

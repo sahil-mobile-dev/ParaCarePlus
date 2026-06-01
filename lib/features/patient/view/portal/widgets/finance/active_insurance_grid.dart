@@ -30,7 +30,10 @@ class ActiveInsuranceGrid extends StatelessWidget {
               limitRightLabel: '₹5,00,000 total',
               pctUsed: 0.24,
               subText: '₹3,80,000 remaining (76%)',
-              progressColors: [const Color(0xFF3A86FF), const Color(0xFF00B4D8)],
+              progressColors: [
+                const Color(0xFF3A86FF),
+                const Color(0xFF00B4D8),
+              ],
               details: [
                 _DetailItem('Family Members', '5 members'),
                 _DetailItem('Cashless Hospitals', '1,800+ in Uttarakhand'),
@@ -54,7 +57,10 @@ class ActiveInsuranceGrid extends StatelessWidget {
               limitRightLabel: 'Unlimited OPD',
               pctUsed: 0.6,
               subText: 'OPD + Medicines covered · IPD up to ₹2L',
-              progressColors: [const Color(0xFF00C897), const Color(0xFF0D9488)],
+              progressColors: [
+                const Color(0xFF00C897),
+                const Color(0xFF0D9488),
+              ],
               details: [
                 _DetailItem('Category', 'Category II'),
                 _DetailItem('CGHS Wellness Centre', 'Dehradun'),
@@ -78,11 +84,18 @@ class ActiveInsuranceGrid extends StatelessWidget {
               limitRightLabel: '₹3,00,000 deductible top-up',
               pctUsed: 0,
               subText: 'Activates after ₹3L base coverage exhausted',
-              progressColors: [const Color(0xFFFFD166), const Color(0xFFF77F00)],
+              progressColors: [
+                const Color(0xFFFFD166),
+                const Color(0xFFF77F00),
+              ],
               details: [
                 _DetailItem('Sum Insured', '₹10,00,000'),
                 _DetailItem('Premium', '₹8,400/year'),
-                _DetailItem('Renewal', 'Dec 2026', color: const Color(0xFFFFD166)),
+                _DetailItem(
+                  'Renewal',
+                  'Dec 2026',
+                  color: const Color(0xFFFFD166),
+                ),
                 _DetailItem('Network Hospitals', '9,800+'),
               ],
               cardGradient: const LinearGradient(
@@ -149,7 +162,10 @@ class ActiveInsuranceGrid extends StatelessWidget {
                 policyNo,
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
-                style: const TextStyle(color: AppColors.secondaryText, fontSize: 10.5),
+                style: const TextStyle(
+                  color: AppColors.secondaryText,
+                  fontSize: 10.5,
+                ),
               ),
             ],
           ),
@@ -192,7 +208,10 @@ class ActiveInsuranceGrid extends StatelessWidget {
               const SizedBox(height: 4),
               Text(
                 subText,
-                style: const TextStyle(color: AppColors.secondaryText, fontSize: 10),
+                style: const TextStyle(
+                  color: AppColors.secondaryText,
+                  fontSize: 10,
+                ),
               ),
             ],
           ),
@@ -248,7 +267,6 @@ class ActiveInsuranceGrid extends StatelessWidget {
 }
 
 class _DetailItem {
-
   _DetailItem(this.label, this.val, {this.color});
   final String label;
   final String val;

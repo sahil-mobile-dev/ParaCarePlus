@@ -14,8 +14,6 @@ final dioProvider = Provider<Dio>((ref) {
 
   dio.interceptors.addAll([
     LogInterceptor(requestBody: true, responseBody: true),
-
-    // TODO(arch): AuthInterceptor will be added here
   ]);
 
   return dio;

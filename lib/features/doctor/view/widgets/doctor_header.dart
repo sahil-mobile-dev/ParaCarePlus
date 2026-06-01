@@ -37,7 +37,9 @@ class DoctorHeader extends StatelessWidget implements PreferredSizeWidget {
               children: [
                 if (showMenuButton) ...[
                   IconButton(
-                    onPressed: onMenuPressed ?? () => Scaffold.of(context).openDrawer(),
+                    onPressed:
+                        onMenuPressed ??
+                        () => Scaffold.of(context).openDrawer(),
                     icon: const Icon(
                       Icons.menu_rounded,
                       color: AppColors.primaryText,

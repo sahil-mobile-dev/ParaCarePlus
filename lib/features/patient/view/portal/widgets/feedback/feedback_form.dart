@@ -11,8 +11,9 @@ class FeedbackForm extends StatefulWidget {
 class _FeedbackFormState extends State<FeedbackForm> {
   String _visitType = 'OPD Consultation';
   String _department = 'General Medicine';
-  final TextEditingController _doctorCtrl =
-      TextEditingController(text: 'Dr. Rajesh Sharma');
+  final TextEditingController _doctorCtrl = TextEditingController(
+    text: 'Dr. Rajesh Sharma',
+  );
   final TextEditingController _commentCtrl = TextEditingController(
     text:
         'Dr. Rajesh was very thorough and explained my BP management plan clearly. The wait was about 45 minutes which was a bit long, but the consultation itself was excellent. The HIMS portal has made it very easy to access my reports and prescriptions online.',
@@ -132,10 +133,7 @@ class _FeedbackFormState extends State<FeedbackForm> {
                   ),
                   const SizedBox(width: 12),
                   const Expanded(
-                    child: _FormField(
-                      label: 'Visit Date',
-                      child: _DateField(),
-                    ),
+                    child: _FormField(label: 'Visit Date', child: _DateField()),
                   ),
                 ],
               ),
@@ -219,24 +217,25 @@ class _FeedbackFormState extends State<FeedbackForm> {
                 child: Wrap(
                   spacing: 6,
                   runSpacing: 6,
-                  children: [
-                    '✅ Caring doctor',
-                    '✅ Clear explanation',
-                    'Short wait time',
-                    '✅ Clean facility',
-                    'Easy appointment',
-                    '✅ Helpful staff',
-                    'Good digital system',
-                    'Affordable care',
-                  ].map((t) {
-                    final sel = _positives.contains(t);
-                    return GestureDetector(
-                      onTap: () => setState(() {
-                        sel ? _positives.remove(t) : _positives.add(t);
-                      }),
-                      child: _Chip(label: t, selected: sel),
-                    );
-                  }).toList(),
+                  children:
+                      [
+                        '✅ Caring doctor',
+                        '✅ Clear explanation',
+                        'Short wait time',
+                        '✅ Clean facility',
+                        'Easy appointment',
+                        '✅ Helpful staff',
+                        'Good digital system',
+                        'Affordable care',
+                      ].map((t) {
+                        final sel = _positives.contains(t);
+                        return GestureDetector(
+                          onTap: () => setState(() {
+                            sel ? _positives.remove(t) : _positives.add(t);
+                          }),
+                          child: _Chip(label: t, selected: sel),
+                        );
+                      }).toList(),
                 ),
               ),
               const SizedBox(height: 12),
@@ -247,21 +246,24 @@ class _FeedbackFormState extends State<FeedbackForm> {
                 child: Wrap(
                   spacing: 6,
                   runSpacing: 6,
-                  children: [
-                    '⚠️ Waiting time',
-                    'Parking facilities',
-                    'Billing process',
-                    'Lab report delays',
-                    'Follow-up reminder',
-                  ].map((t) {
-                    final sel = _improvements.contains(t);
-                    return GestureDetector(
-                      onTap: () => setState(() {
-                        sel ? _improvements.remove(t) : _improvements.add(t);
-                      }),
-                      child: _Chip(label: t, selected: sel),
-                    );
-                  }).toList(),
+                  children:
+                      [
+                        '⚠️ Waiting time',
+                        'Parking facilities',
+                        'Billing process',
+                        'Lab report delays',
+                        'Follow-up reminder',
+                      ].map((t) {
+                        final sel = _improvements.contains(t);
+                        return GestureDetector(
+                          onTap: () => setState(() {
+                            sel
+                                ? _improvements.remove(t)
+                                : _improvements.add(t);
+                          }),
+                          child: _Chip(label: t, selected: sel),
+                        );
+                      }).toList(),
                 ),
               ),
               const SizedBox(height: 12),
@@ -333,7 +335,9 @@ class _FeedbackFormState extends State<FeedbackForm> {
                               child: Text(
                                 '$i',
                                 style: TextStyle(
-                                  color: isSel ? btnColor : AppColors.secondaryText,
+                                  color: isSel
+                                      ? btnColor
+                                      : AppColors.secondaryText,
                                   fontSize: 12,
                                   fontWeight: FontWeight.w600,
                                 ),
@@ -372,39 +376,49 @@ class _FeedbackFormState extends State<FeedbackForm> {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton.icon(
-                  style: ElevatedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 12),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    elevation: 0,
-                    backgroundColor: Colors.transparent,
-                  ).copyWith(
-                    backgroundColor: WidgetStateProperty.all(Colors.transparent),
-                    overlayColor:
-                        WidgetStateProperty.all(Colors.white.withValues(alpha: 0.1)),
-                  ),
+                  style:
+                      ElevatedButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(vertical: 12),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        elevation: 0,
+                        backgroundColor: Colors.transparent,
+                      ).copyWith(
+                        backgroundColor: WidgetStateProperty.all(
+                          Colors.transparent,
+                        ),
+                        overlayColor: WidgetStateProperty.all(
+                          Colors.white.withValues(alpha: 0.1),
+                        ),
+                      ),
                   onPressed: () {
                     if (_commentCtrl.text.trim().isEmpty) return;
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: const Text(
-                            'Feedback submitted! Ref: FB-2026-0519'),
+                          'Feedback submitted! Ref: FB-2026-0519',
+                        ),
                         backgroundColor: AppColors.success,
                         behavior: SnackBarBehavior.floating,
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8)),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
                       ),
                     );
                   },
-                  icon: const Icon(Icons.send_rounded,
-                      color: Colors.white, size: 16),
+                  icon: const Icon(
+                    Icons.send_rounded,
+                    color: Colors.white,
+                    size: 16,
+                  ),
                   label: const Text(
                     'Submit Feedback',
                     style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,
-                        fontSize: 13),
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 13,
+                    ),
                   ),
                 ).withGradient(),
               ),
@@ -529,12 +543,14 @@ class _FeedbackFormState extends State<FeedbackForm> {
                                   vertical: 2,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: AppColors.primaryLight
-                                      .withValues(alpha: 0.1),
+                                  color: AppColors.primaryLight.withValues(
+                                    alpha: 0.1,
+                                  ),
                                   borderRadius: BorderRadius.circular(10),
                                   border: Border.all(
-                                    color: AppColors.primaryLight
-                                        .withValues(alpha: 0.2),
+                                    color: AppColors.primaryLight.withValues(
+                                      alpha: 0.2,
+                                    ),
                                   ),
                                 ),
                                 child: Text(
@@ -639,8 +655,7 @@ class _StyledDropdown extends StatelessWidget {
             size: 18,
           ),
           items: items
-              .map((i) =>
-                  DropdownMenuItem(value: i, child: Text(i)))
+              .map((i) => DropdownMenuItem(value: i, child: Text(i)))
               .toList(),
           onChanged: onChanged,
         ),

@@ -29,8 +29,18 @@ class SpendAnalyticsCharts extends StatelessWidget {
                         showTitles: true,
                         getTitlesWidget: (value, meta) {
                           const labels = [
-                            'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov',
-                            'Dec', 'Jan', 'Feb', 'Mar', 'Apr', 'May'
+                            'Jun',
+                            'Jul',
+                            'Aug',
+                            'Sep',
+                            'Oct',
+                            'Nov',
+                            'Dec',
+                            'Jan',
+                            'Feb',
+                            'Mar',
+                            'Apr',
+                            'May',
                           ];
                           final idx = value.toInt();
                           if (idx >= 0 && idx < labels.length) {
@@ -52,7 +62,15 @@ class SpendAnalyticsCharts extends StatelessWidget {
                         showTitles: true,
                         interval: 3000,
                         getTitlesWidget: (value, meta) {
-                          if (value == 0) return const Text('0', style: TextStyle(color: AppColors.secondaryText, fontSize: 8.5));
+                          if (value == 0) {
+                            return const Text(
+                              '0',
+                              style: TextStyle(
+                                color: AppColors.secondaryText,
+                                fontSize: 8.5,
+                              ),
+                            );
+                          }
                           return Text(
                             '₹${(value / 1000).toStringAsFixed(0)}K',
                             style: const TextStyle(
@@ -101,42 +119,66 @@ class SpendAnalyticsCharts extends StatelessWidget {
                             value: 28,
                             title: '28%',
                             radius: 35,
-                            titleStyle: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
+                            titleStyle: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                           PieChartSectionData(
                             color: const Color(0xFF00C897), // OPD
                             value: 22,
                             title: '22%',
                             radius: 35,
-                            titleStyle: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
+                            titleStyle: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                           PieChartSectionData(
                             color: const Color(0xFFC77DFF), // Radiology
                             value: 18,
                             title: '18%',
                             radius: 35,
-                            titleStyle: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
+                            titleStyle: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                           PieChartSectionData(
                             color: const Color(0xFFFFD166), // Medicines
                             value: 16,
                             title: '16%',
                             radius: 35,
-                            titleStyle: const TextStyle(color: Colors.black, fontSize: 10, fontWeight: FontWeight.bold),
+                            titleStyle: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                           PieChartSectionData(
                             color: const Color(0xFFF77F00), // Procedures
                             value: 10,
                             title: '10%',
                             radius: 35,
-                            titleStyle: const TextStyle(color: Colors.white, fontSize: 10, fontWeight: FontWeight.bold),
+                            titleStyle: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                           PieChartSectionData(
                             color: const Color(0xFF7A9BBF), // Others
                             value: 6,
                             title: '6%',
                             radius: 35,
-                            titleStyle: const TextStyle(color: Colors.white, fontSize: 9, fontWeight: FontWeight.bold),
+                            titleStyle: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 9,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ],
                       ),
@@ -192,7 +234,20 @@ class SpendAnalyticsCharts extends StatelessWidget {
   }
 
   List<BarChartGroupData> _buildStackedBarGroups() {
-    final insured = [8200, 4200, 3200, 6800, 9200, 4800, 5600, 7200, 3400, 6800, 8200, 4200];
+    final insured = [
+      8200,
+      4200,
+      3200,
+      6800,
+      9200,
+      4800,
+      5600,
+      7200,
+      3400,
+      6800,
+      8200,
+      4200,
+    ];
     final oop = [600, 400, 800, 1200, 800, 600, 1000, 400, 600, 1200, 600, 600];
 
     return List.generate(12, (index) {
@@ -205,8 +260,16 @@ class SpendAnalyticsCharts extends StatelessWidget {
           BarChartRodData(
             toY: insuredValue + oopValue,
             rodStackItems: [
-              BarChartRodStackItem(0, insuredValue, const Color(0xFF00B4D8).withValues(alpha: 0.6)),
-              BarChartRodStackItem(insuredValue, insuredValue + oopValue, const Color(0xFFFFD166).withValues(alpha: 0.6)),
+              BarChartRodStackItem(
+                0,
+                insuredValue,
+                const Color(0xFF00B4D8).withValues(alpha: 0.6),
+              ),
+              BarChartRodStackItem(
+                insuredValue,
+                insuredValue + oopValue,
+                const Color(0xFFFFD166).withValues(alpha: 0.6),
+              ),
             ],
             width: 14,
             borderRadius: const BorderRadius.all(Radius.circular(3)),
@@ -258,10 +321,7 @@ class SpendAnalyticsCharts extends StatelessWidget {
         Container(
           width: 8,
           height: 8,
-          decoration: BoxDecoration(
-            color: color,
-            shape: BoxShape.circle,
-          ),
+          decoration: BoxDecoration(color: color, shape: BoxShape.circle),
         ),
         const SizedBox(width: 6),
         Expanded(

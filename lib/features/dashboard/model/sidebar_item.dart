@@ -15,6 +15,11 @@ class SidebarItem {
 
   static const List<SidebarItem> items = [
     SidebarItem(
+      title: 'Dashboard Ecosystem Hub',
+      icon: Icons.hub_outlined,
+      routeName: RouteNames.dashboardHub,
+    ),
+    SidebarItem(
       title: 'Executive Dashboard',
       icon: Icons.dashboard_outlined,
       routeName: RouteNames.dashboard,

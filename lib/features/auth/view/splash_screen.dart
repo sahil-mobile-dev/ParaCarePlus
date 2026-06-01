@@ -138,13 +138,15 @@ class _SplashScreenState extends State<SplashScreen>
                           shape: BoxShape.circle,
                           color: const Color(0xFF03142c),
                           border: Border.all(
-                            color: const Color(0xFF135AB0).withOpacity(0.5),
+                            color: const Color(
+                              0xFF135AB0,
+                            ).withValues(alpha: 0.5),
                             width: 1.5,
                           ),
                         ),
                         padding: const EdgeInsets.fromLTRB(12, 12, 12, 12),
                         child: ClipRRect(
-                          borderRadius: BorderRadius.vertical(
+                          borderRadius: const BorderRadius.vertical(
                             top: Radius.circular(80),
                             bottom: Radius.circular(50),
                           ),
@@ -172,7 +174,7 @@ class _SplashScreenState extends State<SplashScreen>
                       Text(
                         'Hospital Information Management System (HIMS)',
                         style: TextStyle(
-                          color: const Color(0xFFA0C0D8).withOpacity(0.8),
+                          color: const Color(0xFFA0C0D8).withValues(alpha: 0.8),
                           fontSize: 12.5,
                           fontWeight: FontWeight.w600,
                           letterSpacing: 0.2,
@@ -218,7 +220,9 @@ class _SplashScreenState extends State<SplashScreen>
                           Text(
                             'उत्तराखण्ड शासन · स्वास्थ्य एवं परिवार कल्याण विभाग',
                             style: TextStyle(
-                              color: const Color(0xFF6A8A9E).withOpacity(0.8),
+                              color: const Color(
+                                0xFF6A8A9E,
+                              ).withValues(alpha: 0.8),
                               fontSize: 9.5,
                               fontWeight: FontWeight.w600,
                             ),

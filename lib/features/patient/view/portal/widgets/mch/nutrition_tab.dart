@@ -5,12 +5,7 @@ import 'package:paracareplus/core/theme/app_spacing.dart';
 class NutritionTab extends StatelessWidget {
   const NutritionTab({super.key});
 
-  static const List<String> _members = [
-    'Ramesh',
-    'Geeta',
-    'Aryan',
-    'Priya',
-  ];
+  static const List<String> _members = ['Ramesh', 'Geeta', 'Aryan', 'Priya'];
 
   static const List<String> _nutrients = [
     'Calories',
@@ -82,11 +77,7 @@ class NutritionTab extends StatelessWidget {
             children: [
               const Row(
                 children: [
-                  Icon(
-                    Icons.map_rounded,
-                    color: AppColors.success,
-                    size: 16,
-                  ),
+                  Icon(Icons.map_rounded, color: AppColors.success, size: 16),
                   SizedBox(width: 8),
                   Text(
                     'Family Nutritional Risk Map',
@@ -158,12 +149,20 @@ class NutritionTab extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  _buildLegendItem(color: AppColors.success, text: 'Adequate (OK)'),
+                  _buildLegendItem(
+                    color: AppColors.success,
+                    text: 'Adequate (OK)',
+                  ),
                   const SizedBox(width: 20),
                   _buildLegendItem(
-                      color: AppColors.secondaryAccent, text: 'Borderline (Low)'),
+                    color: AppColors.secondaryAccent,
+                    text: 'Borderline (Low)',
+                  ),
                   const SizedBox(width: 20),
-                  _buildLegendItem(color: AppColors.error, text: 'Deficient (DEF)'),
+                  _buildLegendItem(
+                    color: AppColors.error,
+                    text: 'Deficient (DEF)',
+                  ),
                 ],
               ),
             ],
@@ -184,11 +183,7 @@ class NutritionTab extends StatelessWidget {
             children: [
               const Row(
                 children: [
-                  Icon(
-                    Icons.apple_rounded,
-                    color: AppColors.success,
-                    size: 16,
-                  ),
+                  Icon(Icons.apple_rounded, color: AppColors.success, size: 16),
                   SizedBox(width: 8),
                   Text(
                     'Family Nutritional Status',

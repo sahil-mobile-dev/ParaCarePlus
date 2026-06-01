@@ -8,7 +8,6 @@ import 'package:paracareplus/core/widgets/app_button.dart';
 /// Shows circular camera viewport with animated scanning ring
 /// and liveness check steps (Look Left, Look Right, Blink, Smile).
 class LoginFaceAuth extends StatefulWidget {
-
   const LoginFaceAuth({required this.onSuccess, super.key});
   final VoidCallback onSuccess;
 
@@ -22,12 +21,7 @@ class _LoginFaceAuthState extends State<LoginFaceAuth>
   int _livenessStep = 0; // 0=idle, 1..4=liveness checks, 5=verified
   bool _isScanning = false;
 
-  final _livenessChecks = [
-    'Look Left',
-    'Look Right',
-    'Blink Twice',
-    'Smile',
-  ];
+  final _livenessChecks = ['Look Left', 'Look Right', 'Blink Twice', 'Smile'];
 
   @override
   void initState() {
@@ -79,17 +73,23 @@ class _LoginFaceAuthState extends State<LoginFaceAuth>
                 color: AppColors.primary.withValues(alpha: 0.15),
                 shape: BoxShape.circle,
                 border: Border.all(
-                    color: AppColors.primary.withValues(alpha: 0.3)),
+                  color: AppColors.primary.withValues(alpha: 0.3),
+                ),
               ),
-              child: const Icon(Icons.face_rounded,
-                  color: Color(0xFF00B4D8), size: 24),
+              child: const Icon(
+                Icons.face_rounded,
+                color: Color(0xFF00B4D8),
+                size: 24,
+              ),
             ),
             const SizedBox(width: 12),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text('Face Recognition Auth',
-                    style: AppTextStyles.titleSmall),
+                const Text(
+                  'Face Recognition Auth',
+                  style: AppTextStyles.titleSmall,
+                ),
                 Text(
                   'Liveness-verified biometric identity',
                   style: AppTextStyles.labelSmall.copyWith(fontSize: 10),
@@ -146,8 +146,11 @@ class _LoginFaceAuthState extends State<LoginFaceAuth>
                   ),
                 // Face icon / check
                 if (_livenessStep == 5)
-                  const Icon(Icons.check_circle_rounded,
-                      color: AppColors.success, size: 80)
+                  const Icon(
+                    Icons.check_circle_rounded,
+                    color: AppColors.success,
+                    size: 80,
+                  )
                 else
                   Icon(
                     Icons.face_rounded,
@@ -166,8 +169,8 @@ class _LoginFaceAuthState extends State<LoginFaceAuth>
             _livenessStep == 0
                 ? 'Position your face in the frame'
                 : _livenessStep == 5
-                    ? '✅ Identity verified successfully!'
-                    : '→ ${_livenessChecks[_livenessStep - 1]}',
+                ? '✅ Identity verified successfully!'
+                : '→ ${_livenessChecks[_livenessStep - 1]}',
             style: TextStyle(
               color: _livenessStep == 5
                   ? AppColors.success
@@ -192,26 +195,29 @@ class _LoginFaceAuthState extends State<LoginFaceAuth>
               return AnimatedContainer(
                 duration: const Duration(milliseconds: 300),
                 padding: const EdgeInsets.symmetric(
-                    horizontal: 12, vertical: 5),
+                  horizontal: 12,
+                  vertical: 5,
+                ),
                 decoration: BoxDecoration(
                   color: isDone
                       ? AppColors.success.withValues(alpha: 0.12)
                       : isActive
-                          ? const Color(0xFF00B4D8).withValues(alpha: 0.12)
-                          : Colors.white.withValues(alpha: 0.04),
+                      ? const Color(0xFF00B4D8).withValues(alpha: 0.12)
+                      : Colors.white.withValues(alpha: 0.04),
                   borderRadius: BorderRadius.circular(20),
                   border: Border.all(
                     color: isDone
                         ? AppColors.success.withValues(alpha: 0.3)
                         : isActive
-                            ? const Color(0xFF00B4D8).withValues(alpha: 0.3)
-                            : const Color(0xFF1E3A5F),
+                        ? const Color(0xFF00B4D8).withValues(alpha: 0.3)
+                        : const Color(0xFF1E3A5F),
                   ),
                   boxShadow: isActive
                       ? [
                           BoxShadow(
-                            color: const Color(0xFF00B4D8)
-                                .withValues(alpha: 0.25),
+                            color: const Color(
+                              0xFF00B4D8,
+                            ).withValues(alpha: 0.25),
                             blurRadius: 8,
                           ),
                         ]
@@ -221,8 +227,11 @@ class _LoginFaceAuthState extends State<LoginFaceAuth>
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     if (isDone)
-                      const Icon(Icons.check_rounded,
-                          size: 11, color: AppColors.success),
+                      const Icon(
+                        Icons.check_rounded,
+                        size: 11,
+                        color: AppColors.success,
+                      ),
                     if (!isDone)
                       Icon(
                         isActive
@@ -240,8 +249,8 @@ class _LoginFaceAuthState extends State<LoginFaceAuth>
                         color: isDone
                             ? AppColors.success
                             : isActive
-                                ? const Color(0xFF00B4D8)
-                                : const Color(0xFF7A9BBF),
+                            ? const Color(0xFF00B4D8)
+                            : const Color(0xFF7A9BBF),
                         fontSize: 10.5,
                         fontWeight: isDone || isActive
                             ? FontWeight.w600

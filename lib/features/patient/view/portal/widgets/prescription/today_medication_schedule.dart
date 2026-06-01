@@ -7,7 +7,8 @@ class TodayMedicationSchedule extends StatefulWidget {
   const TodayMedicationSchedule({super.key});
 
   @override
-  State<TodayMedicationSchedule> createState() => _TodayMedicationScheduleState();
+  State<TodayMedicationSchedule> createState() =>
+      _TodayMedicationScheduleState();
 }
 
 class _TodayMedicationScheduleState extends State<TodayMedicationSchedule> {
@@ -72,7 +73,9 @@ class _TodayMedicationScheduleState extends State<TodayMedicationSchedule> {
     final name = _meds[index]['name'] as String;
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(isTaken ? '$name marked as taken' : '$name marked as pending'),
+        content: Text(
+          isTaken ? '$name marked as taken' : '$name marked as pending',
+        ),
         duration: const Duration(seconds: 1),
       ),
     );
@@ -92,11 +95,18 @@ class _TodayMedicationScheduleState extends State<TodayMedicationSchedule> {
         children: [
           Row(
             children: [
-              const Icon(Icons.access_time_filled_rounded, color: Color(0xFF00B4D8), size: 16),
+              const Icon(
+                Icons.access_time_filled_rounded,
+                color: Color(0xFF00B4D8),
+                size: 16,
+              ),
               const SizedBox(width: 6),
               Text(
                 "Today's Medication Schedule — 15 May 2026",
-                style: AppTextStyles.labelMedium.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+                style: AppTextStyles.labelMedium.copyWith(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ],
           ),
@@ -105,7 +115,8 @@ class _TodayMedicationScheduleState extends State<TodayMedicationSchedule> {
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
             itemCount: _meds.length,
-            separatorBuilder: (context, index) => const SizedBox(height: AppSpacing.sm),
+            separatorBuilder: (context, index) =>
+                const SizedBox(height: AppSpacing.sm),
             itemBuilder: (context, index) {
               final med = _meds[index];
               final isTaken = med['taken'] as bool;
@@ -146,12 +157,19 @@ class _TodayMedicationScheduleState extends State<TodayMedicationSchedule> {
                           children: [
                             Text(
                               name,
-                              style: const TextStyle(color: Colors.white, fontSize: 13, fontWeight: FontWeight.bold),
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 13,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                             const SizedBox(height: 2),
                             Text(
                               desc,
-                              style: const TextStyle(color: AppColors.secondaryText, fontSize: 11),
+                              style: const TextStyle(
+                                color: AppColors.secondaryText,
+                                fontSize: 11,
+                              ),
                             ),
                           ],
                         ),
@@ -162,13 +180,20 @@ class _TodayMedicationScheduleState extends State<TodayMedicationSchedule> {
                         children: [
                           Text(
                             time,
-                            style: const TextStyle(color: AppColors.secondaryText, fontSize: 11),
+                            style: const TextStyle(
+                              color: AppColors.secondaryText,
+                              fontSize: 11,
+                            ),
                           ),
                           const SizedBox(height: 2),
                           Text(
                             isTaken ? 'Taken ✓' : defaultPendingText,
                             style: TextStyle(
-                              color: isTaken ? AppColors.success : (defaultPendingText == 'Due tonight' ? AppColors.secondaryAccent : AppColors.secondaryText),
+                              color: isTaken
+                                  ? AppColors.success
+                                  : (defaultPendingText == 'Due tonight'
+                                        ? AppColors.secondaryAccent
+                                        : AppColors.secondaryText),
                               fontSize: 10,
                               fontWeight: FontWeight.bold,
                             ),
@@ -180,15 +205,23 @@ class _TodayMedicationScheduleState extends State<TodayMedicationSchedule> {
                         width: 22,
                         height: 22,
                         decoration: BoxDecoration(
-                          color: isTaken ? AppColors.success : Colors.transparent,
+                          color: isTaken
+                              ? AppColors.success
+                              : Colors.transparent,
                           border: Border.all(
-                            color: isTaken ? AppColors.success : AppColors.border,
+                            color: isTaken
+                                ? AppColors.success
+                                : AppColors.border,
                             width: 2,
                           ),
                           borderRadius: BorderRadius.circular(6),
                         ),
                         child: isTaken
-                            ? const Icon(Icons.check, size: 14, color: Colors.white)
+                            ? const Icon(
+                                Icons.check,
+                                size: 14,
+                                color: Colors.white,
+                              )
                             : null,
                       ),
                     ],

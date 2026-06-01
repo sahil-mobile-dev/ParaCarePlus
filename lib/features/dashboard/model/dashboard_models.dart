@@ -52,7 +52,7 @@ class BedStatus with _$BedStatus {
     required String department,
     required int totalBeds,
     required int occupiedBeds,
-    @JsonKey(ignore: true) @Default(Colors.blue) Color color,
+    @Default(Colors.blue) Color color,
   }) = _BedStatus;
 
   factory BedStatus.fromJson(Map<String, dynamic> json) =>
@@ -83,7 +83,7 @@ class ModuleStatus with _$ModuleStatus {
     required String name,
     required String status,
     required ModuleHealth health,
-    @JsonKey(ignore: true) required IconData icon,
+    required IconData icon,
     String? subtext,
   }) = _ModuleStatus;
 }

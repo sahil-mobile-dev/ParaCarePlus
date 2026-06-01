@@ -41,24 +41,31 @@ class ChildGrowthTab extends StatelessWidget {
                       Text(
                         'Vaccinations: ',
                         style: TextStyle(
-                            color: AppColors.secondaryText, fontSize: 10.5),
+                          color: AppColors.secondaryText,
+                          fontSize: 10.5,
+                        ),
                       ),
                       Text(
                         '✓ All complete',
-                        style:
-                            TextStyle(color: AppColors.success, fontSize: 10.5),
+                        style: TextStyle(
+                          color: AppColors.success,
+                          fontSize: 10.5,
+                        ),
                       ),
                       Text(
                         ' · Blood group: ',
                         style: TextStyle(
-                            color: AppColors.secondaryText, fontSize: 10.5),
+                          color: AppColors.secondaryText,
+                          fontSize: 10.5,
+                        ),
                       ),
                       Text(
                         'B+',
                         style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 10.5,
-                            fontWeight: FontWeight.bold),
+                          color: Colors.white,
+                          fontSize: 10.5,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ],
                   ),
@@ -81,24 +88,31 @@ class ChildGrowthTab extends StatelessWidget {
                       Text(
                         'Vaccinations: ',
                         style: TextStyle(
-                            color: AppColors.secondaryText, fontSize: 10.5),
+                          color: AppColors.secondaryText,
+                          fontSize: 10.5,
+                        ),
                       ),
                       Text(
                         '✓ All complete',
-                        style:
-                            TextStyle(color: AppColors.success, fontSize: 10.5),
+                        style: TextStyle(
+                          color: AppColors.success,
+                          fontSize: 10.5,
+                        ),
                       ),
                       Text(
                         ' · Blood group: ',
                         style: TextStyle(
-                            color: AppColors.secondaryText, fontSize: 10.5),
+                          color: AppColors.secondaryText,
+                          fontSize: 10.5,
+                        ),
                       ),
                       Text(
                         'O+',
                         style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 10.5,
-                            fontWeight: FontWeight.bold),
+                          color: Colors.white,
+                          fontSize: 10.5,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ],
                   ),
@@ -117,20 +131,14 @@ class ChildGrowthTab extends StatelessWidget {
                   Expanded(
                     child: _GrowthChartContainer(
                       title: 'Aryan — Height Growth (0–22 yrs)',
-                      child: SizedBox(
-                        height: 220,
-                        child: _AryanGrowthChart(),
-                      ),
+                      child: SizedBox(height: 220, child: _AryanGrowthChart()),
                     ),
                   ),
                   SizedBox(width: AppSpacing.md),
                   Expanded(
                     child: _GrowthChartContainer(
                       title: 'Priya — Height Growth (0–18 yrs)',
-                      child: SizedBox(
-                        height: 220,
-                        child: _PriyaGrowthChart(),
-                      ),
+                      child: SizedBox(height: 220, child: _PriyaGrowthChart()),
                     ),
                   ),
                 ],
@@ -138,18 +146,12 @@ class ChildGrowthTab extends StatelessWidget {
             else ...[
               const _GrowthChartContainer(
                 title: 'Aryan — Height Growth (0–22 yrs)',
-                child: SizedBox(
-                  height: 220,
-                  child: _AryanGrowthChart(),
-                ),
+                child: SizedBox(height: 220, child: _AryanGrowthChart()),
               ),
               const SizedBox(height: AppSpacing.md),
               const _GrowthChartContainer(
                 title: 'Priya — Height Growth (0–18 yrs)',
-                child: SizedBox(
-                  height: 220,
-                  child: _PriyaGrowthChart(),
-                ),
+                child: SizedBox(height: 220, child: _PriyaGrowthChart()),
               ),
             ],
           ],
@@ -229,12 +231,14 @@ class ChildGrowthTab extends StatelessWidget {
               ),
               const SizedBox(width: 6),
               Expanded(
-                child: _buildMetricTile('Weight', weight, AppColors.primaryLight),
+                child: _buildMetricTile(
+                  'Weight',
+                  weight,
+                  AppColors.primaryLight,
+                ),
               ),
               const SizedBox(width: 6),
-              Expanded(
-                child: _buildMetricTile('BMI', bmi, AppColors.success),
-              ),
+              Expanded(child: _buildMetricTile('BMI', bmi, AppColors.success)),
             ],
           ),
           const SizedBox(height: 10),
@@ -303,11 +307,7 @@ class ChildGrowthTab extends StatelessWidget {
 }
 
 class _GrowthChartContainer extends StatelessWidget {
-
-  const _GrowthChartContainer({
-    required this.title,
-    required this.child,
-  });
+  const _GrowthChartContainer({required this.title, required this.child});
   final String title;
   final Widget child;
 
@@ -354,9 +354,48 @@ class _AryanGrowthChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final ages = ['0', '2', '4', '6', '8', '10', '12', '14', '16', '18', '20', '22'];
-    final aryanHeight = [50.0, 86.0, 103.0, 118.0, 132.0, 142.0, 153.0, 163.0, 169.0, 172.0, 173.0, 174.0];
-    final whoMedian = [49.0, 86.0, 103.0, 116.0, 128.0, 138.0, 149.0, 163.0, 170.0, 172.0, 173.0, 174.0];
+    final ages = [
+      '0',
+      '2',
+      '4',
+      '6',
+      '8',
+      '10',
+      '12',
+      '14',
+      '16',
+      '18',
+      '20',
+      '22',
+    ];
+    final aryanHeight = [
+      50.0,
+      86.0,
+      103.0,
+      118.0,
+      132.0,
+      142.0,
+      153.0,
+      163.0,
+      169.0,
+      172.0,
+      173.0,
+      174.0,
+    ];
+    final whoMedian = [
+      49.0,
+      86.0,
+      103.0,
+      116.0,
+      128.0,
+      138.0,
+      149.0,
+      163.0,
+      170.0,
+      172.0,
+      173.0,
+      174.0,
+    ];
 
     return LineChart(
       LineChartData(
@@ -392,7 +431,9 @@ class _AryanGrowthChart extends StatelessWidget {
               showTitles: true,
               getTitlesWidget: (value, meta) {
                 final idx = value.toInt();
-                if (idx < 0 || idx >= ages.length) return const SizedBox.shrink();
+                if (idx < 0 || idx >= ages.length) {
+                  return const SizedBox.shrink();
+                }
                 return Padding(
                   padding: const EdgeInsets.only(top: 4),
                   child: Text(
@@ -407,12 +448,8 @@ class _AryanGrowthChart extends StatelessWidget {
               reservedSize: 18,
             ),
           ),
-          topTitles: const AxisTitles(
-            
-          ),
-          rightTitles: const AxisTitles(
-            
-          ),
+          topTitles: const AxisTitles(),
+          rightTitles: const AxisTitles(),
         ),
         lineBarsData: [
           LineChartBarData(
@@ -451,8 +488,30 @@ class _PriyaGrowthChart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ages = ['0', '2', '4', '6', '8', '10', '12', '14', '16', '18'];
-    final priyaHeight = [49.0, 84.0, 100.0, 115.0, 128.0, 140.0, 151.0, 158.0, 161.0, 162.0];
-    final whoMedian = [48.0, 84.0, 100.0, 114.0, 126.0, 138.0, 149.0, 157.0, 160.0, 161.0];
+    final priyaHeight = [
+      49.0,
+      84.0,
+      100.0,
+      115.0,
+      128.0,
+      140.0,
+      151.0,
+      158.0,
+      161.0,
+      162.0,
+    ];
+    final whoMedian = [
+      48.0,
+      84.0,
+      100.0,
+      114.0,
+      126.0,
+      138.0,
+      149.0,
+      157.0,
+      160.0,
+      161.0,
+    ];
 
     return LineChart(
       LineChartData(
@@ -488,7 +547,9 @@ class _PriyaGrowthChart extends StatelessWidget {
               showTitles: true,
               getTitlesWidget: (value, meta) {
                 final idx = value.toInt();
-                if (idx < 0 || idx >= ages.length) return const SizedBox.shrink();
+                if (idx < 0 || idx >= ages.length) {
+                  return const SizedBox.shrink();
+                }
                 return Padding(
                   padding: const EdgeInsets.only(top: 4),
                   child: Text(
@@ -503,12 +564,8 @@ class _PriyaGrowthChart extends StatelessWidget {
               reservedSize: 18,
             ),
           ),
-          topTitles: const AxisTitles(
-            
-          ),
-          rightTitles: const AxisTitles(
-            
-          ),
+          topTitles: const AxisTitles(),
+          rightTitles: const AxisTitles(),
         ),
         lineBarsData: [
           LineChartBarData(

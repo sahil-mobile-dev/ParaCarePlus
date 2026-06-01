@@ -18,7 +18,11 @@ class LoginLeftPanel extends StatelessWidget {
   ];
 
   static const _abdmBadges = [
-    'ABHA 2.0', 'HIP/HIU', 'FHIR R4', 'PHR App', 'Health Locker',
+    'ABHA 2.0',
+    'HIP/HIU',
+    'FHIR R4',
+    'PHR App',
+    'Health Locker',
     'Consent Mgr',
   ];
 
@@ -105,7 +109,8 @@ class LoginLeftPanel extends StatelessWidget {
             color: const Color(0xFF00B4D8).withValues(alpha: 0.12),
             borderRadius: BorderRadius.circular(20),
             border: Border.all(
-                color: const Color(0xFF00B4D8).withValues(alpha: 0.3)),
+              color: const Color(0xFF00B4D8).withValues(alpha: 0.3),
+            ),
           ),
           child: const Row(
             mainAxisSize: MainAxisSize.min,
@@ -153,19 +158,11 @@ class LoginLeftPanel extends StatelessWidget {
         // Hero sub (with Devanagari)
         const Text(
           'Access your complete health records, appointments, lab reports and more.',
-          style: TextStyle(
-            color: Color(0xFF7A9BBF),
-            fontSize: 13,
-            height: 1.7,
-          ),
+          style: TextStyle(color: Color(0xFF7A9BBF), fontSize: 13, height: 1.7),
         ),
         const Text(
           'अपने स्वास्थ्य रिकॉर्ड, अपॉइंटमेंट और दवाइयों तक तुरंत पहुँचें।',
-          style: TextStyle(
-            color: Color(0xFF4A6A8A),
-            fontSize: 12,
-            height: 1.6,
-          ),
+          style: TextStyle(color: Color(0xFF4A6A8A), fontSize: 12, height: 1.6),
         ),
         const SizedBox(height: AppSpacing.lg),
 
@@ -220,13 +217,17 @@ class LoginLeftPanel extends StatelessWidget {
         color: const Color(0xFF00C897).withValues(alpha: 0.07),
         borderRadius: BorderRadius.circular(12),
         border: Border.all(
-            color: const Color(0xFF00C897).withValues(alpha: 0.2)),
+          color: const Color(0xFF00C897).withValues(alpha: 0.2),
+        ),
       ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Icon(Icons.check_circle_rounded,
-              color: Color(0xFF00C897), size: 20),
+          const Icon(
+            Icons.check_circle_rounded,
+            color: Color(0xFF00C897),
+            size: 20,
+          ),
           const SizedBox(width: 12),
           Expanded(
             child: Column(
@@ -253,12 +254,19 @@ class LoginLeftPanel extends StatelessWidget {
                       .map(
                         (b) => Container(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 8, vertical: 2),
+                            horizontal: 8,
+                            vertical: 2,
+                          ),
                           decoration: BoxDecoration(
-                            color: const Color(0xFF00C897).withValues(alpha: 0.12),
+                            color: const Color(
+                              0xFF00C897,
+                            ).withValues(alpha: 0.12),
                             borderRadius: BorderRadius.circular(4),
                             border: Border.all(
-                                color: const Color(0xFF00C897).withValues(alpha: 0.25)),
+                              color: const Color(
+                                0xFF00C897,
+                              ).withValues(alpha: 0.25),
+                            ),
                           ),
                           child: Text(
                             b,
@@ -345,10 +353,7 @@ class _StatItem extends StatelessWidget {
         Text(
           label,
           textAlign: TextAlign.center,
-          style: const TextStyle(
-            color: Color(0xFF7A9BBF),
-            fontSize: 10,
-          ),
+          style: const TextStyle(color: Color(0xFF7A9BBF), fontSize: 10),
         ),
       ],
     );

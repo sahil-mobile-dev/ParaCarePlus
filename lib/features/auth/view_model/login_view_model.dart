@@ -42,8 +42,8 @@ class LoginViewModel extends _$LoginViewModel {
     );
   }
 
-  void toggleRememberMe(bool? value) {
-    state = AsyncValue.data(state.value!.copyWith(rememberMe: value ?? false));
+  void toggleRememberMe(bool value) {
+    state = AsyncValue.data(state.value!.copyWith(rememberMe: value));
   }
 
   void toggleObscure() {

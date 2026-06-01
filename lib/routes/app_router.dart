@@ -5,6 +5,7 @@ import 'package:paracareplus/features/auth/view/login_screen.dart';
 import 'package:paracareplus/features/auth/view/splash_screen.dart';
 import 'package:paracareplus/features/billing/view/billing_screen.dart';
 import 'package:paracareplus/features/dashboard/view/dashboard_screen.dart';
+import 'package:paracareplus/features/dashboard_hub/view/dashboard_hub_screen.dart';
 import 'package:paracareplus/features/doctor/view/doctor_dashboard_screen.dart';
 import 'package:paracareplus/features/hr/view/hr_screen.dart';
 import 'package:paracareplus/features/ipd/view/ipd_admission_screen.dart';
@@ -56,6 +57,11 @@ final appRouterStateProvider = Provider<GoRouter>((ref) {
         path: RoutePaths.dashboard,
         name: RouteNames.dashboard,
         builder: (context, state) => const DashboardScreen(),
+      ),
+      GoRoute(
+        path: RoutePaths.dashboardHub,
+        name: RouteNames.dashboardHub,
+        builder: (context, state) => const DashboardHubScreen(),
       ),
       GoRoute(
         path: RoutePaths.doctorDashboard,
@@ -217,12 +223,14 @@ final appRouterStateProvider = Provider<GoRouter>((ref) {
       final userRoleStr = prefs.getString('user_role');
 
       final goingToLogin = state.matchedLocation == RoutePaths.login;
-      final goingToPatientLogin = state.matchedLocation == RoutePaths.patientLogin;
+      final goingToPatientLogin =
+          state.matchedLocation == RoutePaths.patientLogin;
 
       if (!isLoggedIn) {
-        // Guard protected routes from unauthorized access, except login, patient portal login, and splash screen.
+        // Guard protected routes from unauthorized access, except login, patient portal login, dashboard hub, and splash screen.
         if (!goingToLogin &&
             !goingToPatientLogin &&
+            state.matchedLocation != RoutePaths.dashboardHub &&
             state.matchedLocation != RoutePaths.splash) {
           return RoutePaths.login;
         }
@@ -233,6 +241,9 @@ final appRouterStateProvider = Provider<GoRouter>((ref) {
             return RoutePaths.patientHome;
           } else if (userRoleStr == UserRole.doctor.name) {
             return RoutePaths.doctorDashboard;
+          } else if (userRoleStr == UserRole.masterAdmin.name ||
+              userRoleStr == UserRole.stateSuperAdmin.name) {
+            return RoutePaths.dashboardHub;
           } else {
             return RoutePaths.dashboard;
           }

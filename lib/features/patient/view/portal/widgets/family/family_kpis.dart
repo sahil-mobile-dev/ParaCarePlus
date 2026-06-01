@@ -49,9 +49,7 @@ class FamilyKpis extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         final width = constraints.maxWidth;
-        final crossAxisCount = width > 1000
-            ? 5
-            : (width > 600 ? 3 : 2);
+        final crossAxisCount = width > 1000 ? 5 : (width > 600 ? 3 : 2);
 
         return GridView.builder(
           shrinkWrap: true,
@@ -95,7 +93,11 @@ class FamilyKpis extends StatelessWidget {
                             color: color.withValues(alpha: 0.15),
                             borderRadius: BorderRadius.circular(8),
                           ),
-                          child: Icon(kpi['icon'] as IconData, color: color, size: 16),
+                          child: Icon(
+                            kpi['icon'] as IconData,
+                            color: color,
+                            size: 16,
+                          ),
                         ),
                         const SizedBox(height: 4),
                         Column(

@@ -208,8 +208,14 @@ class _WellnessSunburstPainter extends CustomPainter {
     final cy = size.height / 2;
     final radius = min(cx, cy);
 
-    final rectInner = Rect.fromCircle(center: Offset(cx, cy), radius: radius * 0.4);
-    final rectOuter = Rect.fromCircle(center: Offset(cx, cy), radius: radius * 0.7);
+    final rectInner = Rect.fromCircle(
+      center: Offset(cx, cy),
+      radius: radius * 0.4,
+    );
+    final rectOuter = Rect.fromCircle(
+      center: Offset(cx, cy),
+      radius: radius * 0.7,
+    );
 
     // Inner Core Center Label
     final paintCore = Paint()
@@ -217,9 +223,7 @@ class _WellnessSunburstPainter extends CustomPainter {
       ..style = PaintingStyle.fill;
     canvas.drawCircle(Offset(cx, cy), radius * 0.18, paintCore);
 
-    final textPainter = TextPainter(
-      textDirection: TextDirection.ltr,
-    );
+    final textPainter = TextPainter(textDirection: TextDirection.ltr);
 
     // Inner Ring: Ramesh, Geeta, Aryan, Priya, Savitri
     final members = [
@@ -329,8 +333,14 @@ class _HereditarySunburstPainter extends CustomPainter {
     final cy = size.height / 2;
     final radius = min(cx, cy);
 
-    final rectInner = Rect.fromCircle(center: Offset(cx, cy), radius: radius * 0.4);
-    final rectOuter = Rect.fromCircle(center: Offset(cx, cy), radius: radius * 0.7);
+    final rectInner = Rect.fromCircle(
+      center: Offset(cx, cy),
+      radius: radius * 0.4,
+    );
+    final rectOuter = Rect.fromCircle(
+      center: Offset(cx, cy),
+      radius: radius * 0.7,
+    );
 
     // Center Core Center Label
     final paintCore = Paint()
@@ -338,9 +348,7 @@ class _HereditarySunburstPainter extends CustomPainter {
       ..style = PaintingStyle.fill;
     canvas.drawCircle(Offset(cx, cy), radius * 0.18, paintCore);
 
-    final textPainter = TextPainter(
-      textDirection: TextDirection.ltr,
-    );
+    final textPainter = TextPainter(textDirection: TextDirection.ltr);
 
     // Inner Ring: HTN, Diabetes, Heart Disease, Osteoarthritis
     final categories = [

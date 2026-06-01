@@ -92,11 +92,7 @@ class UpcomingVaccinations extends StatelessWidget {
               color: statusColor.withValues(alpha: 0.15),
               borderRadius: BorderRadius.circular(10),
             ),
-            child: Icon(
-              Icons.vaccines_outlined,
-              color: statusColor,
-              size: 20,
-            ),
+            child: Icon(Icons.vaccines_outlined, color: statusColor, size: 20),
           ),
           const SizedBox(width: 12),
           Expanded(
@@ -149,9 +145,7 @@ class UpcomingVaccinations extends StatelessWidget {
           OutlinedButton(
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text('Booking appointment for $name...'),
-                ),
+                SnackBar(content: Text('Booking appointment for $name...')),
               );
             },
             style: OutlinedButton.styleFrom(
@@ -164,10 +158,7 @@ class UpcomingVaccinations extends StatelessWidget {
             ),
             child: Text(
               buttonText,
-              style: const TextStyle(
-                fontSize: 11,
-                fontWeight: FontWeight.bold,
-              ),
+              style: const TextStyle(fontSize: 11, fontWeight: FontWeight.bold),
             ),
           ),
         ],

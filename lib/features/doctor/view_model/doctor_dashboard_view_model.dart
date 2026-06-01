@@ -127,7 +127,8 @@ class DoctorDashboardViewModel extends _$DoctorDashboardViewModel {
           pulse: 72,
           vitalsStatus: 'Stable',
           roundStatus: 'Pending',
-          clinicalNotes: 'Recovering well. Retain aspirin and statin. Check ECG in evening.',
+          clinicalNotes:
+              'Recovering well. Retain aspirin and statin. Check ECG in evening.',
         ),
         IpdPatient(
           bed: 'CCU - Bed 102-B',
@@ -140,7 +141,8 @@ class DoctorDashboardViewModel extends _$DoctorDashboardViewModel {
           pulse: 112,
           vitalsStatus: 'Critical',
           roundStatus: 'Pending',
-          clinicalNotes: 'Pulse unstable (Tachycardia). Restrict physical motion. Check cardiac enzymes.',
+          clinicalNotes:
+              'Pulse unstable (Tachycardia). Restrict physical motion. Check cardiac enzymes.',
         ),
         IpdPatient(
           bed: 'Cardiology Ward - Bed 204',
@@ -153,7 +155,8 @@ class DoctorDashboardViewModel extends _$DoctorDashboardViewModel {
           pulse: 82,
           vitalsStatus: 'Stable',
           roundStatus: 'Done',
-          clinicalNotes: 'Vitals stable. Medication adjusted. Scheduled for echo next Monday.',
+          clinicalNotes:
+              'Vitals stable. Medication adjusted. Scheduled for echo next Monday.',
         ),
         IpdPatient(
           bed: 'Stepdown ICU - Bed 105',
@@ -166,7 +169,8 @@ class DoctorDashboardViewModel extends _$DoctorDashboardViewModel {
           pulse: 68,
           vitalsStatus: 'Warning',
           roundStatus: 'Done',
-          clinicalNotes: 'Mild peripheral oedema. Increase frusemide dosage slightly.',
+          clinicalNotes:
+              'Mild peripheral oedema. Increase frusemide dosage slightly.',
         ),
       ],
       labReports: [
@@ -175,7 +179,8 @@ class DoctorDashboardViewModel extends _$DoctorDashboardViewModel {
           patientName: 'Sunita Devi',
           testName: 'Lipid Profile + Serum Creatinine',
           orderedDate: 'Today, 08:30 AM',
-          resultSummary: 'Total Cholesterol: 260 mg/dL (High), LDL: 180 mg/dL (Urgent High), Serum Creatinine: 1.1 mg/dL (Normal)',
+          resultSummary:
+              'Total Cholesterol: 260 mg/dL (High), LDL: 180 mg/dL (Urgent High), Serum Creatinine: 1.1 mg/dL (Normal)',
           isUrgent: true,
           status: 'Pending Review',
         ),
@@ -184,7 +189,8 @@ class DoctorDashboardViewModel extends _$DoctorDashboardViewModel {
           patientName: 'Sanjay Rawat',
           testName: 'Chest X-Ray (AP View)',
           orderedDate: 'Yesterday, 04:15 PM',
-          resultSummary: 'Mild cardiomegaly observed. Pulmonary vascularity is normal. No active consolidation.',
+          resultSummary:
+              'Mild cardiomegaly observed. Pulmonary vascularity is normal. No active consolidation.',
           isUrgent: false,
           status: 'Pending Review',
         ),
@@ -193,7 +199,8 @@ class DoctorDashboardViewModel extends _$DoctorDashboardViewModel {
           patientName: 'Amit Bisht',
           testName: 'Cardiac Enzymes (Troponin-I)',
           orderedDate: 'Today, 10:10 AM',
-          resultSummary: 'Troponin-I: 0.18 ng/mL (Elevated). Suggests myocardial injury. Urgent clinical assessment required.',
+          resultSummary:
+              'Troponin-I: 0.18 ng/mL (Elevated). Suggests myocardial injury. Urgent clinical assessment required.',
           isUrgent: true,
           status: 'Pending Review',
         ),
@@ -202,7 +209,8 @@ class DoctorDashboardViewModel extends _$DoctorDashboardViewModel {
           patientName: 'Anita Dhyani',
           testName: 'Echocardiogram (Transthoracic)',
           orderedDate: 'Yesterday, 11:30 AM',
-          resultSummary: 'EF: 52% (Mildly Reduced). Moderate Mitral Regurgitation. Normal LV/RV dimensions.',
+          resultSummary:
+              'EF: 52% (Mildly Reduced). Moderate Mitral Regurgitation. Normal LV/RV dimensions.',
           isUrgent: false,
           status: 'Pending Review',
         ),
@@ -263,7 +271,9 @@ class DoctorDashboardViewModel extends _$DoctorDashboardViewModel {
       return r;
     }).toList();
 
-    final remainingPending = updatedList.where((r) => r.status == 'Pending Review').length;
+    final remainingPending = updatedList
+        .where((r) => r.status == 'Pending Review')
+        .length;
 
     state = state.copyWith(
       labReports: updatedList,

@@ -8,7 +8,8 @@ class AmbulanceTrackerPanel extends ConsumerStatefulWidget {
   const AmbulanceTrackerPanel({super.key});
 
   @override
-  ConsumerState<AmbulanceTrackerPanel> createState() => _AmbulanceTrackerPanelState();
+  ConsumerState<AmbulanceTrackerPanel> createState() =>
+      _AmbulanceTrackerPanelState();
 }
 
 class _AmbulanceTrackerPanelState extends ConsumerState<AmbulanceTrackerPanel> {
@@ -52,7 +53,7 @@ class _AmbulanceTrackerPanelState extends ConsumerState<AmbulanceTrackerPanel> {
   void _cancelSos() {
     ref.read(sosStateProvider.notifier).state = SosState.idle;
     ref.read(sosCountdownProvider.notifier).state = 5;
-    
+
     ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
@@ -96,7 +97,7 @@ class _AmbulanceTrackerPanelState extends ConsumerState<AmbulanceTrackerPanel> {
             ],
           ),
           const SizedBox(height: 12),
-          
+
           // Metrics Grid
           LayoutBuilder(
             builder: (context, constraints) {
@@ -112,15 +113,23 @@ class _AmbulanceTrackerPanelState extends ConsumerState<AmbulanceTrackerPanel> {
                   _buildMetricTile('Status', 'En Route', AppColors.success),
                   _buildMetricTile('ETA', _formatEta(), AppColors.error),
                   _buildMetricTile('Distance', '2.1 km', Colors.white),
-                  _buildMetricTile('Type', 'Advanced Life Support', Colors.white),
+                  _buildMetricTile(
+                    'Type',
+                    'Advanced Life Support',
+                    Colors.white,
+                  ),
                   _buildMetricTile('Paramedic', 'Suresh Negi', Colors.white),
-                  _buildMetricTile('Vehicle No.', 'UK07 AMB 0142', Colors.white),
+                  _buildMetricTile(
+                    'Vehicle No.',
+                    'UK07 AMB 0142',
+                    Colors.white,
+                  ),
                 ],
               );
             },
           ),
           const SizedBox(height: 16),
-          
+
           // Progress Steps
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
@@ -141,7 +150,7 @@ class _AmbulanceTrackerPanelState extends ConsumerState<AmbulanceTrackerPanel> {
             ),
           ),
           const SizedBox(height: 16),
-          
+
           // Action Buttons
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -184,7 +193,11 @@ class _AmbulanceTrackerPanelState extends ConsumerState<AmbulanceTrackerPanel> {
                     ),
                     label: const Text(
                       'Call Paramedic',
-                      style: TextStyle(color: AppColors.success, fontSize: 9.5, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        color: AppColors.success,
+                        fontSize: 9.5,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                     style: OutlinedButton.styleFrom(
                       side: const BorderSide(color: AppColors.success),
@@ -212,7 +225,11 @@ class _AmbulanceTrackerPanelState extends ConsumerState<AmbulanceTrackerPanel> {
                     ),
                     child: const Text(
                       'Cancel SOS',
-                      style: TextStyle(color: Colors.white, fontSize: 9.5, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 9.5,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                 ],

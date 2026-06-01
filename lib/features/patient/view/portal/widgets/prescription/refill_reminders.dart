@@ -7,10 +7,7 @@ class RefillReminders extends StatelessWidget {
 
   void _showToast(BuildContext context, String message) {
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-        duration: const Duration(seconds: 2),
-      ),
+      SnackBar(content: Text(message), duration: const Duration(seconds: 2)),
     );
   }
 
@@ -38,8 +35,8 @@ class RefillReminders extends StatelessWidget {
               progress: 0.2,
               progressColor: AppColors.error,
               buttonText: 'Order Refill',
-              buttonBg: AppColors.error.withOpacity(0.1),
-              buttonBorder: AppColors.error.withOpacity(0.2),
+              buttonBg: AppColors.error.withValues(alpha: 0.1),
+              buttonBorder: AppColors.error.withValues(alpha: 0.2),
               onTap: () => _showToast(context, 'Ordering Amlodipine refill...'),
             ),
             _buildReminderCard(
@@ -50,8 +47,8 @@ class RefillReminders extends StatelessWidget {
               progress: 0.35,
               progressColor: AppColors.secondaryAccent,
               buttonText: 'Order Refill',
-              buttonBg: AppColors.secondaryAccent.withOpacity(0.1),
-              buttonBorder: AppColors.secondaryAccent.withOpacity(0.2),
+              buttonBg: AppColors.secondaryAccent.withValues(alpha: 0.1),
+              buttonBorder: AppColors.secondaryAccent.withValues(alpha: 0.2),
               onTap: () => _showToast(context, 'Ordering Metformin refill...'),
             ),
             _buildReminderCard(
@@ -62,9 +59,10 @@ class RefillReminders extends StatelessWidget {
               progress: 0.55,
               progressColor: AppColors.primaryLight,
               buttonText: 'Set Reminder',
-              buttonBg: AppColors.primaryLight.withOpacity(0.1),
-              buttonBorder: AppColors.primaryLight.withOpacity(0.2),
-              onTap: () => _showToast(context, 'Scheduled Atorvastatin reminder...'),
+              buttonBg: AppColors.primaryLight.withValues(alpha: 0.1),
+              buttonBorder: AppColors.primaryLight.withValues(alpha: 0.2),
+              onTap: () =>
+                  _showToast(context, 'Scheduled Atorvastatin reminder...'),
             ),
             _buildReminderCard(
               context,
@@ -74,8 +72,8 @@ class RefillReminders extends StatelessWidget {
               progress: 0.7,
               progressColor: AppColors.success,
               buttonText: 'Set Reminder',
-              buttonBg: AppColors.success.withOpacity(0.1),
-              buttonBorder: AppColors.success.withOpacity(0.2),
+              buttonBg: AppColors.success.withValues(alpha: 0.1),
+              buttonBorder: AppColors.success.withValues(alpha: 0.2),
               onTap: () => _showToast(context, 'Vitamin D3 reminder set...'),
             ),
           ],
@@ -109,7 +107,11 @@ class RefillReminders extends StatelessWidget {
         children: [
           Text(
             name,
-            style: const TextStyle(color: Colors.white, fontSize: 11, fontWeight: FontWeight.bold),
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 11,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           const SizedBox(height: 4),
           SizedBox(
@@ -118,7 +120,7 @@ class RefillReminders extends StatelessWidget {
               borderRadius: BorderRadius.circular(6),
               child: LinearProgressIndicator(
                 value: progress,
-                backgroundColor: Colors.white.withOpacity(0.1),
+                backgroundColor: Colors.white.withValues(alpha: 0.1),
                 color: progressColor,
               ),
             ),
@@ -126,7 +128,11 @@ class RefillReminders extends StatelessWidget {
           const SizedBox(height: 4),
           Text(
             daysText,
-            style: TextStyle(color: daysColor, fontSize: 10, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              color: daysColor,
+              fontSize: 10,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           const SizedBox(height: 6),
           ElevatedButton(
@@ -135,7 +141,9 @@ class RefillReminders extends StatelessWidget {
               foregroundColor: daysColor,
               side: BorderSide(color: buttonBorder),
               elevation: 0,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(6),
+              ),
               padding: const EdgeInsets.symmetric(vertical: 4),
             ),
             onPressed: onTap,

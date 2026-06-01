@@ -901,20 +901,21 @@ class _MapCanvasPainter extends CustomPainter {
 
     // Traffic overlay
     if (trafficOn) {
-      canvas.drawLine(
-        Offset(0, size.height * 0.5),
-        Offset(size.width * 0.4, size.height * 0.5),
-        Paint()
-          ..color = AppColors.error.withValues(alpha: 0.5)
-          ..strokeWidth = 4,
-      );
-      canvas.drawLine(
-        Offset(size.width * 0.4, size.height * 0.5),
-        Offset(size.width, size.height * 0.5),
-        Paint()
-          ..color = AppColors.success.withValues(alpha: 0.5)
-          ..strokeWidth = 4,
-      );
+      canvas
+        ..drawLine(
+          Offset(0, size.height * 0.5),
+          Offset(size.width * 0.4, size.height * 0.5),
+          Paint()
+            ..color = AppColors.error.withValues(alpha: 0.5)
+            ..strokeWidth = 4,
+        )
+        ..drawLine(
+          Offset(size.width * 0.4, size.height * 0.5),
+          Offset(size.width, size.height * 0.5),
+          Paint()
+            ..color = AppColors.success.withValues(alpha: 0.5)
+            ..strokeWidth = 4,
+        );
     }
 
     // Route line (for route type)
@@ -940,21 +941,22 @@ class _MapCanvasPainter extends CustomPainter {
         (0.40, 0.56, 30.0),
         (0.70, 0.30, 50.0),
       ]) {
-        canvas.drawCircle(
-          Offset(size.width * spot.$1, size.height * spot.$2),
-          spot.$3,
-          Paint()
-            ..color = AppColors.secondaryAccent.withValues(alpha: 0.2)
-            ..style = PaintingStyle.fill,
-        );
-        canvas.drawCircle(
-          Offset(size.width * spot.$1, size.height * spot.$2),
-          spot.$3,
-          Paint()
-            ..color = const Color(0xFFF77F00).withValues(alpha: 0.4)
-            ..style = PaintingStyle.stroke
-            ..strokeWidth = 1.5,
-        );
+        canvas
+          ..drawCircle(
+            Offset(size.width * spot.$1, size.height * spot.$2),
+            spot.$3,
+            Paint()
+              ..color = AppColors.secondaryAccent.withValues(alpha: 0.2)
+              ..style = PaintingStyle.fill,
+          )
+          ..drawCircle(
+            Offset(size.width * spot.$1, size.height * spot.$2),
+            spot.$3,
+            Paint()
+              ..color = const Color(0xFFF77F00).withValues(alpha: 0.4)
+              ..style = PaintingStyle.stroke
+              ..strokeWidth = 1.5,
+          );
       }
     }
 
@@ -973,22 +975,23 @@ class _MapCanvasPainter extends CustomPainter {
         );
       }
 
-      canvas.drawCircle(
-        pt,
-        isSel ? 12 : 9,
-        Paint()
-          ..color = color
-          ..style = PaintingStyle.fill,
-      );
-      canvas.drawCircle(
-        pt,
-        isSel ? 12 : 9,
-        Paint()
-          ..color = Colors.white.withValues(alpha: 0.4)
-          ..style = PaintingStyle.stroke
-          ..strokeWidth = 2,
-      );
-      canvas.drawCircle(pt, isSel ? 4 : 3, Paint()..color = Colors.white);
+      canvas
+        ..drawCircle(
+          pt,
+          isSel ? 12 : 9,
+          Paint()
+            ..color = color
+            ..style = PaintingStyle.fill,
+        )
+        ..drawCircle(
+          pt,
+          isSel ? 12 : 9,
+          Paint()
+            ..color = Colors.white.withValues(alpha: 0.4)
+            ..style = PaintingStyle.stroke
+            ..strokeWidth = 2,
+        )
+        ..drawCircle(pt, isSel ? 4 : 3, Paint()..color = Colors.white);
 
       if (isSel) {
         final tp = TextPainter(

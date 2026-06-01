@@ -54,7 +54,9 @@ class _LiveConsultationVideoState extends State<LiveConsultationVideo> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(_isMicOn ? 'Microphone unmuted' : 'Microphone muted'),
-        backgroundColor: _isMicOn ? AppColors.success : AppColors.secondaryAccent,
+        backgroundColor: _isMicOn
+            ? AppColors.success
+            : AppColors.secondaryAccent,
         duration: const Duration(seconds: 2),
       ),
     );
@@ -68,7 +70,9 @@ class _LiveConsultationVideoState extends State<LiveConsultationVideo> {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(_isCamOn ? 'Camera turned on' : 'Camera turned off'),
-        backgroundColor: _isCamOn ? AppColors.success : AppColors.secondaryAccent,
+        backgroundColor: _isCamOn
+            ? AppColors.success
+            : AppColors.secondaryAccent,
         duration: const Duration(seconds: 2),
       ),
     );
@@ -80,7 +84,10 @@ class _LiveConsultationVideoState extends State<LiveConsultationVideo> {
       builder: (BuildContext context) {
         return AlertDialog(
           backgroundColor: AppColors.surface,
-          title: const Text('End Consultation', style: TextStyle(color: Colors.white)),
+          title: const Text(
+            'End Consultation',
+            style: TextStyle(color: Colors.white),
+          ),
           content: const Text(
             'Are you sure you want to end your consultation with Dr. Rajesh Kumar?',
             style: TextStyle(color: AppColors.secondaryText),
@@ -88,7 +95,10 @@ class _LiveConsultationVideoState extends State<LiveConsultationVideo> {
           actions: [
             TextButton(
               onPressed: () => Navigator.of(context).pop(),
-              child: const Text('Cancel', style: TextStyle(color: Colors.white70)),
+              child: const Text(
+                'Cancel',
+                style: TextStyle(color: Colors.white70),
+              ),
             ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(backgroundColor: AppColors.error),
@@ -105,7 +115,10 @@ class _LiveConsultationVideoState extends State<LiveConsultationVideo> {
                   ),
                 );
               },
-              child: const Text('End Call', style: TextStyle(color: Colors.white)),
+              child: const Text(
+                'End Call',
+                style: TextStyle(color: Colors.white),
+              ),
             ),
           ],
         );
@@ -135,7 +148,11 @@ class _LiveConsultationVideoState extends State<LiveConsultationVideo> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Icon(Icons.video_call_rounded, size: 48, color: AppColors.secondaryText),
+                          Icon(
+                            Icons.video_call_rounded,
+                            size: 48,
+                            color: AppColors.secondaryText,
+                          ),
                           SizedBox(height: 12),
                           Text(
                             'Consultation Finished',
@@ -148,7 +165,10 @@ class _LiveConsultationVideoState extends State<LiveConsultationVideo> {
                           SizedBox(height: 4),
                           Text(
                             'Summary & prescriptions uploaded to EMR',
-                            style: TextStyle(color: AppColors.secondaryText, fontSize: 12),
+                            style: TextStyle(
+                              color: AppColors.secondaryText,
+                              fontSize: 12,
+                            ),
                           ),
                         ],
                       ),
@@ -171,7 +191,10 @@ class _LiveConsultationVideoState extends State<LiveConsultationVideo> {
               top: 12,
               left: 12,
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 4,
+                ),
                 decoration: BoxDecoration(
                   color: Colors.black.withValues(alpha: 0.6),
                   borderRadius: BorderRadius.circular(8),
@@ -262,10 +285,7 @@ class _LiveConsultationVideoState extends State<LiveConsultationVideo> {
                 const SizedBox(height: 4),
                 const Text(
                   'Cardiologist · AIIMS Rishikesh',
-                  style: TextStyle(
-                    color: Colors.white70,
-                    fontSize: 11,
-                  ),
+                  style: TextStyle(color: Colors.white70, fontSize: 11),
                 ),
               ],
             ),
@@ -287,8 +307,16 @@ class _LiveConsultationVideoState extends State<LiveConsultationVideo> {
                 ),
                 alignment: Alignment.center,
                 child: _isCamOn
-                    ? const Icon(Icons.person_rounded, color: AppColors.secondaryText, size: 24)
-                    : const Icon(Icons.videocam_off_rounded, color: AppColors.error, size: 20),
+                    ? const Icon(
+                        Icons.person_rounded,
+                        color: AppColors.secondaryText,
+                        size: 24,
+                      )
+                    : const Icon(
+                        Icons.videocam_off_rounded,
+                        color: AppColors.error,
+                        size: 20,
+                      ),
               ),
             ),
 
@@ -298,10 +326,16 @@ class _LiveConsultationVideoState extends State<LiveConsultationVideo> {
               right: 0,
               bottom: 0,
               child: Container(
-                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 10,
+                  horizontal: 16,
+                ),
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
-                    colors: [Colors.black.withValues(alpha: 0.8), Colors.transparent],
+                    colors: [
+                      Colors.black.withValues(alpha: 0.8),
+                      Colors.transparent,
+                    ],
                     begin: Alignment.bottomCenter,
                     end: Alignment.topCenter,
                   ),
@@ -310,14 +344,18 @@ class _LiveConsultationVideoState extends State<LiveConsultationVideo> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     _buildControlButton(
-                      icon: _isMicOn ? Icons.mic_rounded : Icons.mic_off_rounded,
+                      icon: _isMicOn
+                          ? Icons.mic_rounded
+                          : Icons.mic_off_rounded,
                       isActive: _isMicOn,
                       onPressed: _toggleMic,
                       tooltip: 'Mute/Unmute',
                     ),
                     const SizedBox(width: 8),
                     _buildControlButton(
-                      icon: _isCamOn ? Icons.videocam_rounded : Icons.videocam_off_rounded,
+                      icon: _isCamOn
+                          ? Icons.videocam_rounded
+                          : Icons.videocam_off_rounded,
                       isActive: _isCamOn,
                       onPressed: _toggleCam,
                       tooltip: 'Camera On/Off',
@@ -402,15 +440,8 @@ class _LiveConsultationVideoState extends State<LiveConsultationVideo> {
         child: Container(
           width: 36,
           height: 36,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: bg,
-          ),
-          child: Icon(
-            icon,
-            color: iconColor ?? Colors.white,
-            size: 18,
-          ),
+          decoration: BoxDecoration(shape: BoxShape.circle, color: bg),
+          child: Icon(icon, color: iconColor ?? Colors.white, size: 18),
         ),
       ),
     );

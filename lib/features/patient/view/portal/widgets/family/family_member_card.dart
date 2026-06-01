@@ -121,25 +121,16 @@ class FamilyMemberCard extends StatelessWidget {
       children: [
         const Row(
           children: [
-            Icon(
-              Icons.badge_rounded,
-              color: AppColors.primaryLight,
-              size: 18,
-            ),
+            Icon(Icons.badge_rounded, color: AppColors.primaryLight, size: 18),
             SizedBox(width: 8),
-            Text(
-              'FAMILY HEALTH PROFILES',
-              style: AppTextStyles.labelSmall,
-            ),
+            Text('FAMILY HEALTH PROFILES', style: AppTextStyles.labelSmall),
           ],
         ),
         const SizedBox(height: AppSpacing.sm),
         LayoutBuilder(
           builder: (context, constraints) {
             final width = constraints.maxWidth;
-            final crossAxisCount = width > 1200
-                ? 3
-                : (width > 768 ? 2 : 1);
+            final crossAxisCount = width > 1200 ? 3 : (width > 768 ? 2 : 1);
 
             return GridView.builder(
               shrinkWrap: true,
@@ -190,7 +181,11 @@ class FamilyMemberCard extends StatelessWidget {
                                 ),
                                 borderRadius: BorderRadius.circular(10),
                               ),
-                              child: Icon(avatarIcon, color: Colors.white, size: 22),
+                              child: Icon(
+                                avatarIcon,
+                                color: Colors.white,
+                                size: 22,
+                              ),
                             ),
                             const SizedBox(width: 12),
                             Expanded(
@@ -252,7 +247,9 @@ class FamilyMemberCard extends StatelessWidget {
                             return Expanded(
                               child: Container(
                                 margin: const EdgeInsets.only(right: 6),
-                                padding: const EdgeInsets.symmetric(vertical: 4),
+                                padding: const EdgeInsets.symmetric(
+                                  vertical: 4,
+                                ),
                                 decoration: BoxDecoration(
                                   color: AppColors.surface,
                                   borderRadius: BorderRadius.circular(6),
@@ -363,7 +360,9 @@ class FamilyMemberCard extends StatelessWidget {
                           children: actions.map((act) {
                             return Expanded(
                               child: Padding(
-                                padding: const EdgeInsets.symmetric(horizontal: 3),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 3,
+                                ),
                                 child: OutlinedButton(
                                   onPressed: () {
                                     ScaffoldMessenger.of(context).showSnackBar(

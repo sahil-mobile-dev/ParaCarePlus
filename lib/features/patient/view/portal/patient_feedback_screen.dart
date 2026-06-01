@@ -46,7 +46,7 @@ class PatientFeedbackScreen extends ConsumerWidget {
             ),
           ],
         ),
-        actions: [const SizedBox(width: 16)],
+        actions: const [SizedBox(width: 16)],
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -83,7 +83,7 @@ class PatientFeedbackScreen extends ConsumerWidget {
                   ),
                 ],
               ),
-              SizedBox(height: AppRadius.md),
+              const SizedBox(height: AppRadius.md),
               // KPI row
               const FeedbackKpis(),
               const SizedBox(height: AppSpacing.md),

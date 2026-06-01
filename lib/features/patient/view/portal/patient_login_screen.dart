@@ -128,10 +128,7 @@ class _PatientLoginScreenState extends State<PatientLoginScreen> {
                 end: Alignment.bottomRight,
                 colors: [Color(0xF30F2137), Color(0xF9071221)],
               ),
-              border: Border(
-                right: BorderSide(
-                    color: Color(0xFF1E3A5F)),
-              ),
+              border: Border(right: BorderSide(color: Color(0xFF1E3A5F))),
             ),
             padding: const EdgeInsets.all(48),
             child: const LoginLeftPanel(),
@@ -168,10 +165,7 @@ class _PatientLoginScreenState extends State<PatientLoginScreen> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         // Tab selector
-        LoginTabSelector(
-          activeTab: _activeTab,
-          onTabChanged: _switchTab,
-        ),
+        LoginTabSelector(activeTab: _activeTab, onTabChanged: _switchTab),
         const SizedBox(height: AppSpacing.md),
 
         // Login card
@@ -275,10 +269,7 @@ class _PatientLoginScreenState extends State<PatientLoginScreen> {
         const SizedBox(width: 5),
         Text(
           label,
-          style: const TextStyle(
-            color: Color(0xFF7A9BBF),
-            fontSize: 10.5,
-          ),
+          style: const TextStyle(color: Color(0xFF7A9BBF), fontSize: 10.5),
         ),
       ],
     );

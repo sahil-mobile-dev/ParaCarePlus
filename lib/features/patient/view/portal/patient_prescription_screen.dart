@@ -54,7 +54,10 @@ class PatientPrescriptionScreen extends ConsumerWidget {
             const SizedBox(height: AppSpacing.lg),
 
             // Active Prescriptions Section
-            _buildSectionTitle(Icons.description_rounded, 'Active Prescriptions'),
+            _buildSectionTitle(
+              Icons.description_rounded,
+              'Active Prescriptions',
+            ),
             const SizedBox(height: AppSpacing.sm),
             const ActivePrescriptionCards(),
             const SizedBox(height: AppSpacing.lg),
@@ -64,7 +67,10 @@ class PatientPrescriptionScreen extends ConsumerWidget {
             const SizedBox(height: AppSpacing.lg),
 
             // Refill Reminders
-            _buildSectionTitle(Icons.notifications_active_rounded, 'Refill Reminders'),
+            _buildSectionTitle(
+              Icons.notifications_active_rounded,
+              'Refill Reminders',
+            ),
             const SizedBox(height: AppSpacing.sm),
             const RefillReminders(),
             const SizedBox(height: AppSpacing.lg),
@@ -85,7 +91,11 @@ class PatientPrescriptionScreen extends ConsumerWidget {
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
-              const Icon(Icons.medication_liquid_rounded, color: Color(0xFF00B4D8), size: 20),
+              const Icon(
+                Icons.medication_liquid_rounded,
+                color: Color(0xFF00B4D8),
+                size: 20,
+              ),
               const SizedBox(width: 8),
               Text(
                 'Prescriptions & Medications',
@@ -103,11 +113,18 @@ class PatientPrescriptionScreen extends ConsumerWidget {
               _buildBadge(Icons.calendar_month_rounded, dateStr),
               ElevatedButton.icon(
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.success.withOpacity(0.15),
+                  backgroundColor: AppColors.success.withValues(alpha: 0.15),
                   foregroundColor: AppColors.success,
-                  side: BorderSide(color: AppColors.success.withOpacity(0.3)),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-                  padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  side: BorderSide(
+                    color: AppColors.success.withValues(alpha: 0.3),
+                  ),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(20),
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 8,
+                  ),
                   elevation: 0,
                 ),
                 onPressed: () {
@@ -144,8 +161,10 @@ class PatientPrescriptionScreen extends ConsumerWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
       decoration: BoxDecoration(
-        color: const Color(0xFF00B4D8).withOpacity(0.15),
-        border: Border.all(color: const Color(0xFF00B4D8).withOpacity(0.3)),
+        color: const Color(0xFF00B4D8).withValues(alpha: 0.15),
+        border: Border.all(
+          color: const Color(0xFF00B4D8).withValues(alpha: 0.3),
+        ),
         borderRadius: BorderRadius.circular(20),
       ),
       child: Row(

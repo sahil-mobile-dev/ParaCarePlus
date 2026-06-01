@@ -41,24 +41,40 @@ class LabOrdersTab extends ConsumerWidget {
                       // Left side - LIS queue
                       Expanded(
                         flex: 10,
-                        child: _buildReportsQueue(labReports, currentReport, notifier),
+                        child: _buildReportsQueue(
+                          labReports,
+                          currentReport,
+                          notifier,
+                        ),
                       ),
                       const SizedBox(width: AppSpacing.lg),
                       // Right side - Clinical verification desk
                       Expanded(
                         flex: 12,
-                        child: _buildVerificationDesk(context, currentReport, notifier),
+                        child: _buildVerificationDesk(
+                          context,
+                          currentReport,
+                          notifier,
+                        ),
                       ),
                     ],
                   )
                 : Column(
                     children: [
                       Expanded(
-                        child: _buildReportsQueue(labReports, currentReport, notifier),
+                        child: _buildReportsQueue(
+                          labReports,
+                          currentReport,
+                          notifier,
+                        ),
                       ),
                       const SizedBox(height: AppSpacing.lg),
                       Expanded(
-                        child: _buildVerificationDesk(context, currentReport, notifier),
+                        child: _buildVerificationDesk(
+                          context,
+                          currentReport,
+                          notifier,
+                        ),
                       ),
                     ],
                   ),
@@ -74,15 +90,24 @@ class LabOrdersTab extends ConsumerWidget {
       children: [
         const Row(
           children: [
-            Icon(Icons.biotech_rounded, color: AppColors.primaryLight, size: 28),
+            Icon(
+              Icons.biotech_rounded,
+              color: AppColors.primaryLight,
+              size: 28,
+            ),
             SizedBox(width: 10),
-            Text('Lab Orders & Results (LIS)', style: AppTextStyles.titleMedium),
+            Text(
+              'Lab Orders & Results (LIS)',
+              style: AppTextStyles.titleMedium,
+            ),
           ],
         ),
         const SizedBox(height: 4),
         Text(
           'Validate laboratory investigation outcomes. $pendingCount results awaiting clinical e-signature.',
-          style: AppTextStyles.bodySmall.copyWith(color: AppColors.secondaryText),
+          style: AppTextStyles.bodySmall.copyWith(
+            color: AppColors.secondaryText,
+          ),
         ),
       ],
     );
@@ -133,27 +158,30 @@ class LabOrdersTab extends ConsumerWidget {
                             color: isSelected
                                 ? AppColors.primary
                                 : r.isUrgent
-                                    ? AppColors.error.withValues(alpha: 0.5)
-                                    : AppColors.border,
+                                ? AppColors.error.withValues(alpha: 0.5)
+                                : AppColors.border,
                             width: isSelected ? 1.5 : 1,
                           ),
                         ),
                         child: ListTile(
-                          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                          contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 6,
+                          ),
                           onTap: () => notifier.selectReportToReview(r),
                           leading: CircleAvatar(
                             backgroundColor: isSelected
                                 ? AppColors.primary
                                 : r.isUrgent
-                                    ? AppColors.error.withValues(alpha: 0.15)
-                                    : AppColors.card,
+                                ? AppColors.error.withValues(alpha: 0.15)
+                                : AppColors.card,
                             child: Icon(
                               Icons.science_outlined,
                               color: isSelected
                                   ? Colors.white
                                   : r.isUrgent
-                                      ? AppColors.error
-                                      : AppColors.secondaryText,
+                                  ? AppColors.error
+                                  : AppColors.secondaryText,
                               size: 18,
                             ),
                           ),
@@ -170,11 +198,19 @@ class LabOrdersTab extends ConsumerWidget {
                               ),
                               if (r.isUrgent)
                                 Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 6,
+                                    vertical: 2,
+                                  ),
                                   decoration: BoxDecoration(
-                                    color: AppColors.error.withValues(alpha: 0.15),
+                                    color: AppColors.error.withValues(
+                                      alpha: 0.15,
+                                    ),
                                     borderRadius: BorderRadius.circular(20),
-                                    border: Border.all(color: AppColors.error, width: 0.5),
+                                    border: Border.all(
+                                      color: AppColors.error,
+                                      width: 0.5,
+                                    ),
                                   ),
                                   child: const Text(
                                     'CRITICAL',
@@ -193,7 +229,9 @@ class LabOrdersTab extends ConsumerWidget {
                               const SizedBox(height: 4),
                               Text(
                                 r.testName,
-                                style: AppTextStyles.bodySmall.copyWith(fontSize: 11),
+                                style: AppTextStyles.bodySmall.copyWith(
+                                  fontSize: 11,
+                                ),
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -241,11 +279,18 @@ class LabOrdersTab extends ConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(report.patientName, style: AppTextStyles.labelLarge.copyWith(fontWeight: FontWeight.bold)),
+                    Text(
+                      report.patientName,
+                      style: AppTextStyles.labelLarge.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     const SizedBox(height: 2),
                     Text(
                       'LIS Order ID: ${report.id} · Sample Drawn: ${report.orderedDate}',
-                      style: AppTextStyles.bodySmall.copyWith(color: AppColors.secondaryText),
+                      style: AppTextStyles.bodySmall.copyWith(
+                        color: AppColors.secondaryText,
+                      ),
                     ),
                   ],
                 ),
@@ -260,7 +305,10 @@ class LabOrdersTab extends ConsumerWidget {
                 const SizedBox(height: 6),
                 Text(
                   report.testName,
-                  style: AppTextStyles.bodyMedium.copyWith(color: AppColors.primaryText, fontWeight: FontWeight.bold),
+                  style: AppTextStyles.bodyMedium.copyWith(
+                    color: AppColors.primaryText,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 const SizedBox(height: 16),
                 _buildSectionHeader('Laboratory Quantifications & Readings'),
@@ -271,7 +319,9 @@ class LabOrdersTab extends ConsumerWidget {
                     color: AppColors.background.withValues(alpha: 0.5),
                     borderRadius: BorderRadius.circular(10),
                     border: Border.all(
-                      color: report.isUrgent ? AppColors.error.withValues(alpha: 0.3) : AppColors.border,
+                      color: report.isUrgent
+                          ? AppColors.error.withValues(alpha: 0.3)
+                          : AppColors.border,
                       width: report.isUrgent ? 1.2 : 1,
                     ),
                   ),
@@ -282,7 +332,9 @@ class LabOrdersTab extends ConsumerWidget {
                         children: [
                           Icon(
                             Icons.science_outlined,
-                            color: report.isUrgent ? AppColors.error : AppColors.primaryLight,
+                            color: report.isUrgent
+                                ? AppColors.error
+                                : AppColors.primaryLight,
                             size: 18,
                           ),
                           const SizedBox(width: 8),
@@ -308,14 +360,26 @@ class LabOrdersTab extends ConsumerWidget {
                 _buildSectionHeader('LIS Timeline & Logs'),
                 const SizedBox(height: 8),
                 _buildTimelineItem('Sample Drawn', '08:30 AM', true),
-                _buildTimelineItem('Accessioned in LIS Analyzer', '09:05 AM', true),
-                _buildTimelineItem('Quantified & Verified by Pathologist', '09:40 AM', true),
+                _buildTimelineItem(
+                  'Accessioned in LIS Analyzer',
+                  '09:05 AM',
+                  true,
+                ),
+                _buildTimelineItem(
+                  'Quantified & Verified by Pathologist',
+                  '09:40 AM',
+                  true,
+                ),
                 const SizedBox(height: 16),
                 _buildSectionHeader('Validation Compliance'),
                 const SizedBox(height: 8),
                 Row(
                   children: [
-                    const Icon(Icons.verified_user_rounded, color: AppColors.success, size: 16),
+                    const Icon(
+                      Icons.verified_user_rounded,
+                      color: AppColors.success,
+                      size: 16,
+                    ),
                     const SizedBox(width: 8),
                     Text(
                       'ABDM compliant electronic signature queued',
@@ -331,12 +395,21 @@ class LabOrdersTab extends ConsumerWidget {
             children: [
               Expanded(
                 child: TextButton.icon(
-                  icon: const Icon(Icons.refresh_rounded, size: 18, color: Colors.orange),
-                  label: const Text('Re-Verify Sample', style: TextStyle(color: Colors.orange)),
+                  icon: const Icon(
+                    Icons.refresh_rounded,
+                    size: 18,
+                    color: Colors.orange,
+                  ),
+                  label: const Text(
+                    'Re-Verify Sample',
+                    style: TextStyle(color: Colors.orange),
+                  ),
                   onPressed: () {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text('Verification order queued: Re-test requested for Patient ${report.patientName}.'),
+                        content: Text(
+                          'Verification order queued: Re-test requested for Patient ${report.patientName}.',
+                        ),
                         backgroundColor: Colors.orange,
                       ),
                     );
@@ -353,13 +426,17 @@ class LabOrdersTab extends ConsumerWidget {
                     backgroundColor: AppColors.success,
                     foregroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(vertical: 12),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
                   onPressed: () {
                     notifier.approveReport(report.id);
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text('Lab Report ${report.id} electronically signed & approved.'),
+                        content: Text(
+                          'Lab Report ${report.id} electronically signed & approved.',
+                        ),
                         backgroundColor: AppColors.success,
                       ),
                     );
@@ -390,7 +467,9 @@ class LabOrdersTab extends ConsumerWidget {
       child: Row(
         children: [
           Icon(
-            isDone ? Icons.check_circle_rounded : Icons.radio_button_unchecked_rounded,
+            isDone
+                ? Icons.check_circle_rounded
+                : Icons.radio_button_unchecked_rounded,
             color: isDone ? AppColors.success : AppColors.border,
             size: 14,
           ),
@@ -398,12 +477,18 @@ class LabOrdersTab extends ConsumerWidget {
           Expanded(
             child: Text(
               title,
-              style: AppTextStyles.bodySmall.copyWith(fontSize: 11, color: isDone ? AppColors.primaryText : AppColors.secondaryText),
+              style: AppTextStyles.bodySmall.copyWith(
+                fontSize: 11,
+                color: isDone ? AppColors.primaryText : AppColors.secondaryText,
+              ),
             ),
           ),
           Text(
             time,
-            style: AppTextStyles.bodySmall.copyWith(fontSize: 10, color: AppColors.secondaryText),
+            style: AppTextStyles.bodySmall.copyWith(
+              fontSize: 10,
+              color: AppColors.secondaryText,
+            ),
           ),
         ],
       ),
@@ -419,7 +504,10 @@ class LabOrdersTab extends ConsumerWidget {
           SizedBox(height: 12),
           Text(
             'Lab Results Queue Clear',
-            style: TextStyle(color: AppColors.primaryText, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              color: AppColors.primaryText,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           SizedBox(height: 4),
           Text(
@@ -442,11 +530,18 @@ class LabOrdersTab extends ConsumerWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.science_outlined, size: 48, color: AppColors.secondaryText),
+            Icon(
+              Icons.science_outlined,
+              size: 48,
+              color: AppColors.secondaryText,
+            ),
             SizedBox(height: 12),
             Text(
               'Select Lab Result',
-              style: TextStyle(color: AppColors.primaryText, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                color: AppColors.primaryText,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             SizedBox(height: 4),
             Text(

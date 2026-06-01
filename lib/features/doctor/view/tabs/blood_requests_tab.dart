@@ -1035,7 +1035,7 @@ class _BloodRequestsTabState extends State<BloodRequestsTab> {
             ],
           ),
           const SizedBox(height: 12),
-          Container(
+          SizedBox(
             height: 400,
             child: ListView.separated(
               itemCount: _donors.length,
@@ -1187,7 +1187,7 @@ class _BloodRequestsTabState extends State<BloodRequestsTab> {
             ),
           ),
           const SizedBox(height: 12),
-          Container(
+          SizedBox(
             height: 400,
             child: ListView.separated(
               itemCount: _donations.length,
@@ -1344,7 +1344,7 @@ class _BloodRequestsTabState extends State<BloodRequestsTab> {
             ),
           ),
           const SizedBox(height: 12),
-          Container(
+          SizedBox(
             height: 400,
             child: ListView.separated(
               itemCount: _requests.length,
@@ -2367,7 +2367,7 @@ class _BloodRequestsTabState extends State<BloodRequestsTab> {
                 ),
               ),
               const SizedBox(height: 12),
-              Container(
+              SizedBox(
                 height: 150,
                 child: ListView.separated(
                   itemCount: _issuedHistory.length,
@@ -2478,7 +2478,7 @@ class _BloodRequestsTabState extends State<BloodRequestsTab> {
             ),
           ),
           const SizedBox(height: 12),
-          Container(
+          SizedBox(
             height: 75,
             child: expiredBags.isEmpty
                 ? const Center(

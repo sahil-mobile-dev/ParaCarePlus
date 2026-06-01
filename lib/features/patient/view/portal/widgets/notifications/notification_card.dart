@@ -180,7 +180,7 @@ class NotificationCard extends StatelessWidget {
                           ),
                         ],
                       ),
-                      SizedBox(height: AppSpacing.md),
+                      const SizedBox(height: AppSpacing.md),
                       Row(
                         children: [
                           const Icon(

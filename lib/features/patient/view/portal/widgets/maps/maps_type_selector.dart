@@ -3,7 +3,9 @@ import 'package:paracareplus/core/theme/app_colors.dart';
 
 class MapsTypeSelector extends StatelessWidget {
   const MapsTypeSelector({
-    required this.selectedType, required this.onTypeSelect, super.key,
+    required this.selectedType,
+    required this.onTypeSelect,
+    super.key,
   });
 
   final String selectedType;
@@ -60,7 +62,10 @@ class MapsTypeSelector extends StatelessWidget {
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
                 width: 100,
-                padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 10,
+                  horizontal: 8,
+                ),
                 decoration: BoxDecoration(
                   color: isActive
                       ? AppColors.primaryLight.withValues(alpha: 0.1)

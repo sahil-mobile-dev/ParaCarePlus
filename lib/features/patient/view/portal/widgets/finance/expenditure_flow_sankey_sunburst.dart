@@ -704,8 +704,9 @@ class SunburstChartPainter extends CustomPainter {
         textDirection: TextDirection.ltr,
       )..layout();
 
-      canvas.save();
-      canvas.translate(textX, textY);
+      canvas
+        ..save()
+        ..translate(textX, textY);
 
       // Rotate label to align outwards or flat
       var rotation = midAngle;

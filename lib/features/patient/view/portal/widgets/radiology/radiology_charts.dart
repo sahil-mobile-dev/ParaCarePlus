@@ -47,7 +47,11 @@ class RadiologyCharts extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Icon(Icons.bar_chart_rounded, color: Color(0xFF00B4D8), size: 16),
+              const Icon(
+                Icons.bar_chart_rounded,
+                color: Color(0xFF00B4D8),
+                size: 16,
+              ),
               const SizedBox(width: 6),
               Text(
                 'Imaging Studies by Modality (3 Years)',
@@ -67,7 +71,10 @@ class RadiologyCharts extends StatelessWidget {
                     sideTitles: SideTitles(
                       showTitles: true,
                       getTitlesWidget: (value, meta) {
-                        const style = TextStyle(color: AppColors.secondaryText, fontSize: 9);
+                        const style = TextStyle(
+                          color: AppColors.secondaryText,
+                          fontSize: 9,
+                        );
                         String text;
                         switch (value.toInt()) {
                           case 0:
@@ -100,7 +107,10 @@ class RadiologyCharts extends StatelessWidget {
                       getTitlesWidget: (value, meta) {
                         return Text(
                           value.toInt().toString(),
-                          style: const TextStyle(color: AppColors.secondaryText, fontSize: 8),
+                          style: const TextStyle(
+                            color: AppColors.secondaryText,
+                            fontSize: 8,
+                          ),
                         );
                       },
                     ),
@@ -165,11 +175,20 @@ class RadiologyCharts extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        _buildLegendItem('2024', const Color(0xFF00B4D8).withValues(alpha: 0.7)),
+        _buildLegendItem(
+          '2024',
+          const Color(0xFF00B4D8).withValues(alpha: 0.7),
+        ),
         const SizedBox(width: 12),
-        _buildLegendItem('2025', const Color(0xFFC77DFF).withValues(alpha: 0.7)),
+        _buildLegendItem(
+          '2025',
+          const Color(0xFFC77DFF).withValues(alpha: 0.7),
+        ),
         const SizedBox(width: 12),
-        _buildLegendItem('2026', const Color(0xFF22C55E).withValues(alpha: 0.7)),
+        _buildLegendItem(
+          '2026',
+          const Color(0xFF22C55E).withValues(alpha: 0.7),
+        ),
       ],
     );
   }
@@ -188,7 +207,11 @@ class RadiologyCharts extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Icon(Icons.pie_chart_rounded, color: Color(0xFF00B4D8), size: 16),
+              const Icon(
+                Icons.pie_chart_rounded,
+                color: Color(0xFF00B4D8),
+                size: 16,
+              ),
               const SizedBox(width: 6),
               Text(
                 'Findings Distribution',
@@ -212,28 +235,44 @@ class RadiologyCharts extends StatelessWidget {
                           title: '11',
                           color: AppColors.success,
                           radius: 18,
-                          titleStyle: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.white),
+                          titleStyle: const TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
                         ),
                         PieChartSectionData(
                           value: 2,
                           title: '2',
                           color: AppColors.secondaryAccent,
                           radius: 18,
-                          titleStyle: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.white),
+                          titleStyle: const TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
                         ),
                         PieChartSectionData(
                           value: 0.001, // Avoid crash if 0
                           title: '',
                           color: AppColors.error,
                           radius: 18,
-                          titleStyle: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.white),
+                          titleStyle: const TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
                         ),
                         PieChartSectionData(
                           value: 1,
                           title: '1',
                           color: AppColors.secondaryText,
                           radius: 18,
-                          titleStyle: const TextStyle(fontSize: 10, fontWeight: FontWeight.bold, color: Colors.white),
+                          titleStyle: const TextStyle(
+                            fontSize: 10,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                          ),
                         ),
                       ],
                     ),
@@ -271,15 +310,16 @@ class RadiologyCharts extends StatelessWidget {
         Container(
           width: 8,
           height: 8,
-          decoration: BoxDecoration(
-            color: color,
-            shape: BoxShape.circle,
-          ),
+          decoration: BoxDecoration(color: color, shape: BoxShape.circle),
         ),
         const SizedBox(width: 6),
         Text(
           text,
-          style: const TextStyle(color: AppColors.secondaryText, fontSize: 9, fontWeight: FontWeight.bold),
+          style: const TextStyle(
+            color: AppColors.secondaryText,
+            fontSize: 9,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ],
     );

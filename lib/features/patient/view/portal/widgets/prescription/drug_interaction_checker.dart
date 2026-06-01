@@ -20,18 +20,26 @@ class DrugInteractionChecker extends StatelessWidget {
         children: [
           Row(
             children: [
-              const Icon(Icons.warning_amber_rounded, color: AppColors.secondaryAccent, size: 16),
+              const Icon(
+                Icons.warning_amber_rounded,
+                color: AppColors.secondaryAccent,
+                size: 16,
+              ),
               const SizedBox(width: 6),
               Text(
                 'Drug Interaction Checker',
-                style: AppTextStyles.labelMedium.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+                style: AppTextStyles.labelMedium.copyWith(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ],
           ),
           const SizedBox(height: AppSpacing.md),
           _buildInteractionItem(
             title: 'Metformin + Omeprazole — Moderate Interaction',
-            desc: 'Omeprazole may slightly increase Metformin plasma levels by inhibiting its renal transport. Monitor blood glucose. No dose change needed unless hyperglycemia worsens.',
+            desc:
+                'Omeprazole may slightly increase Metformin plasma levels by inhibiting its renal transport. Monitor blood glucose. No dose change needed unless hyperglycemia worsens.',
             severity: 'moderate',
             color: AppColors.secondaryAccent,
             icon: Icons.medication_liquid_rounded,
@@ -39,7 +47,8 @@ class DrugInteractionChecker extends StatelessWidget {
           const SizedBox(height: AppSpacing.sm),
           _buildInteractionItem(
             title: 'Atorvastatin + Vitamin D3 — Minor / Beneficial',
-            desc: 'No clinically significant negative interaction. Vitamin D may enhance statin effectiveness in some patients. Continue as prescribed.',
+            desc:
+                'No clinically significant negative interaction. Vitamin D may enhance statin effectiveness in some patients. Continue as prescribed.',
             severity: 'minor',
             color: AppColors.success,
             icon: Icons.workspace_premium_rounded,
@@ -47,7 +56,8 @@ class DrugInteractionChecker extends StatelessWidget {
           const SizedBox(height: AppSpacing.sm),
           _buildInteractionItem(
             title: 'Amlodipine + Atorvastatin — Moderate Interaction',
-            desc: 'Amlodipine inhibits CYP3A4, increasing Atorvastatin levels. Risk of myopathy at higher statin doses. Current low-dose (10mg) combination is generally safe. Watch for muscle pain.',
+            desc:
+                'Amlodipine inhibits CYP3A4, increasing Atorvastatin levels. Risk of myopathy at higher statin doses. Current low-dose (10mg) combination is generally safe. Watch for muscle pain.',
             severity: 'moderate',
             color: AppColors.secondaryAccent,
             icon: Icons.error_outline_rounded,
@@ -65,12 +75,12 @@ class DrugInteractionChecker extends StatelessWidget {
     required IconData icon,
   }) {
     final bg = severity == 'moderate'
-        ? AppColors.secondaryAccent.withOpacity(0.06)
-        : AppColors.success.withOpacity(0.06);
+        ? AppColors.secondaryAccent.withValues(alpha: 0.06)
+        : AppColors.success.withValues(alpha: 0.06);
 
     final border = severity == 'moderate'
-        ? AppColors.secondaryAccent.withOpacity(0.2)
-        : AppColors.success.withOpacity(0.15);
+        ? AppColors.secondaryAccent.withValues(alpha: 0.2)
+        : AppColors.success.withValues(alpha: 0.15);
 
     return Container(
       padding: const EdgeInsets.all(10),
@@ -86,7 +96,7 @@ class DrugInteractionChecker extends StatelessWidget {
             width: 32,
             height: 32,
             decoration: BoxDecoration(
-              color: color.withOpacity(0.15),
+              color: color.withValues(alpha: 0.15),
               borderRadius: BorderRadius.circular(8),
             ),
             alignment: Alignment.center,
@@ -99,12 +109,20 @@ class DrugInteractionChecker extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: TextStyle(color: color, fontSize: 11, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    color: color,
+                    fontSize: 11,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 const SizedBox(height: 3),
                 Text(
                   desc,
-                  style: const TextStyle(color: AppColors.secondaryText, fontSize: 10, height: 1.4),
+                  style: const TextStyle(
+                    color: AppColors.secondaryText,
+                    fontSize: 10,
+                    height: 1.4,
+                  ),
                 ),
               ],
             ),

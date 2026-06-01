@@ -30,12 +30,14 @@ class _ConsultationChatPanelState extends State<ConsultationChatPanel> {
       sender: 'Dr. Rajesh Kumar',
     ),
     const ChatMessage(
-      text: "Doctor, I've been having mild chest tightness after climbing stairs.",
+      text:
+          "Doctor, I've been having mild chest tightness after climbing stairs.",
       isPatient: true,
       sender: 'You',
     ),
     const ChatMessage(
-      text: 'I see. Can you check your BP right now? We have your recent ECG on file.',
+      text:
+          'I see. Can you check your BP right now? We have your recent ECG on file.',
       isPatient: false,
       sender: 'Dr. Rajesh Kumar',
     ),
@@ -45,7 +47,8 @@ class _ConsultationChatPanelState extends State<ConsultationChatPanel> {
       sender: 'You',
     ),
     const ChatMessage(
-      text: "That's slightly elevated. Let me review your last lab results and chest X-ray.",
+      text:
+          "That's slightly elevated. Let me review your last lab results and chest X-ray.",
       isPatient: false,
       sender: 'Dr. Rajesh Kumar',
     ),
@@ -80,11 +83,14 @@ class _ConsultationChatPanelState extends State<ConsultationChatPanel> {
     Timer(const Duration(milliseconds: 1500), () {
       if (mounted) {
         setState(() {
-          _messages.add(const ChatMessage(
-            text: "Thank you for the information. I'll review and advise accordingly.",
-            isPatient: false,
-            sender: 'Dr. Rajesh Kumar',
-          ));
+          _messages.add(
+            const ChatMessage(
+              text:
+                  "Thank you for the information. I'll review and advise accordingly.",
+              isPatient: false,
+              sender: 'Dr. Rajesh Kumar',
+            ),
+          );
         });
         _scrollToBottom();
       }
@@ -109,10 +115,15 @@ class _ConsultationChatPanelState extends State<ConsultationChatPanel> {
             children: [
               // Chat Header
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 14,
+                  vertical: 10,
+                ),
                 decoration: BoxDecoration(
                   color: const Color(0xFF00B4D8).withValues(alpha: 0.1),
-                  border: const Border(bottom: BorderSide(color: AppColors.border)),
+                  border: const Border(
+                    bottom: BorderSide(color: AppColors.border),
+                  ),
                   borderRadius: const BorderRadius.only(
                     topLeft: Radius.circular(AppRadius.md),
                     topRight: Radius.circular(AppRadius.md),
@@ -120,7 +131,11 @@ class _ConsultationChatPanelState extends State<ConsultationChatPanel> {
                 ),
                 child: const Row(
                   children: [
-                    Icon(Icons.comments_disabled_outlined, color: Color(0xFF00B4D8), size: 14),
+                    Icon(
+                      Icons.comments_disabled_outlined,
+                      color: Color(0xFF00B4D8),
+                      size: 14,
+                    ),
                     SizedBox(width: 8),
                     Text(
                       'Consultation Chat',
@@ -144,13 +159,18 @@ class _ConsultationChatPanelState extends State<ConsultationChatPanel> {
                   itemBuilder: (context, index) {
                     final msg = _messages[index];
                     return Align(
-                      alignment: msg.isPatient ? Alignment.centerRight : Alignment.centerLeft,
+                      alignment: msg.isPatient
+                          ? Alignment.centerRight
+                          : Alignment.centerLeft,
                       child: Container(
                         margin: const EdgeInsets.only(bottom: 8),
                         constraints: BoxConstraints(
                           maxWidth: MediaQuery.of(context).size.width * 0.7,
                         ),
-                        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 10,
+                          vertical: 7,
+                        ),
                         decoration: BoxDecoration(
                           color: msg.isPatient
                               ? AppColors.success.withValues(alpha: 0.12)
@@ -199,33 +219,46 @@ class _ConsultationChatPanelState extends State<ConsultationChatPanel> {
               Container(
                 padding: const EdgeInsets.all(8),
                 decoration: const BoxDecoration(
-                  border: Border(
-                    top: BorderSide(color: AppColors.border),
-                  ),
+                  border: Border(top: BorderSide(color: AppColors.border)),
                 ),
                 child: Row(
                   children: [
                     Expanded(
                       child: TextField(
                         controller: _controller,
-                        style: const TextStyle(color: Colors.white, fontSize: 11),
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 11,
+                        ),
                         decoration: InputDecoration(
                           hintText: 'Type message...',
-                          hintStyle: const TextStyle(color: AppColors.secondaryText, fontSize: 11),
-                          contentPadding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                          hintStyle: const TextStyle(
+                            color: AppColors.secondaryText,
+                            fontSize: 11,
+                          ),
+                          contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 10,
+                            vertical: 6,
+                          ),
                           filled: true,
                           fillColor: Colors.white.withValues(alpha: 0.05),
                           border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8),
-                            borderSide: const BorderSide(color: AppColors.border),
+                            borderSide: const BorderSide(
+                              color: AppColors.border,
+                            ),
                           ),
                           enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8),
-                            borderSide: const BorderSide(color: AppColors.border),
+                            borderSide: const BorderSide(
+                              color: AppColors.border,
+                            ),
                           ),
                           focusedBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(8),
-                            borderSide: const BorderSide(color: Color(0xFF00B4D8)),
+                            borderSide: const BorderSide(
+                              color: Color(0xFF00B4D8),
+                            ),
                           ),
                         ),
                         onSubmitted: (_) => _sendMessage(),
@@ -241,7 +274,11 @@ class _ConsultationChatPanelState extends State<ConsultationChatPanel> {
                           color: const Color(0xFF00B4D8),
                           borderRadius: BorderRadius.circular(8),
                         ),
-                        child: const Icon(Icons.send_rounded, color: Colors.white, size: 14),
+                        child: const Icon(
+                          Icons.send_rounded,
+                          color: Colors.white,
+                          size: 14,
+                        ),
                       ),
                     ),
                   ],
@@ -266,7 +303,11 @@ class _ConsultationChatPanelState extends State<ConsultationChatPanel> {
             children: [
               const Row(
                 children: [
-                  Icon(Icons.file_copy_rounded, color: Color(0xFF00B4D8), size: 14),
+                  Icon(
+                    Icons.file_copy_rounded,
+                    color: Color(0xFF00B4D8),
+                    size: 14,
+                  ),
                   SizedBox(width: 6),
                   Text(
                     'Shared Files',
@@ -317,9 +358,7 @@ class _ConsultationChatPanelState extends State<ConsultationChatPanel> {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 6),
       decoration: const BoxDecoration(
-        border: Border(
-          bottom: BorderSide(color: Colors.white10),
-        ),
+        border: Border(bottom: BorderSide(color: Colors.white10)),
       ),
       child: InkWell(
         onTap: () {
@@ -344,7 +383,11 @@ class _ConsultationChatPanelState extends State<ConsultationChatPanel> {
                 ),
               ),
             ),
-            const Icon(Icons.open_in_new_rounded, color: AppColors.secondaryText, size: 12),
+            const Icon(
+              Icons.open_in_new_rounded,
+              color: AppColors.secondaryText,
+              size: 12,
+            ),
           ],
         ),
       ),

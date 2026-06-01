@@ -197,7 +197,10 @@ class AnalyticsHeatmap extends StatelessWidget {
                                     color: weeks[w][row]!.$2,
                                     size: cellSize,
                                   )
-                                : const SizedBox(width: cellSize, height: cellSize),
+                                : const SizedBox(
+                                    width: cellSize,
+                                    height: cellSize,
+                                  ),
                           ),
                       ],
                     ),

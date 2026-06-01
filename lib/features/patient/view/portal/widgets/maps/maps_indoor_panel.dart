@@ -240,22 +240,22 @@ class _FloorPlanPainter extends CustomPainter {
     final h = size.height;
 
     // Outer walls
-    canvas.drawRRect(
-      RRect.fromRectAndRadius(
-        Rect.fromLTWH(8, 8, w - 16, h - 16),
-        const Radius.circular(6),
-      ),
-      Paint()
-        ..color = AppColors.border
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = 2,
-    );
-
-    // Corridor
-    canvas.drawRect(
-      Rect.fromLTWH(8, h * 0.44, w - 16, h * 0.12),
-      Paint()..color = AppColors.primaryLight.withValues(alpha: 0.05),
-    );
+    canvas
+      ..drawRRect(
+        RRect.fromRectAndRadius(
+          Rect.fromLTWH(8, 8, w - 16, h - 16),
+          const Radius.circular(6),
+        ),
+        Paint()
+          ..color = AppColors.border
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 2,
+      )
+      // Corridor
+      ..drawRect(
+        Rect.fromLTWH(8, h * 0.44, w - 16, h * 0.12),
+        Paint()..color = AppColors.primaryLight.withValues(alpha: 0.05),
+      );
     _drawText(
       canvas,
       'MAIN CORRIDOR',
@@ -394,17 +394,18 @@ class _FloorPlanPainter extends CustomPainter {
     String title,
     String sub,
   ) {
-    canvas.drawRRect(
-      RRect.fromRectAndRadius(rect, const Radius.circular(4)),
-      Paint()..color = color.withValues(alpha: 0.1),
-    );
-    canvas.drawRRect(
-      RRect.fromRectAndRadius(rect, const Radius.circular(4)),
-      Paint()
-        ..color = color.withValues(alpha: 0.6)
-        ..style = PaintingStyle.stroke
-        ..strokeWidth = 1.5,
-    );
+    canvas
+      ..drawRRect(
+        RRect.fromRectAndRadius(rect, const Radius.circular(4)),
+        Paint()..color = color.withValues(alpha: 0.1),
+      )
+      ..drawRRect(
+        RRect.fromRectAndRadius(rect, const Radius.circular(4)),
+        Paint()
+          ..color = color.withValues(alpha: 0.6)
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 1.5,
+      );
     _drawText(
       canvas,
       title,

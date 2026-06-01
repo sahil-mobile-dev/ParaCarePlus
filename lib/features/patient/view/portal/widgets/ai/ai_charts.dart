@@ -171,8 +171,16 @@ class _AiInteractionsBarChart extends StatelessWidget {
                 toY: sym + med + cbt,
                 rodStackItems: [
                   BarChartRodStackItem(0, sym, AppColors.error),
-                  BarChartRodStackItem(sym, sym + med, AppColors.secondaryAccent),
-                  BarChartRodStackItem(sym + med, sym + med + cbt, Colors.purpleAccent),
+                  BarChartRodStackItem(
+                    sym,
+                    sym + med,
+                    AppColors.secondaryAccent,
+                  ),
+                  BarChartRodStackItem(
+                    sym + med,
+                    sym + med + cbt,
+                    Colors.purpleAccent,
+                  ),
                 ],
                 width: 6,
                 borderRadius: const BorderRadius.only(
@@ -309,7 +317,14 @@ class _AiRadarPainter extends CustomPainter {
     final cy = size.height / 2;
     final radius = min(cx, cy) - 15;
 
-    final axisLabels = ['Symptom', 'Drug Safety', 'Lab Triage', 'Radiology', 'CBT', 'Wellness'];
+    final axisLabels = [
+      'Symptom',
+      'Drug Safety',
+      'Lab Triage',
+      'Radiology',
+      'CBT',
+      'Wellness',
+    ];
     final dataValues = [0.95, 0.92, 0.89, 0.85, 0.88, 0.91];
 
     final paintLine = Paint()
@@ -336,9 +351,7 @@ class _AiRadarPainter extends CustomPainter {
     }
 
     // Draw axes lines & labels
-    final textPainter = TextPainter(
-      textDirection: TextDirection.ltr,
-    );
+    final textPainter = TextPainter(textDirection: TextDirection.ltr);
 
     for (var i = 0; i < axisLabels.length; i++) {
       final angle = -pi / 2 + (2 * pi * i / axisLabels.length);

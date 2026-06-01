@@ -1,14 +1,15 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:paracareplus/core/theme/app_colors.dart';
 import 'package:paracareplus/core/theme/app_spacing.dart';
+import 'package:paracareplus/features/auth/model/user_role.dart';
 import 'package:paracareplus/features/auth/view/widgets/demo_credentials_bar.dart';
 import 'package:paracareplus/features/auth/view/widgets/login_info_section.dart';
 import 'package:paracareplus/features/auth/view/widgets/role_selection_grid.dart';
 import 'package:paracareplus/features/auth/view_model/login_view_model.dart';
-import 'package:paracareplus/features/auth/model/user_role.dart';
 import 'package:paracareplus/routes/route_names.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
@@ -371,7 +372,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         // Right panel
         Expanded(
           flex: 10,
-          child: Container(
+          child: ColoredBox(
             color: Colors.white.withValues(alpha: 0.03),
             child: Center(
               child: SingleChildScrollView(
@@ -720,7 +721,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                                   value: state.rememberMe,
                                   onChanged: (v) => ref
                                       .read(loginViewModelProvider.notifier)
-                                      .toggleRememberMe(v),
+                                      .toggleRememberMe(v!),
                                   activeColor: AppColors.primary,
                                   side: const BorderSide(
                                     color: Color(0xFFCCD8E8),
@@ -850,7 +851,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               shape: BoxShape.circle,
               color: const Color(0xFF03142c),
               border: Border.all(
-                color: const Color(0xFF135AB0).withOpacity(0.5),
+                color: const Color(0xFF135AB0).withValues(alpha: 0.5),
                 width: 1.5,
               ),
             ),
@@ -928,54 +929,6 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               message,
               style: const TextStyle(color: Color(0xFF7F0000), fontSize: 12),
             ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildLightTextField({
-    required String label,
-    required String hint,
-    required String prefixEmoji,
-    bool isPassword = false,
-    required void Function(String) onChanged,
-    Widget? trailing,
-  }) {
-    return SizedBox(
-      height: 110,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              TextField(
-                obscureText: isPassword,
-                onChanged: onChanged,
-                style: const TextStyle(color: Color(0xFF0D1B2A), fontSize: 13),
-                decoration: InputDecoration(
-                  hintText: hint,
-                  fillColor: Colors.white,
-                  prefixIcon: Text(
-                    prefixEmoji,
-                    style: const TextStyle(fontSize: 20, color: Colors.black26),
-                    // color: Colors.black,
-                  ),
-                  hintStyle: const TextStyle(color: Colors.white24),
-                  border: InputBorder.none,
-                  contentPadding: const EdgeInsets.symmetric(
-                    horizontal: 10,
-                    vertical: 10,
-                  ),
-                  suffixIcon: trailing != null
-                      ? Padding(
-                          padding: const EdgeInsets.only(right: 12),
-                          child: trailing,
-                        )
-                      : null,
-                ),
-              ),
-            ],
           ),
         ],
       ),
@@ -1085,7 +1038,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       child: Material(
         color: Colors.transparent,
         child: InkWell(
-          onTap: () {},
+          onTap: () {
+            context.pushNamed(RouteNames.dashboardHub);
+          },
           borderRadius: BorderRadius.circular(10),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
@@ -1317,8 +1272,8 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 //  Live dot animation widget
 // ─────────────────────────────────────────────────────────────
 class _LiveDot extends StatefulWidget {
-  final Color color;
   const _LiveDot({required this.color});
+  final Color color;
 
   @override
   State<_LiveDot> createState() => _LiveDotState();

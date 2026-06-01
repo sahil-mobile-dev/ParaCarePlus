@@ -19,11 +19,7 @@ class WellnessHeatmap extends StatelessWidget {
         children: [
           const Row(
             children: [
-              Icon(
-                Icons.grid_on_rounded,
-                color: AppColors.success,
-                size: 18,
-              ),
+              Icon(Icons.grid_on_rounded, color: AppColors.success, size: 18),
               SizedBox(width: 8),
               Text(
                 'LIFESTYLE RISK FACTOR HEATMAP — WEEKLY',
@@ -39,9 +35,7 @@ class WellnessHeatmap extends StatelessWidget {
               physics: BouncingScrollPhysics(),
               child: SizedBox(
                 width: 600,
-                child: CustomPaint(
-                  painter: _HeatmapPainter(),
-                ),
+                child: CustomPaint(painter: _HeatmapPainter()),
               ),
             ),
           ),
@@ -131,9 +125,7 @@ class _HeatmapPainter extends CustomPainter {
     final cellHeight = gridHeight / riskFactors.length;
 
     // Paints
-    final textPainter = TextPainter(
-      textDirection: TextDirection.ltr,
-    );
+    final textPainter = TextPainter(textDirection: TextDirection.ltr);
 
     // Draw Y-Axis (Risk Factors Labels)
     for (var i = 0; i < riskFactors.length; i++) {
@@ -149,10 +141,7 @@ class _HeatmapPainter extends CustomPainter {
         ..layout()
         ..paint(
           canvas,
-          Offset(
-            10,
-            i * cellHeight + (cellHeight - textPainter.height) / 2,
-          ),
+          Offset(10, i * cellHeight + (cellHeight - textPainter.height) / 2),
         );
     }
 
@@ -190,7 +179,10 @@ class _HeatmapPainter extends CustomPainter {
           ..style = PaintingStyle.stroke
           ..strokeWidth = 1.5;
 
-        final rrect = RRect.fromRectAndRadius(cellRect, const Radius.circular(4));
+        final rrect = RRect.fromRectAndRadius(
+          cellRect,
+          const Radius.circular(4),
+        );
 
         canvas
           ..drawRRect(rrect, fillPaint)
@@ -232,7 +224,9 @@ class _HeatmapPainter extends CustomPainter {
         ..paint(
           canvas,
           Offset(
-            leftLabelWidth + col * cellWidth + (cellWidth - textPainter.width) / 2,
+            leftLabelWidth +
+                col * cellWidth +
+                (cellWidth - textPainter.width) / 2,
             size.height - bottomLabelHeight + 6,
           ),
         );

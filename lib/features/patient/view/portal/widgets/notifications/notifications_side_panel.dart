@@ -7,8 +7,7 @@ class NotificationsSidePanel extends StatefulWidget {
   final void Function(String category) onCategoryFilter;
 
   @override
-  State<NotificationsSidePanel> createState() =>
-      _NotificationsSidePanelState();
+  State<NotificationsSidePanel> createState() => _NotificationsSidePanelState();
 }
 
 class _NotificationsSidePanelState extends State<NotificationsSidePanel> {
@@ -195,7 +194,7 @@ class _AlertCategoriesPanel extends StatelessWidget {
 class _AlertVolumeChart extends StatelessWidget {
   const _AlertVolumeChart();
 
-  final List<Map<String, dynamic>> _data = const [
+  static const List<Map<String, dynamic>> data = [
     {'day': 'Mon', 'critical': 1, 'warning': 2, 'info': 4},
     {'day': 'Tue', 'critical': 0, 'warning': 3, 'info': 5},
     {'day': 'Wed', 'critical': 2, 'warning': 1, 'info': 3},
@@ -207,14 +206,14 @@ class _AlertVolumeChart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return _PanelBox(
+    return const _PanelBox(
       title: 'Alert Volume — 7 Days',
       icon: Icons.bar_chart_rounded,
       iconColor: AppColors.secondaryAccent,
       child: SizedBox(
         height: 160,
         child: CustomPaint(
-          painter: _AlertBarPainter(data: _data),
+          painter: _AlertBarPainter(data: data),
           size: Size.infinite,
         ),
       ),
@@ -233,9 +232,8 @@ class _AlertBarPainter extends CustomPainter {
     const infoColor = AppColors.primaryLight;
 
     final maxTotal = data.fold<int>(0, (m, d) {
-      final t = (d['critical'] as int) +
-          (d['warning'] as int) +
-          (d['info'] as int);
+      final t =
+          (d['critical'] as int) + (d['warning'] as int) + (d['info'] as int);
       return t > m ? t : m;
     }).toDouble();
 
@@ -271,17 +269,11 @@ class _AlertBarPainter extends CustomPainter {
       final tp = TextPainter(
         text: TextSpan(
           text: d['day'] as String,
-          style: const TextStyle(
-            color: AppColors.secondaryText,
-            fontSize: 9,
-          ),
+          style: const TextStyle(color: AppColors.secondaryText, fontSize: 9),
         ),
         textDirection: TextDirection.ltr,
       )..layout();
-      tp.paint(
-        canvas,
-        Offset(x + w / 2 - tp.width / 2, size.height - 16),
-      );
+      tp.paint(canvas, Offset(x + w / 2 - tp.width / 2, size.height - 16));
     }
 
     // Legend
@@ -293,17 +285,25 @@ class _AlertBarPainter extends CustomPainter {
     double lx = 24;
     for (final (label, color) in legendItems) {
       canvas.drawRRect(
-        RRect.fromRectAndRadius(Rect.fromLTWH(lx, 0, 10, 7), const Radius.circular(2)),
+        RRect.fromRectAndRadius(
+          Rect.fromLTWH(lx, 0, 10, 7),
+          const Radius.circular(2),
+        ),
         Paint()..color = color,
       );
-      final tp = TextPainter(
-        text: TextSpan(
-          text: label,
-          style: const TextStyle(color: AppColors.secondaryText, fontSize: 9),
-        ),
-        textDirection: TextDirection.ltr,
-      )..layout();
-      tp.paint(canvas, Offset(lx + 13, 0));
+      final tp =
+          TextPainter(
+              text: TextSpan(
+                text: label,
+                style: const TextStyle(
+                  color: AppColors.secondaryText,
+                  fontSize: 9,
+                ),
+              ),
+              textDirection: TextDirection.ltr,
+            )
+            ..layout()
+            ..paint(canvas, Offset(lx + 13, 0));
       lx += tp.width + 26;
     }
   }
@@ -371,8 +371,9 @@ class _PreferencesPanel extends StatelessWidget {
                     ),
                     child: AnimatedAlign(
                       duration: const Duration(milliseconds: 200),
-                      alignment:
-                          e.value ? Alignment.centerRight : Alignment.centerLeft,
+                      alignment: e.value
+                          ? Alignment.centerRight
+                          : Alignment.centerLeft,
                       child: Container(
                         margin: const EdgeInsets.all(2),
                         width: 16,
@@ -459,7 +460,9 @@ class _DeliveryChannelsPanel extends StatelessWidget {
                       width: 36,
                       height: 20,
                       decoration: BoxDecoration(
-                        color: e.value ? AppColors.success : AppColors.secondaryText,
+                        color: e.value
+                            ? AppColors.success
+                            : AppColors.secondaryText,
                         borderRadius: BorderRadius.circular(10),
                       ),
                       child: AnimatedAlign(

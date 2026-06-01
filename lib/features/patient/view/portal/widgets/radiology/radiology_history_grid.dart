@@ -9,7 +9,8 @@ class RadiologyHistoryGrid extends ConsumerStatefulWidget {
   const RadiologyHistoryGrid({super.key});
 
   @override
-  ConsumerState<RadiologyHistoryGrid> createState() => _RadiologyHistoryGridState();
+  ConsumerState<RadiologyHistoryGrid> createState() =>
+      _RadiologyHistoryGridState();
 }
 
 class _RadiologyHistoryGridState extends ConsumerState<RadiologyHistoryGrid> {
@@ -17,10 +18,7 @@ class _RadiologyHistoryGridState extends ConsumerState<RadiologyHistoryGrid> {
 
   void _showToast(String message) {
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(message),
-        duration: const Duration(seconds: 2),
-      ),
+      SnackBar(content: Text(message), duration: const Duration(seconds: 2)),
     );
   }
 
@@ -44,7 +42,8 @@ class _RadiologyHistoryGridState extends ConsumerState<RadiologyHistoryGrid> {
               date: '28 Apr 2026',
               title: 'Chest PA + Lateral',
               meta: 'Dr. Kavita Mehta · AIIMS Rishikesh · Ref: RAD-2026-0421',
-              finding: 'Mild cardiomegaly. Both lung fields clear. No consolidation or pleural effusion detected.',
+              finding:
+                  'Mild cardiomegaly. Both lung fields clear. No consolidation or pleural effusion detected.',
               status: 'Abnormal',
               statusBg: AppColors.error.withValues(alpha: 0.15),
               statusFg: AppColors.error,
@@ -60,8 +59,10 @@ class _RadiologyHistoryGridState extends ConsumerState<RadiologyHistoryGrid> {
               typeFg: const Color(0xFF22C55E),
               date: '10 Mar 2026',
               title: 'USG Abdomen & Pelvis',
-              meta: 'Dr. Priya Kapoor · Himalayan Hospital · Ref: RAD-2026-0318',
-              finding: 'Liver mildly enlarged (15.2 cm). Mild fatty infiltration Grade I. Gall bladder, pancreas, spleen, both kidneys — normal. No free fluid.',
+              meta:
+                  'Dr. Priya Kapoor · Himalayan Hospital · Ref: RAD-2026-0318',
+              finding:
+                  'Liver mildly enlarged (15.2 cm). Mild fatty infiltration Grade I. Gall bladder, pancreas, spleen, both kidneys — normal. No free fluid.',
               status: 'Mild Change',
               statusBg: AppColors.secondaryAccent.withValues(alpha: 0.15),
               statusFg: AppColors.secondaryAccent,
@@ -78,7 +79,8 @@ class _RadiologyHistoryGridState extends ConsumerState<RadiologyHistoryGrid> {
               date: '15 Jan 2026',
               title: 'Right Knee AP & Lateral',
               meta: 'Dr. Suresh Gupta · Doon Hospital · Ref: RAD-2026-0089',
-              finding: 'Post-arthroscopy changes seen. Joint space preserved. No new effusion. Hardware intact. Bony alignment maintained.',
+              finding:
+                  'Post-arthroscopy changes seen. Joint space preserved. No new effusion. Hardware intact. Bony alignment maintained.',
               status: 'Normal (Post-op)',
               statusBg: AppColors.success.withValues(alpha: 0.15),
               statusFg: AppColors.success,
@@ -93,13 +95,21 @@ class _RadiologyHistoryGridState extends ConsumerState<RadiologyHistoryGrid> {
               typeFg: const Color(0xFFF72585),
               date: _isEchoConfirmed ? 'Confirmed' : 'Pending',
               title: '2D Echocardiogram',
-              meta: 'Dr. Rajesh Kumar · AIIMS Rishikesh · Scheduled: 20 May 2026',
-              finding: 'Ordered in response to mild cardiomegaly on chest X-ray. Will assess LV function, wall motion, EF%.',
+              meta:
+                  'Dr. Rajesh Kumar · AIIMS Rishikesh · Scheduled: 20 May 2026',
+              finding:
+                  'Ordered in response to mild cardiomegaly on chest X-ray. Will assess LV function, wall motion, EF%.',
               status: _isEchoConfirmed ? 'Confirmed' : 'Scheduled',
-              statusBg: _isEchoConfirmed ? AppColors.success.withValues(alpha: 0.15) : AppColors.secondaryAccent.withValues(alpha: 0.15),
-              statusFg: _isEchoConfirmed ? AppColors.success : AppColors.secondaryAccent,
+              statusBg: _isEchoConfirmed
+                  ? AppColors.success.withValues(alpha: 0.15)
+                  : AppColors.secondaryAccent.withValues(alpha: 0.15),
+              statusFg: _isEchoConfirmed
+                  ? AppColors.success
+                  : AppColors.secondaryAccent,
               onView: () {
-                _showToast('No DICOM images available yet for pending Echocardiogram.');
+                _showToast(
+                  'No DICOM images available yet for pending Echocardiogram.',
+                );
               },
               isPending: !_isEchoConfirmed,
               onAction: () {
@@ -153,19 +163,29 @@ class _RadiologyHistoryGridState extends ConsumerState<RadiologyHistoryGrid> {
                 ),
                 child: Text(
                   type,
-                  style: TextStyle(color: typeFg, fontSize: 8, fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    color: typeFg,
+                    fontSize: 8,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               Text(
                 date,
-                style: const TextStyle(color: AppColors.secondaryText, fontSize: 9),
+                style: const TextStyle(
+                  color: AppColors.secondaryText,
+                  fontSize: 9,
+                ),
               ),
             ],
           ),
           const SizedBox(height: 4),
           Text(
             title,
-            style: AppTextStyles.labelLarge.copyWith(color: Colors.white, fontSize: 12),
+            style: AppTextStyles.labelLarge.copyWith(
+              color: Colors.white,
+              fontSize: 12,
+            ),
           ),
           Text(
             meta,
@@ -182,7 +202,11 @@ class _RadiologyHistoryGridState extends ConsumerState<RadiologyHistoryGrid> {
             ),
             child: Text(
               finding,
-              style: const TextStyle(color: AppColors.primaryText, fontSize: 9, height: 1.4),
+              style: const TextStyle(
+                color: AppColors.primaryText,
+                fontSize: 9,
+                height: 1.4,
+              ),
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
@@ -194,7 +218,10 @@ class _RadiologyHistoryGridState extends ConsumerState<RadiologyHistoryGrid> {
               Row(
                 children: [
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 6,
+                      vertical: 2,
+                    ),
                     decoration: BoxDecoration(
                       color: statusBg,
                       borderRadius: BorderRadius.circular(20),
@@ -205,12 +232,19 @@ class _RadiologyHistoryGridState extends ConsumerState<RadiologyHistoryGrid> {
                         Container(
                           width: 4,
                           height: 4,
-                          decoration: BoxDecoration(color: statusFg, shape: BoxShape.circle),
+                          decoration: BoxDecoration(
+                            color: statusFg,
+                            shape: BoxShape.circle,
+                          ),
                         ),
                         const SizedBox(width: 4),
                         Text(
                           status,
-                          style: TextStyle(color: statusFg, fontSize: 8, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                            color: statusFg,
+                            fontSize: 8,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ],
                     ),
@@ -219,7 +253,10 @@ class _RadiologyHistoryGridState extends ConsumerState<RadiologyHistoryGrid> {
                     const SizedBox(width: 8),
                     Text(
                       'AI Confidence: $aiConfidence',
-                      style: const TextStyle(color: AppColors.secondaryText, fontSize: 8),
+                      style: const TextStyle(
+                        color: AppColors.secondaryText,
+                        fontSize: 8,
+                      ),
                     ),
                   ],
                 ],
@@ -235,11 +272,20 @@ class _RadiologyHistoryGridState extends ConsumerState<RadiologyHistoryGrid> {
                     style: OutlinedButton.styleFrom(
                       padding: EdgeInsets.zero,
                       side: const BorderSide(color: AppColors.border),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(6),
+                      ),
                     ),
                     onPressed: onAction,
-                    icon: const Icon(Icons.check_circle_outline_rounded, size: 12, color: AppColors.success),
-                    label: const Text('Confirm Appt', style: TextStyle(color: Colors.white, fontSize: 10)),
+                    icon: const Icon(
+                      Icons.check_circle_outline_rounded,
+                      size: 12,
+                      color: AppColors.success,
+                    ),
+                    label: const Text(
+                      'Confirm Appt',
+                      style: TextStyle(color: Colors.white, fontSize: 10),
+                    ),
                   ),
                 ),
                 const SizedBox(width: 6),
@@ -248,11 +294,23 @@ class _RadiologyHistoryGridState extends ConsumerState<RadiologyHistoryGrid> {
                     style: OutlinedButton.styleFrom(
                       padding: EdgeInsets.zero,
                       side: const BorderSide(color: AppColors.border),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(6),
+                      ),
                     ),
                     onPressed: () => _showToast('Rx Shared'),
-                    icon: const Icon(Icons.share_rounded, size: 12, color: AppColors.secondaryText),
-                    label: const Text('Share Rx', style: TextStyle(color: AppColors.secondaryText, fontSize: 10)),
+                    icon: const Icon(
+                      Icons.share_rounded,
+                      size: 12,
+                      color: AppColors.secondaryText,
+                    ),
+                    label: const Text(
+                      'Share Rx',
+                      style: TextStyle(
+                        color: AppColors.secondaryText,
+                        fontSize: 10,
+                      ),
+                    ),
                   ),
                 ),
               ] else ...[
@@ -261,11 +319,20 @@ class _RadiologyHistoryGridState extends ConsumerState<RadiologyHistoryGrid> {
                     style: OutlinedButton.styleFrom(
                       padding: EdgeInsets.zero,
                       side: const BorderSide(color: AppColors.border),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(6),
+                      ),
                     ),
                     onPressed: onView,
-                    icon: const Icon(Icons.visibility_rounded, size: 12, color: AppColors.secondaryText),
-                    label: const Text('View', style: TextStyle(color: Colors.white, fontSize: 10)),
+                    icon: const Icon(
+                      Icons.visibility_rounded,
+                      size: 12,
+                      color: AppColors.secondaryText,
+                    ),
+                    label: const Text(
+                      'View',
+                      style: TextStyle(color: Colors.white, fontSize: 10),
+                    ),
                   ),
                 ),
                 const SizedBox(width: 4),
@@ -274,11 +341,23 @@ class _RadiologyHistoryGridState extends ConsumerState<RadiologyHistoryGrid> {
                     style: OutlinedButton.styleFrom(
                       padding: EdgeInsets.zero,
                       side: const BorderSide(color: AppColors.border),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(6),
+                      ),
                     ),
                     onPressed: () => _showToast('Downloading scan report...'),
-                    icon: const Icon(Icons.download_rounded, size: 12, color: AppColors.secondaryText),
-                    label: const Text('Download', style: TextStyle(color: AppColors.secondaryText, fontSize: 10)),
+                    icon: const Icon(
+                      Icons.download_rounded,
+                      size: 12,
+                      color: AppColors.secondaryText,
+                    ),
+                    label: const Text(
+                      'Download',
+                      style: TextStyle(
+                        color: AppColors.secondaryText,
+                        fontSize: 10,
+                      ),
+                    ),
                   ),
                 ),
                 const SizedBox(width: 4),
@@ -287,11 +366,23 @@ class _RadiologyHistoryGridState extends ConsumerState<RadiologyHistoryGrid> {
                     style: OutlinedButton.styleFrom(
                       padding: EdgeInsets.zero,
                       side: const BorderSide(color: AppColors.border),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(6),
+                      ),
                     ),
                     onPressed: () => _showToast('Scan shared successfully'),
-                    icon: const Icon(Icons.share_rounded, size: 12, color: AppColors.secondaryText),
-                    label: const Text('Share', style: TextStyle(color: AppColors.secondaryText, fontSize: 10)),
+                    icon: const Icon(
+                      Icons.share_rounded,
+                      size: 12,
+                      color: AppColors.secondaryText,
+                    ),
+                    label: const Text(
+                      'Share',
+                      style: TextStyle(
+                        color: AppColors.secondaryText,
+                        fontSize: 10,
+                      ),
+                    ),
                   ),
                 ),
               ],

@@ -11,7 +11,8 @@ class AiInsights extends StatelessWidget {
     final insights = <Map<String, dynamic>>[
       {
         'title': 'Diet AI Recommendation',
-        'desc': 'Your sodium intake (est. 3,800 mg/day) exceeds the 2,300 mg target. AI suggests the DASH diet tailored for North Indian cuisine — dal, lauki sabzi, curd over salt-rich pickles.',
+        'desc':
+            'Your sodium intake (est. 3,800 mg/day) exceeds the 2,300 mg target. AI suggests the DASH diet tailored for North Indian cuisine — dal, lauki sabzi, curd over salt-rich pickles.',
         'icon': Icons.restaurant_menu_rounded,
         'color': AppColors.success,
         'actionLabel': 'View 7-day meal plan',
@@ -19,7 +20,8 @@ class AiInsights extends StatelessWidget {
       },
       {
         'title': 'Activity AI Coaching',
-        'desc': 'Step count 3,240 today — 35% of 10K target. Based on your knee OA, AI recommends swimming/aqua-aerobics 3×/week + 30 min zone-2 walking daily. Avoid HIIT until ortho review.',
+        'desc':
+            'Step count 3,240 today — 35% of 10K target. Based on your knee OA, AI recommends swimming/aqua-aerobics 3×/week + 30 min zone-2 walking daily. Avoid HIIT until ortho review.',
         'icon': Icons.directions_run_rounded,
         'color': AppColors.primaryLight,
         'actionLabel': 'Get exercise plan',
@@ -27,7 +29,8 @@ class AiInsights extends StatelessWidget {
       },
       {
         'title': 'Sleep AI Analysis',
-        'desc': 'Avg sleep 5.8 hrs vs. 7–8 hr target. AI detects irregular bedtimes (10 PM–1 AM range). Sleep debt accumulated: 8.2 hrs this week. Melatonin circadian reset protocol suggested.',
+        'desc':
+            'Avg sleep 5.8 hrs vs. 7–8 hr target. AI detects irregular bedtimes (10 PM–1 AM range). Sleep debt accumulated: 8.2 hrs this week. Melatonin circadian reset protocol suggested.',
         'icon': Icons.nightlight_round_rounded,
         'color': Colors.purpleAccent,
         'actionLabel': 'Sleep protocol',

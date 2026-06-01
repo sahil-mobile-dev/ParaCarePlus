@@ -53,7 +53,7 @@ Map<String, dynamic> _$$ActivityFeedItemImplToJson(
   'title': instance.title,
   'description': instance.description,
   'timestamp': instance.timestamp.toIso8601String(),
-  'type': _$ActivityTypeEnumMap[instance.type]!,
+  'type': _$ActivityTypeEnumMap[instance.type],
 };
 
 const _$ActivityTypeEnumMap = {
@@ -100,7 +100,7 @@ Map<String, dynamic> _$$CriticalPatientImplToJson(
   'bed': instance.bed,
   'condition': instance.condition,
   'assignedTo': instance.assignedTo,
-  'severity': _$PatientSeverityEnumMap[instance.severity]!,
+  'severity': _$PatientSeverityEnumMap[instance.severity],
 };
 
 const _$PatientSeverityEnumMap = {

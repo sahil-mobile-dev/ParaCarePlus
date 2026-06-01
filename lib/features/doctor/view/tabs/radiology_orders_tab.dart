@@ -50,24 +50,38 @@ class _RadiologyOrdersTabState extends ConsumerState<RadiologyOrdersTab> {
                       // Left side - RIS queue
                       Expanded(
                         flex: 10,
-                        child: _buildReportsQueue(radReports, currentReport, notifier),
+                        child: _buildReportsQueue(
+                          radReports,
+                          currentReport,
+                          notifier,
+                        ),
                       ),
                       const SizedBox(width: AppSpacing.lg),
                       // Right side - Clinical verification desk & DICOM mockup
                       Expanded(
                         flex: 12,
-                        child: _buildRadiologyWorkspace(currentReport, notifier),
+                        child: _buildRadiologyWorkspace(
+                          currentReport,
+                          notifier,
+                        ),
                       ),
                     ],
                   )
                 : Column(
                     children: [
                       Expanded(
-                        child: _buildReportsQueue(radReports, currentReport, notifier),
+                        child: _buildReportsQueue(
+                          radReports,
+                          currentReport,
+                          notifier,
+                        ),
                       ),
                       const SizedBox(height: AppSpacing.lg),
                       Expanded(
-                        child: _buildRadiologyWorkspace(currentReport, notifier),
+                        child: _buildRadiologyWorkspace(
+                          currentReport,
+                          notifier,
+                        ),
                       ),
                     ],
                   ),
@@ -83,15 +97,24 @@ class _RadiologyOrdersTabState extends ConsumerState<RadiologyOrdersTab> {
       children: [
         const Row(
           children: [
-            Icon(Icons.settings_remote_outlined, color: AppColors.primaryLight, size: 28),
+            Icon(
+              Icons.settings_remote_outlined,
+              color: AppColors.primaryLight,
+              size: 28,
+            ),
             SizedBox(width: 10),
-            Text('Radiology Orders & Diagnostics (RIS)', style: AppTextStyles.titleMedium),
+            Text(
+              'Radiology Orders & Diagnostics (RIS)',
+              style: AppTextStyles.titleMedium,
+            ),
           ],
         ),
         const SizedBox(height: 4),
         Text(
           'Review imaging diagnostics, modalities, and expert RIS reports. $totalCount active cases under tracking.',
-          style: AppTextStyles.bodySmall.copyWith(color: AppColors.secondaryText),
+          style: AppTextStyles.bodySmall.copyWith(
+            color: AppColors.secondaryText,
+          ),
         ),
       ],
     );
@@ -131,7 +154,9 @@ class _RadiologyOrdersTabState extends ConsumerState<RadiologyOrdersTab> {
                       final r = reports[i];
                       final isSelected = currentReport?.id == r.id;
                       final isCT = r.testName.contains('CT');
-                      final isEcho = r.testName.contains('Echo') || r.testName.contains('USG');
+                      final isEcho =
+                          r.testName.contains('Echo') ||
+                          r.testName.contains('USG');
 
                       var modalityColor = Colors.teal;
                       var modalityText = 'X-RAY';
@@ -158,7 +183,10 @@ class _RadiologyOrdersTabState extends ConsumerState<RadiologyOrdersTab> {
                           ),
                         ),
                         child: ListTile(
-                          contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                          contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 6,
+                          ),
                           onTap: () {
                             setState(() => _showDicomViewer = false);
                             notifier.selectReportToReview(r);
@@ -185,11 +213,17 @@ class _RadiologyOrdersTabState extends ConsumerState<RadiologyOrdersTab> {
                                 ),
                               ),
                               Container(
-                                padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 2),
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 6,
+                                  vertical: 2,
+                                ),
                                 decoration: BoxDecoration(
                                   color: modalityColor.withValues(alpha: 0.15),
                                   borderRadius: BorderRadius.circular(20),
-                                  border: Border.all(color: modalityColor, width: 0.5),
+                                  border: Border.all(
+                                    color: modalityColor,
+                                    width: 0.5,
+                                  ),
                                 ),
                                 child: Text(
                                   modalityText,
@@ -208,7 +242,9 @@ class _RadiologyOrdersTabState extends ConsumerState<RadiologyOrdersTab> {
                               const SizedBox(height: 4),
                               Text(
                                 r.testName,
-                                style: AppTextStyles.bodySmall.copyWith(fontSize: 11),
+                                style: AppTextStyles.bodySmall.copyWith(
+                                  fontSize: 11,
+                                ),
                                 maxLines: 1,
                                 overflow: TextOverflow.ellipsis,
                               ),
@@ -224,7 +260,10 @@ class _RadiologyOrdersTabState extends ConsumerState<RadiologyOrdersTab> {
     );
   }
 
-  Widget _buildRadiologyWorkspace(LabReport? report, DoctorDashboardViewModel notifier) {
+  Widget _buildRadiologyWorkspace(
+    LabReport? report,
+    DoctorDashboardViewModel notifier,
+  ) {
     if (report == null) return _buildEmptyVerificationState();
 
     if (_showDicomViewer) {
@@ -256,11 +295,18 @@ class _RadiologyOrdersTabState extends ConsumerState<RadiologyOrdersTab> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(report.patientName, style: AppTextStyles.labelLarge.copyWith(fontWeight: FontWeight.bold)),
+                    Text(
+                      report.patientName,
+                      style: AppTextStyles.labelLarge.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                     const SizedBox(height: 2),
                     Text(
                       'RIS Study UID: ${report.id} · Performed: ${report.orderedDate}',
-                      style: AppTextStyles.bodySmall.copyWith(color: AppColors.secondaryText),
+                      style: AppTextStyles.bodySmall.copyWith(
+                        color: AppColors.secondaryText,
+                      ),
                     ),
                   ],
                 ),
@@ -275,7 +321,10 @@ class _RadiologyOrdersTabState extends ConsumerState<RadiologyOrdersTab> {
                 const SizedBox(height: 6),
                 Text(
                   report.testName,
-                  style: AppTextStyles.bodyMedium.copyWith(color: AppColors.primaryText, fontWeight: FontWeight.bold),
+                  style: AppTextStyles.bodyMedium.copyWith(
+                    color: AppColors.primaryText,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 const SizedBox(height: 16),
                 _buildSectionHeader('Radiologist Findings & Transcription'),
@@ -292,9 +341,16 @@ class _RadiologyOrdersTabState extends ConsumerState<RadiologyOrdersTab> {
                     children: [
                       const Row(
                         children: [
-                          Icon(Icons.assignment_outlined, color: AppColors.primaryLight, size: 18),
+                          Icon(
+                            Icons.assignment_outlined,
+                            color: AppColors.primaryLight,
+                            size: 18,
+                          ),
                           SizedBox(width: 8),
-                          Text('RIS Transcription Note', style: AppTextStyles.labelSmall),
+                          Text(
+                            'RIS Transcription Note',
+                            style: AppTextStyles.labelSmall,
+                          ),
                         ],
                       ),
                       const SizedBox(height: 12),
@@ -314,7 +370,11 @@ class _RadiologyOrdersTabState extends ConsumerState<RadiologyOrdersTab> {
                 const SizedBox(height: 8),
                 Row(
                   children: [
-                    const Icon(Icons.cloud_done_rounded, color: AppColors.success, size: 16),
+                    const Icon(
+                      Icons.cloud_done_rounded,
+                      color: AppColors.success,
+                      size: 16,
+                    ),
                     const SizedBox(width: 8),
                     Text(
                       'PACS imaging study locked with secure clinical token.',
@@ -330,12 +390,21 @@ class _RadiologyOrdersTabState extends ConsumerState<RadiologyOrdersTab> {
             children: [
               Expanded(
                 child: TextButton.icon(
-                  icon: const Icon(Icons.refresh_rounded, size: 18, color: Colors.orange),
-                  label: const Text('Re-scan Study', style: TextStyle(color: Colors.orange)),
+                  icon: const Icon(
+                    Icons.refresh_rounded,
+                    size: 18,
+                    color: Colors.orange,
+                  ),
+                  label: const Text(
+                    'Re-scan Study',
+                    style: TextStyle(color: Colors.orange),
+                  ),
                   onPressed: () {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text('Re-scan investigation ordered for Patient ${report.patientName}.'),
+                        content: Text(
+                          'Re-scan investigation ordered for Patient ${report.patientName}.',
+                        ),
                         backgroundColor: Colors.orange,
                       ),
                     );
@@ -346,13 +415,18 @@ class _RadiologyOrdersTabState extends ConsumerState<RadiologyOrdersTab> {
               Expanded(
                 flex: 2,
                 child: ElevatedButton.icon(
-                  icon: const Icon(Icons.picture_in_picture_alt_rounded, size: 18),
+                  icon: const Icon(
+                    Icons.picture_in_picture_alt_rounded,
+                    size: 18,
+                  ),
                   label: const Text('Launch DICOM Viewer'),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primary,
                     foregroundColor: Colors.white,
                     padding: const EdgeInsets.symmetric(vertical: 12),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
                   ),
                   onPressed: () {
                     setState(() => _showDicomViewer = true);
@@ -367,7 +441,8 @@ class _RadiologyOrdersTabState extends ConsumerState<RadiologyOrdersTab> {
   }
 
   Widget _buildDicomViewerPanel(LabReport report) {
-    const mockImagePath = r'C:\Users\SHREE232\.gemini\antigravity-ide\brain\3fdf6894-4697-478d-8ae2-0f5cdde5ef93\radiology_dicom_mock_1779737475948.png';
+    const mockImagePath =
+        r'C:\Users\SHREE232\.gemini\antigravity-ide\brain\3fdf6894-4697-478d-8ae2-0f5cdde5ef93\radiology_dicom_mock_1779737475948.png';
     final hasFile = File(mockImagePath).existsSync();
 
     return Container(
@@ -375,18 +450,28 @@ class _RadiologyOrdersTabState extends ConsumerState<RadiologyOrdersTab> {
       decoration: BoxDecoration(
         color: const Color(0xFF070E17),
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(color: AppColors.primary.withValues(alpha: 0.3), width: 1.5),
+        border: Border.all(
+          color: AppColors.primary.withValues(alpha: 0.3),
+          width: 1.5,
+        ),
       ),
       child: Column(
         children: [
           Row(
             children: [
-              const Icon(Icons.grid_goldenratio_rounded, color: AppColors.primaryLight, size: 20),
+              const Icon(
+                Icons.grid_goldenratio_rounded,
+                color: AppColors.primaryLight,
+                size: 20,
+              ),
               const SizedBox(width: 8),
               Expanded(
                 child: Text(
                   'PACS/DICOM Diagnostic Desk — ${report.patientName}',
-                  style: AppTextStyles.labelMedium.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+                  style: AppTextStyles.labelMedium.copyWith(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
               IconButton(
@@ -413,10 +498,26 @@ class _RadiologyOrdersTabState extends ConsumerState<RadiologyOrdersTab> {
                   child: hasFile
                       ? ColorFiltered(
                           colorFilter: ColorFilter.matrix([
-                            _contrastLevel, 0, 0, 0, 0,
-                            0, _contrastLevel, 0, 0, 0,
-                            0, 0, _contrastLevel, 0, 0,
-                            0, 0, 0, 1, 0,
+                            _contrastLevel,
+                            0,
+                            0,
+                            0,
+                            0,
+                            0,
+                            _contrastLevel,
+                            0,
+                            0,
+                            0,
+                            0,
+                            0,
+                            _contrastLevel,
+                            0,
+                            0,
+                            0,
+                            0,
+                            0,
+                            1,
+                            0,
                           ]),
                           child: Transform.scale(
                             scale: _zoomLevel,
@@ -430,9 +531,18 @@ class _RadiologyOrdersTabState extends ConsumerState<RadiologyOrdersTab> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              const Icon(Icons.broken_image_outlined, color: Colors.white24, size: 48),
+                              const Icon(
+                                Icons.broken_image_outlined,
+                                color: Colors.white24,
+                                size: 48,
+                              ),
                               const SizedBox(height: 12),
-                              Text('No Imaging File Loaded', style: AppTextStyles.bodyMedium.copyWith(color: Colors.white38)),
+                              Text(
+                                'No Imaging File Loaded',
+                                style: AppTextStyles.bodyMedium.copyWith(
+                                  color: Colors.white38,
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -444,9 +554,30 @@ class _RadiologyOrdersTabState extends ConsumerState<RadiologyOrdersTab> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('ZOOM: ${(_zoomLevel * 100).toInt()}%', style: const TextStyle(color: Colors.green, fontSize: 10, fontFamily: 'monospace')),
-                      Text('CONTRAST: ${(_contrastLevel * 100).toInt()}%', style: const TextStyle(color: Colors.green, fontSize: 10, fontFamily: 'monospace')),
-                      const Text('PACS ID: ABDM-CT-9824', style: TextStyle(color: Colors.green, fontSize: 10, fontFamily: 'monospace')),
+                      Text(
+                        'ZOOM: ${(_zoomLevel * 100).toInt()}%',
+                        style: const TextStyle(
+                          color: Colors.green,
+                          fontSize: 10,
+                          fontFamily: 'monospace',
+                        ),
+                      ),
+                      Text(
+                        'CONTRAST: ${(_contrastLevel * 100).toInt()}%',
+                        style: const TextStyle(
+                          color: Colors.green,
+                          fontSize: 10,
+                          fontFamily: 'monospace',
+                        ),
+                      ),
+                      const Text(
+                        'PACS ID: ABDM-CT-9824',
+                        style: TextStyle(
+                          color: Colors.green,
+                          fontSize: 10,
+                          fontFamily: 'monospace',
+                        ),
+                      ),
                     ],
                   ),
                 ),
@@ -458,13 +589,19 @@ class _RadiologyOrdersTabState extends ConsumerState<RadiologyOrdersTab> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               _buildDicomTool(Icons.zoom_in_rounded, 'Zoom In', () {
-                setState(() => _zoomLevel = (_zoomLevel + 0.15).clamp(1.0, 3.0));
+                setState(
+                  () => _zoomLevel = (_zoomLevel + 0.15).clamp(1.0, 3.0),
+                );
               }),
               _buildDicomTool(Icons.zoom_out_rounded, 'Zoom Out', () {
-                setState(() => _zoomLevel = (_zoomLevel - 0.15).clamp(1.0, 3.0));
+                setState(
+                  () => _zoomLevel = (_zoomLevel - 0.15).clamp(1.0, 3.0),
+                );
               }),
               _buildDicomTool(Icons.exposure_rounded, 'High Contrast', () {
-                setState(() => _contrastLevel = (_contrastLevel + 0.2).clamp(1.0, 2.5));
+                setState(
+                  () => _contrastLevel = (_contrastLevel + 0.2).clamp(1.0, 2.5),
+                );
               }),
               _buildDicomTool(Icons.restart_alt_rounded, 'Reset Controls', () {
                 setState(() {
@@ -492,7 +629,10 @@ class _RadiologyOrdersTabState extends ConsumerState<RadiologyOrdersTab> {
           ),
         ),
         const SizedBox(height: 4),
-        Text(label, style: const TextStyle(color: Colors.white70, fontSize: 9.5)),
+        Text(
+          label,
+          style: const TextStyle(color: Colors.white70, fontSize: 9.5),
+        ),
       ],
     );
   }
@@ -517,7 +657,10 @@ class _RadiologyOrdersTabState extends ConsumerState<RadiologyOrdersTab> {
           SizedBox(height: 12),
           Text(
             'Imaging Studies Complete',
-            style: TextStyle(color: AppColors.primaryText, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              color: AppColors.primaryText,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           SizedBox(height: 4),
           Text(
@@ -540,11 +683,18 @@ class _RadiologyOrdersTabState extends ConsumerState<RadiologyOrdersTab> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.settings_remote_outlined, size: 48, color: AppColors.secondaryText),
+            Icon(
+              Icons.settings_remote_outlined,
+              size: 48,
+              color: AppColors.secondaryText,
+            ),
             SizedBox(height: 12),
             Text(
               'Select Imaging Result',
-              style: TextStyle(color: AppColors.primaryText, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                color: AppColors.primaryText,
+                fontWeight: FontWeight.bold,
+              ),
             ),
             SizedBox(height: 4),
             Text(
