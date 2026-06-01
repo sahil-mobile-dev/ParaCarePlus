@@ -19,8 +19,6 @@ class GovRibbon extends StatelessWidget {
             Color(0xFFFF6900), // Saffron
             Color(0xFFFF9D00), // Gold-orange
           ],
-          begin: Alignment.centerLeft,
-          end: Alignment.centerRight,
         ),
       ),
       padding: const EdgeInsets.symmetric(

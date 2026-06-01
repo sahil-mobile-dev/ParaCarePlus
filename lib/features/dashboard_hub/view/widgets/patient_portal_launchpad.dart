@@ -126,7 +126,7 @@ class PatientPortalLaunchpad extends StatelessWidget {
             ),
             SizedBox(height: 2),
             Text(
-              'ABDM-linked · ABHA identity · 20 patient modules · Ramesh Kumar demo',
+              'ABDM-linked · ABHA identity · \n20 patient modules · Ramesh Kumar demo',
               style: TextStyle(
                 fontSize: 11,
                 color: AppColors.secondaryText,

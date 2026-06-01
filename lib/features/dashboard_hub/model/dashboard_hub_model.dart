@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:paracareplus/routes/route_names.dart';
 
 class DashboardModuleItem {
@@ -12,11 +13,11 @@ class DashboardModuleItem {
     required this.routeName,
     required this.colorTheme,
     this.isFeatured = false,
+    this.onTap,
   });
   final String title;
   final String description;
-  final String
-  category; // 'state', 'clinical', 'ops', 'ai', 'public', 'finance'
+  final String category;
   final List<String> tags;
   final String emoji;
   final String badge;
@@ -24,8 +25,9 @@ class DashboardModuleItem {
   final String routeName;
   final bool isFeatured;
   final String colorTheme;
+  final VoidCallback? onTap;
 
-  static const List<DashboardModuleItem> items = [
+  static List<DashboardModuleItem> items = [
     DashboardModuleItem(
       title: 'Executive State Health Command Center',
       description:
@@ -40,9 +42,10 @@ class DashboardModuleItem {
         'GIS Maps': '5',
         'AI': 'Predictions',
       },
-      routeName: RouteNames.dashboard,
+      routeName: RouteNames.stateCommand,
       isFeatured: true,
       colorTheme: 'blue',
+      onTap: () {},
     ),
     DashboardModuleItem(
       title: 'ABDM Compliance Dashboard',
@@ -55,6 +58,7 @@ class DashboardModuleItem {
       metrics: {'KPIs': '16', 'Charts': '7', 'FHIR': 'API'},
       routeName: RouteNames.dashboard,
       colorTheme: 'teal',
+      onTap: () {},
     ),
     DashboardModuleItem(
       title: 'State Disease Surveillance',
@@ -67,6 +71,7 @@ class DashboardModuleItem {
       metrics: {'KPIs': '12', 'Heatmaps': '5', 'GIS': 'Active'},
       routeName: RouteNames.dashboard,
       colorTheme: 'red',
+      onTap: () {},
     ),
     DashboardModuleItem(
       title: 'State Admin Overview',
@@ -79,6 +84,7 @@ class DashboardModuleItem {
       metrics: {'Districts': '13', 'Charts': '20+'},
       routeName: RouteNames.dashboard,
       colorTheme: 'indigo',
+      onTap: () {},
     ),
     DashboardModuleItem(
       title: 'Hospital Performance Dashboard',
@@ -91,6 +97,7 @@ class DashboardModuleItem {
       metrics: {'KPIs': '17', 'Charts': '7', 'Sunbursts': '3'},
       routeName: RouteNames.dashboard,
       colorTheme: 'green',
+      onTap: () {},
     ),
     DashboardModuleItem(
       title: 'OPD Analytics Dashboard',
@@ -103,6 +110,7 @@ class DashboardModuleItem {
       metrics: {'KPIs': '10', 'Charts': '5', 'Heatmaps': '3'},
       routeName: RouteNames.opdToken,
       colorTheme: 'blue',
+      onTap: () {},
     ),
     DashboardModuleItem(
       title: 'IPD & Bed Management',
@@ -115,6 +123,7 @@ class DashboardModuleItem {
       metrics: {'KPIs': '9', 'Charts': '4', 'GIS': 'Maps'},
       routeName: RouteNames.ipdAdmission,
       colorTheme: 'purple',
+      onTap: () {},
     ),
     DashboardModuleItem(
       title: 'Emergency & Trauma Dashboard',
@@ -127,6 +136,7 @@ class DashboardModuleItem {
       metrics: {'KPIs': '6', 'Charts': '4', 'GIS': '3'},
       routeName: RouteNames.ambulance,
       colorTheme: 'red',
+      onTap: () {},
     ),
     DashboardModuleItem(
       title: 'Maternal & Child Health',
@@ -139,6 +149,7 @@ class DashboardModuleItem {
       metrics: {'KPIs': '7', 'Charts': '4', 'Heatmaps': '2'},
       routeName: RouteNames.dashboard,
       colorTheme: 'pink',
+      onTap: () {},
     ),
     DashboardModuleItem(
       title: 'Radiology & Imaging',
@@ -151,6 +162,7 @@ class DashboardModuleItem {
       metrics: {'KPIs': '5', 'Charts': '3', 'AI': 'Findings'},
       routeName: RouteNames.radiology,
       colorTheme: 'cyan',
+      onTap: () {},
     ),
     DashboardModuleItem(
       title: 'Laboratory & Diagnostics',
@@ -163,6 +175,7 @@ class DashboardModuleItem {
       metrics: {'KPIs': '7', 'Charts': '4', 'Heatmaps': '2'},
       routeName: RouteNames.laboratory,
       colorTheme: 'teal',
+      onTap: () {},
     ),
     DashboardModuleItem(
       title: 'Blood Bank Management',
@@ -175,6 +188,7 @@ class DashboardModuleItem {
       metrics: {'Groups': '8', 'Live': 'Inventory'},
       routeName: RouteNames.bloodbank,
       colorTheme: 'red',
+      onTap: () {},
     ),
     DashboardModuleItem(
       title: 'Pharmacy & Drug Intelligence Dashboard',
@@ -188,6 +202,7 @@ class DashboardModuleItem {
       routeName: RouteNames.pharmacy,
       isFeatured: true,
       colorTheme: 'orange',
+      onTap: () {},
     ),
     DashboardModuleItem(
       title: 'Inventory & Asset Management',
@@ -200,6 +215,7 @@ class DashboardModuleItem {
       metrics: {'Items': '1,800+', 'Assets': '284'},
       routeName: 'inventory',
       colorTheme: 'brown',
+      onTap: () {},
     ),
     DashboardModuleItem(
       title: 'HR & Workforce Dashboard',
@@ -212,6 +228,7 @@ class DashboardModuleItem {
       metrics: {'Staff': '248', 'KPIs': '7'},
       routeName: RouteNames.hr,
       colorTheme: 'indigo',
+      onTap: () {},
     ),
     DashboardModuleItem(
       title: 'Finance & Revenue Intelligence Dashboard',
@@ -225,6 +242,7 @@ class DashboardModuleItem {
       routeName: RouteNames.billing,
       isFeatured: true,
       colorTheme: 'green',
+      onTap: () {},
     ),
     DashboardModuleItem(
       title: 'Ayushman Bharat / SHA Claims',
@@ -237,6 +255,7 @@ class DashboardModuleItem {
       metrics: {'KPIs': '7', 'Charts': '4', 'Sunbursts': '2'},
       routeName: RouteNames.tpa,
       colorTheme: 'gold',
+      onTap: () {},
     ),
     DashboardModuleItem(
       title: 'Billing & Collections',
@@ -249,6 +268,7 @@ class DashboardModuleItem {
       metrics: {'Live': 'Billing', 'AB+': 'Schemes'},
       routeName: RouteNames.billing,
       colorTheme: 'teal',
+      onTap: () {},
     ),
     DashboardModuleItem(
       title: 'AI & Predictive Healthcare Intelligence',
@@ -267,6 +287,7 @@ class DashboardModuleItem {
       routeName: RouteNames.dashboard,
       isFeatured: true,
       colorTheme: 'purple',
+      onTap: () {},
     ),
     DashboardModuleItem(
       title: 'Quick Appointment Portal',
@@ -279,6 +300,7 @@ class DashboardModuleItem {
       metrics: {'Steps': '6', 'OTP': 'Enabled'},
       routeName: RouteNames.opdToken,
       colorTheme: 'green',
+      onTap: () {},
     ),
     DashboardModuleItem(
       title: 'Transfer & Posting Workflow',
@@ -291,6 +313,7 @@ class DashboardModuleItem {
       metrics: {'Stages': '7', 'Workflow': 'Active'},
       routeName: RouteNames.dashboard,
       colorTheme: 'purple',
+      onTap: () {},
     ),
     DashboardModuleItem(
       title: 'Certificates & Documents',
@@ -303,6 +326,7 @@ class DashboardModuleItem {
       metrics: {'Types': '8', 'Live': 'Preview'},
       routeName: RouteNames.dashboard,
       colorTheme: 'brown',
+      onTap: () {},
     ),
     DashboardModuleItem(
       title: 'Doctor Clinical Workspace',
@@ -315,6 +339,7 @@ class DashboardModuleItem {
       metrics: {'OPD': 'Queue', 'EMR': 'Integrated'},
       routeName: RouteNames.doctorDashboard,
       colorTheme: 'blue',
+      onTap: () {},
     ),
     DashboardModuleItem(
       title: 'Nursing Station Dashboard',
@@ -327,6 +352,7 @@ class DashboardModuleItem {
       metrics: {'Ward': 'Vitals', 'MAR': 'Active'},
       routeName: RouteNames.dashboard,
       colorTheme: 'pink',
+      onTap: () {},
     ),
     DashboardModuleItem(
       title: 'Facility Onboarding Wizard',
@@ -339,6 +365,7 @@ class DashboardModuleItem {
       metrics: {'Steps': '8', 'Wizard': 'Active'},
       routeName: RouteNames.dashboard,
       colorTheme: 'orange',
+      onTap: () {},
     ),
     DashboardModuleItem(
       title: 'Hospital Admin Dashboard',
@@ -351,6 +378,7 @@ class DashboardModuleItem {
       metrics: {'Live Map': 'Beds', 'Staff': 'Active'},
       routeName: RouteNames.dashboard,
       colorTheme: 'indigo',
+      onTap: () {},
     ),
     DashboardModuleItem(
       title: 'Ambulance Fleet & Dispatch',
@@ -363,6 +391,7 @@ class DashboardModuleItem {
       metrics: {'Fleet': '8', 'Live': 'Tracking'},
       routeName: RouteNames.ambulance,
       colorTheme: 'red',
+      onTap: () {},
     ),
   ];
 }

@@ -44,9 +44,7 @@ class DoctorDashboardScreen extends ConsumerWidget {
   Widget _buildSelectedTabContent(DoctorTab tab) {
     switch (tab) {
       case DoctorTab.console:
-        return const DoctorConsoleTab(
-          viewMode: DoctorConsoleViewMode.fullConsole,
-        );
+        return const DoctorConsoleTab();
       case DoctorTab.opdQueue:
         return const DoctorConsoleTab(viewMode: DoctorConsoleViewMode.opdQueue);
       case DoctorTab.ipdRound:

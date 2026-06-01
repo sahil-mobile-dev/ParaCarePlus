@@ -34,6 +34,7 @@ import 'package:paracareplus/features/patient/view/portal/patient_vaccination_sc
 import 'package:paracareplus/features/patient/view/portal/patient_wellness_screen.dart';
 import 'package:paracareplus/features/pharmacy/view/pharmacy_screen.dart';
 import 'package:paracareplus/features/radiology/view/radiology_screen.dart';
+import 'package:paracareplus/features/state_command/view/state_command_screen.dart';
 import 'package:paracareplus/features/tpa/view/tpa_screen.dart';
 import 'package:paracareplus/routes/route_names.dart';
 import 'package:paracareplus/routes/route_paths.dart';
@@ -62,6 +63,11 @@ final appRouterStateProvider = Provider<GoRouter>((ref) {
         path: RoutePaths.dashboardHub,
         name: RouteNames.dashboardHub,
         builder: (context, state) => const DashboardHubScreen(),
+      ),
+      GoRoute(
+        path: RoutePaths.stateCommand,
+        name: RouteNames.stateCommand,
+        builder: (context, state) => const StateCommandScreen(),
       ),
       GoRoute(
         path: RoutePaths.doctorDashboard,

@@ -159,11 +159,7 @@ class _QuickStatCard extends StatelessWidget {
             height: 3,
             child: Container(
               decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: accentColors,
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
-                ),
+                gradient: LinearGradient(colors: accentColors),
               ),
             ),
           ),

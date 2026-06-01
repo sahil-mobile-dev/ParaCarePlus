@@ -22,6 +22,7 @@ class RouteNames {
   static const String ipdAdmission = 'ipdAdmission';
   static const String hr = 'hr';
   static const String tpa = 'tpa';
+  static const String stateCommand = 'stateCommand';
 
   // Patient Portal (Phase C)
   static const String patientLogin = 'patientLogin';

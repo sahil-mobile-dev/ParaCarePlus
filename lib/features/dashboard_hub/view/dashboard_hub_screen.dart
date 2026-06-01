@@ -77,8 +77,8 @@ class _DashboardHubScreenState extends ConsumerState<DashboardHubScreen> {
 
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: const AppHeader(),
-      drawer: isWideScreen ? null : const Drawer(child: AppSidebar()),
+      // appBar: const AppHeader(),
+      // drawer: isWideScreen ? null : const Drawer(child: AppSidebar()),
       body: SafeArea(
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -353,49 +353,41 @@ class _DashboardHubScreenState extends ConsumerState<DashboardHubScreen> {
   }
 
   Widget _buildSearchField() {
-    return Container(
-      decoration: BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: AppColors.border, width: 2),
-      ),
-      padding: const EdgeInsets.symmetric(horizontal: AppSpacing.md),
-      child: TextField(
-        controller: _searchController,
-        style: const TextStyle(color: AppColors.primaryText, fontSize: 14),
-        decoration: InputDecoration(
-          hintText: 'Search dashboards, KPIs, modules...',
-          hintStyle: const TextStyle(
-            color: AppColors.secondaryText,
-            fontSize: 13,
-          ),
-          icon: const Icon(
-            Icons.search_rounded,
-            color: AppColors.secondaryText,
-          ),
-          border: InputBorder.none,
-          suffixIcon: _searchQuery.isNotEmpty
-              ? IconButton(
-                  icon: const Icon(
-                    Icons.clear,
-                    color: AppColors.secondaryText,
-                    size: 18,
-                  ),
-                  onPressed: () {
-                    setState(() {
-                      _searchController.clear();
-                      _searchQuery = '';
-                    });
-                  },
-                )
-              : null,
+    return TextField(
+      controller: _searchController,
+      style: const TextStyle(color: AppColors.primaryText, fontSize: 14),
+      decoration: InputDecoration(
+        hintText: 'Search dashboards, KPIs, modules...',
+        hintStyle: const TextStyle(
+          color: AppColors.secondaryText,
+          fontSize: 13,
         ),
-        onChanged: (val) {
-          setState(() {
-            _searchQuery = val;
-          });
-        },
+        prefixIcon: const Icon(
+          Icons.search_rounded,
+          color: AppColors.secondaryText,
+        ),
+        border: InputBorder.none,
+        suffixIcon: _searchQuery.isNotEmpty
+            ? IconButton(
+                icon: const Icon(
+                  Icons.clear,
+                  color: AppColors.secondaryText,
+                  size: 18,
+                ),
+                onPressed: () {
+                  setState(() {
+                    _searchController.clear();
+                    _searchQuery = '';
+                  });
+                },
+              )
+            : null,
       ),
+      onChanged: (val) {
+        setState(() {
+          _searchQuery = val;
+        });
+      },
     );
   }
 
@@ -450,21 +442,21 @@ class _DashboardHubScreenState extends ConsumerState<DashboardHubScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Row(
+            Container(
+              width: 32,
+              height: 32,
+              decoration: BoxDecoration(
+                color: AppColors.primary.withValues(alpha: 0.1),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              alignment: Alignment.center,
+              child: const Text('🏛️', style: TextStyle(fontSize: 16)),
+            ),
+            const SizedBox(width: 10),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Container(
-                  width: 32,
-                  height: 32,
-                  decoration: BoxDecoration(
-                    color: AppColors.primary.withValues(alpha: 0.1),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  alignment: Alignment.center,
-                  child: const Text('🏛️', style: TextStyle(fontSize: 16)),
-                ),
-                const SizedBox(width: 10),
                 const Text(
                   'Ecosystem Dashboards & Modules',
                   style: TextStyle(
@@ -474,11 +466,11 @@ class _DashboardHubScreenState extends ConsumerState<DashboardHubScreen> {
                     fontFamily: AppTextStyles.fontFamily,
                   ),
                 ),
+                Text(
+                  'Showing ${filteredModules.length} of ${DashboardModuleItem.items.length}',
+                  style: AppTextStyles.bodySmall,
+                ),
               ],
-            ),
-            Text(
-              'Showing ${filteredModules.length} of ${DashboardModuleItem.items.length}',
-              style: AppTextStyles.bodySmall,
             ),
           ],
         ),
@@ -520,7 +512,7 @@ class _DashboardHubScreenState extends ConsumerState<DashboardHubScreen> {
               crossAxisCount: columns,
               crossAxisSpacing: AppSpacing.md,
               mainAxisSpacing: AppSpacing.md,
-              childAspectRatio: 1.05,
+              childAspectRatio: 1.25,
             ),
             itemBuilder: (context, index) {
               final module = filteredModules[index];

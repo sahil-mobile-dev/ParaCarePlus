@@ -460,7 +460,7 @@ class _PatientBillsTabState extends State<PatientBillsTab> {
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(25),
-          border: Border.all(color: Colors.grey, width: 1),
+          border: Border.all(color: Colors.grey),
         ),
         child: Stack(
           children: [
