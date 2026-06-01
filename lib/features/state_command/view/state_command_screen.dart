@@ -916,12 +916,15 @@ class _StateCommandScreenState extends ConsumerState<StateCommandScreen> {
             children: [
               const Icon(Icons.psychology, color: Color(0xFFCE93D8), size: 20),
               const SizedBox(width: 8),
-              Text(
-                'AI Predictive Healthcare Intelligence — Live Snapshot',
-                style: AppTextStyles.labelLarge.copyWith(
-                  color: const Color(0xFFCE93D8),
-                  fontWeight: FontWeight.w800,
-                  fontSize: 13,
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.75,
+                child: Text(
+                  'AI Predictive Healthcare Intelligence — Live Snapshot',
+                  style: AppTextStyles.labelLarge.copyWith(
+                    color: const Color(0xFFCE93D8),
+                    fontWeight: FontWeight.w800,
+                    fontSize: 13,
+                  ),
                 ),
               ),
             ],
@@ -1046,7 +1049,7 @@ class _StateCommandScreenState extends ConsumerState<StateCommandScreen> {
               crossAxisCount: cols,
               crossAxisSpacing: 16,
               mainAxisSpacing: 16,
-              childAspectRatio: 1.5,
+              childAspectRatio: 1.25,
               children: [
                 StateCommandChartPanel(
                   title: '📅 OPD Trend — 30 Days',
@@ -1256,7 +1259,7 @@ class _StateCommandScreenState extends ConsumerState<StateCommandScreen> {
               crossAxisCount: cols,
               crossAxisSpacing: 16,
               mainAxisSpacing: 16,
-              childAspectRatio: w < 850 ? 2.0 : 1.7,
+              childAspectRatio: 1.75,
               children: [
                 StateCommandSunburstPanel(
                   title: '🏘️ District ➔ Hospital ➔ Department ➔ Doctor',
@@ -1447,12 +1450,7 @@ class _StateCommandScreenState extends ConsumerState<StateCommandScreen> {
                       fontSize: 8.5,
                       fontWeight: FontWeight.w800,
                       color: Colors.white54,
-                      shadows: [
-                        Shadow(
-                          blurRadius: 4,
-                          offset: Offset(1, 1),
-                        ),
-                      ],
+                      shadows: [Shadow(blurRadius: 4, offset: Offset(1, 1))],
                     ),
                   ),
                 );
@@ -1587,7 +1585,7 @@ class _StateCommandScreenState extends ConsumerState<StateCommandScreen> {
               crossAxisCount: cols,
               crossAxisSpacing: 16,
               mainAxisSpacing: 16,
-              childAspectRatio: 1.9,
+              childAspectRatio: .95,
               children: [
                 StateCommandAlertPanel(
                   title: '🔴 Critical & High-Priority Alerts',

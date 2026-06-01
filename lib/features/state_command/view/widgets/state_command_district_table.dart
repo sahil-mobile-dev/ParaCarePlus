@@ -9,7 +9,8 @@ class StateCommandDistrictTable extends ConsumerWidget {
 
   Color _getPerformanceBadgeBg(String perf) {
     if (perf == 'Good') return AppColors.success.withValues(alpha: 0.12);
-    if (perf == 'Average') return AppColors.secondaryAccent.withValues(alpha: 0.12);
+    if (perf == 'Average')
+      return AppColors.secondaryAccent.withValues(alpha: 0.12);
     return AppColors.error.withValues(alpha: 0.12);
   }
 
@@ -34,9 +35,7 @@ class StateCommandDistrictTable extends ConsumerWidget {
       decoration: BoxDecoration(
         color: AppColors.surface,
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(
-          color: AppColors.border.withValues(alpha: 0.4),
-        ),
+        border: Border.all(color: AppColors.border.withValues(alpha: 0.4)),
       ),
       clipBehavior: Clip.antiAlias,
       child: Column(
@@ -46,12 +45,10 @@ class StateCommandDistrictTable extends ConsumerWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             decoration: const BoxDecoration(
-              border: Border(
-                bottom: BorderSide(color: Color(0x11FFFFFF)),
-              ),
+              border: Border(bottom: BorderSide(color: Color(0x11FFFFFF))),
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
                   '🏆 District Health Performance Scorecard',
@@ -61,6 +58,7 @@ class StateCommandDistrictTable extends ConsumerWidget {
                     color: Colors.white,
                   ),
                 ),
+                const SizedBox(height: 10),
                 // Sort Dropdown
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -76,7 +74,11 @@ class StateCommandDistrictTable extends ConsumerWidget {
                     child: DropdownButton<String>(
                       value: commandState.sortBy,
                       dropdownColor: AppColors.surface,
-                      icon: const Icon(Icons.arrow_drop_down, color: Colors.white70, size: 18),
+                      icon: const Icon(
+                        Icons.arrow_drop_down,
+                        color: Colors.white70,
+                        size: 18,
+                      ),
                       style: const TextStyle(
                         fontSize: 11,
                         color: Colors.white,
@@ -91,7 +93,9 @@ class StateCommandDistrictTable extends ConsumerWidget {
                       }).toList(),
                       onChanged: (newVal) {
                         if (newVal != null) {
-                          ref.read(stateCommandProvider.notifier).sortDistricts(newVal);
+                          ref
+                              .read(stateCommandProvider.notifier)
+                              .sortDistricts(newVal);
                         }
                       },
                     ),
@@ -137,7 +141,10 @@ class StateCommandDistrictTable extends ConsumerWidget {
                     DataCell(
                       Text(
                         '${idx + 1}',
-                        style: const TextStyle(color: Colors.white30, fontSize: 11),
+                        style: const TextStyle(
+                          color: Colors.white30,
+                          fontSize: 11,
+                        ),
                       ),
                     ),
                     DataCell(
@@ -153,16 +160,22 @@ class StateCommandDistrictTable extends ConsumerWidget {
                     DataCell(
                       Text(
                         '${d.facilitiesCount}',
-                        style: const TextStyle(color: Colors.white70, fontSize: 11.5),
+                        style: const TextStyle(
+                          color: Colors.white70,
+                          fontSize: 11.5,
+                        ),
                       ),
                     ),
                     DataCell(
                       Text(
                         d.dailyOpd.toString().replaceAllMapped(
-                              RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
-                              (Match m) => '${m[1]},',
-                            ),
-                        style: const TextStyle(color: Colors.white70, fontSize: 11.5),
+                          RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+                          (Match m) => '${m[1]},',
+                        ),
+                        style: const TextStyle(
+                          color: Colors.white70,
+                          fontSize: 11.5,
+                        ),
                       ),
                     ),
                     DataCell(
@@ -188,27 +201,39 @@ class StateCommandDistrictTable extends ConsumerWidget {
                     DataCell(
                       Text(
                         '${d.mmr}',
-                        style: const TextStyle(color: Colors.white70, fontSize: 11.5),
+                        style: const TextStyle(
+                          color: Colors.white70,
+                          fontSize: 11.5,
+                        ),
                       ),
                     ),
                     DataCell(
                       Text(
                         d.abClaimsCount.toString().replaceAllMapped(
-                              RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
-                              (Match m) => '${m[1]},',
-                            ),
-                        style: const TextStyle(color: Colors.white70, fontSize: 11.5),
+                          RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+                          (Match m) => '${m[1]},',
+                        ),
+                        style: const TextStyle(
+                          color: Colors.white70,
+                          fontSize: 11.5,
+                        ),
                       ),
                     ),
                     DataCell(
                       Text(
                         '${d.medicineAvailabilityPercent}%',
-                        style: const TextStyle(color: Colors.white70, fontSize: 11.5),
+                        style: const TextStyle(
+                          color: Colors.white70,
+                          fontSize: 11.5,
+                        ),
                       ),
                     ),
                     DataCell(
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2.5),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 7,
+                          vertical: 2.5,
+                        ),
                         decoration: BoxDecoration(
                           color: badgeBg,
                           borderRadius: BorderRadius.circular(6),
@@ -243,8 +268,8 @@ class StateCommandDistrictTable extends ConsumerWidget {
                                 color: d.score > 70
                                     ? AppColors.success
                                     : (d.score > 55
-                                        ? AppColors.secondaryAccent
-                                        : AppColors.error),
+                                          ? AppColors.secondaryAccent
+                                          : AppColors.error),
                                 borderRadius: BorderRadius.circular(3),
                               ),
                             ),

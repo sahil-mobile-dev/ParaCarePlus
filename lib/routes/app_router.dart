@@ -237,6 +237,7 @@ final appRouterStateProvider = Provider<GoRouter>((ref) {
         if (!goingToLogin &&
             !goingToPatientLogin &&
             state.matchedLocation != RoutePaths.dashboardHub &&
+            state.matchedLocation != RoutePaths.stateCommand &&
             state.matchedLocation != RoutePaths.splash) {
           return RoutePaths.login;
         }
