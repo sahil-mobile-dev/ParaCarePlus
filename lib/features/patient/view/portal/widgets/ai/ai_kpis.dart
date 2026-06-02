@@ -41,18 +41,15 @@ class AiKpis extends StatelessWidget {
 
     return LayoutBuilder(
       builder: (context, constraints) {
-        final width = constraints.maxWidth;
-        final crossAxisCount = width > 900 ? 4 : (width > 600 ? 2 : 1);
-
         return GridView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           itemCount: kpis.length,
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             crossAxisSpacing: AppSpacing.sm,
             mainAxisSpacing: AppSpacing.sm,
-            childAspectRatio: width > 900 ? 1.5 : 1.7,
+            childAspectRatio: 1.7,
           ),
           itemBuilder: (context, index) {
             final kpi = kpis[index];

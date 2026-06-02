@@ -18,7 +18,7 @@ class AbdmFhirHealthPanel extends ConsumerWidget {
     final state = ref.watch(abdmComplianceProvider);
     final width = MediaQuery.of(context).size.width;
 
-    int crossAxisCount = 4;
+    var crossAxisCount = 4;
     if (width < 760) {
       crossAxisCount = 1;
     } else if (width < 1100) {
@@ -37,10 +37,10 @@ class AbdmFhirHealthPanel extends ConsumerWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
+          const Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Column(
+              Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(

@@ -68,9 +68,7 @@ class _AbdmTickerState extends ConsumerState<AbdmTicker>
       width: double.infinity,
       decoration: BoxDecoration(
         color: Colors.black.withValues(alpha: 0.35),
-        border: const Border(
-          bottom: BorderSide(color: Color(0x1FFFFFFF), width: 1),
-        ),
+        border: const Border(bottom: BorderSide(color: Color(0x1FFFFFFF))),
       ),
       child: Row(
         children: [

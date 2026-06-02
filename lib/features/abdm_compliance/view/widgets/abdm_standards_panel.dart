@@ -8,7 +8,7 @@ class AbdmStandardsPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
-    int crossAxisCount = 3;
+    var crossAxisCount = 3;
     if (width < 700) {
       crossAxisCount = 1;
     } else if (width < 1100) {
@@ -257,40 +257,41 @@ class AbdmStandardsPanel extends StatelessWidget {
                 fontSize: 10,
               ),
             ),
-            isPill
-                ? Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 5,
-                      vertical: 1.5,
-                    ),
-                    decoration: BoxDecoration(
-                      color: (pillColor ?? AppColors.success).withValues(
-                        alpha: 0.15,
-                      ),
-                      border: Border.all(
-                        color: (pillColor ?? AppColors.success).withValues(
-                          alpha: 0.3,
-                        ),
-                      ),
-                      borderRadius: BorderRadius.circular(6),
-                    ),
-                    child: Text(
-                      value,
-                      style: TextStyle(
-                        color: pillColor ?? AppColors.success,
-                        fontSize: 8,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  )
-                : Text(
-                    value,
-                    style: TextStyle(
-                      color: valColor ?? Colors.white,
-                      fontSize: 10,
-                      fontWeight: FontWeight.w700,
+            if (isPill)
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 5,
+                  vertical: 1.5,
+                ),
+                decoration: BoxDecoration(
+                  color: (pillColor ?? AppColors.success).withValues(
+                    alpha: 0.15,
+                  ),
+                  border: Border.all(
+                    color: (pillColor ?? AppColors.success).withValues(
+                      alpha: 0.3,
                     ),
                   ),
+                  borderRadius: BorderRadius.circular(6),
+                ),
+                child: Text(
+                  value,
+                  style: TextStyle(
+                    color: pillColor ?? AppColors.success,
+                    fontSize: 8,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              )
+            else
+              Text(
+                value,
+                style: TextStyle(
+                  color: valColor ?? Colors.white,
+                  fontSize: 10,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
           ],
         ),
       ),

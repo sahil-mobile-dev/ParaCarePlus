@@ -80,7 +80,6 @@ class HealthLockerChart extends StatelessWidget {
             child: LineChart(
               LineChartData(
                 gridData: FlGridData(
-                  show: true,
                   drawVerticalLine: false,
                   horizontalInterval: 1000,
                   getDrawingHorizontalLine: (value) => FlLine(
@@ -89,13 +88,8 @@ class HealthLockerChart extends StatelessWidget {
                   ),
                 ),
                 titlesData: FlTitlesData(
-                  show: true,
-                  topTitles: const AxisTitles(
-                    sideTitles: SideTitles(showTitles: false),
-                  ),
-                  rightTitles: const AxisTitles(
-                    sideTitles: SideTitles(showTitles: false),
-                  ),
+                  topTitles: const AxisTitles(),
+                  rightTitles: const AxisTitles(),
                   leftTitles: AxisTitles(
                     sideTitles: SideTitles(
                       showTitles: true,
@@ -119,7 +113,6 @@ class HealthLockerChart extends StatelessWidget {
                   bottomTitles: AxisTitles(
                     sideTitles: SideTitles(
                       showTitles: true,
-                      reservedSize: 22,
                       interval: 6,
                       getTitlesWidget: (value, meta) {
                         final idx = value.toInt();
@@ -151,7 +144,6 @@ class HealthLockerChart extends StatelessWidget {
                     spots: spots,
                     isCurved: true,
                     color: const Color(0xFFFFD166),
-                    barWidth: 2,
                     dotData: const FlDotData(show: false),
                     belowBarData: BarAreaData(
                       show: true,

@@ -46,7 +46,6 @@ class CriticalPatientsTable extends StatelessWidget {
             child: DataTable(
               columnSpacing: 24,
               headingRowHeight: 40,
-              dataRowHeight: 56,
               headingRowColor: WidgetStateProperty.all(AppColors.background),
               columns: const [
                 DataColumn(

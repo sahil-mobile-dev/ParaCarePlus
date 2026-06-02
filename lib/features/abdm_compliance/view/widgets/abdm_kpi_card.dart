@@ -69,7 +69,6 @@ class _AbdmKpiCardState extends State<AbdmKpiCard> {
             color: _isHovered
                 ? themeColors[0].withValues(alpha: 0.6)
                 : AppColors.border.withValues(alpha: 0.4),
-            width: 1,
           ),
           borderRadius: BorderRadius.circular(12),
           boxShadow: _isHovered
@@ -93,11 +92,7 @@ class _AbdmKpiCardState extends State<AbdmKpiCard> {
               height: 3,
               child: Container(
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    colors: themeColors,
-                    begin: Alignment.centerLeft,
-                    end: Alignment.centerRight,
-                  ),
+                  gradient: LinearGradient(colors: themeColors),
                 ),
               ),
             ),
@@ -165,8 +160,12 @@ class _AbdmKpiCardState extends State<AbdmKpiCard> {
                                 color: widget.trendUp == null
                                     ? AppColors.secondaryText
                                     : (widget.trendUp!
-                                        ? AppColors.success.withValues(alpha: 0.9)
-                                        : AppColors.error.withValues(alpha: 0.9)),
+                                          ? AppColors.success.withValues(
+                                              alpha: 0.9,
+                                            )
+                                          : AppColors.error.withValues(
+                                              alpha: 0.9,
+                                            )),
                                 fontWeight: widget.trendUp == null
                                     ? FontWeight.w500
                                     : FontWeight.bold,
@@ -187,8 +186,12 @@ class _AbdmKpiCardState extends State<AbdmKpiCard> {
                             width: double.infinity,
                             child: LinearProgressIndicator(
                               value: widget.progressPercent,
-                              backgroundColor: Colors.white.withValues(alpha: 0.07),
-                              valueColor: AlwaysStoppedAnimation<Color>(themeColors[0]),
+                              backgroundColor: Colors.white.withValues(
+                                alpha: 0.07,
+                              ),
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                themeColors[0],
+                              ),
                             ),
                           ),
                         ),
@@ -204,10 +207,7 @@ class _AbdmKpiCardState extends State<AbdmKpiCard> {
               bottom: -4,
               child: Opacity(
                 opacity: 0.08,
-                child: Text(
-                  widget.emoji,
-                  style: const TextStyle(fontSize: 42),
-                ),
+                child: Text(widget.emoji, style: const TextStyle(fontSize: 42)),
               ),
             ),
           ],

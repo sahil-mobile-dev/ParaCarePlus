@@ -128,8 +128,6 @@ class PatientFinanceScreen extends ConsumerWidget {
   Widget _buildPageHeader(BuildContext context, String dateStr) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        final isMobile = constraints.maxWidth < 600;
-
         final elements = [
           Row(
             mainAxisSize: MainAxisSize.min,

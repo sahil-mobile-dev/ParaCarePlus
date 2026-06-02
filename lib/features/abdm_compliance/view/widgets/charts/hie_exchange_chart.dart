@@ -64,9 +64,9 @@ class HieExchangeChart extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
+              SizedBox(
                 width: MediaQuery.sizeOf(context).width * 0.55,
-                child: Column(
+                child: const Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
@@ -90,7 +90,7 @@ class HieExchangeChart extends StatelessWidget {
                   ],
                 ),
               ),
-              Row(
+              const Row(
                 children: [
                   Text(
                     '2.34L today',
@@ -134,15 +134,10 @@ class HieExchangeChart extends StatelessWidget {
               BarChartData(
                 alignment: BarChartAlignment.spaceAround,
                 maxY: 110000,
-                barTouchData: BarTouchData(enabled: true),
+                barTouchData: const BarTouchData(enabled: true),
                 titlesData: FlTitlesData(
-                  show: true,
-                  topTitles: const AxisTitles(
-                    sideTitles: SideTitles(showTitles: false),
-                  ),
-                  rightTitles: const AxisTitles(
-                    sideTitles: SideTitles(showTitles: false),
-                  ),
+                  topTitles: const AxisTitles(),
+                  rightTitles: const AxisTitles(),
                   leftTitles: AxisTitles(
                     sideTitles: SideTitles(
                       showTitles: true,
@@ -167,7 +162,6 @@ class HieExchangeChart extends StatelessWidget {
                   bottomTitles: AxisTitles(
                     sideTitles: SideTitles(
                       showTitles: true,
-                      reservedSize: 22,
                       interval: 6,
                       getTitlesWidget: (value, meta) {
                         final index = value.toInt();
@@ -190,7 +184,6 @@ class HieExchangeChart extends StatelessWidget {
                   ),
                 ),
                 gridData: FlGridData(
-                  show: true,
                   drawVerticalLine: false,
                   horizontalInterval: 25000,
                   getDrawingHorizontalLine: (value) => FlLine(

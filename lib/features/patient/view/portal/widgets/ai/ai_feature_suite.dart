@@ -130,11 +130,6 @@ class _AiFeatureSuiteState extends State<AiFeatureSuite> {
         const SizedBox(height: AppSpacing.sm),
         LayoutBuilder(
           builder: (context, constraints) {
-            final width = constraints.maxWidth;
-            final crossAxisCount = width > 1200
-                ? 4
-                : (width > 800 ? 3 : (width > 480 ? 2 : 1));
-
             return GridView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),

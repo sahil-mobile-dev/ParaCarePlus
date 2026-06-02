@@ -79,11 +79,6 @@ class WellnessGoals extends StatelessWidget {
         const SizedBox(height: AppSpacing.sm),
         LayoutBuilder(
           builder: (context, constraints) {
-            final width = constraints.maxWidth;
-            final crossAxisCount = width > 900
-                ? 6
-                : (width > 600 ? 3 : (width > 400 ? 2 : 1));
-
             return GridView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),

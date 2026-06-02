@@ -50,7 +50,7 @@ class FacilityDistrictCharts extends StatelessWidget {
 
     final barGroups = List.generate(facilityNames.length, (i) {
       final val = scores[i];
-      Color barColor = const Color(0xFF00C897); // Green >= 85
+      var barColor = const Color(0xFF00C897); // Green >= 85
       if (val >= 85) {
         barColor = const Color(0xFF00C897);
       } else if (val >= 70) {
@@ -127,15 +127,10 @@ class FacilityDistrictCharts extends StatelessWidget {
               BarChartData(
                 alignment: BarChartAlignment.spaceAround,
                 maxY: 100,
-                barTouchData: BarTouchData(enabled: true),
+                barTouchData: const BarTouchData(enabled: true),
                 titlesData: FlTitlesData(
-                  show: true,
-                  topTitles: const AxisTitles(
-                    sideTitles: SideTitles(showTitles: false),
-                  ),
-                  rightTitles: const AxisTitles(
-                    sideTitles: SideTitles(showTitles: false),
-                  ),
+                  topTitles: const AxisTitles(),
+                  rightTitles: const AxisTitles(),
                   leftTitles: AxisTitles(
                     sideTitles: SideTitles(
                       showTitles: true,
@@ -185,7 +180,6 @@ class FacilityDistrictCharts extends StatelessWidget {
                   ),
                 ),
                 gridData: FlGridData(
-                  show: true,
                   drawVerticalLine: false,
                   horizontalInterval: 25,
                   getDrawingHorizontalLine: (value) => FlLine(
@@ -237,7 +231,7 @@ class FacilityDistrictCharts extends StatelessWidget {
 
     final barGroups = List.generate(distNames.length, (i) {
       final val = scores[i];
-      Color barColor = const Color(0xFF00C897); // Green >= 80
+      var barColor = const Color(0xFF00C897); // Green >= 80
       if (val >= 80) {
         barColor = const Color(0xFF00C897);
       } else if (val >= 70) {
@@ -276,7 +270,7 @@ class FacilityDistrictCharts extends StatelessWidget {
             children: [
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.65,
-                child: Column(
+                child: const Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
@@ -300,7 +294,7 @@ class FacilityDistrictCharts extends StatelessWidget {
                   ],
                 ),
               ),
-              Text(
+              const Text(
                 'State Avg: 73.4%',
                 style: TextStyle(
                   color: Color(0xFF00B4D8),
@@ -317,15 +311,10 @@ class FacilityDistrictCharts extends StatelessWidget {
               BarChartData(
                 alignment: BarChartAlignment.spaceAround,
                 maxY: 100,
-                barTouchData: BarTouchData(enabled: true),
+                barTouchData: const BarTouchData(enabled: true),
                 titlesData: FlTitlesData(
-                  show: true,
-                  topTitles: const AxisTitles(
-                    sideTitles: SideTitles(showTitles: false),
-                  ),
-                  rightTitles: const AxisTitles(
-                    sideTitles: SideTitles(showTitles: false),
-                  ),
+                  topTitles: const AxisTitles(),
+                  rightTitles: const AxisTitles(),
                   leftTitles: AxisTitles(
                     sideTitles: SideTitles(
                       showTitles: true,
@@ -371,7 +360,6 @@ class FacilityDistrictCharts extends StatelessWidget {
                   ),
                 ),
                 gridData: FlGridData(
-                  show: true,
                   drawVerticalLine: false,
                   horizontalInterval: 25,
                   getDrawingHorizontalLine: (value) => FlLine(

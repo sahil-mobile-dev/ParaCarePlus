@@ -55,9 +55,9 @@ class AbhaTrendChart extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
+              SizedBox(
                 width: MediaQuery.sizeOf(context).width * 0.55,
-                child: Column(
+                child: const Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
@@ -131,7 +131,6 @@ class AbhaTrendChart extends StatelessWidget {
             child: LineChart(
               LineChartData(
                 gridData: FlGridData(
-                  show: true,
                   drawVerticalLine: false,
                   horizontalInterval: 2000,
                   getDrawingHorizontalLine: (value) => FlLine(
@@ -140,13 +139,8 @@ class AbhaTrendChart extends StatelessWidget {
                   ),
                 ),
                 titlesData: FlTitlesData(
-                  show: true,
-                  rightTitles: const AxisTitles(
-                    sideTitles: SideTitles(showTitles: false),
-                  ),
-                  topTitles: const AxisTitles(
-                    sideTitles: SideTitles(showTitles: false),
-                  ),
+                  rightTitles: const AxisTitles(),
+                  topTitles: const AxisTitles(),
                   leftTitles: AxisTitles(
                     sideTitles: SideTitles(
                       showTitles: true,
@@ -171,7 +165,6 @@ class AbhaTrendChart extends StatelessWidget {
                   bottomTitles: AxisTitles(
                     sideTitles: SideTitles(
                       showTitles: true,
-                      reservedSize: 22,
                       interval: 6,
                       getTitlesWidget: (value, meta) {
                         final index = value.toInt();
@@ -210,7 +203,6 @@ class AbhaTrendChart extends StatelessWidget {
                     gradient: const LinearGradient(
                       colors: [Color(0xFF0D9488), Color(0xFF06D6A0)],
                     ),
-                    barWidth: 2,
                     isStrokeCapRound: true,
                     dotData: const FlDotData(show: false),
                     belowBarData: BarAreaData(
@@ -218,7 +210,7 @@ class AbhaTrendChart extends StatelessWidget {
                       gradient: LinearGradient(
                         colors: [
                           const Color(0xFF0D9488).withValues(alpha: 0.15),
-                          const Color(0xFF06D6A0).withValues(alpha: 0.0),
+                          const Color(0xFF06D6A0),
                         ],
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
@@ -231,7 +223,6 @@ class AbhaTrendChart extends StatelessWidget {
                       30,
                       (i) => FlSpot(i.toDouble(), 11000),
                     ),
-                    isCurved: false,
                     color: const Color(0x7DFFD166),
                     barWidth: 1.5,
                     dashArray: [6, 4],

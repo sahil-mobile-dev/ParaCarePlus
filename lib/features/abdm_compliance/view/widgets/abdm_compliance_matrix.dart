@@ -54,7 +54,7 @@ class AbdmComplianceMatrix extends ConsumerWidget {
           ),
           const SizedBox(height: 16),
           if (isCompact)
-            ...state.complianceMatrix.map((row) => _buildCompactCard(row))
+            ...state.complianceMatrix.map(_buildCompactCard)
           else
             _buildTable(state.complianceMatrix),
         ],
@@ -167,7 +167,7 @@ class AbdmComplianceMatrix extends ConsumerWidget {
       columnWidths: const {
         0: FlexColumnWidth(2.5),
         1: FlexColumnWidth(1.2),
-        2: FlexColumnWidth(2.0),
+        2: FlexColumnWidth(2),
         3: FlexColumnWidth(0.8),
         4: FlexColumnWidth(0.8),
         5: FlexColumnWidth(1.2),
@@ -178,9 +178,7 @@ class AbdmComplianceMatrix extends ConsumerWidget {
         // Header
         TableRow(
           decoration: const BoxDecoration(
-            border: Border(
-              bottom: BorderSide(color: AppColors.border, width: 1),
-            ),
+            border: Border(bottom: BorderSide(color: AppColors.border)),
           ),
           children: [
             _buildHeaderCell('ABDM Module'),
@@ -199,9 +197,7 @@ class AbdmComplianceMatrix extends ConsumerWidget {
 
           return TableRow(
             decoration: const BoxDecoration(
-              border: Border(
-                bottom: BorderSide(color: Color(0x1FFFFFFF), width: 1),
-              ),
+              border: Border(bottom: BorderSide(color: Color(0x1FFFFFFF))),
             ),
             children: [
               Padding(

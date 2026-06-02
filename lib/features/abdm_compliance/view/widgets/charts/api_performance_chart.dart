@@ -77,7 +77,7 @@ class ApiPerformanceChart extends StatelessWidget {
             children: [
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.65,
-                child: Column(
+                child: const Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
@@ -101,7 +101,7 @@ class ApiPerformanceChart extends StatelessWidget {
                   ],
                 ),
               ),
-              Column(
+              const Column(
                 children: [
                   Text(
                     'Avg 214ms',
@@ -130,7 +130,6 @@ class ApiPerformanceChart extends StatelessWidget {
             child: LineChart(
               LineChartData(
                 gridData: FlGridData(
-                  show: true,
                   drawVerticalLine: false,
                   horizontalInterval: 50,
                   getDrawingHorizontalLine: (value) => FlLine(
@@ -139,17 +138,14 @@ class ApiPerformanceChart extends StatelessWidget {
                   ),
                 ),
                 titlesData: FlTitlesData(
-                  show: true,
-                  topTitles: const AxisTitles(
-                    sideTitles: SideTitles(showTitles: false),
-                  ),
+                  topTitles: const AxisTitles(),
                   rightTitles: AxisTitles(
                     sideTitles: SideTitles(
                       showTitles: true,
                       interval: 100, // Dummy interval
                       getTitlesWidget: (value, meta) {
                         // Display some success rates on the right
-                        if (value == 100)
+                        if (value == 100) {
                           return const Text(
                             '99.0%',
                             style: TextStyle(
@@ -157,7 +153,8 @@ class ApiPerformanceChart extends StatelessWidget {
                               fontSize: 8,
                             ),
                           );
-                        if (value == 200)
+                        }
+                        if (value == 200) {
                           return const Text(
                             '99.4%',
                             style: TextStyle(
@@ -165,7 +162,8 @@ class ApiPerformanceChart extends StatelessWidget {
                               fontSize: 8,
                             ),
                           );
-                        if (value == 300)
+                        }
+                        if (value == 300) {
                           return const Text(
                             '99.8%',
                             style: TextStyle(
@@ -173,6 +171,7 @@ class ApiPerformanceChart extends StatelessWidget {
                               fontSize: 8,
                             ),
                           );
+                        }
                         return const SizedBox.shrink();
                       },
                       reservedSize: 28,
@@ -201,7 +200,6 @@ class ApiPerformanceChart extends StatelessWidget {
                   bottomTitles: AxisTitles(
                     sideTitles: SideTitles(
                       showTitles: true,
-                      reservedSize: 22,
                       interval: 4,
                       getTitlesWidget: (value, meta) {
                         final idx = value.toInt();
@@ -237,7 +235,6 @@ class ApiPerformanceChart extends StatelessWidget {
                     ),
                     isCurved: true,
                     color: const Color(0xFF00B4D8),
-                    barWidth: 2,
                     dotData: const FlDotData(show: false),
                     belowBarData: BarAreaData(
                       show: true,

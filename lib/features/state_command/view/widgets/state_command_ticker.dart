@@ -17,16 +17,43 @@ class _StateCommandTickerState extends State<StateCommandTicker>
   Timer? _scrollTimer;
 
   final List<Map<String, dynamic>> _tickerItems = [
-    {'type': 'crit', 'text': 'ICU overflow risk — Haridwar Dist. Hospital 98% capacity'},
-    {'type': 'warn', 'text': 'Dengue: 47 new cases Dehradun today — Outbreak Zone Active'},
-    {'type': 'ok', 'text': 'AB Claim batch approved — AIIMS Rishikesh (₹3.2Cr)'},
-    {'type': 'crit', 'text': 'Medicine shortage: Paracetamol IV — CHC Doiwala 0 stock'},
-    {'type': 'warn', 'text': 'High-risk pregnancy: 12 cases flagged — Pithoragarh'},
-    {'type': 'ok', 'text': 'Telemedicine today: 1,247 consultations — new state record'},
+    {
+      'type': 'crit',
+      'text': 'ICU overflow risk — Haridwar Dist. Hospital 98% capacity',
+    },
+    {
+      'type': 'warn',
+      'text': 'Dengue: 47 new cases Dehradun today — Outbreak Zone Active',
+    },
+    {
+      'type': 'ok',
+      'text': 'AB Claim batch approved — AIIMS Rishikesh (₹3.2Cr)',
+    },
+    {
+      'type': 'crit',
+      'text': 'Medicine shortage: Paracetamol IV — CHC Doiwala 0 stock',
+    },
+    {
+      'type': 'warn',
+      'text': 'High-risk pregnancy: 12 cases flagged — Pithoragarh',
+    },
+    {
+      'type': 'ok',
+      'text': 'Telemedicine today: 1,247 consultations — new state record',
+    },
     {'type': 'warn', 'text': 'TB positives this week: 89 across 8 districts'},
-    {'type': 'crit', 'text': 'Ambulance response >30 min: Chamoli — 5 incidents flagged'},
-    {'type': 'ok', 'text': 'ABHA linked: 31.7L patients — 65.8% statewide coverage'},
-    {'type': 'warn', 'text': 'AI Outbreak Risk Score: 7.4/10 — Nainital & Pithoragarh'},
+    {
+      'type': 'crit',
+      'text': 'Ambulance response >30 min: Chamoli — 5 incidents flagged',
+    },
+    {
+      'type': 'ok',
+      'text': 'ABHA linked: 31.7L patients — 65.8% statewide coverage',
+    },
+    {
+      'type': 'warn',
+      'text': 'AI Outbreak Risk Score: 7.4/10 — Nainital & Pithoragarh',
+    },
   ];
 
   @override
@@ -76,9 +103,7 @@ class _StateCommandTickerState extends State<StateCommandTicker>
       width: double.infinity,
       decoration: BoxDecoration(
         color: Colors.black.withValues(alpha: 0.35),
-        border: const Border(
-          bottom: BorderSide(color: Color(0x1FFFFFFF), width: 1),
-        ),
+        border: const Border(bottom: BorderSide(color: Color(0x1FFFFFFF))),
       ),
       child: Row(
         children: [

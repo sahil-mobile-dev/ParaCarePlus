@@ -5,7 +5,12 @@ import 'package:paracareplus/core/theme/app_text_styles.dart';
 
 // --- MAIN WRAPPER PANEL ---
 class StateCommandChartPanel extends StatelessWidget {
-  const StateCommandChartPanel({required this.title, required this.badgeText, required this.child, super.key});
+  const StateCommandChartPanel({
+    required this.title,
+    required this.badgeText,
+    required this.child,
+    super.key,
+  });
 
   final String title;
   final String badgeText;
@@ -17,9 +22,7 @@ class StateCommandChartPanel extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.surface,
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(
-          color: AppColors.border.withValues(alpha: 0.4),
-        ),
+        border: Border.all(color: AppColors.border.withValues(alpha: 0.4)),
       ),
       clipBehavior: Clip.antiAlias,
       child: Column(
@@ -29,11 +32,7 @@ class StateCommandChartPanel extends StatelessWidget {
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             decoration: const BoxDecoration(
-              border: Border(
-                bottom: BorderSide(
-                  color: Color(0x11FFFFFF),
-                ),
-              ),
+              border: Border(bottom: BorderSide(color: Color(0x11FFFFFF))),
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -50,7 +49,10 @@ class StateCommandChartPanel extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 7, vertical: 2),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 7,
+                    vertical: 2,
+                  ),
                   decoration: BoxDecoration(
                     color: AppColors.primary.withValues(alpha: 0.15),
                     borderRadius: BorderRadius.circular(6),
@@ -70,10 +72,7 @@ class StateCommandChartPanel extends StatelessWidget {
             ),
           ),
           // Body
-          Padding(
-            padding: const EdgeInsets.all(16),
-            child: child,
-          ),
+          Padding(padding: const EdgeInsets.all(16), child: child),
         ],
       ),
     );
@@ -87,21 +86,56 @@ class StaffDistributionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final staffData = [
-      {'role': 'Doctors', 'total': 3240, 'avail': 2847, 'color': const Color(0xFF42A5F5)},
-      {'role': 'Nurses', 'total': 8920, 'avail': 7124, 'color': const Color(0xFF4DB6AC)},
-      {'role': 'Paramedics', 'total': 4210, 'avail': 3688, 'color': const Color(0xFFFFB74D)},
-      {'role': 'Lab Techs', 'total': 1840, 'avail': 1620, 'color': const Color(0xFFCE93D8)},
-      {'role': 'Pharmacists', 'total': 1240, 'avail': 1089, 'color': const Color(0xFF80CBC4)},
-      {'role': 'Ambulance Drivers', 'total': 640, 'avail': 524, 'color': const Color(0xFFEF9A9A)},
-      {'role': 'Admin Staff', 'total': 2840, 'avail': 2234, 'color': const Color(0xFF90CAF9)},
+      {
+        'role': 'Doctors',
+        'total': 3240,
+        'avail': 2847,
+        'color': const Color(0xFF42A5F5),
+      },
+      {
+        'role': 'Nurses',
+        'total': 8920,
+        'avail': 7124,
+        'color': const Color(0xFF4DB6AC),
+      },
+      {
+        'role': 'Paramedics',
+        'total': 4210,
+        'avail': 3688,
+        'color': const Color(0xFFFFB74D),
+      },
+      {
+        'role': 'Lab Techs',
+        'total': 1840,
+        'avail': 1620,
+        'color': const Color(0xFFCE93D8),
+      },
+      {
+        'role': 'Pharmacists',
+        'total': 1240,
+        'avail': 1089,
+        'color': const Color(0xFF80CBC4),
+      },
+      {
+        'role': 'Ambulance Drivers',
+        'total': 640,
+        'avail': 524,
+        'color': const Color(0xFFEF9A9A),
+      },
+      {
+        'role': 'Admin Staff',
+        'total': 2840,
+        'avail': 2234,
+        'color': const Color(0xFF90CAF9),
+      },
     ];
 
     return Column(
       children: staffData.map((s) {
-        final total = s['total'] as int;
-        final avail = s['avail'] as int;
+        final total = s['total']! as int;
+        final avail = s['avail']! as int;
         final ratio = (avail / total).clamp(0.0, 1.0);
-        final color = s['color'] as Color;
+        final color = s['color']! as Color;
 
         return Padding(
           padding: const EdgeInsets.only(bottom: 12),
@@ -110,7 +144,7 @@ class StaffDistributionWidget extends StatelessWidget {
               SizedBox(
                 width: 100,
                 child: Text(
-                  s['role'] as String,
+                  s['role']! as String,
                   style: const TextStyle(
                     fontSize: 11.5,
                     color: Colors.white70,
@@ -185,7 +219,6 @@ class DiseaseBurdenWidget extends StatelessWidget {
     ];
 
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         // Simulated Doughnut graphic
         Container(
@@ -193,10 +226,7 @@ class DiseaseBurdenWidget extends StatelessWidget {
           height: 120,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            border: Border.all(
-              color: AppColors.border,
-              width: 12,
-            ),
+            border: Border.all(color: AppColors.border, width: 12),
           ),
           alignment: Alignment.center,
           child: const Column(
@@ -228,7 +258,7 @@ class DiseaseBurdenWidget extends StatelessWidget {
         Expanded(
           child: Column(
             children: diseases.map((d) {
-              final color = d['color'] as Color;
+              final color = d['color']! as Color;
               return Padding(
                 padding: const EdgeInsets.symmetric(vertical: 2.5),
                 child: Row(
@@ -244,7 +274,7 @@ class DiseaseBurdenWidget extends StatelessWidget {
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
-                        d['label'] as String,
+                        d['label']! as String,
                         style: const TextStyle(
                           fontSize: 11,
                           color: Colors.white70,
@@ -310,14 +340,18 @@ class CustomLineChart extends StatelessWidget {
         const SizedBox(height: 8),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: labels.map((lbl) => Text(
-            lbl,
-            style: const TextStyle(
-              fontSize: 8.5,
-              color: AppColors.secondaryText,
-              fontFamily: AppTextStyles.fontFamily,
-            ),
-          )).toList(),
+          children: labels
+              .map(
+                (lbl) => Text(
+                  lbl,
+                  style: const TextStyle(
+                    fontSize: 8.5,
+                    color: AppColors.secondaryText,
+                    fontFamily: AppTextStyles.fontFamily,
+                  ),
+                ),
+              )
+              .toList(),
         ),
       ],
     );
@@ -359,7 +393,6 @@ class _LineChartPainter extends CustomPainter {
 
     path.moveTo(getX(0), getY(values[0]));
     fillPath.moveTo(getX(0), size.height);
-    fillPath.lineTo(getX(0), getY(values[0]));
 
     for (var i = 1; i < values.length; i++) {
       final x = getX(i);
@@ -369,7 +402,6 @@ class _LineChartPainter extends CustomPainter {
     }
 
     fillPath.lineTo(getX(values.length - 1), size.height);
-    fillPath.close();
 
     // Draw grid background line
     final gridPaint = Paint()
@@ -393,7 +425,11 @@ class _LineChartPainter extends CustomPainter {
       // Draw dashed line
       double dx = 0;
       while (dx < size.width) {
-        canvas.drawLine(Offset(dx, targetY), Offset(dx + 5, targetY), targetPaint);
+        canvas.drawLine(
+          Offset(dx, targetY),
+          Offset(dx + 5, targetY),
+          targetPaint,
+        );
         dx += 10;
       }
     }
@@ -402,7 +438,7 @@ class _LineChartPainter extends CustomPainter {
     if (fillColor != null) {
       final gradPaint = Paint()
         ..shader = LinearGradient(
-          colors: [fillColor!, fillColor!.withValues(alpha: 0.0)],
+          colors: [fillColor!, fillColor!.withValues(alpha: 0.2)],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
         ).createShader(Rect.fromLTWH(0, 0, size.width, size.height))
@@ -490,19 +526,23 @@ class CustomBarChart extends StatelessWidget {
         const SizedBox(height: 8),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: labels.map((lbl) => Expanded(
-            child: Text(
-              lbl,
-              style: const TextStyle(
-                fontSize: 8.5,
-                color: AppColors.secondaryText,
-                fontFamily: AppTextStyles.fontFamily,
-              ),
-              textAlign: TextAlign.center,
-              maxLines: 1,
-              overflow: TextOverflow.ellipsis,
-            ),
-          )).toList(),
+          children: labels
+              .map(
+                (lbl) => Expanded(
+                  child: Text(
+                    lbl,
+                    style: const TextStyle(
+                      fontSize: 8.5,
+                      color: AppColors.secondaryText,
+                      fontFamily: AppTextStyles.fontFamily,
+                    ),
+                    textAlign: TextAlign.center,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              )
+              .toList(),
         ),
       ],
     );

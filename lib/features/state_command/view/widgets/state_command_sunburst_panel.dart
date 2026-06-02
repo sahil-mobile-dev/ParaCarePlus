@@ -3,13 +3,18 @@ import 'package:paracareplus/core/theme/app_colors.dart';
 import 'package:paracareplus/core/theme/app_text_styles.dart';
 
 class StateCommandSunburstPanel extends StatefulWidget {
-  const StateCommandSunburstPanel({required this.title, required this.hierarchyData, super.key});
+  const StateCommandSunburstPanel({
+    required this.title,
+    required this.hierarchyData,
+    super.key,
+  });
 
   final String title;
   final Map<String, dynamic> hierarchyData;
 
   @override
-  State<StateCommandSunburstPanel> createState() => _StateCommandSunburstPanelState();
+  State<StateCommandSunburstPanel> createState() =>
+      _StateCommandSunburstPanelState();
 }
 
 class _StateCommandSunburstPanelState extends State<StateCommandSunburstPanel> {
@@ -23,7 +28,7 @@ class _StateCommandSunburstPanelState extends State<StateCommandSunburstPanel> {
   }
 
   void _drillDown(String childName) {
-    final List<dynamic> children = (_currentNode['children'] as List<dynamic>?) ?? [];
+    final children = (_currentNode['children'] as List<dynamic>?) ?? [];
     final match = children.firstWhere(
       (c) => (c as Map<String, dynamic>)['name'] == childName,
       orElse: () => null,
@@ -53,7 +58,7 @@ class _StateCommandSunburstPanelState extends State<StateCommandSunburstPanel> {
 
     for (var i = 1; i <= index; i++) {
       final step = _navigationPath[i];
-      final List<dynamic> children = (temp['children'] as List<dynamic>?) ?? [];
+      final children = (temp['children'] as List<dynamic>?) ?? [];
       final match = children.firstWhere(
         (c) => (c as Map<String, dynamic>)['name'] == step,
         orElse: () => null,
@@ -99,9 +104,7 @@ class _StateCommandSunburstPanelState extends State<StateCommandSunburstPanel> {
       decoration: BoxDecoration(
         color: AppColors.surface,
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(
-          color: AppColors.border.withValues(alpha: 0.4),
-        ),
+        border: Border.all(color: AppColors.border.withValues(alpha: 0.4)),
       ),
       padding: const EdgeInsets.all(16),
       child: Column(
@@ -151,8 +154,12 @@ class _StateCommandSunburstPanelState extends State<StateCommandSunburstPanel> {
                         style: TextStyle(
                           fontSize: 10,
                           fontWeight: FontWeight.bold,
-                          color: isLast ? AppColors.secondaryAccent : AppColors.primaryLight,
-                          decoration: isLast ? TextDecoration.none : TextDecoration.underline,
+                          color: isLast
+                              ? AppColors.secondaryAccent
+                              : AppColors.primaryLight,
+                          decoration: isLast
+                              ? TextDecoration.none
+                              : TextDecoration.underline,
                           fontFamily: AppTextStyles.fontFamily,
                         ),
                       ),
@@ -161,7 +168,10 @@ class _StateCommandSunburstPanelState extends State<StateCommandSunburstPanel> {
                           padding: EdgeInsets.symmetric(horizontal: 4),
                           child: Text(
                             '➔',
-                            style: TextStyle(color: Colors.white24, fontSize: 8),
+                            style: TextStyle(
+                              color: Colors.white24,
+                              fontSize: 8,
+                            ),
                           ),
                         ),
                     ],
@@ -262,18 +272,29 @@ class _StateCommandSunburstPanelState extends State<StateCommandSunburstPanel> {
                         children: children.map((c) {
                           final cMap = c as Map<String, dynamic>;
                           final name = cMap['name'] as String;
-                          final hasValue = cMap['value'] != null && (cMap['value'] as num) > 0;
-                          final valueText = hasValue ? ' (${cMap['value']})' : '';
+                          final hasValue =
+                              cMap['value'] != null &&
+                              (cMap['value'] as num) > 0;
+                          final valueText = hasValue
+                              ? ' (${cMap['value']})'
+                              : '';
 
                           return InkWell(
                             onTap: () => _drillDown(name),
                             borderRadius: BorderRadius.circular(8),
                             child: Container(
-                              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 10,
+                                vertical: 6,
+                              ),
                               decoration: BoxDecoration(
-                                color: _getLevelColor(level + 1).withValues(alpha: 0.08),
+                                color: _getLevelColor(
+                                  level + 1,
+                                ).withValues(alpha: 0.08),
                                 border: Border.all(
-                                  color: _getLevelColor(level + 1).withValues(alpha: 0.3),
+                                  color: _getLevelColor(
+                                    level + 1,
+                                  ).withValues(alpha: 0.3),
                                 ),
                                 borderRadius: BorderRadius.circular(8),
                               ),

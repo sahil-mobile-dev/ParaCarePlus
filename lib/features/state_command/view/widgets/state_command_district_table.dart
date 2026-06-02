@@ -9,8 +9,9 @@ class StateCommandDistrictTable extends ConsumerWidget {
 
   Color _getPerformanceBadgeBg(String perf) {
     if (perf == 'Good') return AppColors.success.withValues(alpha: 0.12);
-    if (perf == 'Average')
+    if (perf == 'Average') {
       return AppColors.secondaryAccent.withValues(alpha: 0.12);
+    }
     return AppColors.error.withValues(alpha: 0.12);
   }
 

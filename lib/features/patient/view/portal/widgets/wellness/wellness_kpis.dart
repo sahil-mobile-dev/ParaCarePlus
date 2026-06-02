@@ -69,11 +69,6 @@ class WellnessKpis extends StatelessWidget {
 
     return LayoutBuilder(
       builder: (context, constraints) {
-        final width = constraints.maxWidth;
-        final crossAxisCount = width > 1200
-            ? 7
-            : (width > 800 ? 4 : (width > 480 ? 2 : 1));
-
         return GridView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
