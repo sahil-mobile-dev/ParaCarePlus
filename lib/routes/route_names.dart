@@ -24,6 +24,8 @@ class RouteNames {
   static const String tpa = 'tpa';
   static const String stateCommand = 'stateCommand';
   static const String abdmCompliance = 'abdmCompliance';
+  static const String diseaseSurveillance = 'diseaseSurveillance';
+  static const String stateAdminOverview = 'stateAdminOverview';
 
   // Patient Portal (Phase C)
   static const String patientLogin = 'patientLogin';

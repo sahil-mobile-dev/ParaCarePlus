@@ -7,6 +7,7 @@ import 'package:paracareplus/features/auth/view/splash_screen.dart';
 import 'package:paracareplus/features/billing/view/billing_screen.dart';
 import 'package:paracareplus/features/dashboard/view/dashboard_screen.dart';
 import 'package:paracareplus/features/dashboard_hub/view/dashboard_hub_screen.dart';
+import 'package:paracareplus/features/disease_surveillance/view/disease_surveillance_screen.dart';
 import 'package:paracareplus/features/doctor/view/doctor_dashboard_screen.dart';
 import 'package:paracareplus/features/hr/view/hr_screen.dart';
 import 'package:paracareplus/features/ipd/view/ipd_admission_screen.dart';
@@ -35,6 +36,7 @@ import 'package:paracareplus/features/patient/view/portal/patient_vaccination_sc
 import 'package:paracareplus/features/patient/view/portal/patient_wellness_screen.dart';
 import 'package:paracareplus/features/pharmacy/view/pharmacy_screen.dart';
 import 'package:paracareplus/features/radiology/view/radiology_screen.dart';
+import 'package:paracareplus/features/state_admin/view/state_admin_screen.dart';
 import 'package:paracareplus/features/state_command/view/state_command_screen.dart';
 import 'package:paracareplus/features/tpa/view/tpa_screen.dart';
 import 'package:paracareplus/routes/route_names.dart';
@@ -74,6 +76,16 @@ final appRouterStateProvider = Provider<GoRouter>((ref) {
         path: RoutePaths.abdmCompliance,
         name: RouteNames.abdmCompliance,
         builder: (context, state) => const AbdmComplianceScreen(),
+      ),
+      GoRoute(
+        path: RoutePaths.diseaseSurveillance,
+        name: RouteNames.diseaseSurveillance,
+        builder: (context, state) => const DiseaseSurveillanceScreen(),
+      ),
+      GoRoute(
+        path: RoutePaths.stateAdminOverview,
+        name: RouteNames.stateAdminOverview,
+        builder: (context, state) => const StateAdminOverviewScreen(),
       ),
       GoRoute(
         path: RoutePaths.doctorDashboard,
@@ -245,6 +257,8 @@ final appRouterStateProvider = Provider<GoRouter>((ref) {
             state.matchedLocation != RoutePaths.dashboardHub &&
             state.matchedLocation != RoutePaths.stateCommand &&
             state.matchedLocation != RoutePaths.abdmCompliance &&
+            state.matchedLocation != RoutePaths.diseaseSurveillance &&
+            state.matchedLocation != RoutePaths.stateAdminOverview &&
             state.matchedLocation != RoutePaths.splash) {
           return RoutePaths.login;
         }
