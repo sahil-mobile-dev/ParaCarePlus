@@ -1,72 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:paracareplus/core/theme/app_colors.dart';
 import 'package:paracareplus/core/theme/app_spacing.dart';
 import 'package:paracareplus/core/theme/app_text_styles.dart';
+import 'package:paracareplus/features/hr/view_model/hr_view_model.dart';
+import 'package:paracareplus/features/hr/model/hr_model.dart';
 
-class PayrollTab extends StatefulWidget {
+class PayrollTab extends ConsumerWidget {
   const PayrollTab({super.key});
 
   @override
-  State<PayrollTab> createState() => _PayrollTabState();
-}
+  Widget build(BuildContext context, WidgetRef ref) {
+    final payrollList = ref.watch(hrProvider.select((s) => s.payrollList));
 
-class _PayrollTabState extends State<PayrollTab> {
-  final List<Map<String, dynamic>> _payroll = [
-    {
-      'id': 'EMP-1042',
-      'name': 'Dr. Alok Verma',
-      'role': 'HOD Cardiology',
-      'base': 180000,
-      'allowance': 35000,
-      'deductions': 12000,
-      'tax': 25000,
-      'status': 'Paid',
-    },
-    {
-      'id': 'EMP-2210',
-      'name': 'Shashi Kiran',
-      'role': 'Senior Staff Nurse',
-      'base': 45000,
-      'allowance': 8000,
-      'deductions': 3000,
-      'tax': 1500,
-      'status': 'Paid',
-    },
-    {
-      'id': 'EMP-1102',
-      'name': 'Dr. Meera Gupta',
-      'role': 'Senior Radiologist',
-      'base': 150000,
-      'allowance': 28000,
-      'deductions': 10000,
-      'tax': 20000,
-      'status': 'Processing',
-    },
-    {
-      'id': 'EMP-3049',
-      'name': 'Aman Rawat',
-      'role': 'HR Operations Lead',
-      'base': 65000,
-      'allowance': 12000,
-      'deductions': 4500,
-      'tax': 3200,
-      'status': 'Paid',
-    },
-  ];
-
-  @override
-  Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        _buildSummaryBar(),
+        _buildSummaryBar(context, ref),
         const SizedBox(height: AppSpacing.lg),
-        _buildPayrollTableCard(),
+        _buildPayrollTableCard(context, ref, payrollList),
       ],
     );
   }
 
-  Widget _buildSummaryBar() {
+  Widget _buildSummaryBar(BuildContext context, WidgetRef ref) {
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
@@ -119,7 +76,7 @@ class _PayrollTabState extends State<PayrollTab> {
     );
   }
 
-  Widget _buildPayrollTableCard() {
+  Widget _buildPayrollTableCard(BuildContext context, WidgetRef ref, List<PayrollItem> items) {
     return Container(
       decoration: BoxDecoration(
         color: AppColors.card,
@@ -178,15 +135,14 @@ class _PayrollTabState extends State<PayrollTab> {
                       _headerCell('Payslip Disbursal'),
                     ],
                   ),
-                  ..._payroll.map((row) {
-                    final base = row['base'] as int;
-                    final allowance = row['allowance'] as int;
-                    final deductions = row['deductions'] as int;
-                    final tax = row['tax'] as int;
-                    final name = row['name'] as String;
-                    final role = row['role'] as String;
-                    final id = row['id'] as String;
+                  ...items.map((row) {
+                    final cleanSalaryStr = row.salary.replaceAll(RegExp(r'[^0-9]'), '');
+                    final base = int.tryParse(cleanSalaryStr) ?? 30000;
+                    final allowance = (base * 0.15).round();
+                    final deductions = (base * 0.05).round();
+                    final tax = (base * 0.10).round();
                     final net = base + allowance - deductions - tax;
+
                     return TableRow(
                       decoration: const BoxDecoration(
                         border: Border(
@@ -194,7 +150,7 @@ class _PayrollTabState extends State<PayrollTab> {
                         ),
                       ),
                       children: [
-                        _cell(id, isBold: true),
+                        _cell(row.id, isBold: true),
                         Padding(
                           padding: const EdgeInsets.symmetric(
                             vertical: 14,
@@ -204,13 +160,13 @@ class _PayrollTabState extends State<PayrollTab> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                name,
+                                row.name,
                                 style: AppTextStyles.bodyMedium.copyWith(
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
                               const SizedBox(height: 2),
-                              Text(role, style: AppTextStyles.bodySmall),
+                              Text(row.designation, style: AppTextStyles.bodySmall),
                             ],
                           ),
                         ),
@@ -226,27 +182,31 @@ class _PayrollTabState extends State<PayrollTab> {
                           ),
                           child: ElevatedButton(
                             onPressed: () {
+                              ref.read(hrProvider.notifier).processPayroll(row.id);
                               ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(
                                   content: Text(
-                                    'Generating PDF payslip for $name...',
+                                    row.status == 'PAID'
+                                        ? 'Payslip for ${row.name} is already processed!'
+                                        : 'Processing and disbursing payroll for ${row.name}...',
                                   ),
                                 ),
                               );
                             },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.background,
-                              foregroundColor: AppColors.primaryText,
-                              side: const BorderSide(color: AppColors.border),
+                              backgroundColor: row.status == 'PAID'
+                                  ? AppColors.success.withValues(alpha: 0.2)
+                                  : AppColors.primary,
+                              foregroundColor: Colors.white,
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 10,
                                 vertical: 4,
                               ),
                               minimumSize: const Size(0, 30),
                             ),
-                            child: const Text(
-                              'Download Slip',
-                              style: TextStyle(fontSize: 10),
+                            child: Text(
+                              row.status == 'PAID' ? 'Downloaded' : 'Disburse',
+                              style: const TextStyle(fontSize: 10),
                             ),
                           ),
                         ),

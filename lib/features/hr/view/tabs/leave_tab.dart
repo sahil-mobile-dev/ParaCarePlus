@@ -1,52 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:paracareplus/core/theme/app_colors.dart';
 import 'package:paracareplus/core/theme/app_spacing.dart';
 import 'package:paracareplus/core/theme/app_text_styles.dart';
+import 'package:paracareplus/features/hr/view_model/hr_view_model.dart';
+import 'package:paracareplus/features/hr/model/hr_model.dart';
 
-class LeaveTab extends StatefulWidget {
+class LeaveTab extends ConsumerStatefulWidget {
   const LeaveTab({super.key});
 
   @override
-  State<LeaveTab> createState() => _LeaveTabState();
+  ConsumerState<LeaveTab> createState() => _LeaveTabState();
 }
 
-class _LeaveTabState extends State<LeaveTab> {
-  final List<Map<String, dynamic>> _leaveRequests = [
-    {
-      'id': 'REQ-2098',
-      'name': 'Shashi Kiran',
-      'role': 'Senior Staff Nurse',
-      'type': 'Casual Leave',
-      'dates': 'May 24 - May 26',
-      'days': 3,
-      'reason': 'Family emergency in hometown',
-    },
-    {
-      'id': 'REQ-2099',
-      'name': 'Sanjay Sen',
-      'role': 'Billing Executive',
-      'type': 'Sick Leave',
-      'dates': 'May 22 - May 23',
-      'days': 2,
-      'reason': 'Dental surgery recovery',
-    },
-  ];
-
-  void _handleLeaveAction(int index, bool approved) {
-    final reqName = _leaveRequests[index]['name'];
-    final reqType = _leaveRequests[index]['type'];
-
-    setState(() {
-      _leaveRequests.removeAt(index);
-    });
+class _LeaveTabState extends ConsumerState<LeaveTab> {
+  void _handleLeaveAction(LeaveRequest request, bool approved) {
+    if (approved) {
+      ref.read(hrProvider.notifier).approveLeave(request.id);
+    } else {
+      ref.read(hrProvider.notifier).rejectLeave(request.id);
+    }
 
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         backgroundColor: approved ? AppColors.success : AppColors.error,
         content: Text(
           approved
-              ? 'Leave request for $reqName ($reqType) has been APPROVED!'
-              : 'Leave request for $reqName ($reqType) has been REJECTED.',
+              ? 'Leave request for ${request.name} (${request.type}) has been APPROVED!'
+              : 'Leave request for ${request.name} (${request.type}) has been REJECTED.',
         ),
       ),
     );
@@ -141,6 +122,9 @@ class _LeaveTabState extends State<LeaveTab> {
   }
 
   Widget _buildRequestsListCard() {
+    final leaves = ref.watch(hrProvider.select((s) => s.leaves));
+    final pendingRequests = leaves.where((l) => l.status == 'PENDING').toList();
+
     return Container(
       padding: const EdgeInsets.all(AppSpacing.md),
       decoration: BoxDecoration(
@@ -168,7 +152,7 @@ class _LeaveTabState extends State<LeaveTab> {
           const SizedBox(height: AppSpacing.md),
           const Divider(color: AppColors.border, height: 1),
           const SizedBox(height: 12),
-          if (_leaveRequests.isEmpty)
+          if (pendingRequests.isEmpty)
             const Padding(
               padding: EdgeInsets.symmetric(vertical: 36),
               child: Center(
@@ -182,15 +166,15 @@ class _LeaveTabState extends State<LeaveTab> {
             ListView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              itemCount: _leaveRequests.length,
+              itemCount: pendingRequests.length,
               itemBuilder: (context, index) {
-                final req = _leaveRequests[index];
-                final name = req['name'] as String;
-                final role = req['role'] as String;
-                final type = req['type'] as String;
-                final dates = req['dates'] as String;
-                final days = req['days'].toString();
-                final reason = req['reason'] as String;
+                final req = pendingRequests[index];
+                final name = req.name;
+                const role = 'Staff Member';
+                final type = req.type;
+                final dates = req.date;
+                final days = req.duration;
+                final reason = req.reason;
                 return Container(
                   margin: const EdgeInsets.symmetric(vertical: 6),
                   padding: const EdgeInsets.all(12),
@@ -254,7 +238,7 @@ class _LeaveTabState extends State<LeaveTab> {
                             ),
                             const SizedBox(height: 4),
                             Text(
-                              'Dates : $dates \n($days Days)',
+                              'Dates : $dates \n($days)',
                               style: AppTextStyles.bodySmall.copyWith(
                                 color: AppColors.primaryText,
                               ),
@@ -271,7 +255,7 @@ class _LeaveTabState extends State<LeaveTab> {
                       Row(
                         children: [
                           ElevatedButton(
-                            onPressed: () => _handleLeaveAction(index, true),
+                            onPressed: () => _handleLeaveAction(req, true),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: AppColors.success,
                               foregroundColor: Colors.white,
@@ -291,7 +275,7 @@ class _LeaveTabState extends State<LeaveTab> {
                           ),
                           const SizedBox(width: 8),
                           OutlinedButton(
-                            onPressed: () => _handleLeaveAction(index, false),
+                            onPressed: () => _handleLeaveAction(req, false),
                             style: OutlinedButton.styleFrom(
                               side: const BorderSide(color: AppColors.error),
                               foregroundColor: AppColors.error,

@@ -213,7 +213,7 @@ class DashboardModuleItem {
       emoji: '📦',
       badge: 'SUPPLY',
       metrics: {'Items': '1,800+', 'Assets': '284'},
-      routeName: 'inventory',
+      routeName: RouteNames.inventory,
       colorTheme: 'brown',
       onTap: () {},
     ),

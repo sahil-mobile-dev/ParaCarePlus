@@ -1,36 +1,21 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:paracareplus/core/theme/app_colors.dart';
 import 'package:paracareplus/core/theme/app_spacing.dart';
 import 'package:paracareplus/core/theme/app_text_styles.dart';
+import 'package:paracareplus/features/pharmacy/model/pharmacy_model.dart';
+import 'package:paracareplus/features/pharmacy/view_model/pharmacy_view_model.dart';
 
-class ExpiryAlertsTab extends StatefulWidget {
+class ExpiryAlertsTab extends ConsumerStatefulWidget {
   const ExpiryAlertsTab({super.key});
 
   @override
-  State<ExpiryAlertsTab> createState() => _ExpiryAlertsTabState();
+  ConsumerState<ExpiryAlertsTab> createState() => _ExpiryAlertsTabState();
 }
 
-class _ExpiryAlertsTabState extends State<ExpiryAlertsTab> {
+class _ExpiryAlertsTabState extends ConsumerState<ExpiryAlertsTab> {
   bool _isLoading = true;
-  final List<Map<String, dynamic>> _expiryItems = [
-    {
-      'drug': 'Tab. Atorvastatin 10mg',
-      'batch': 'B-ATO904',
-      'expiryDate': '15-06-2026',
-      'daysLeft': 27,
-      'qty': 180,
-      'recommendedAction': 'Return to Supplier',
-    },
-    {
-      'drug': 'Inj. Insulin 100 IU',
-      'batch': 'B-INS009',
-      'expiryDate': '08-06-2026',
-      'daysLeft': 20,
-      'qty': 15,
-      'recommendedAction': 'Quarantine Item',
-    },
-  ];
 
   @override
   void initState() {
@@ -78,6 +63,8 @@ class _ExpiryAlertsTabState extends State<ExpiryAlertsTab> {
         ),
       );
     }
+
+    final expiryItems = ref.watch(pharmacyProvider.select((s) => s.expiryAlerts));
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -149,7 +136,7 @@ class _ExpiryAlertsTabState extends State<ExpiryAlertsTab> {
               const SizedBox(width: 12),
               Expanded(
                 child: Text(
-                  '${_expiryItems.length} item(s) found in expiry alerts. Please review and take appropriate action.',
+                  '${expiryItems.length} item(s) found in expiry alerts. Please review and take appropriate action.',
                   style: AppTextStyles.bodySmall.copyWith(
                     color: AppColors.primaryText,
                   ),
@@ -207,7 +194,7 @@ class _ExpiryAlertsTabState extends State<ExpiryAlertsTab> {
                         _buildHeaderCell('ACTIONS'),
                       ],
                     ),
-                    ..._expiryItems.map((item) {
+                    ...expiryItems.map((item) {
                       return TableRow(
                         decoration: const BoxDecoration(
                           border: Border(
@@ -221,29 +208,29 @@ class _ExpiryAlertsTabState extends State<ExpiryAlertsTab> {
                               vertical: 14,
                             ),
                             child: Text(
-                              item['drug'] as String,
+                              item.drug,
                               style: AppTextStyles.bodyMedium.copyWith(
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),
-                          _buildTextCell(item['batch'] as String),
-                          _buildTextCell(item['expiryDate'] as String),
+                          _buildTextCell(item.batch),
+                          _buildTextCell(item.expiryDate),
                           Padding(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 12,
                               vertical: 14,
                             ),
                             child: Text(
-                              '${item['daysLeft']} days',
+                              '${item.daysLeft} days',
                               style: AppTextStyles.bodyMedium.copyWith(
                                 color: AppColors.error,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),
-                          _buildTextCell('${item['qty']}'),
-                          _buildTextCell(item['recommendedAction'] as String),
+                          _buildTextCell('${item.qty}'),
+                          _buildTextCell(item.recommendedAction),
                           Padding(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 12,
@@ -302,23 +289,20 @@ class _ExpiryAlertsTabState extends State<ExpiryAlertsTab> {
     );
   }
 
-  void _quarantineItem(Map<String, dynamic> item) {
-    setState(() {
-      _expiryItems.remove(item);
-    });
+  void _quarantineItem(ExpiryAlertItem item) {
+    ref.read(pharmacyProvider.notifier).quarantineExpiryItem(item.batch);
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         backgroundColor: AppColors.error,
         content: Text(
-          'Batch ${item['batch']} has been moved to Quarantine Zone!',
+          'Batch ${item.batch} has been moved to Quarantine Zone!',
         ),
       ),
     );
   }
 
   void _processExpiredItems() {
-    if (_expiryItems.isEmpty) return;
-    setState(_expiryItems.clear);
+    ref.read(pharmacyProvider.notifier).processAllExpired();
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(
         backgroundColor: AppColors.success,

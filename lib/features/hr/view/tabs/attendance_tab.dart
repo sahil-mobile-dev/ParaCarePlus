@@ -1,85 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:paracareplus/core/theme/app_colors.dart';
 import 'package:paracareplus/core/theme/app_spacing.dart';
 import 'package:paracareplus/core/theme/app_text_styles.dart';
+import 'package:paracareplus/features/hr/view_model/hr_view_model.dart';
+import 'package:paracareplus/features/hr/model/hr_model.dart';
 
-class AttendanceTab extends StatefulWidget {
+class AttendanceTab extends ConsumerStatefulWidget {
   const AttendanceTab({super.key});
 
   @override
-  State<AttendanceTab> createState() => _AttendanceTabState();
+  ConsumerState<AttendanceTab> createState() => _AttendanceTabState();
 }
 
-class _AttendanceTabState extends State<AttendanceTab> {
-  final List<Map<String, dynamic>> _attendance = [
-    {
-      'id': 'EMP-1042',
-      'name': 'Dr. Alok Verma',
-      'role': 'HOD Cardiology',
-      'shift': 'Day Shift A (09:00 - 17:00)',
-      'in': '08:52 AM',
-      'out': '05:08 PM',
-      'overtime': '0.3 hrs',
-      'status': 'Present',
-      'statusColor': AppColors.success,
-    },
-    {
-      'id': 'EMP-2210',
-      'name': 'Shashi Kiran',
-      'role': 'Senior Staff Nurse',
-      'shift': 'Night Shift B (20:00 - 08:00)',
-      'in': '07:45 PM',
-      'out': '08:02 AM',
-      'overtime': '1.0 hrs',
-      'status': 'Present',
-      'statusColor': AppColors.success,
-    },
-    {
-      'id': 'EMP-1102',
-      'name': 'Dr. Meera Gupta',
-      'role': 'Senior Radiologist',
-      'shift': 'Day Shift B (11:00 - 19:00)',
-      'in': '10:58 AM',
-      'out': '--',
-      'overtime': '0.0 hrs',
-      'status': 'On Duty',
-      'statusColor': AppColors.primary,
-    },
-    {
-      'id': 'EMP-3049',
-      'name': 'Aman Rawat',
-      'role': 'HR Operations Lead',
-      'shift': 'Day Shift A (09:00 - 17:00)',
-      'in': '09:12 AM',
-      'out': '--',
-      'overtime': '0.0 hrs',
-      'status': 'Late In',
-      'statusColor': AppColors.secondaryAccent,
-    },
-    {
-      'id': 'EMP-4421',
-      'name': 'Sanjay Sen',
-      'role': 'Billing Executive',
-      'shift': 'Day Shift A (09:00 - 17:00)',
-      'in': '--',
-      'out': '--',
-      'overtime': '0.0 hrs',
-      'status': 'Absent',
-      'statusColor': AppColors.error,
-    },
-  ];
-
+class _AttendanceTabState extends ConsumerState<AttendanceTab> {
   bool _isClockedIn = false;
   String _simulatedTime = '--';
 
   @override
   Widget build(BuildContext context) {
+    final attendanceList = ref.watch(hrProvider.select((s) => s.attendance));
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
         _buildActiveClockWidget(),
         const SizedBox(height: AppSpacing.lg),
-        _buildAttendanceTableCard(),
+        _buildAttendanceTableCard(attendanceList),
       ],
     );
   }
@@ -168,7 +115,7 @@ class _AttendanceTabState extends State<AttendanceTab> {
     );
   }
 
-  Widget _buildAttendanceTableCard() {
+  Widget _buildAttendanceTableCard(List<AttendanceItem> items) {
     return Container(
       decoration: BoxDecoration(
         color: AppColors.card,
@@ -236,7 +183,7 @@ class _AttendanceTabState extends State<AttendanceTab> {
                       _headerCell('Shift Status'),
                     ],
                   ),
-                  ..._attendance.map(_buildTableRow),
+                  ...items.map(_buildTableRow),
                 ],
               ),
             ),
@@ -246,33 +193,40 @@ class _AttendanceTabState extends State<AttendanceTab> {
     );
   }
 
-  TableRow _buildTableRow(Map<String, dynamic> row) {
+  TableRow _buildTableRow(AttendanceItem row) {
+    Color statusColor = AppColors.success;
+    if (row.status == 'Absent') {
+      statusColor = AppColors.error;
+    } else if (row.status == 'Late') {
+      statusColor = AppColors.secondaryAccent;
+    }
+
     return TableRow(
       decoration: const BoxDecoration(
         border: Border(bottom: BorderSide(color: AppColors.border)),
       ),
       children: [
-        _cell(row['id'] as String, isBold: true),
+        _cell(row.id, isBold: true),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 12),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                row['name'] as String,
+                row.name,
                 style: AppTextStyles.bodyMedium.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
               ),
               const SizedBox(height: 2),
-              Text(row['role'] as String, style: AppTextStyles.bodySmall),
+              Text(row.role, style: AppTextStyles.bodySmall),
             ],
           ),
         ),
-        _cell(row['shift'] as String),
-        _cell(row['in'] as String),
-        _cell(row['out'] as String),
-        _cell(row['overtime'] as String),
+        _cell('Day Shift A (09:00 - 17:00)'),
+        _cell(row.checkIn),
+        _cell(row.checkOut),
+        _cell(row.status == 'Present' ? '0.0 hrs' : '0.0 hrs'),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 12),
           child: Align(
@@ -280,16 +234,16 @@ class _AttendanceTabState extends State<AttendanceTab> {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
               decoration: BoxDecoration(
-                color: (row['statusColor'] as Color).withValues(alpha: 0.1),
+                color: statusColor.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(12),
                 border: Border.all(
-                  color: (row['statusColor'] as Color).withValues(alpha: 0.3),
+                  color: statusColor.withValues(alpha: 0.3),
                 ),
               ),
               child: Text(
-                row['status'] as String,
+                row.status,
                 style: TextStyle(
-                  color: row['statusColor'] as Color,
+                  color: statusColor,
                   fontSize: 10,
                   fontWeight: FontWeight.bold,
                 ),

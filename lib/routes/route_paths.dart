@@ -31,6 +31,7 @@ class RoutePaths {
   static const String ipdBeds = '/ipd-beds';
   static const String mchDashboard = '/mch-dashboard';
   static const String radiologyImaging = '/radiology-imaging';
+  static const String inventory = '/inventory';
 
   // Patient Portal (Phase C)
   static const String patientLogin = '/patient/login';

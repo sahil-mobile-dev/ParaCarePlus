@@ -12,6 +12,7 @@ import 'package:paracareplus/features/disease_surveillance/view/disease_surveill
 import 'package:paracareplus/features/doctor/view/doctor_dashboard_screen.dart';
 import 'package:paracareplus/features/hospital_performance/view/hospital_performance_screen.dart';
 import 'package:paracareplus/features/hr/view/hr_screen.dart';
+import 'package:paracareplus/features/inventory/view/inventory_screen.dart';
 import 'package:paracareplus/features/ipd/view/ipd_admission_screen.dart';
 import 'package:paracareplus/features/ipd_beds/view/ipd_beds_screen.dart';
 import 'package:paracareplus/features/lab_diagnostics/view/lab_diagnostics_screen.dart';
@@ -169,6 +170,11 @@ final appRouterStateProvider = Provider<GoRouter>((ref) {
         builder: (context, state) => const HrScreen(),
       ),
       GoRoute(
+        path: RoutePaths.inventory,
+        name: RouteNames.inventory,
+        builder: (context, state) => const InventoryScreen(),
+      ),
+      GoRoute(
         path: RoutePaths.tpa,
         name: RouteNames.tpa,
         builder: (context, state) => const TpaScreen(),
@@ -302,6 +308,9 @@ final appRouterStateProvider = Provider<GoRouter>((ref) {
             state.matchedLocation != RoutePaths.radiologyImaging &&
             state.matchedLocation != RoutePaths.laboratory &&
             state.matchedLocation != RoutePaths.bloodbank &&
+            state.matchedLocation != RoutePaths.pharmacy &&
+            state.matchedLocation != RoutePaths.inventory &&
+            state.matchedLocation != RoutePaths.hr &&
             state.matchedLocation != RoutePaths.splash) {
           return RoutePaths.login;
         }

@@ -31,6 +31,7 @@ class RouteNames {
   static const String ipdBeds = 'ipdBeds';
   static const String mchDashboard = 'mchDashboard';
   static const String radiologyImaging = 'radiologyImaging';
+  static const String inventory = 'inventory';
 
   // Patient Portal (Phase C)
   static const String patientLogin = 'patientLogin';

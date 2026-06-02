@@ -1,71 +1,21 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:paracareplus/core/theme/app_colors.dart';
 import 'package:paracareplus/core/theme/app_spacing.dart';
 import 'package:paracareplus/core/theme/app_text_styles.dart';
+import 'package:paracareplus/features/pharmacy/view_model/pharmacy_view_model.dart';
 
-class DrugInventoryTab extends StatefulWidget {
+class DrugInventoryTab extends ConsumerStatefulWidget {
   const DrugInventoryTab({super.key});
 
   @override
-  State<DrugInventoryTab> createState() => _DrugInventoryTabState();
+  ConsumerState<DrugInventoryTab> createState() => _DrugInventoryTabState();
 }
 
-class _DrugInventoryTabState extends State<DrugInventoryTab> {
+class _DrugInventoryTabState extends ConsumerState<DrugInventoryTab> {
   bool _isLoading = true;
   String _searchQuery = '';
-  final List<Map<String, dynamic>> _inventory = [
-    {
-      'name': 'Tab. Metformin 500mg',
-      'category': 'Anti-Diabetic',
-      'form': 'Tablet',
-      'batch': 'B-MET238',
-      'qty': 1200,
-      'minLevel': 200,
-      'mrp': 4.5,
-      'status': 'In Stock',
-    },
-    {
-      'name': 'Tab. Atorvastatin 10mg',
-      'category': 'Cardiovascular',
-      'form': 'Tablet',
-      'batch': 'B-ATO904',
-      'qty': 180,
-      'minLevel': 300,
-      'mrp': 12.0,
-      'status': 'Reorder Alert',
-    },
-    {
-      'name': 'Inj. Ceftriaxone 1g',
-      'category': 'Antibiotic',
-      'form': 'Vial',
-      'batch': 'B-CEF112',
-      'qty': 450,
-      'minLevel': 100,
-      'mrp': 45.0,
-      'status': 'In Stock',
-    },
-    {
-      'name': 'Inj. Insulin 100 IU',
-      'category': 'Hormone',
-      'form': 'Vial',
-      'batch': 'B-INS009',
-      'qty': 15,
-      'minLevel': 50,
-      'mrp': 210.0,
-      'status': 'Reorder Alert',
-    },
-    {
-      'name': 'Tab. Paracetamol 650mg',
-      'category': 'Analgesic',
-      'form': 'Tablet',
-      'batch': 'B-PCM504',
-      'qty': 5000,
-      'minLevel': 1000,
-      'mrp': 1.8,
-      'status': 'In Stock',
-    },
-  ];
 
   @override
   void initState() {
@@ -115,11 +65,13 @@ class _DrugInventoryTabState extends State<DrugInventoryTab> {
       );
     }
 
-    final filteredList = _inventory.where((item) {
+    final inventory = ref.watch(pharmacyProvider.select((s) => s.inventory));
+
+    final filteredList = inventory.where((item) {
       final query = _searchQuery.toLowerCase();
-      return item['name'].toString().toLowerCase().contains(query) ||
-          item['category'].toString().toLowerCase().contains(query) ||
-          item['batch'].toString().toLowerCase().contains(query);
+      return item.name.toLowerCase().contains(query) ||
+          item.category.toLowerCase().contains(query) ||
+          item.batch.toLowerCase().contains(query);
     }).toList();
 
     return Column(
@@ -230,7 +182,7 @@ class _DrugInventoryTabState extends State<DrugInventoryTab> {
                       ],
                     ),
                     ...filteredList.map((item) {
-                      final isLow = item['status'] == 'Reorder Alert';
+                      final isLow = item.status == 'Reorder Alert';
                       return TableRow(
                         decoration: const BoxDecoration(
                           border: Border(
@@ -244,22 +196,22 @@ class _DrugInventoryTabState extends State<DrugInventoryTab> {
                               vertical: 14,
                             ),
                             child: Text(
-                              item['name'] as String,
+                              item.name,
                               style: AppTextStyles.bodyMedium.copyWith(
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),
-                          _buildTextCell(item['category'] as String),
-                          _buildTextCell(item['form'] as String),
-                          _buildTextCell(item['batch'] as String),
+                          _buildTextCell(item.category),
+                          _buildTextCell(item.form),
+                          _buildTextCell(item.batch),
                           Padding(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 12,
                               vertical: 14,
                             ),
                             child: Text(
-                              '${item['qty']}',
+                              '${item.qty}',
                               style: AppTextStyles.bodyMedium.copyWith(
                                 color: isLow
                                     ? AppColors.error
@@ -270,8 +222,8 @@ class _DrugInventoryTabState extends State<DrugInventoryTab> {
                               ),
                             ),
                           ),
-                          _buildTextCell('${item['minLevel']}'),
-                          _buildTextCell('₹${item['mrp']}'),
+                          _buildTextCell('${item.minLevel}'),
+                          _buildTextCell('₹${item.mrp}'),
                           Padding(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 12,
@@ -290,7 +242,7 @@ class _DrugInventoryTabState extends State<DrugInventoryTab> {
                               ),
                               alignment: Alignment.center,
                               child: Text(
-                                item['status'] as String,
+                                item.status,
                                 style: AppTextStyles.labelSmall.copyWith(
                                   color: isLow
                                       ? AppColors.error
@@ -315,7 +267,7 @@ class _DrugInventoryTabState extends State<DrugInventoryTab> {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     content: Text(
-                                      'Edit ${item['name']} triggered.',
+                                      'Edit ${item.name} triggered.',
                                     ),
                                   ),
                                 );
@@ -378,7 +330,12 @@ class _DrugInventoryTabState extends State<DrugInventoryTab> {
   }
 
   void _showAddStockDialog() {
-    showDialog(
+    final nameController = TextEditingController();
+    final batchController = TextEditingController();
+    final qtyController = TextEditingController();
+    final mrpController = TextEditingController();
+
+    showDialog<void>(
       context: context,
       builder: (context) {
         return AlertDialog(
@@ -391,13 +348,13 @@ class _DrugInventoryTabState extends State<DrugInventoryTab> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                _buildDialogField('Drug Name'),
+                _buildDialogField('Drug Name', nameController),
                 const SizedBox(height: 12),
-                _buildDialogField('Batch Number'),
+                _buildDialogField('Batch Number', batchController),
                 const SizedBox(height: 12),
-                _buildDialogField('Quantity'),
+                _buildDialogField('Quantity', qtyController),
                 const SizedBox(height: 12),
-                _buildDialogField('MRP (₹)'),
+                _buildDialogField('MRP (₹)', mrpController),
               ],
             ),
           ),
@@ -411,13 +368,29 @@ class _DrugInventoryTabState extends State<DrugInventoryTab> {
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.pop(context);
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    backgroundColor: AppColors.success,
-                    content: Text('Stock SKU added successfully!'),
-                  ),
-                );
+                final name = nameController.text.trim();
+                final batch = batchController.text.trim();
+                final qty = int.tryParse(qtyController.text) ?? 0;
+                final mrp = double.tryParse(mrpController.text) ?? 0.0;
+
+                if (name.isNotEmpty && batch.isNotEmpty) {
+                  ref.read(pharmacyProvider.notifier).addInventoryItem(
+                    name: name,
+                    category: 'Analgesic', // default mock category
+                    form: 'Tablet',       // default mock form
+                    batch: batch,
+                    qty: qty,
+                    minLevel: 100,         // default minLevel
+                    mrp: mrp,
+                  );
+                  Navigator.pop(context);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      backgroundColor: AppColors.success,
+                      content: Text('Stock SKU added successfully!'),
+                    ),
+                  );
+                }
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
@@ -430,8 +403,9 @@ class _DrugInventoryTabState extends State<DrugInventoryTab> {
     );
   }
 
-  Widget _buildDialogField(String label) {
+  Widget _buildDialogField(String label, TextEditingController controller) {
     return TextField(
+      controller: controller,
       style: AppTextStyles.bodyMedium,
       decoration: InputDecoration(
         labelText: label,

@@ -1,79 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:paracareplus/core/theme/app_colors.dart';
 import 'package:paracareplus/core/theme/app_spacing.dart';
 import 'package:paracareplus/core/theme/app_text_styles.dart';
+import 'package:paracareplus/features/hr/view_model/hr_view_model.dart';
+import 'package:paracareplus/features/hr/model/hr_model.dart';
 
-class DirectoryTab extends StatefulWidget {
+class DirectoryTab extends ConsumerStatefulWidget {
   const DirectoryTab({super.key});
 
   @override
-  State<DirectoryTab> createState() => _DirectoryTabState();
+  ConsumerState<DirectoryTab> createState() => _DirectoryTabState();
 }
 
-class _DirectoryTabState extends State<DirectoryTab> {
-  final List<Map<String, String>> _staff = [
-    {
-      'id': 'EMP-1042',
-      'name': 'Dr. Alok Verma',
-      'designation': 'HOD Cardiology',
-      'department': 'Cardiology',
-      'email': 'alok.verma@paracare.com',
-      'phone': '+91 98765 43210',
-      'status': 'Active',
-    },
-    {
-      'id': 'EMP-2210',
-      'name': 'Shashi Kiran',
-      'designation': 'Senior Staff Nurse',
-      'department': 'Emergency Medicine',
-      'email': 'shashi.k@paracare.com',
-      'phone': '+91 88765 99011',
-      'status': 'On Leave',
-    },
-    {
-      'id': 'EMP-1102',
-      'name': 'Dr. Meera Gupta',
-      'designation': 'Senior Radiologist',
-      'department': 'Radiology / RIS',
-      'email': 'meera.g@paracare.com',
-      'phone': '+91 99881 22340',
-      'status': 'Active',
-    },
-    {
-      'id': 'EMP-3049',
-      'name': 'Aman Rawat',
-      'designation': 'HR Operations Lead',
-      'department': 'Human Resources',
-      'email': 'aman.r@paracare.com',
-      'phone': '+91 77665 44210',
-      'status': 'Active',
-    },
-    {
-      'id': 'EMP-4421',
-      'name': 'Sanjay Sen',
-      'designation': 'Billing Executive',
-      'department': 'Billing & Finance',
-      'email': 'sanjay.sen@paracare.com',
-      'phone': '+91 91223 88401',
-      'status': 'Active',
-    },
-  ];
-
+class _DirectoryTabState extends ConsumerState<DirectoryTab> {
   String _searchQuery = '';
   String _selectedDept = 'All';
 
   @override
   Widget build(BuildContext context) {
-    final filtered = _staff.where((person) {
+    final staff = ref.watch(hrProvider.select((s) => s.staffDirectory));
+
+    final filtered = staff.where((person) {
       final matchesSearch =
-          person['name']!.toLowerCase().contains(_searchQuery.toLowerCase()) ||
-          person['designation']!.toLowerCase().contains(
-            _searchQuery.toLowerCase(),
-          ) ||
-          person['id']!.toLowerCase().contains(_searchQuery.toLowerCase());
+          person.name.toLowerCase().contains(_searchQuery.toLowerCase()) ||
+          person.role.toLowerCase().contains(_searchQuery.toLowerCase()) ||
+          person.id.toLowerCase().contains(_searchQuery.toLowerCase());
 
       final matchesDept =
-          _selectedDept == 'All' || person['department'] == _selectedDept;
+          _selectedDept == 'All' || person.department == _selectedDept;
 
       return matchesSearch && matchesDept;
     }).toList();
@@ -135,6 +90,9 @@ class _DirectoryTabState extends State<DirectoryTab> {
                 items:
                     [
                       'All',
+                      'Nursing',
+                      'Clinical',
+                      'Billing',
                       'Cardiology',
                       'Emergency Medicine',
                       'Radiology / RIS',
@@ -156,7 +114,7 @@ class _DirectoryTabState extends State<DirectoryTab> {
     );
   }
 
-  Widget _buildDirectoryGrid(List<Map<String, String>> items) {
+  Widget _buildDirectoryGrid(List<StaffItem> items) {
     return LayoutBuilder(
       builder: (context, constraints) {
         final cols = constraints.maxWidth > 900
@@ -174,7 +132,7 @@ class _DirectoryTabState extends State<DirectoryTab> {
           itemCount: items.length,
           itemBuilder: (context, index) {
             final person = items[index];
-            final isOnLeave = person['status'] == 'On Leave';
+            final isOnLeave = person.status == 'On Leave';
             return Container(
               padding: const EdgeInsets.all(AppSpacing.md),
               decoration: BoxDecoration(
@@ -194,7 +152,7 @@ class _DirectoryTabState extends State<DirectoryTab> {
                         ),
                         radius: 20,
                         child: Text(
-                          person['name']!.split(' ').last.substring(0, 1),
+                          person.name.split(' ').last.substring(0, 1),
                           style: const TextStyle(
                             color: AppColors.primary,
                             fontWeight: FontWeight.bold,
@@ -210,7 +168,7 @@ class _DirectoryTabState extends State<DirectoryTab> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Text(
-                                  person['id']!,
+                                  person.id,
                                   style: AppTextStyles.labelSmall.copyWith(
                                     fontSize: 8,
                                   ),
@@ -229,7 +187,7 @@ class _DirectoryTabState extends State<DirectoryTab> {
                                     borderRadius: BorderRadius.circular(4),
                                   ),
                                   child: Text(
-                                    person['status']!,
+                                    person.status,
                                     style: TextStyle(
                                       color: isOnLeave
                                           ? AppColors.error
@@ -243,13 +201,13 @@ class _DirectoryTabState extends State<DirectoryTab> {
                             ),
                             const SizedBox(height: 2),
                             Text(
-                              person['name']!,
+                              person.name,
                               style: AppTextStyles.bodyMedium.copyWith(
-                                fontWeight: FontWeight.bold,
-                              ),
+                                  fontWeight: FontWeight.bold,
+                                ),
                             ),
                             Text(
-                              person['designation']!,
+                              person.role,
                               style: AppTextStyles.bodySmall.copyWith(
                                 fontSize: 11,
                               ),
@@ -262,8 +220,8 @@ class _DirectoryTabState extends State<DirectoryTab> {
                   const Divider(color: AppColors.border, height: 1),
                   Column(
                     children: [
-                      _contactRow(Icons.mail_outline_rounded, person['email']!),
-                      _contactRow(Icons.phone_iphone_rounded, person['phone']!),
+                      _contactRow(Icons.mail_outline_rounded, person.email),
+                      _contactRow(Icons.phone_iphone_rounded, person.mobile),
                     ],
                   ),
                 ],

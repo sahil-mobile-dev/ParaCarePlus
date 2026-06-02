@@ -1,54 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:paracareplus/core/theme/app_colors.dart';
 import 'package:paracareplus/core/theme/app_spacing.dart';
 import 'package:paracareplus/core/theme/app_text_styles.dart';
+import 'package:paracareplus/features/pharmacy/model/pharmacy_model.dart';
+import 'package:paracareplus/features/pharmacy/view_model/pharmacy_view_model.dart';
 
-class RxValidationTab extends StatefulWidget {
+class RxValidationTab extends ConsumerStatefulWidget {
   const RxValidationTab({super.key});
 
   @override
-  State<RxValidationTab> createState() => _RxValidationTabState();
+  ConsumerState<RxValidationTab> createState() => _RxValidationTabState();
 }
 
-class _RxValidationTabState extends State<RxValidationTab> {
-  final List<Map<String, dynamic>> _validations = [
-    {
-      'id': 'VAL-101',
-      'patient': 'Sunita Rawat',
-      'rxNo': 'RX-2026-1853',
-      'drug': 'Tab. Warfarin 5mg',
-      'category': 'Safety',
-      'warning':
-          'HIGH RISK: Warfarin - INR not checked today. Check latest INR levels before dispensing.',
-      'icon': Icons.security_rounded,
-      'color': AppColors.error,
-    },
-    {
-      'id': 'VAL-102',
-      'patient': 'Rajesh Sharma',
-      'rxNo': 'RX-2026-1854',
-      'drug': 'Inj. Insulin 20u',
-      'category': 'Dose',
-      'warning':
-          'Dose seems high for body weight (60 kg) - verify clinical calculation with prescribing physician.',
-      'icon': Icons.scale_rounded,
-      'color': AppColors.secondaryAccent,
-    },
-    {
-      'id': 'VAL-103',
-      'patient': 'Meena Bisht',
-      'rxNo': 'RX-2026-1855',
-      'drug': 'Tab. Clarithromycin 500mg',
-      'category': 'Interaction',
-      'warning':
-          'Drug-drug interaction with Simvastatin. High risk of myopathy / rhabdomyolysis.',
-      'icon': Icons.swap_horizontal_circle_outlined,
-      'color': AppColors.primary,
-    },
-  ];
-
+class _RxValidationTabState extends ConsumerState<RxValidationTab> {
   @override
   Widget build(BuildContext context) {
+    final validations = ref.watch(pharmacyProvider.select((s) => s.rxValidations));
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -76,17 +45,17 @@ class _RxValidationTabState extends State<RxValidationTab> {
                   ),
                 ),
                 child: Text(
-                  '${_validations.length} Pending Validation',
+                  '${validations.length} Pending Validation',
                   style: AppTextStyles.labelSmall.copyWith(
-                    color: AppColors.error,
-                    fontWeight: FontWeight.bold,
+                     color: AppColors.error,
+                     fontWeight: FontWeight.bold,
                   ),
                 ),
               ),
             ],
           ),
         ),
-        if (_validations.isEmpty)
+        if (validations.isEmpty)
           Container(
             width: double.infinity,
             padding: const EdgeInsets.all(40),
@@ -116,11 +85,11 @@ class _RxValidationTabState extends State<RxValidationTab> {
           ListView.separated(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
-            itemCount: _validations.length,
+            itemCount: validations.length,
             separatorBuilder: (context, index) => const SizedBox(height: 12),
             itemBuilder: (context, index) {
-              final val = _validations[index];
-              final categoryColor = val['color'] as Color;
+              final val = validations[index];
+              final categoryColor = val.color;
 
               return Container(
                 decoration: BoxDecoration(
@@ -149,13 +118,13 @@ class _RxValidationTabState extends State<RxValidationTab> {
                       child: Row(
                         children: [
                           Icon(
-                            val['icon'] as IconData,
+                            val.icon,
                             color: categoryColor,
                             size: 18,
                           ),
                           const SizedBox(width: 8),
                           Text(
-                            val['category'].toString().toUpperCase(),
+                            val.category.toUpperCase(),
                             style: AppTextStyles.labelSmall.copyWith(
                               color: categoryColor,
                               fontWeight: FontWeight.bold,
@@ -164,7 +133,7 @@ class _RxValidationTabState extends State<RxValidationTab> {
                           ),
                           const Spacer(),
                           Text(
-                            'RX No: ${val['rxNo']}',
+                            'RX No: ${val.rxNo}',
                             style: AppTextStyles.bodySmall.copyWith(
                               color: AppColors.secondaryText,
                             ),
@@ -185,7 +154,7 @@ class _RxValidationTabState extends State<RxValidationTab> {
                                 Row(
                                   children: [
                                     Text(
-                                      val['patient'] as String,
+                                      val.patient,
                                       style: AppTextStyles.bodyMedium.copyWith(
                                         fontWeight: FontWeight.bold,
                                       ),
@@ -203,7 +172,7 @@ class _RxValidationTabState extends State<RxValidationTab> {
                                         borderRadius: BorderRadius.circular(4),
                                       ),
                                       child: Text(
-                                        val['drug'] as String,
+                                        val.drug,
                                         style: AppTextStyles.labelSmall
                                             .copyWith(
                                               color: AppColors.primaryText,
@@ -215,7 +184,7 @@ class _RxValidationTabState extends State<RxValidationTab> {
                                 ),
                                 const SizedBox(height: 8),
                                 Text(
-                                  val['warning'] as String,
+                                  val.warning,
                                   style: AppTextStyles.bodySmall.copyWith(
                                     color: AppColors.primaryText,
                                   ),
@@ -240,18 +209,18 @@ class _RxValidationTabState extends State<RxValidationTab> {
                             context,
                             'Reject',
                             AppColors.error,
-                            () => _handleAction(index, 'Rejected'),
+                            () => _handleAction(val, 'Rejected'),
                           ),
                           const SizedBox(width: 8),
                           _buildActionBtn(
                             context,
                             'Escalate',
                             AppColors.primary,
-                            () => _handleAction(index, 'Escalated'),
+                            () => _handleAction(val, 'Escalated'),
                           ),
                           const SizedBox(width: 8),
                           ElevatedButton(
-                            onPressed: () => _handleAction(index, 'Approved'),
+                            onPressed: () => _handleAction(val, 'Approved'),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: AppColors.success,
                               foregroundColor: Colors.white,
@@ -301,11 +270,8 @@ class _RxValidationTabState extends State<RxValidationTab> {
     );
   }
 
-  void _handleAction(int index, String status) {
-    final val = _validations[index];
-    setState(() {
-      _validations.removeAt(index);
-    });
+  void _handleAction(RxValidationItem val, String status) {
+    ref.read(pharmacyProvider.notifier).resolveRxValidation(val.id, status);
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         backgroundColor: status == 'Approved'
@@ -313,7 +279,7 @@ class _RxValidationTabState extends State<RxValidationTab> {
             : status == 'Rejected'
             ? AppColors.error
             : AppColors.primary,
-        content: Text('Prescription ${val['rxNo']} is $status!'),
+        content: Text('Prescription ${val.rxNo} is $status!'),
       ),
     );
   }

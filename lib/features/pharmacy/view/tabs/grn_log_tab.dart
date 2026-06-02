@@ -1,46 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:paracareplus/core/theme/app_colors.dart';
 import 'package:paracareplus/core/theme/app_spacing.dart';
 import 'package:paracareplus/core/theme/app_text_styles.dart';
+import 'package:paracareplus/features/pharmacy/view_model/pharmacy_view_model.dart';
 
-class GrnLogTab extends StatelessWidget {
-  GrnLogTab({super.key});
-
-  final mockGrns = [
-    {
-      'grnNo': 'GRN-2024-0458',
-      'supplier': 'Cipla Ltd.',
-      'invoice': 'INV-C-8821',
-      'items': 24,
-      'value': '₹84,500',
-      'receivedBy': 'Pharmacist Suresh',
-      'date': 'Today',
-      'status': 'verified',
-    },
-    {
-      'grnNo': 'GRN-2024-0457',
-      'supplier': 'Sun Pharma',
-      'invoice': 'INV-SP-3392',
-      'items': 18,
-      'value': '₹62,000',
-      'receivedBy': 'Pharmacist Suresh',
-      'date': 'Yesterday',
-      'status': 'verified',
-    },
-    {
-      'grnNo': 'GRN-2024-0456',
-      'supplier': "Dr. Reddy's",
-      'invoice': 'INV-DR-1123',
-      'items': 31,
-      'value': '₹1,15,800',
-      'receivedBy': 'Pharmacist Suresh',
-      'date': '3 days ago',
-      'status': 'partial',
-    },
-  ];
+class GrnLogTab extends ConsumerWidget {
+  const GrnLogTab({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final grnLogs = ref.watch(pharmacyProvider.select((s) => s.grnLogs));
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -125,8 +96,8 @@ class GrnLogTab extends StatelessWidget {
                         _buildHeaderCell('STATUS'),
                       ],
                     ),
-                    ...mockGrns.map((item) {
-                      final isVerified = item['status'] == 'verified';
+                    ...grnLogs.map((item) {
+                      final isVerified = item.status == 'verified';
                       return TableRow(
                         decoration: const BoxDecoration(
                           border: Border(
@@ -140,19 +111,19 @@ class GrnLogTab extends StatelessWidget {
                               vertical: 14,
                             ),
                             child: Text(
-                              item['grnNo']! as String,
+                              item.grnNo,
                               style: AppTextStyles.bodyMedium.copyWith(
                                 color: AppColors.primary,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),
-                          _buildTextCell(item['supplier']! as String),
-                          _buildTextCell(item['invoice']! as String),
-                          _buildTextCell('${item['items']}'),
-                          _buildTextCell(item['value']! as String),
-                          _buildTextCell(item['receivedBy']! as String),
-                          _buildTextCell(item['date']! as String),
+                          _buildTextCell(item.supplier),
+                          _buildTextCell(item.invoice),
+                          _buildTextCell('${item.items}'),
+                          _buildTextCell(item.value),
+                          _buildTextCell(item.receivedBy),
+                          _buildTextCell(item.date),
                           Padding(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 12,
@@ -173,7 +144,7 @@ class GrnLogTab extends StatelessWidget {
                               ),
                               alignment: Alignment.center,
                               child: Text(
-                                item['status'].toString().toUpperCase(),
+                                item.status.toUpperCase(),
                                 style: AppTextStyles.labelSmall.copyWith(
                                   color: isVerified
                                       ? AppColors.success

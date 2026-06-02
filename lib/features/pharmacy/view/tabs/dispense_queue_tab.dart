@@ -1,62 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:paracareplus/core/theme/app_colors.dart';
 import 'package:paracareplus/core/theme/app_spacing.dart';
 import 'package:paracareplus/core/theme/app_text_styles.dart';
+import 'package:paracareplus/features/pharmacy/view_model/pharmacy_view_model.dart';
 
-class DispenseQueueTab extends StatefulWidget {
+class DispenseQueueTab extends ConsumerStatefulWidget {
   const DispenseQueueTab({super.key});
 
   @override
-  State<DispenseQueueTab> createState() => _DispenseQueueTabState();
+  ConsumerState<DispenseQueueTab> createState() => _DispenseQueueTabState();
 }
 
-class _DispenseQueueTabState extends State<DispenseQueueTab> {
+class _DispenseQueueTabState extends ConsumerState<DispenseQueueTab> {
   final TextEditingController _searchController = TextEditingController();
   String _searchQuery = '';
 
-  final List<Map<String, dynamic>> _mockQueues = [
-    {
-      'rxNo': 'RX-2026-8910',
-      'patient': 'Nilesh Patel',
-      'ageSex': '45 / M',
-      'wardType': 'OPD (General)',
-      'doctor': 'Dr. Negi',
-      'drugs': 'Tab. Metformin 500mg x 30\nTab. Atorvastatin 10mg x 15',
-      'priority': 'Routine',
-      'time': '10 min ago',
-      'status': 'Pending Prep',
-    },
-    {
-      'rxNo': 'RX-2026-8911',
-      'patient': 'Sunita Rawat',
-      'ageSex': '38 / F',
-      'wardType': 'IPD (ICU-3)',
-      'doctor': 'Dr. Sharma',
-      'drugs': 'Inj. Ceftriaxone 1g x 2\nInj. Pantoprazole 40mg x 2',
-      'priority': 'Urgent',
-      'time': '5 min ago',
-      'status': 'Preparing',
-    },
-    {
-      'rxNo': 'RX-2026-8912',
-      'patient': 'Rajesh Kumar',
-      'ageSex': '29 / M',
-      'wardType': 'Emergency (T-1)',
-      'doctor': 'Dr. Verma',
-      'drugs': 'Tab. Paracetamol 650mg x 10\nInj. Diclofenac 75mg x 1',
-      'priority': 'Urgent',
-      'time': '12 min ago',
-      'status': 'Prepared',
-    },
-  ];
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final filteredList = _mockQueues.where((item) {
+    final dispenseQueue = ref.watch(pharmacyProvider.select((s) => s.dispenseQueue));
+
+    final filteredList = dispenseQueue.where((item) {
       final query = _searchQuery.toLowerCase();
-      return item['patient'].toString().toLowerCase().contains(query) ||
-          item['rxNo'].toString().toLowerCase().contains(query) ||
-          item['doctor'].toString().toLowerCase().contains(query);
+      return item.patient.toLowerCase().contains(query) ||
+          item.rxNo.toLowerCase().contains(query) ||
+          item.doctor.toLowerCase().contains(query);
     }).toList();
 
     return Column(
@@ -225,7 +199,7 @@ class _DispenseQueueTabState extends State<DispenseQueueTab> {
                       ),
                       // Data Rows
                       ...filteredList.map((item) {
-                        final isUrgent = item['priority'] == 'Urgent';
+                        final isUrgent = item.priority == 'Urgent';
                         return TableRow(
                           decoration: const BoxDecoration(
                             border: Border(
@@ -239,7 +213,7 @@ class _DispenseQueueTabState extends State<DispenseQueueTab> {
                                 vertical: 14,
                               ),
                               child: Text(
-                                item['rxNo'] as String,
+                                item.rxNo,
                                 style: AppTextStyles.labelMedium.copyWith(
                                   color: AppColors.primary,
                                   fontWeight: FontWeight.bold,
@@ -255,28 +229,28 @@ class _DispenseQueueTabState extends State<DispenseQueueTab> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    item['patient'] as String,
+                                    item.patient,
                                     style: AppTextStyles.bodyMedium.copyWith(
                                       fontWeight: FontWeight.w600,
                                     ),
                                   ),
                                   const SizedBox(height: 2),
                                   Text(
-                                    item['ageSex'] as String,
+                                    item.ageSex,
                                     style: AppTextStyles.bodySmall,
                                   ),
                                 ],
                               ),
                             ),
-                            _buildTextCell(item['wardType'] as String),
-                            _buildTextCell(item['doctor'] as String),
+                            _buildTextCell(item.wardType),
+                            _buildTextCell(item.doctor),
                             Padding(
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 12,
                                 vertical: 14,
                               ),
                               child: Text(
-                                item['drugs'] as String,
+                                item.drugs,
                                 style: AppTextStyles.bodySmall.copyWith(
                                   color: AppColors.primaryText,
                                   height: 1.3,
@@ -310,7 +284,7 @@ class _DispenseQueueTabState extends State<DispenseQueueTab> {
                                 ),
                                 alignment: Alignment.center,
                                 child: Text(
-                                  item['priority'] as String,
+                                  item.priority,
                                   style: AppTextStyles.labelSmall.copyWith(
                                     color: isUrgent
                                         ? AppColors.error
@@ -320,7 +294,7 @@ class _DispenseQueueTabState extends State<DispenseQueueTab> {
                                 ),
                               ),
                             ),
-                            _buildTextCell(item['time'] as String),
+                            _buildTextCell(item.time),
                             // Status Badge
                             Padding(
                               padding: const EdgeInsets.symmetric(
@@ -333,9 +307,9 @@ class _DispenseQueueTabState extends State<DispenseQueueTab> {
                                   vertical: 4,
                                 ),
                                 decoration: BoxDecoration(
-                                  color: item['status'] == 'Prepared'
+                                  color: item.status == 'Prepared'
                                       ? AppColors.success.withValues(alpha: 0.1)
-                                      : item['status'] == 'Preparing'
+                                      : item.status == 'Preparing'
                                       ? AppColors.secondaryAccent.withValues(
                                           alpha: 0.1,
                                         )
@@ -346,11 +320,11 @@ class _DispenseQueueTabState extends State<DispenseQueueTab> {
                                 ),
                                 alignment: Alignment.center,
                                 child: Text(
-                                  item['status'] as String,
+                                  item.status,
                                   style: AppTextStyles.labelSmall.copyWith(
-                                    color: item['status'] == 'Prepared'
+                                    color: item.status == 'Prepared'
                                         ? AppColors.success
-                                        : item['status'] == 'Preparing'
+                                        : item.status == 'Preparing'
                                         ? AppColors.secondaryAccent
                                         : AppColors.secondaryText,
                                     fontWeight: FontWeight.w600,
@@ -366,11 +340,12 @@ class _DispenseQueueTabState extends State<DispenseQueueTab> {
                               ),
                               child: ElevatedButton(
                                 onPressed: () {
+                                  ref.read(pharmacyProvider.notifier).dispensePrescription(item.rxNo);
                                   ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(
                                       backgroundColor: AppColors.success,
                                       content: Text(
-                                        'Prescription ${item['rxNo']} dispensed successfully!',
+                                        'Prescription ${item.rxNo} dispensed successfully!',
                                       ),
                                     ),
                                   );

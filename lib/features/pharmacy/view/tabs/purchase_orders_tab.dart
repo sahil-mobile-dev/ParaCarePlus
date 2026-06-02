@@ -1,42 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:paracareplus/core/theme/app_colors.dart';
 import 'package:paracareplus/core/theme/app_spacing.dart';
 import 'package:paracareplus/core/theme/app_text_styles.dart';
+import 'package:paracareplus/features/pharmacy/view_model/pharmacy_view_model.dart';
 
-class PurchaseOrdersTab extends StatefulWidget {
+class PurchaseOrdersTab extends ConsumerStatefulWidget {
   const PurchaseOrdersTab({super.key});
 
   @override
-  State<PurchaseOrdersTab> createState() => _PurchaseOrdersTabState();
+  ConsumerState<PurchaseOrdersTab> createState() => _PurchaseOrdersTabState();
 }
 
-class _PurchaseOrdersTabState extends State<PurchaseOrdersTab> {
-  final List<Map<String, dynamic>> _purchaseOrders = [
-    {
-      'poNo': 'PO-2024-009',
-      'vendor': 'Cipla Distribution',
-      'items': 12,
-      'estDelivery': '22-05-2026',
-      'status': 'SENT',
-    },
-    {
-      'poNo': 'PO-2024-010',
-      'vendor': 'Sun Pharma Logistics',
-      'items': 5,
-      'estDelivery': '25-05-2026',
-      'status': 'PENDING APPROVAL',
-    },
-    {
-      'poNo': 'PO-2024-011',
-      'vendor': "Dr. Reddy's Labs",
-      'items': 8,
-      'estDelivery': '28-05-2026',
-      'status': 'SENT',
-    },
-  ];
-
+class _PurchaseOrdersTabState extends ConsumerState<PurchaseOrdersTab> {
   @override
   Widget build(BuildContext context) {
+    final purchaseOrders = ref.watch(pharmacyProvider.select((s) => s.purchaseOrders));
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -119,8 +99,8 @@ class _PurchaseOrdersTabState extends State<PurchaseOrdersTab> {
                         _buildHeaderCell('ACTION'),
                       ],
                     ),
-                    ..._purchaseOrders.map((item) {
-                      final isSent = item['status'] == 'SENT';
+                    ...purchaseOrders.map((item) {
+                      final isSent = item.status == 'SENT';
                       return TableRow(
                         decoration: const BoxDecoration(
                           border: Border(
@@ -134,16 +114,16 @@ class _PurchaseOrdersTabState extends State<PurchaseOrdersTab> {
                               vertical: 14,
                             ),
                             child: Text(
-                              item['poNo'] as String,
+                              item.poNo,
                               style: AppTextStyles.bodyMedium.copyWith(
                                 color: AppColors.primary,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                           ),
-                          _buildTextCell(item['vendor'] as String),
-                          _buildTextCell('${item['items']} Line Items'),
-                          _buildTextCell(item['estDelivery'] as String),
+                          _buildTextCell(item.vendor),
+                          _buildTextCell('${item.items} Line Items'),
+                          _buildTextCell(item.estDelivery),
                           Padding(
                             padding: const EdgeInsets.symmetric(
                               horizontal: 12,
@@ -164,7 +144,7 @@ class _PurchaseOrdersTabState extends State<PurchaseOrdersTab> {
                               ),
                               alignment: Alignment.center,
                               child: Text(
-                                item['status'] as String,
+                                item.status,
                                 style: AppTextStyles.labelSmall.copyWith(
                                   color: isSent
                                       ? AppColors.success
@@ -184,7 +164,7 @@ class _PurchaseOrdersTabState extends State<PurchaseOrdersTab> {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     content: Text(
-                                      'Viewing PO Details for ${item['poNo']}',
+                                      'Viewing PO Details for ${item.poNo}',
                                     ),
                                   ),
                                 );
@@ -229,7 +209,10 @@ class _PurchaseOrdersTabState extends State<PurchaseOrdersTab> {
   }
 
   void _showDraftPoDialog() {
-    showDialog(
+    final vendorController = TextEditingController();
+    final itemsController = TextEditingController();
+
+    showDialog<void>(
       context: context,
       builder: (context) {
         return AlertDialog(
@@ -242,11 +225,9 @@ class _PurchaseOrdersTabState extends State<PurchaseOrdersTab> {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                _buildDialogField('Vendor Name (e.g. Cipla)'),
+                _buildDialogField('Vendor Name (e.g. Cipla)', vendorController),
                 const SizedBox(height: 12),
-                _buildDialogField('Line Items Requested'),
-                const SizedBox(height: 12),
-                _buildDialogField('Urgency Note / Comments'),
+                _buildDialogField('Line Items Count', itemsController),
               ],
             ),
           ),
@@ -260,13 +241,23 @@ class _PurchaseOrdersTabState extends State<PurchaseOrdersTab> {
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.pop(context);
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    backgroundColor: AppColors.success,
-                    content: Text('New Purchase Order Drafted & Saved!'),
-                  ),
-                );
+                final vendor = vendorController.text.trim();
+                final itemsCount = int.tryParse(itemsController.text) ?? 5;
+
+                if (vendor.isNotEmpty) {
+                  ref.read(pharmacyProvider.notifier).generatePurchaseOrder(
+                    vendor: vendor,
+                    itemsCount: itemsCount,
+                    estDelivery: '28-05-2026', // default mock delivery
+                  );
+                  Navigator.pop(context);
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      backgroundColor: AppColors.success,
+                      content: Text('New Purchase Order Drafted & Saved!'),
+                    ),
+                  );
+                }
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: AppColors.primary,
@@ -279,8 +270,9 @@ class _PurchaseOrdersTabState extends State<PurchaseOrdersTab> {
     );
   }
 
-  Widget _buildDialogField(String label) {
+  Widget _buildDialogField(String label, TextEditingController controller) {
     return TextField(
+      controller: controller,
       style: AppTextStyles.bodyMedium,
       decoration: InputDecoration(
         labelText: label,
