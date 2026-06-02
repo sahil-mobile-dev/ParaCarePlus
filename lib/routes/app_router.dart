@@ -5,6 +5,7 @@ import 'package:paracareplus/features/auth/model/user_role.dart';
 import 'package:paracareplus/features/auth/view/login_screen.dart';
 import 'package:paracareplus/features/auth/view/splash_screen.dart';
 import 'package:paracareplus/features/billing/view/billing_screen.dart';
+import 'package:paracareplus/features/blood_bank/view/blood_bank_screen.dart';
 import 'package:paracareplus/features/dashboard/view/dashboard_screen.dart';
 import 'package:paracareplus/features/dashboard_hub/view/dashboard_hub_screen.dart';
 import 'package:paracareplus/features/disease_surveillance/view/disease_surveillance_screen.dart';
@@ -13,7 +14,7 @@ import 'package:paracareplus/features/hospital_performance/view/hospital_perform
 import 'package:paracareplus/features/hr/view/hr_screen.dart';
 import 'package:paracareplus/features/ipd/view/ipd_admission_screen.dart';
 import 'package:paracareplus/features/ipd_beds/view/ipd_beds_screen.dart';
-import 'package:paracareplus/features/laboratory/view/laboratory_screen.dart';
+import 'package:paracareplus/features/lab_diagnostics/view/lab_diagnostics_screen.dart';
 import 'package:paracareplus/features/mch_dashboard/view/mch_dashboard_screen.dart';
 import 'package:paracareplus/features/opd/view/opd_token_screen.dart';
 import 'package:paracareplus/features/opd_analytics/view/opd_analytics_screen.dart';
@@ -150,7 +151,12 @@ final appRouterStateProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: RoutePaths.laboratory,
         name: RouteNames.laboratory,
-        builder: (context, state) => const LaboratoryScreen(),
+        builder: (context, state) => const LabDiagnosticsScreen(),
+      ),
+      GoRoute(
+        path: RoutePaths.bloodbank,
+        name: RouteNames.bloodbank,
+        builder: (context, state) => const BloodBankScreen(),
       ),
       GoRoute(
         path: RoutePaths.radiology,
@@ -294,6 +300,8 @@ final appRouterStateProvider = Provider<GoRouter>((ref) {
             state.matchedLocation != RoutePaths.ipdBeds &&
             state.matchedLocation != RoutePaths.mchDashboard &&
             state.matchedLocation != RoutePaths.radiologyImaging &&
+            state.matchedLocation != RoutePaths.laboratory &&
+            state.matchedLocation != RoutePaths.bloodbank &&
             state.matchedLocation != RoutePaths.splash) {
           return RoutePaths.login;
         }
