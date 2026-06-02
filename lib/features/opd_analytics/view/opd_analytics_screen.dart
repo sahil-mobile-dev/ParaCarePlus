@@ -107,6 +107,7 @@ class _OpdAnalyticsScreenState extends ConsumerState<OpdAnalyticsScreen>
                                 'OPD Performance KPIs — Real-time',
                                 'Live',
                               ),
+                              const SizedBox(height: AppSpacing.lg),
                               _buildKpis(state),
                               const SizedBox(height: AppSpacing.lg),
                               const OpdAnalyticsLiveStrip(),
@@ -164,14 +165,13 @@ class _OpdAnalyticsScreenState extends ConsumerState<OpdAnalyticsScreen>
 
   Widget _buildTopbar(BuildContext context) {
     return Container(
-      height: 58,
+      height: 100,
       padding: const EdgeInsets.symmetric(horizontal: 16),
       decoration: const BoxDecoration(
         color: AppColors.surface,
         border: Border(bottom: BorderSide(color: AppColors.border)),
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Column(
         children: [
           Row(
             children: [
@@ -194,6 +194,27 @@ class _OpdAnalyticsScreenState extends ConsumerState<OpdAnalyticsScreen>
                 ),
               ),
               const SizedBox(width: 12),
+              ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.primary.withValues(alpha: 0.2),
+                  foregroundColor: AppColors.primaryLight,
+                  side: const BorderSide(color: AppColors.border),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 8,
+                  ),
+                ),
+                onPressed: _handleRefresh,
+                icon: RotationTransition(
+                  turns: _syncAnimationController,
+                  child: const Icon(Icons.sync, size: 14),
+                ),
+                label: const Text('Refresh', style: TextStyle(fontSize: 11)),
+              ),
+            ],
+          ),
+          Row(
+            children: [
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                 decoration: BoxDecoration(
@@ -209,10 +230,7 @@ class _OpdAnalyticsScreenState extends ConsumerState<OpdAnalyticsScreen>
                   ),
                 ),
               ),
-            ],
-          ),
-          Row(
-            children: [
+              const SizedBox(width: 12),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
@@ -252,24 +270,6 @@ class _OpdAnalyticsScreenState extends ConsumerState<OpdAnalyticsScreen>
                   fontSize: 11.5,
                 ),
               ),
-              const SizedBox(width: 12),
-              ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primary.withValues(alpha: 0.2),
-                  foregroundColor: AppColors.primaryLight,
-                  side: const BorderSide(color: AppColors.border),
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 8,
-                  ),
-                ),
-                onPressed: _handleRefresh,
-                icon: RotationTransition(
-                  turns: _syncAnimationController,
-                  child: const Icon(Icons.sync, size: 14),
-                ),
-                label: const Text('Refresh', style: TextStyle(fontSize: 11)),
-              ),
             ],
           ),
         ],
@@ -287,62 +287,65 @@ class _OpdAnalyticsScreenState extends ConsumerState<OpdAnalyticsScreen>
         borderRadius: BorderRadius.circular(12),
         border: Border.all(color: AppColors.border),
       ),
-      child: Row(
+      child: Column(
         children: [
-          const Icon(
-            Icons.filter_list,
-            color: AppColors.secondaryText,
-            size: 16,
-          ),
-          const SizedBox(width: 8),
-          const Text(
-            'FILTERS:',
-            style: TextStyle(
-              color: AppColors.secondaryText,
-              fontSize: 11,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(width: 12),
-          _buildDropdown(
-            value: state.selectedFacility,
-            items: [
-              'All Facilities',
-              'AIIMS Rishikesh',
-              'Doon Hospital',
-              'Haldwani Base',
+          Row(
+            children: [
+              _buildDropdown(
+                value: state.selectedFacility,
+                items: [
+                  'All Facilities',
+                  'AIIMS Rishikesh',
+                  'Doon Hospital',
+                  'Haldwani Base',
+                ],
+                onChanged: (val) => notifier.changeFacility(val!),
+              ),
+              const SizedBox(width: 8),
+              _buildDropdown(
+                value: state.selectedSpecialty,
+                items: [
+                  'All Specialties',
+                  'General Medicine',
+                  'Orthopaedics',
+                  'Gynaecology',
+                ],
+                onChanged: (val) => notifier.changeSpecialty(val!),
+              ),
             ],
-            onChanged: (val) => notifier.changeFacility(val!),
           ),
-          const SizedBox(width: 8),
-          _buildDropdown(
-            value: state.selectedSpecialty,
-            items: [
-              'All Specialties',
-              'General Medicine',
-              'Orthopaedics',
-              'Gynaecology',
+          const SizedBox(height: 8),
+          Row(
+            children: [
+              _buildDropdown(
+                value: state.selectedDistrict,
+                items: ['All Districts', 'Dehradun', 'Haridwar', 'Nainital'],
+                onChanged: (val) => notifier.changeDistrict(val!),
+              ),
+              const SizedBox(width: 8),
+              _buildDropdown(
+                value: state.selectedTimeframe,
+                items: ['Today', 'Last 7 Days', 'Last 30 Days'],
+                onChanged: (val) => notifier.changeTimeframe(val!),
+              ),
+              SizedBox(width: 8),
+              const Icon(
+                Icons.filter_list,
+                color: AppColors.secondaryText,
+                size: 16,
+              ),
             ],
-            onChanged: (val) => notifier.changeSpecialty(val!),
           ),
-          const SizedBox(width: 8),
-          _buildDropdown(
-            value: state.selectedDistrict,
-            items: ['All Districts', 'Dehradun', 'Haridwar', 'Nainital'],
-            onChanged: (val) => notifier.changeDistrict(val!),
+          const SizedBox(height: 8),
+          Row(
+            children: [
+              _buildStatusChip('52,840 Today', AppColors.success),
+              const SizedBox(width: 8),
+              _buildStatusChip('3 Overcrowded OPDs', AppColors.secondaryAccent),
+              const SizedBox(width: 8),
+              _buildStatusChip('Avg Wait: 28 min', AppColors.primaryLight),
+            ],
           ),
-          const SizedBox(width: 8),
-          _buildDropdown(
-            value: state.selectedTimeframe,
-            items: ['Today', 'Last 7 Days', 'Last 30 Days'],
-            onChanged: (val) => notifier.changeTimeframe(val!),
-          ),
-          const Spacer(),
-          _buildStatusChip('52,840 Today', AppColors.success),
-          const SizedBox(width: 8),
-          _buildStatusChip('3 Overcrowded OPDs', AppColors.secondaryAccent),
-          const SizedBox(width: 8),
-          _buildStatusChip('Avg Wait: 28 min', AppColors.primaryLight),
         ],
       ),
     );
@@ -437,12 +440,12 @@ class _OpdAnalyticsScreenState extends ConsumerState<OpdAnalyticsScreen>
     return Column(
       children: [
         GridView.count(
-          crossAxisCount: 5,
+          crossAxisCount: 2,
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           crossAxisSpacing: AppSpacing.md,
           mainAxisSpacing: AppSpacing.md,
-          childAspectRatio: 1.4,
+          childAspectRatio: 1.2,
           children: [
             OpdAnalyticsKpiCard(
               title: 'Total OPD Today',
@@ -499,12 +502,12 @@ class _OpdAnalyticsScreenState extends ConsumerState<OpdAnalyticsScreen>
         ),
         const SizedBox(height: AppSpacing.md),
         GridView.count(
-          crossAxisCount: 5,
+          crossAxisCount: 2,
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           crossAxisSpacing: AppSpacing.md,
           mainAxisSpacing: AppSpacing.md,
-          childAspectRatio: 1.4,
+          childAspectRatio: 1.2,
           children: [
             OpdAnalyticsKpiCard(
               title: 'ABHA Scan & Share %',
@@ -569,28 +572,22 @@ class _OpdAnalyticsScreenState extends ConsumerState<OpdAnalyticsScreen>
   }
 
   Widget _buildChartsSection2() {
-    return const SizedBox(
-      height: 320,
-      child: Row(
-        children: [
-          Expanded(child: OpdSpecialtyDemandChart()),
-          SizedBox(width: AppSpacing.md),
-          Expanded(child: OpdConsultationTrendChart()),
-        ],
-      ),
+    return const Column(
+      children: [
+        SizedBox(height: 320, child: OpdSpecialtyDemandChart()),
+        SizedBox(height: AppSpacing.md),
+        SizedBox(height: 320, child: OpdConsultationTrendChart()),
+      ],
     );
   }
 
   Widget _buildChartsSection3() {
-    return const SizedBox(
-      height: 300,
-      child: Row(
-        children: [
-          Expanded(flex: 3, child: OpdQueueCongestionChart()),
-          SizedBox(width: AppSpacing.md),
-          Expanded(flex: 2, child: OpdDemographicsChart()),
-        ],
-      ),
+    return const Column(
+      children: [
+        SizedBox(height: 300, child: OpdQueueCongestionChart()),
+        SizedBox(height: AppSpacing.md),
+        SizedBox(height: 300, child: OpdDemographicsChart()),
+      ],
     );
   }
 
@@ -616,68 +613,54 @@ class _OpdAnalyticsScreenState extends ConsumerState<OpdAnalyticsScreen>
           ],
         ),
         SizedBox(height: AppSpacing.md),
-        SizedBox(
-          height: 340,
-          child: Row(
-            children: [
-              Expanded(child: OpdRushHourHeatmap()),
-              SizedBox(width: AppSpacing.md),
-              Expanded(child: OpdSpecialtyWeekdayHeatmap()),
-              SizedBox(width: AppSpacing.md),
-              Expanded(child: OpdCounterHourHeatmap()),
-            ],
-          ),
-        ),
+        SizedBox(height: 340, child: OpdRushHourHeatmap()),
+        SizedBox(height: AppSpacing.md),
+        SizedBox(height: 340, child: OpdSpecialtyWeekdayHeatmap()),
+        SizedBox(height: AppSpacing.md),
+        SizedBox(height: 340, child: OpdCounterHourHeatmap()),
       ],
     );
   }
 
   Widget _buildFooter() {
-    return Container(
-      padding: const EdgeInsets.symmetric(vertical: 12),
-      decoration: BoxDecoration(
-        color: AppColors.card,
-        border: Border.all(color: AppColors.border),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: const Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            'ParaCare+ Uttarakhand · OPD Analytics Dashboard · HIMS v3.2',
-            style: TextStyle(color: AppColors.secondaryText, fontSize: 11),
-          ),
-          Row(
-            children: [
-              Text(
-                'State OPD Today: ',
-                style: TextStyle(color: AppColors.secondaryText, fontSize: 11),
+    return const Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          'ParaCare+ Uttarakhand · OPD Analytics Dashboard · HIMS v3.2',
+          style: TextStyle(color: AppColors.secondaryText, fontSize: 11),
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              'State OPD Today: ',
+              style: TextStyle(color: AppColors.secondaryText, fontSize: 11),
+            ),
+            Text(
+              '52,840',
+              style: TextStyle(
+                color: AppColors.success,
+                fontSize: 11,
+                fontWeight: FontWeight.bold,
               ),
-              Text(
-                '52,840',
-                style: TextStyle(
-                  color: AppColors.success,
-                  fontSize: 11,
-                  fontWeight: FontWeight.bold,
-                ),
+            ),
+            SizedBox(width: 16),
+            Text(
+              'Avg Wait: ',
+              style: TextStyle(color: AppColors.secondaryText, fontSize: 11),
+            ),
+            Text(
+              '28 min',
+              style: TextStyle(
+                color: AppColors.secondaryAccent,
+                fontSize: 11,
+                fontWeight: FontWeight.bold,
               ),
-              SizedBox(width: 16),
-              Text(
-                'Avg Wait: ',
-                style: TextStyle(color: AppColors.secondaryText, fontSize: 11),
-              ),
-              Text(
-                '28 min',
-                style: TextStyle(
-                  color: AppColors.secondaryAccent,
-                  fontSize: 11,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-        ],
-      ),
+            ),
+          ],
+        ),
+      ],
     );
   }
 }

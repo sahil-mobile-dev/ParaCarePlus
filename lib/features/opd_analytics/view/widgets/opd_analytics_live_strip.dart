@@ -64,7 +64,7 @@ class OpdAnalyticsLiveStrip extends ConsumerWidget {
         ),
         const SizedBox(height: AppSpacing.md),
         GridView.count(
-          crossAxisCount: 6,
+          crossAxisCount: 2,
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
           crossAxisSpacing: AppSpacing.md,

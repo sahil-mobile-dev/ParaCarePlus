@@ -4,7 +4,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:paracareplus/core/theme/app_colors.dart';
 import 'package:paracareplus/core/theme/app_spacing.dart';
-import 'package:paracareplus/features/dashboard/view/widgets/app_sidebar.dart';
 import 'package:paracareplus/features/hospital_performance/view/widgets/charts/hosp_adm_dis_chart.dart';
 import 'package:paracareplus/features/hospital_performance/view/widgets/charts/hosp_bed_occupancy_trend_chart.dart';
 import 'package:paracareplus/features/hospital_performance/view/widgets/charts/hosp_dept_bed_chart.dart';
@@ -81,92 +80,80 @@ class _HospitalPerformanceScreenState
 
   @override
   Widget build(BuildContext context) {
-    final isWideScreen = MediaQuery.of(context).size.width > 1200;
     final state = ref.watch(hospitalPerformanceProvider);
 
     return Scaffold(
       backgroundColor: AppColors.background,
       body: SafeArea(
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Column(
           children: [
-            if (isWideScreen) const AppSidebar(),
+            _buildTopbar(context),
+            const HospitalPerformanceTicker(),
             Expanded(
-              child: Column(
+              child: Stack(
                 children: [
-                  _buildTopbar(context),
-                  const HospitalPerformanceTicker(),
-                  Expanded(
-                    child: Stack(
+                  SingleChildScrollView(
+                    padding: const EdgeInsets.all(AppSpacing.lg),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SingleChildScrollView(
-                          padding: const EdgeInsets.all(AppSpacing.lg),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              _buildFilterBar(context, state),
-                              const SizedBox(height: AppSpacing.lg),
-                              _buildSectionHeader(
-                                'Capacity & Utilisation KPIs',
-                                'Live',
-                              ),
-                              const SizedBox(height: AppSpacing.lg),
-                              _buildCapacityKpis(state),
-                              const SizedBox(height: AppSpacing.lg),
-                              _buildSectionHeader(
-                                'Clinical Activity KPIs',
-                                'Today',
-                              ),
-                              _buildClinicalKpis(state),
-                              const SizedBox(height: AppSpacing.lg),
-                              _buildSectionHeader(
-                                'Quality & Outcome KPIs',
-                                'NHM Benchmarks',
-                              ),
-                              _buildQualityKpis(state),
-                              const SizedBox(height: AppSpacing.xl),
-                              _buildChartsSection1(),
-                              const SizedBox(height: AppSpacing.xl),
-                              _buildChartsSection2(),
-                              const SizedBox(height: AppSpacing.xl),
-                              _buildChartsSection3(),
-                              const SizedBox(height: AppSpacing.xl),
-                              _buildSunburstSection(),
-                              const SizedBox(height: AppSpacing.xl),
-                              const HospitalPerformanceScorecardTable(),
-                              const SizedBox(height: AppSpacing.xl),
-                              const HospitalPerformanceAlertPanel(),
-                              const SizedBox(height: AppSpacing.xxl),
-                              _buildFooter(),
-                            ],
-                          ),
+                        _buildFilterBar(context, state),
+                        const SizedBox(height: AppSpacing.lg),
+                        _buildSectionHeader(
+                          'Capacity & Utilisation KPIs',
+                          'Live',
                         ),
-                        if (state.isRefreshing)
-                          ColoredBox(
-                            color: Colors.black.withValues(alpha: 0.6),
-                            child: const Center(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  CircularProgressIndicator(
-                                    color: AppColors.primaryLight,
-                                  ),
-                                  SizedBox(height: 16),
-                                  Text(
-                                    'Syncing Hospital Performance Data...',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
+                        const SizedBox(height: AppSpacing.lg),
+                        _buildCapacityKpis(state),
+                        const SizedBox(height: AppSpacing.lg),
+                        _buildSectionHeader('Clinical Activity KPIs', 'Today'),
+                        _buildClinicalKpis(state),
+                        const SizedBox(height: AppSpacing.lg),
+                        _buildSectionHeader(
+                          'Quality & Outcome KPIs',
+                          'NHM Benchmarks',
+                        ),
+                        _buildQualityKpis(state),
+                        const SizedBox(height: AppSpacing.xl),
+                        _buildChartsSection1(),
+                        const SizedBox(height: AppSpacing.xl),
+                        _buildChartsSection2(),
+                        const SizedBox(height: AppSpacing.xl),
+                        _buildChartsSection3(),
+                        const SizedBox(height: AppSpacing.xl),
+                        _buildSunburstSection(),
+                        const SizedBox(height: AppSpacing.xl),
+                        const HospitalPerformanceScorecardTable(),
+                        const SizedBox(height: AppSpacing.xl),
+                        const HospitalPerformanceAlertPanel(),
+                        const SizedBox(height: AppSpacing.xxl),
+                        _buildFooter(),
                       ],
                     ),
                   ),
+                  if (state.isRefreshing)
+                    ColoredBox(
+                      color: Colors.black.withValues(alpha: 0.6),
+                      child: const Center(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            CircularProgressIndicator(
+                              color: AppColors.primaryLight,
+                            ),
+                            SizedBox(height: 16),
+                            Text(
+                              'Syncing Hospital Performance Data...',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                 ],
               ),
             ),
@@ -178,13 +165,13 @@ class _HospitalPerformanceScreenState
 
   Widget _buildTopbar(BuildContext context) {
     return Container(
-      height: 58,
+      height: 100,
       padding: const EdgeInsets.symmetric(horizontal: 16),
       decoration: const BoxDecoration(
         color: AppColors.surface,
         border: Border(bottom: BorderSide(color: AppColors.border)),
       ),
-      child: Row(
+      child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Row(
@@ -212,6 +199,10 @@ class _HospitalPerformanceScreenState
                 ),
               ),
               const SizedBox(width: 12),
+            ],
+          ),
+          Row(
+            children: [
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
                 decoration: BoxDecoration(
@@ -227,10 +218,7 @@ class _HospitalPerformanceScreenState
                   ),
                 ),
               ),
-            ],
-          ),
-          Row(
-            children: [
+              const SizedBox(width: 12),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                 decoration: BoxDecoration(
@@ -309,21 +297,6 @@ class _HospitalPerformanceScreenState
         children: [
           Row(
             children: [
-              const Icon(
-                Icons.filter_list,
-                color: AppColors.secondaryText,
-                size: 16,
-              ),
-              const SizedBox(width: 8),
-              const Text(
-                'FILTERS:',
-                style: TextStyle(
-                  color: AppColors.secondaryText,
-                  fontSize: 11,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              const SizedBox(width: 12),
               _buildDropdown(
                 value: state.selectedHospital,
                 items: [
@@ -344,7 +317,11 @@ class _HospitalPerformanceScreenState
                 ],
                 onChanged: (val) => notifier.changeFacilityType(val!),
               ),
-              const SizedBox(width: 8),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Row(
+            children: [
               _buildDropdown(
                 value: state.selectedDistrict,
                 items: ['All Districts', 'Dehradun', 'Haridwar', 'Nainital'],
@@ -356,7 +333,18 @@ class _HospitalPerformanceScreenState
                 items: ['Last 30 Days', 'Last 7 Days', 'Last 90 Days'],
                 onChanged: (val) => notifier.changeTimePeriod(val!),
               ),
-              const Spacer(),
+              const SizedBox(width: 8),
+              const Icon(
+                Icons.filter_list,
+                color: AppColors.secondaryText,
+                size: 16,
+              ),
+              const SizedBox(width: 8),
+            ],
+          ),
+          const SizedBox(height: 12),
+          Row(
+            children: [
               _buildStatusChip('14 NABH Accredited', AppColors.success),
               const SizedBox(width: 8),
               _buildStatusChip('3 Overcrowded', AppColors.secondaryAccent),

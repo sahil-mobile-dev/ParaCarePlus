@@ -41,7 +41,7 @@ class OpdQueueCongestionChart extends StatelessWidget {
                   ),
                 ],
               ),
-              Row(
+              Column(
                 children: [
                   _buildLegendItem('Morning', AppColors.error),
                   const SizedBox(width: 8),

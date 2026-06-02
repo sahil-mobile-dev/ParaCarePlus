@@ -21,26 +21,29 @@ class OpdCounterHourHeatmap extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'OPD Registration Counter Throughput (Counter × Hour)',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 13,
-                      fontWeight: FontWeight.bold,
+              SizedBox(
+                width: MediaQuery.sizeOf(context).width * 0.5,
+                child: const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'OPD Registration Counter Throughput (Counter × Hour)',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 4),
-                  Text(
-                    'Patients served per counter per hour (Doon Hospital)',
-                    style: TextStyle(
-                      color: AppColors.secondaryText,
-                      fontSize: 10,
+                    SizedBox(height: 4),
+                    Text(
+                      'Patients served per counter per hour (Doon Hospital)',
+                      style: TextStyle(
+                        color: AppColors.secondaryText,
+                        fontSize: 10,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),

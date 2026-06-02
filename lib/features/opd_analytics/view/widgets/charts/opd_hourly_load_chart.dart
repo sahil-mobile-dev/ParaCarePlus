@@ -41,7 +41,7 @@ class OpdHourlyLoadChart extends StatelessWidget {
                   ),
                 ],
               ),
-              Row(
+              Column(
                 children: [
                   _buildLegendItem('Today', AppColors.primaryLight),
                   const SizedBox(width: 8),

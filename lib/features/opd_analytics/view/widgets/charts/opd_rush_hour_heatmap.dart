@@ -21,26 +21,29 @@ class OpdRushHourHeatmap extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'OPD Rush Hour Pattern (Facility × Hour of Day)',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 13,
-                      fontWeight: FontWeight.bold,
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.50,
+                child: const Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'OPD Rush Hour Pattern (Facility × Hour of Day)',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 4),
-                  Text(
-                    'Average footfall per hour across top 8 facilities · Darker = more congested',
-                    style: TextStyle(
-                      color: AppColors.secondaryText,
-                      fontSize: 10,
+                    SizedBox(height: 4),
+                    Text(
+                      'Average footfall per hour across top 8 facilities · Darker = more congested',
+                      style: TextStyle(
+                        color: AppColors.secondaryText,
+                        fontSize: 10,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),

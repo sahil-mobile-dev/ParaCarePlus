@@ -41,7 +41,7 @@ class OpdConsultationTrendChart extends StatelessWidget {
                   ),
                 ],
               ),
-              Wrap(
+              Column(
                 spacing: 8,
                 children: [
                   _buildLegendItem('Med', AppColors.primaryLight),

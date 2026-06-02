@@ -33,17 +33,21 @@ class OpdAnalyticsDoctorTable extends ConsumerWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text(
-                'Doctor OPD Performance Scorecard — Today',
-                style: AppTextStyles.titleMedium,
+              SizedBox(
+                width: MediaQuery.sizeOf(context).width * 0.5,
+                child: const Text(
+                  'Doctor OPD Performance Scorecard — Today',
+                  style: AppTextStyles.titleMedium,
+                ),
               ),
               DropdownButton<String>(
                 value: state.sortBy,
                 dropdownColor: AppColors.surface,
                 style: const TextStyle(color: Colors.white, fontSize: 12),
                 underline: const SizedBox(),
-                items: ['Doctor', 'Seen', 'ConsultTime', 'ABHA', 'CSAT']
-                    .map((String value) {
+                items: ['Doctor', 'Seen', 'ConsultTime', 'ABHA', 'CSAT'].map((
+                  String value,
+                ) {
                   return DropdownMenuItem<String>(
                     value: value,
                     child: Text('Sort by: $value'),
@@ -72,33 +76,171 @@ class OpdAnalyticsDoctorTable extends ConsumerWidget {
               horizontalMargin: 12,
               columnSpacing: 18,
               columns: const [
-                DataColumn(label: Text('Doctor', style: TextStyle(color: AppColors.secondaryText, fontWeight: FontWeight.bold, fontSize: 10.5))),
-                DataColumn(label: Text('Specialty', style: TextStyle(color: AppColors.secondaryText, fontWeight: FontWeight.bold, fontSize: 10.5))),
-                DataColumn(label: Text('Patients Seen', style: TextStyle(color: AppColors.secondaryText, fontWeight: FontWeight.bold, fontSize: 10.5)), numeric: true),
-                DataColumn(label: Text('Target', style: TextStyle(color: AppColors.secondaryText, fontWeight: FontWeight.bold, fontSize: 10.5)), numeric: true),
-                DataColumn(label: Text('% Achievement', style: TextStyle(color: AppColors.secondaryText, fontWeight: FontWeight.bold, fontSize: 10.5))),
-                DataColumn(label: Text('Avg Consult (min)', style: TextStyle(color: AppColors.secondaryText, fontWeight: FontWeight.bold, fontSize: 10.5)), numeric: true),
-                DataColumn(label: Text('ABHA Scan %', style: TextStyle(color: AppColors.secondaryText, fontWeight: FontWeight.bold, fontSize: 10.5)), numeric: true),
-                DataColumn(label: Text('ePrescription %', style: TextStyle(color: AppColors.secondaryText, fontWeight: FontWeight.bold, fontSize: 10.5)), numeric: true),
-                DataColumn(label: Text('CSAT', style: TextStyle(color: AppColors.secondaryText, fontWeight: FontWeight.bold, fontSize: 10.5)), numeric: true),
-                DataColumn(label: Text('Status', style: TextStyle(color: AppColors.secondaryText, fontWeight: FontWeight.bold, fontSize: 10.5))),
+                DataColumn(
+                  label: Text(
+                    'Doctor',
+                    style: TextStyle(
+                      color: AppColors.secondaryText,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 10.5,
+                    ),
+                  ),
+                ),
+                DataColumn(
+                  label: Text(
+                    'Specialty',
+                    style: TextStyle(
+                      color: AppColors.secondaryText,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 10.5,
+                    ),
+                  ),
+                ),
+                DataColumn(
+                  label: Text(
+                    'Patients Seen',
+                    style: TextStyle(
+                      color: AppColors.secondaryText,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 10.5,
+                    ),
+                  ),
+                  numeric: true,
+                ),
+                DataColumn(
+                  label: Text(
+                    'Target',
+                    style: TextStyle(
+                      color: AppColors.secondaryText,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 10.5,
+                    ),
+                  ),
+                  numeric: true,
+                ),
+                DataColumn(
+                  label: Text(
+                    '% Achievement',
+                    style: TextStyle(
+                      color: AppColors.secondaryText,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 10.5,
+                    ),
+                  ),
+                ),
+                DataColumn(
+                  label: Text(
+                    'Avg Consult (min)',
+                    style: TextStyle(
+                      color: AppColors.secondaryText,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 10.5,
+                    ),
+                  ),
+                  numeric: true,
+                ),
+                DataColumn(
+                  label: Text(
+                    'ABHA Scan %',
+                    style: TextStyle(
+                      color: AppColors.secondaryText,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 10.5,
+                    ),
+                  ),
+                  numeric: true,
+                ),
+                DataColumn(
+                  label: Text(
+                    'ePrescription %',
+                    style: TextStyle(
+                      color: AppColors.secondaryText,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 10.5,
+                    ),
+                  ),
+                  numeric: true,
+                ),
+                DataColumn(
+                  label: Text(
+                    'CSAT',
+                    style: TextStyle(
+                      color: AppColors.secondaryText,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 10.5,
+                    ),
+                  ),
+                  numeric: true,
+                ),
+                DataColumn(
+                  label: Text(
+                    'Status',
+                    style: TextStyle(
+                      color: AppColors.secondaryText,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 10.5,
+                    ),
+                  ),
+                ),
               ],
               rows: state.doctorPerformance.map((item) {
                 final pct = (item.patientsSeen / item.target * 100).round();
-                final pctColor = pct >= 100 ? AppColors.success : (pct >= 90 ? AppColors.secondaryAccent : AppColors.error);
+                final pctColor = pct >= 100
+                    ? AppColors.success
+                    : (pct >= 90 ? AppColors.secondaryAccent : AppColors.error);
                 final csatColor = _getCSATColor(item.csat);
 
                 return DataRow(
                   cells: [
-                    DataCell(Text(item.name, style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 11, color: Colors.white))),
-                    DataCell(Text(item.specialty, style: const TextStyle(color: AppColors.secondaryText, fontSize: 10.5))),
-                    DataCell(Text(item.patientsSeen.toString(), style: const TextStyle(fontSize: 11, color: Colors.white))),
-                    DataCell(Text(item.target.toString(), style: const TextStyle(fontSize: 11, color: Colors.white))),
+                    DataCell(
+                      Text(
+                        item.name,
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 11,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    DataCell(
+                      Text(
+                        item.specialty,
+                        style: const TextStyle(
+                          color: AppColors.secondaryText,
+                          fontSize: 10.5,
+                        ),
+                      ),
+                    ),
+                    DataCell(
+                      Text(
+                        item.patientsSeen.toString(),
+                        style: const TextStyle(
+                          fontSize: 11,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                    DataCell(
+                      Text(
+                        item.target.toString(),
+                        style: const TextStyle(
+                          fontSize: 11,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
                     DataCell(
                       Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          Text('$pct%', style: TextStyle(color: pctColor, fontWeight: FontWeight.bold, fontSize: 11)),
+                          Text(
+                            '$pct%',
+                            style: TextStyle(
+                              color: pctColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 11,
+                            ),
+                          ),
                           const SizedBox(width: 8),
                           SizedBox(
                             width: 60,
@@ -107,20 +249,34 @@ class OpdAnalyticsDoctorTable extends ConsumerWidget {
                               borderRadius: BorderRadius.circular(3),
                               child: LinearProgressIndicator(
                                 value: (pct / 100.0).clamp(0.0, 1.0),
-                                backgroundColor: Colors.white.withValues(alpha: 0.05),
-                                valueColor: AlwaysStoppedAnimation<Color>(pctColor),
+                                backgroundColor: Colors.white.withValues(
+                                  alpha: 0.05,
+                                ),
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  pctColor,
+                                ),
                               ),
                             ),
                           ),
                         ],
                       ),
                     ),
-                    DataCell(Text(item.avgConsultTime.toStringAsFixed(1), style: const TextStyle(fontSize: 11, color: Colors.white))),
+                    DataCell(
+                      Text(
+                        item.avgConsultTime.toStringAsFixed(1),
+                        style: const TextStyle(
+                          fontSize: 11,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
                     DataCell(
                       Text(
                         '${item.abhaScanPercent.round()}%',
                         style: TextStyle(
-                          color: item.abhaScanPercent >= 80 ? AppColors.success : AppColors.secondaryAccent,
+                          color: item.abhaScanPercent >= 80
+                              ? AppColors.success
+                              : AppColors.secondaryAccent,
                           fontSize: 11,
                         ),
                       ),
@@ -129,7 +285,9 @@ class OpdAnalyticsDoctorTable extends ConsumerWidget {
                       Text(
                         '${item.ePrescriptionPercent.round()}%',
                         style: TextStyle(
-                          color: item.ePrescriptionPercent >= 75 ? AppColors.success : AppColors.secondaryAccent,
+                          color: item.ePrescriptionPercent >= 75
+                              ? AppColors.success
+                              : AppColors.secondaryAccent,
                           fontSize: 11,
                         ),
                       ),
@@ -146,15 +304,26 @@ class OpdAnalyticsDoctorTable extends ConsumerWidget {
                     ),
                     DataCell(
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 3,
+                        ),
                         decoration: BoxDecoration(
                           color: pctColor.withValues(alpha: 0.15),
                           borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: pctColor.withValues(alpha: 0.3)),
+                          border: Border.all(
+                            color: pctColor.withValues(alpha: 0.3),
+                          ),
                         ),
                         child: Text(
-                          pct >= 100 ? 'On Target' : (pct >= 90 ? 'Near Target' : 'Below Target'),
-                          style: TextStyle(color: pctColor, fontSize: 9, fontWeight: FontWeight.bold),
+                          pct >= 100
+                              ? 'On Target'
+                              : (pct >= 90 ? 'Near Target' : 'Below Target'),
+                          style: TextStyle(
+                            color: pctColor,
+                            fontSize: 9,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
                     ),
