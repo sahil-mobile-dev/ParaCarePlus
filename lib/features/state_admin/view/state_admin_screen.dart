@@ -123,63 +123,54 @@ class _StateAdminOverviewScreenState
 
   @override
   Widget build(BuildContext context) {
-    final isWideScreen = MediaQuery.of(context).size.width > 1200;
     final state = ref.watch(stateAdminProvider);
 
     return Scaffold(
       backgroundColor: AppColors.background,
       body: SafeArea(
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
+        child: Column(
           children: [
-            if (isWideScreen) const StateAdminSidebar(),
+            _buildTopbar(context, state),
+            const StateAdminTicker(),
             Expanded(
-              child: Column(
+              child: Stack(
                 children: [
-                  _buildTopbar(context, state),
-                  const StateAdminTicker(),
-                  Expanded(
-                    child: Stack(
+                  SingleChildScrollView(
+                    padding: const EdgeInsets.all(AppSpacing.lg),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SingleChildScrollView(
-                          padding: const EdgeInsets.all(AppSpacing.lg),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              _buildFilterBar(context, state),
-                              const SizedBox(height: AppSpacing.lg),
-                              _buildActiveTabContent(state),
-                              const SizedBox(height: AppSpacing.xxl),
-                              _buildFooter(),
-                            ],
-                          ),
-                        ),
-                        if (state.isRefreshing)
-                          ColoredBox(
-                            color: Colors.black.withValues(alpha: 0.65),
-                            child: const Center(
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  CircularProgressIndicator(
-                                    color: AppColors.primaryLight,
-                                  ),
-                                  SizedBox(height: 16),
-                                  Text(
-                                    'Syncing State Administration Command Telemetry...',
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 14,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
+                        _buildFilterBar(context, state),
+                        const SizedBox(height: AppSpacing.lg),
+                        _buildActiveTabContent(state),
+                        const SizedBox(height: AppSpacing.xxl),
+                        _buildFooter(),
                       ],
                     ),
                   ),
+                  if (state.isRefreshing)
+                    ColoredBox(
+                      color: Colors.black.withValues(alpha: 0.65),
+                      child: const Center(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            CircularProgressIndicator(
+                              color: AppColors.primaryLight,
+                            ),
+                            SizedBox(height: 16),
+                            Text(
+                              'Syncing State Administration Command Telemetry...',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                 ],
               ),
             ),
@@ -190,92 +181,104 @@ class _StateAdminOverviewScreenState
   }
 
   Widget _buildTopbar(BuildContext context, StateAdminState state) {
-    final isMobile = MediaQuery.of(context).size.width < 760;
-
     return Container(
-      height: 58,
+      height: 100,
       padding: const EdgeInsets.symmetric(horizontal: 16),
       decoration: const BoxDecoration(
         color: AppColors.surface,
         border: Border(bottom: BorderSide(color: AppColors.border)),
       ),
-      child: Row(
+      child: Column(
         children: [
-          IconButton(
-            icon: const Icon(Icons.arrow_back, color: AppColors.primaryLight),
-            onPressed: () => context.pushNamed(RouteNames.dashboardHub),
-          ),
-          const SizedBox(width: 8),
-          Expanded(
-            child: Row(
-              children: [
-                const Text('🏛️', style: TextStyle(fontSize: 18)),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        'State Admin Overview',
-                        style: AppTextStyles.labelLarge.copyWith(
-                          fontWeight: FontWeight.w800,
-                          fontSize: isMobile ? 12.5 : 15,
-                        ),
-                      ),
-                      if (!isMobile)
-                        const Text(
-                          'Office of Health Secretary & SHA — Uttarakhand Health Command Centre',
-                          style: TextStyle(
-                            fontSize: 9.5,
-                            color: Colors.white54,
+          Row(
+            children: [
+              IconButton(
+                icon: const Icon(
+                  Icons.arrow_back,
+                  color: AppColors.primaryLight,
+                ),
+                onPressed: () => context.pushNamed(RouteNames.dashboardHub),
+              ),
+              const SizedBox(width: 8),
+              Expanded(
+                child: Row(
+                  children: [
+                    const Text('🏛️', style: TextStyle(fontSize: 18)),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            'State Admin Overview',
+                            style: AppTextStyles.labelLarge.copyWith(
+                              fontWeight: FontWeight.w800,
+                              fontSize: 15,
+                            ),
                           ),
-                        ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-          if (!isMobile) ...[
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-              decoration: BoxDecoration(
-                color: AppColors.success.withValues(alpha: 0.15),
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(
-                  color: AppColors.success.withValues(alpha: 0.35),
-                ),
-              ),
-              child: const Row(
-                children: [
-                  _LiveDot(),
-                  SizedBox(width: 6),
-                  Text(
-                    'LIVE SYNCED',
-                    style: TextStyle(
-                      color: AppColors.success,
-                      fontSize: 9.5,
-                      fontWeight: FontWeight.bold,
+                          const Text(
+                            'Office of Health Secretary & SHA — Uttarakhand Health Command Centre',
+                            style: TextStyle(
+                              fontSize: 9.5,
+                              color: Colors.white54,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+
+          Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 4,
+                ),
+                decoration: BoxDecoration(
+                  color: AppColors.success.withValues(alpha: 0.15),
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(
+                    color: AppColors.success.withValues(alpha: 0.35),
                   ),
-                ],
+                ),
+                child: const Row(
+                  children: [
+                    _LiveDot(),
+                    SizedBox(width: 6),
+                    Text(
+                      'LIVE SYNCED',
+                      style: TextStyle(
+                        color: AppColors.success,
+                        fontSize: 9.5,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            const SizedBox(width: 14),
-            Text(
-              _timeString,
-              style: const TextStyle(
-                color: AppColors.secondaryText,
-                fontSize: 11.5,
-                fontWeight: FontWeight.w600,
+
+              const SizedBox(width: 14),
+              Text(
+                _timeString,
+                style: const TextStyle(
+                  color: AppColors.secondaryText,
+                  fontSize: 11.5,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
-            ),
-            const SizedBox(width: 14),
-          ],
-          IconButton(
-            icon: const Icon(Icons.refresh, color: AppColors.primaryLight),
-            onPressed: () => ref.read(stateAdminProvider.notifier).refresh(),
+              const SizedBox(width: 14),
+              IconButton(
+                icon: const Icon(Icons.refresh, color: AppColors.primaryLight),
+                onPressed: () =>
+                    ref.read(stateAdminProvider.notifier).refresh(),
+              ),
+            ],
           ),
         ],
       ),
@@ -283,8 +286,6 @@ class _StateAdminOverviewScreenState
   }
 
   Widget _buildFilterBar(BuildContext context, StateAdminState state) {
-    final isMobile = MediaQuery.of(context).size.width < 760;
-
     Widget buildDropdown(
       String val,
       List<String> items,
@@ -323,76 +324,83 @@ class _StateAdminOverviewScreenState
         borderRadius: BorderRadius.circular(8),
         border: Border.all(color: AppColors.border.withValues(alpha: 0.5)),
       ),
-      child: Row(
+      child: Column(
         children: [
-          const Text(
-            'FILTERS:',
-            style: TextStyle(
-              fontSize: 9.5,
-              fontWeight: FontWeight.bold,
-              color: AppColors.secondaryText,
-            ),
-          ),
-          const SizedBox(width: 8),
-          buildDropdown(
-            state.selectedYear,
-            ['FY 2024-25', 'FY 2023-24', 'FY 2022-23'],
-            (v) => v != null
-                ? ref.read(stateAdminProvider.notifier).changeYear(v)
-                : null,
-          ),
-          const SizedBox(width: 6),
-          buildDropdown(
-            state.selectedMonth,
-            ['all', 'Mar', 'Apr', 'May', 'Jun'],
-            (v) => v != null
-                ? ref.read(stateAdminProvider.notifier).changeMonth(v)
-                : null,
-          ),
-          if (!isMobile) ...[
-            const SizedBox(width: 6),
-            buildDropdown(
-              state.selectedDistrict,
-              ['All Districts', 'Dehradun', 'Haridwar', 'Nainital', 'Almora'],
-              (v) => v != null
-                  ? ref.read(stateAdminProvider.notifier).changeDistrict(v)
-                  : null,
-            ),
-            const SizedBox(width: 6),
-            buildDropdown(
-              state.selectedFacilityType,
-              [
-                'All Facility Types',
-                'Medical College',
-                'District Hospital',
-                'CHC',
-                'PHC',
-              ],
-              (v) => v != null
-                  ? ref.read(stateAdminProvider.notifier).changeFacilityType(v)
-                  : null,
-            ),
-            const Spacer(),
-            ElevatedButton.icon(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF00695C),
-                foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 14,
-                  vertical: 8,
+          Row(
+            children: [
+              const Text(
+                'FILTERS:',
+                style: TextStyle(
+                  fontSize: 9.5,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.secondaryText,
                 ),
               ),
-              icon: const Icon(Icons.download, size: 13),
-              label: const Text(
-                'Export',
-                style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+              const SizedBox(width: 8),
+              buildDropdown(
+                state.selectedYear,
+                ['FY 2024-25', 'FY 2023-24', 'FY 2022-23'],
+                (v) => v != null
+                    ? ref.read(stateAdminProvider.notifier).changeYear(v)
+                    : null,
               ),
-              onPressed: () => _showExportDialog(context),
-            ),
-          ],
+              const SizedBox(width: 6),
+              buildDropdown(
+                state.selectedMonth,
+                ['all', 'Mar', 'Apr', 'May', 'Jun'],
+                (v) => v != null
+                    ? ref.read(stateAdminProvider.notifier).changeMonth(v)
+                    : null,
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              const SizedBox(width: 6),
+              buildDropdown(
+                state.selectedDistrict,
+                ['All Districts', 'Dehradun', 'Haridwar', 'Nainital', 'Almora'],
+                (v) => v != null
+                    ? ref.read(stateAdminProvider.notifier).changeDistrict(v)
+                    : null,
+              ),
+              const SizedBox(width: 6),
+              buildDropdown(
+                state.selectedFacilityType,
+                [
+                  'All Facility Types',
+                  'Medical College',
+                  'District Hospital',
+                  'CHC',
+                  'PHC',
+                ],
+                (v) => v != null
+                    ? ref
+                          .read(stateAdminProvider.notifier)
+                          .changeFacilityType(v)
+                    : null,
+              ),
+              ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF00695C),
+                  foregroundColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 14,
+                    vertical: 8,
+                  ),
+                ),
+                icon: const Icon(Icons.download, size: 13),
+                label: const Text(
+                  'Export',
+                  style: TextStyle(fontSize: 10, fontWeight: FontWeight.bold),
+                ),
+                onPressed: () => _showExportDialog(context),
+              ),
+            ],
+          ),
         ],
       ),
     );

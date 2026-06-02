@@ -26,6 +26,8 @@ class RoutePaths {
   static const String abdmCompliance = '/abdm-compliance';
   static const String diseaseSurveillance = '/disease-surveillance';
   static const String stateAdminOverview = '/state-admin-overview';
+  static const String hospitalPerformance = '/hospital-performance';
+  static const String opdAnalytics = '/opd-analytics';
 
   // Patient Portal (Phase C)
   static const String patientLogin = '/patient/login';

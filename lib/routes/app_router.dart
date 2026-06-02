@@ -9,10 +9,12 @@ import 'package:paracareplus/features/dashboard/view/dashboard_screen.dart';
 import 'package:paracareplus/features/dashboard_hub/view/dashboard_hub_screen.dart';
 import 'package:paracareplus/features/disease_surveillance/view/disease_surveillance_screen.dart';
 import 'package:paracareplus/features/doctor/view/doctor_dashboard_screen.dart';
+import 'package:paracareplus/features/hospital_performance/view/hospital_performance_screen.dart';
 import 'package:paracareplus/features/hr/view/hr_screen.dart';
 import 'package:paracareplus/features/ipd/view/ipd_admission_screen.dart';
 import 'package:paracareplus/features/laboratory/view/laboratory_screen.dart';
 import 'package:paracareplus/features/opd/view/opd_token_screen.dart';
+import 'package:paracareplus/features/opd_analytics/view/opd_analytics_screen.dart';
 import 'package:paracareplus/features/patient/view/patient_registration_screen.dart';
 import 'package:paracareplus/features/patient/view/portal/patient_ai_screen.dart';
 import 'package:paracareplus/features/patient/view/portal/patient_chronic_screen.dart';
@@ -86,6 +88,16 @@ final appRouterStateProvider = Provider<GoRouter>((ref) {
         path: RoutePaths.stateAdminOverview,
         name: RouteNames.stateAdminOverview,
         builder: (context, state) => const StateAdminOverviewScreen(),
+      ),
+      GoRoute(
+        path: RoutePaths.hospitalPerformance,
+        name: RouteNames.hospitalPerformance,
+        builder: (context, state) => const HospitalPerformanceScreen(),
+      ),
+      GoRoute(
+        path: RoutePaths.opdAnalytics,
+        name: RouteNames.opdAnalytics,
+        builder: (context, state) => const OpdAnalyticsScreen(),
       ),
       GoRoute(
         path: RoutePaths.doctorDashboard,
@@ -259,6 +271,8 @@ final appRouterStateProvider = Provider<GoRouter>((ref) {
             state.matchedLocation != RoutePaths.abdmCompliance &&
             state.matchedLocation != RoutePaths.diseaseSurveillance &&
             state.matchedLocation != RoutePaths.stateAdminOverview &&
+            state.matchedLocation != RoutePaths.hospitalPerformance &&
+            state.matchedLocation != RoutePaths.opdAnalytics &&
             state.matchedLocation != RoutePaths.splash) {
           return RoutePaths.login;
         }

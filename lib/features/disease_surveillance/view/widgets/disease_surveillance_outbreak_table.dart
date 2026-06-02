@@ -4,10 +4,7 @@ import 'package:paracareplus/core/theme/app_text_styles.dart';
 import 'package:paracareplus/features/disease_surveillance/model/disease_surveillance_model.dart';
 
 class DiseaseSurveillanceOutbreakTable extends StatelessWidget {
-  const DiseaseSurveillanceOutbreakTable({
-    required this.outbreaks,
-    super.key,
-  });
+  const DiseaseSurveillanceOutbreakTable({required this.outbreaks, super.key});
 
   final List<OutbreakItem> outbreaks;
 
@@ -150,8 +147,8 @@ class DiseaseSurveillanceOutbreakTable extends StatelessWidget {
                           color: r.cfrPercent > 1.0
                               ? AppColors.error
                               : (r.cfrPercent > 0.0
-                                  ? AppColors.secondaryAccent
-                                  : AppColors.success),
+                                    ? AppColors.secondaryAccent
+                                    : AppColors.success),
                           fontWeight: FontWeight.bold,
                           fontSize: 11,
                         ),
@@ -186,7 +183,9 @@ class DiseaseSurveillanceOutbreakTable extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: sevCol.withValues(alpha: 0.15),
                           borderRadius: BorderRadius.circular(8),
-                          border: Border.all(color: sevCol.withValues(alpha: 0.3)),
+                          border: Border.all(
+                            color: sevCol.withValues(alpha: 0.3),
+                          ),
                         ),
                         child: Text(
                           r.severity.toUpperCase(),
@@ -199,8 +198,8 @@ class DiseaseSurveillanceOutbreakTable extends StatelessWidget {
                         ),
                       ),
                     ),
-                    DataCell(
-                      const Text(
+                    const DataCell(
+                      Text(
                         'Today',
                         style: TextStyle(
                           color: AppColors.secondaryText,
