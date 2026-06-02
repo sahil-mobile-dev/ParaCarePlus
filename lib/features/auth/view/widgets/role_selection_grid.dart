@@ -58,7 +58,6 @@ class RoleSelectionGrid extends ConsumerWidget {
       itemBuilder: (context, index) {
         final role = _displayRoles[index];
         final isSelected = selectedRole == role;
-        final isStateAdmin = role == UserRole.stateSuperAdmin;
 
         const accentColor = Color(0xFFE65100);
         final accentBg = AppColors.primary.withValues(alpha: 0.06);

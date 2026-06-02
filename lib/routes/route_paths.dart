@@ -23,6 +23,7 @@ class RoutePaths {
   static const String hr = '/hr';
   static const String tpa = '/tpa';
   static const String stateCommand = '/state-command';
+  static const String abdmCompliance = '/abdm-compliance';
 
   // Patient Portal (Phase C)
   static const String patientLogin = '/patient/login';

@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:paracareplus/core/theme/app_colors.dart';
 import 'package:paracareplus/core/theme/app_spacing.dart';
 import 'package:paracareplus/core/theme/app_text_styles.dart';
-import 'package:paracareplus/features/dashboard/view/widgets/app_header.dart';
 import 'package:paracareplus/features/dashboard/view/widgets/app_sidebar.dart';
 import 'package:paracareplus/features/dashboard_hub/model/dashboard_hub_model.dart';
 import 'package:paracareplus/features/dashboard_hub/view/widgets/alert_ticker.dart';

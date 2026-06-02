@@ -1,5 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:paracareplus/features/abdm_compliance/view/abdm_compliance_screen.dart';
 import 'package:paracareplus/features/auth/model/user_role.dart';
 import 'package:paracareplus/features/auth/view/login_screen.dart';
 import 'package:paracareplus/features/auth/view/splash_screen.dart';
@@ -68,6 +69,11 @@ final appRouterStateProvider = Provider<GoRouter>((ref) {
         path: RoutePaths.stateCommand,
         name: RouteNames.stateCommand,
         builder: (context, state) => const StateCommandScreen(),
+      ),
+      GoRoute(
+        path: RoutePaths.abdmCompliance,
+        name: RouteNames.abdmCompliance,
+        builder: (context, state) => const AbdmComplianceScreen(),
       ),
       GoRoute(
         path: RoutePaths.doctorDashboard,
@@ -238,6 +244,7 @@ final appRouterStateProvider = Provider<GoRouter>((ref) {
             !goingToPatientLogin &&
             state.matchedLocation != RoutePaths.dashboardHub &&
             state.matchedLocation != RoutePaths.stateCommand &&
+            state.matchedLocation != RoutePaths.abdmCompliance &&
             state.matchedLocation != RoutePaths.splash) {
           return RoutePaths.login;
         }

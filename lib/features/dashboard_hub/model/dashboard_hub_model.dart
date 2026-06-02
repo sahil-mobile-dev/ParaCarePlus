@@ -56,7 +56,7 @@ class DashboardModuleItem {
       emoji: '🔗',
       badge: 'ABDM',
       metrics: {'KPIs': '16', 'Charts': '7', 'FHIR': 'API'},
-      routeName: RouteNames.dashboard,
+      routeName: RouteNames.abdmCompliance,
       colorTheme: 'teal',
       onTap: () {},
     ),
