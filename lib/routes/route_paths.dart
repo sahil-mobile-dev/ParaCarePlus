@@ -28,6 +28,9 @@ class RoutePaths {
   static const String stateAdminOverview = '/state-admin-overview';
   static const String hospitalPerformance = '/hospital-performance';
   static const String opdAnalytics = '/opd-analytics';
+  static const String ipdBeds = '/ipd-beds';
+  static const String mchDashboard = '/mch-dashboard';
+  static const String radiologyImaging = '/radiology-imaging';
 
   // Patient Portal (Phase C)
   static const String patientLogin = '/patient/login';

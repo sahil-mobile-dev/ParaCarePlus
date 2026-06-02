@@ -201,7 +201,6 @@ class _DiseaseSurveillanceGisMapState extends State<DiseaseSurveillanceGisMap> {
                                   border: Border.all(
                                     color: col.withValues(alpha: 0.35),
                                     width: 1.5,
-                                    style: BorderStyle.solid,
                                   ),
                                 ),
                               ),

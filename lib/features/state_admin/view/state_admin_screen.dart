@@ -16,7 +16,7 @@ import 'package:paracareplus/features/state_admin/view/widgets/state_admin_distr
 import 'package:paracareplus/features/state_admin/view/widgets/state_admin_gis_map.dart';
 import 'package:paracareplus/features/state_admin/view/widgets/state_admin_kpi_card.dart';
 import 'package:paracareplus/features/state_admin/view/widgets/state_admin_mini_stats.dart';
-import 'package:paracareplus/features/state_admin/view/widgets/state_admin_sidebar.dart';
+
 import 'package:paracareplus/features/state_admin/view/widgets/state_admin_ticker.dart';
 import 'package:paracareplus/features/state_admin/view_model/state_admin_view_model.dart';
 import 'package:paracareplus/routes/route_names.dart';

@@ -12,7 +12,9 @@ import 'package:paracareplus/features/doctor/view/doctor_dashboard_screen.dart';
 import 'package:paracareplus/features/hospital_performance/view/hospital_performance_screen.dart';
 import 'package:paracareplus/features/hr/view/hr_screen.dart';
 import 'package:paracareplus/features/ipd/view/ipd_admission_screen.dart';
+import 'package:paracareplus/features/ipd_beds/view/ipd_beds_screen.dart';
 import 'package:paracareplus/features/laboratory/view/laboratory_screen.dart';
+import 'package:paracareplus/features/mch_dashboard/view/mch_dashboard_screen.dart';
 import 'package:paracareplus/features/opd/view/opd_token_screen.dart';
 import 'package:paracareplus/features/opd_analytics/view/opd_analytics_screen.dart';
 import 'package:paracareplus/features/patient/view/patient_registration_screen.dart';
@@ -38,6 +40,7 @@ import 'package:paracareplus/features/patient/view/portal/patient_vaccination_sc
 import 'package:paracareplus/features/patient/view/portal/patient_wellness_screen.dart';
 import 'package:paracareplus/features/pharmacy/view/pharmacy_screen.dart';
 import 'package:paracareplus/features/radiology/view/radiology_screen.dart';
+import 'package:paracareplus/features/radiology_imaging/view/radiology_imaging_screen.dart';
 import 'package:paracareplus/features/state_admin/view/state_admin_screen.dart';
 import 'package:paracareplus/features/state_command/view/state_command_screen.dart';
 import 'package:paracareplus/features/tpa/view/tpa_screen.dart';
@@ -98,6 +101,21 @@ final appRouterStateProvider = Provider<GoRouter>((ref) {
         path: RoutePaths.opdAnalytics,
         name: RouteNames.opdAnalytics,
         builder: (context, state) => const OpdAnalyticsScreen(),
+      ),
+      GoRoute(
+        path: RoutePaths.ipdBeds,
+        name: RouteNames.ipdBeds,
+        builder: (context, state) => const IpdBedsScreen(),
+      ),
+      GoRoute(
+        path: RoutePaths.mchDashboard,
+        name: RouteNames.mchDashboard,
+        builder: (context, state) => const MchDashboardScreen(),
+      ),
+      GoRoute(
+        path: RoutePaths.radiologyImaging,
+        name: RouteNames.radiologyImaging,
+        builder: (context, state) => const RadiologyImagingScreen(),
       ),
       GoRoute(
         path: RoutePaths.doctorDashboard,
@@ -273,6 +291,9 @@ final appRouterStateProvider = Provider<GoRouter>((ref) {
             state.matchedLocation != RoutePaths.stateAdminOverview &&
             state.matchedLocation != RoutePaths.hospitalPerformance &&
             state.matchedLocation != RoutePaths.opdAnalytics &&
+            state.matchedLocation != RoutePaths.ipdBeds &&
+            state.matchedLocation != RoutePaths.mchDashboard &&
+            state.matchedLocation != RoutePaths.radiologyImaging &&
             state.matchedLocation != RoutePaths.splash) {
           return RoutePaths.login;
         }

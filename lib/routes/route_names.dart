@@ -28,6 +28,9 @@ class RouteNames {
   static const String stateAdminOverview = 'stateAdminOverview';
   static const String hospitalPerformance = 'hospitalPerformance';
   static const String opdAnalytics = 'opdAnalytics';
+  static const String ipdBeds = 'ipdBeds';
+  static const String mchDashboard = 'mchDashboard';
+  static const String radiologyImaging = 'radiologyImaging';
 
   // Patient Portal (Phase C)
   static const String patientLogin = 'patientLogin';
